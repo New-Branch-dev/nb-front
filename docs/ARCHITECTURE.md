@@ -62,6 +62,8 @@ UI 컴포넌트, 유틸 함수, 타입, 상수 등을 포함합니다.
 ## 📌 Slice (Domain)
 
 Slice는 **도메인 기준**으로 나눕니다.
+import는 각 도메인마다 index.ts 파일을 생성 하고 index.ts에서 export 합니다.
+(도메인의 함수,컴포넌트들은 해당 도메인의 index.ts에 export)
 
 예시:
 
