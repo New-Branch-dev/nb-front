@@ -4,11 +4,15 @@ import Link from "next/link";
 
 import { Container } from "@shared/ui/layout";
 
+import { Modal } from "@widgets/modal";
+
 import {
   brandStyle,
   centerSlotStyle,
   linkStyle,
   menuStyle,
+  modalCloseButtonStyle,
+  modalHeaderStyle,
   navInnerStyle,
   navShellStyle,
   triggerLinkStyle,
@@ -33,6 +37,7 @@ export function Navigation() {
       href: "/creative-experience",
     },
   ];
+
   return (
     <header className={navShellStyle}>
       <Container>
@@ -53,9 +58,24 @@ export function Navigation() {
             </ul>
           </div>
 
-          <a href="#menu" className={triggerLinkStyle} aria-label="Open menu">
-            Menu
-          </a>
+          <Modal
+            triggerText="Menu"
+            triggerAriaLabel="Open menu modal"
+            triggerClassName={triggerLinkStyle}
+          >
+            {({ close }) => (
+              <div className={modalHeaderStyle}>
+                <strong>Menu</strong>
+                <button
+                  type="button"
+                  className={modalCloseButtonStyle}
+                  onClick={close}
+                >
+                  Close
+                </button>
+              </div>
+            )}
+          </Modal>
         </nav>
       </Container>
     </header>

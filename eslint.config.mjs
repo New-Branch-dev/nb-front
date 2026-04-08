@@ -61,8 +61,8 @@ const eslintConfig = defineConfig([
         "error",
         {
           groups: [
-            // 외부 패키지(react/next 포함)
-            ["^react$", "^next", "^@?\\w"],
+            // 외부 패키지(next/react 포함) - prettier sort-imports와 순서 일치
+            ["^next", "^react$", "^@?\\w"],
             // FSD 계층 alias
             ["^@shared(/.*|$)"],
             ["^@entities(/.*|$)"],

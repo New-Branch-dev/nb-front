@@ -61,6 +61,7 @@ export const linkStyle = css`
 `;
 
 export const triggerLinkStyle = css`
+  appearance: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -68,10 +69,13 @@ export const triggerLinkStyle = css`
   padding-inline: 0.75rem;
   border: 1px solid rgba(23, 23, 23, 0.28);
   border-radius: 999px;
+  background: transparent;
   color: rgba(23, 23, 23, 0.9);
+  font-family: inherit;
   font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  cursor: pointer;
   transition:
     border-color 0.2s ease,
     color 0.2s ease;
@@ -80,4 +84,30 @@ export const triggerLinkStyle = css`
     border-color: rgba(23, 23, 23, 0.7);
     color: #171717;
   }
+`;
+
+export const modalHeaderStyle = css`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+`;
+
+export const modalCloseButtonStyle = css`
+  border: 1px solid rgba(23, 23, 23, 0.25);
+  border-radius: 999px;
+  background: transparent;
+  color: #171717;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+`;
+
+export const modalMenuListStyle = css`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
