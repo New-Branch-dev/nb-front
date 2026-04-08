@@ -54,9 +54,9 @@ import는 아래 순서를 기준으로 정렬합니다.
 <br>
 import { useQuery } from "@tanstack/react-query";
 
-import { Button } from "@/shared/ui/button";
-import { userQueryOptions } from "@/entities/user/api/user-query-options";
-import { useLogin } from "@/features/auth/model/use-login";
+import { Button } from "@shared/ui/button";
+import { userQueryOptions } from "@entities/user/api/user-query-options";
+import { useLogin } from "@features/auth/model/use-login";
 
 import "./style.css";
 
