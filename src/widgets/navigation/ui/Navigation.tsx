@@ -30,15 +30,15 @@ export function Navigation() {
     },
     {
       label: "단권화",
-      href: "/danghwan",
+      href: "/condensed-notes",
     },
     {
       label: "진정한 학습",
-      href: "/true-learning",
+      href: "/deep-learning",
     },
     {
       label: "창의적 체험활동",
-      href: "/creative-experience",
+      href: "/creative-activities",
     },
   ];
 

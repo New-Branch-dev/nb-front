@@ -10,8 +10,6 @@ import { pageStyle } from "./page.styles";
 export default function Home() {
   return (
     <div className={pageStyle}>
-      <Navigation />
-
       <main>
         <Section as="section" id="scene" paddingTop="8rem">
           <Flex direction="column" align="center" justify="center" gap="1.5rem">
