@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import { Container } from "@shared/ui/layout";
 
 import { Modal } from "@widgets/modal";
+import { Sidebar } from "@widgets/sidebar";
 
 import {
   brandStyle,
@@ -13,12 +15,14 @@ import {
   menuStyle,
   modalCloseButtonStyle,
   modalHeaderStyle,
+  navActionGroupStyle,
   navInnerStyle,
   navShellStyle,
   triggerLinkStyle,
 } from "./Navigation.styles";
 
 export function Navigation() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const menuItems = [
     {
       label: "학습 목표 달성",
@@ -39,45 +43,64 @@ export function Navigation() {
   ];
 
   return (
-    <header className={navShellStyle}>
-      <Container>
-        <nav className={navInnerStyle}>
-          <Link href="/" className={brandStyle}>
-            NEWBRANCH
-          </Link>
+    <>
+      <header className={navShellStyle}>
+        <Container>
+          <nav className={navInnerStyle}>
+            <Link href="/" className={brandStyle}>
+              NEWBRANCH
+            </Link>
 
-          <div className={centerSlotStyle}>
-            <ul className={menuStyle}>
-              {menuItems.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href} className={linkStyle}>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <div className={centerSlotStyle}>
+              <ul className={menuStyle}>
+                {menuItems.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href} className={linkStyle}>
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          <Modal
-            triggerText="Menu"
-            triggerAriaLabel="Open menu modal"
-            triggerClassName={triggerLinkStyle}
-          >
-            {({ close }) => (
-              <div className={modalHeaderStyle}>
-                <strong>Menu</strong>
-                <button
-                  type="button"
-                  className={modalCloseButtonStyle}
-                  onClick={close}
-                >
-                  Close
-                </button>
-              </div>
-            )}
-          </Modal>
-        </nav>
-      </Container>
-    </header>
+            <div className={navActionGroupStyle}>
+              <Modal
+                triggerText="Menu"
+                triggerAriaLabel="Open menu modal"
+                triggerClassName={triggerLinkStyle}
+              >
+                {({ close }) => (
+                  <div className={modalHeaderStyle}>
+                    <strong>Menu</strong>
+                    <button
+                      type="button"
+                      className={modalCloseButtonStyle}
+                      onClick={close}
+                    >
+                      Close
+                    </button>
+                  </div>
+                )}
+              </Modal>
+
+              <button
+                type="button"
+                className={triggerLinkStyle}
+                aria-label="Open sidebar"
+                onClick={() => setIsSidebarOpen(true)}
+              >
+                Sidebar
+              </button>
+            </div>
+          </nav>
+        </Container>
+      </header>
+      <Sidebar
+        title="네비게이션"
+        items={menuItems}
+        open={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
+    </>
   );
 }

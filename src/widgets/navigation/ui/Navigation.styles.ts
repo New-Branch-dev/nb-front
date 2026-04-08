@@ -9,7 +9,6 @@ export const navShellStyle = css`
   z-index: 10;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.96);
-  opacity: 0.8;
   border-bottom: 1px solid rgba(23, 23, 23, 0.12);
 `;
 
@@ -84,6 +83,12 @@ export const triggerLinkStyle = css`
     border-color: rgba(23, 23, 23, 0.7);
     color: #171717;
   }
+`;
+
+export const navActionGroupStyle = css`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 `;
 
 export const modalHeaderStyle = css`
