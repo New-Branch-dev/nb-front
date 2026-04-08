@@ -1,4 +1,6 @@
-import { Container, Flex, Section } from "@shared/ui/layout";
+import Link from "next/link";
+
+import { Flex, Section } from "@shared/ui/layout";
 
 import { Navigation } from "@widgets/navigation";
 import { Slider } from "@widgets/slider";
@@ -48,6 +50,22 @@ export default function Home() {
           />
         </Section>
       </main>
+
+      <Flex
+        as="footer"
+        align="center"
+        justify="space-between"
+        gap="1.5rem"
+        style={{ backgroundColor: "#171717" }}
+        padding="2rem"
+      >
+        <h3>뉴브랜치</h3>
+
+        <Flex gap="1.5rem" width="auto">
+          <Link href="/">개인정보처리방침</Link>
+          <Link href="/">이용약관</Link>
+        </Flex>
+      </Flex>
     </div>
   );
 }
