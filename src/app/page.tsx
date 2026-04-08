@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import { Flex, Section } from "@shared/ui/layout";
 
-import { Navigation } from "@widgets/navigation";
 import { Slider } from "@widgets/slider";
 
 import { pageStyle } from "./page.styles";

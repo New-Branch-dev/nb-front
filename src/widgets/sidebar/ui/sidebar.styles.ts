@@ -1,13 +1,12 @@
 import { css } from "@emotion/css";
 
-export const getSidebarLayerStyle = (open: boolean) => css`
+export const sidebarLayerStyle = css`
   position: fixed;
   inset: 0;
   z-index: 30;
-  pointer-events: ${open ? "auto" : "none"};
 `;
 
-export const getSidebarOverlayStyle = (open: boolean) => css`
+export const sidebarOverlayStyle = css`
   position: absolute;
   inset: 0;
   appearance: none;
@@ -16,11 +15,9 @@ export const getSidebarOverlayStyle = (open: boolean) => css`
   padding: 0;
   background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(4px);
-  opacity: ${open ? 1 : 0};
-  transition: opacity 0.24s ease;
 `;
 
-export const getSidebarPanelStyle = (open: boolean) => css`
+export const sidebarPanelStyle = css`
   position: absolute;
   top: 0;
   right: 0;
@@ -28,8 +25,6 @@ export const getSidebarPanelStyle = (open: boolean) => css`
   width: min(22rem, 100vw);
   padding: 1.25rem 1rem;
   background: #ffffff;
-  transform: translateX(${open ? "0%" : "110%"});
-  transition: transform 0.24s ease;
   box-shadow: -8px 0 24px rgba(0, 0, 0, 0.16);
 `;
 

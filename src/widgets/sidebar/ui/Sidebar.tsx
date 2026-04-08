@@ -3,11 +3,11 @@
 import Link from "next/link";
 
 import {
-  getSidebarLayerStyle,
-  getSidebarOverlayStyle,
-  getSidebarPanelStyle,
+  sidebarLayerStyle,
   sidebarMenuLinkStyle,
   sidebarMenuListStyle,
+  sidebarOverlayStyle,
+  sidebarPanelStyle,
   sidebarTitleStyle,
   sidebarWrapperStyle,
 } from "./sidebar.styles";
@@ -32,12 +32,12 @@ export function Sidebar({
   onClose,
   onItemClick,
 }: SidebarProps) {
-  const sidebarLayerStyle = getSidebarLayerStyle(open);
-  const sidebarOverlayStyle = getSidebarOverlayStyle(open);
-  const sidebarPanelStyle = getSidebarPanelStyle(open);
+  if (!open) {
+    return null;
+  }
 
   return (
-    <div className={sidebarLayerStyle} aria-hidden={!open}>
+    <div className={sidebarLayerStyle}>
       <button
         type="button"
         className={sidebarOverlayStyle}
