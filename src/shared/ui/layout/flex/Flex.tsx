@@ -50,7 +50,7 @@ export function Flex({
     width,
   });
 
-  const mergedClassName = [flexBaseStyle, dynamicStyle, className].filter(Boolean).join('');
+  const mergedClassName = [flexBaseStyle, dynamicStyle, className].filter(Boolean).join(' ');
 
   return (
     <Component className={mergedClassName} {...rest}>
