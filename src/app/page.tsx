@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
           height={20}
           priority
         />
+
         <div className={styles.intro}>
           <h1>To get started, edit the page.tsx file.</h1>
           <p>

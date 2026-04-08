@@ -61,13 +61,11 @@ import는 아래 순서를 기준으로 정렬합니다.
 예)
 <br>
 import { useQuery } from "@tanstack/react-query";
-<br>
-import { Button } from "@/shared/ui/button";
-<br>
-import { userQueryOptions } from "@/entities/user/api/user-query-options";
-<br>
-import { useLogin } from "@/features/auth/model/use-login";
-<br>
+
+import { Button } from "@shared/ui/button";
+import { userQueryOptions } from "@entities/user/api/user-query-options";
+import { useLogin } from "@features/auth/model/use-login";
+
 import "./style.css";
 
 ### 📌 Styling Convention
