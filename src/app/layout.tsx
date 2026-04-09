@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import { Navigation } from "@widgets/navigation";
 
+import { EmotionRegistry } from "./providers/EmotionRegistry";
+
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,9 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body>
-        <Navigation />
-        {children}
+      <body suppressHydrationWarning={true}>
+        <EmotionRegistry>
+          <Navigation />
+          {children}
+        </EmotionRegistry>
       </body>
     </html>
   );

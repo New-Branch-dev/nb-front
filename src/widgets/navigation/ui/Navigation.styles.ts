@@ -19,6 +19,11 @@ export const navInnerStyle = css`
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.75rem;
+  padding-inline: 1rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 5rem;
+  }
 `;
 
 export const centerSlotStyle = css`

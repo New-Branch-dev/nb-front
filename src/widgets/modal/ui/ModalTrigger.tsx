@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { Button } from "@shared/ui/Button";
+import { Button } from "@shared/ui/Button.styles";
 
 type ModalTriggerProps = {
   text: string;
@@ -18,12 +18,7 @@ export function ModalTrigger({
   onOpen,
 }: ModalTriggerProps) {
   return (
-    <Button
-      type="button"
-      className={className}
-      aria-label={ariaLabel}
-      onClick={onOpen}
-    >
+    <Button className={className} aria-label={ariaLabel} onClick={onOpen}>
       {icon}
       <span>{text}</span>
     </Button>
