@@ -52,7 +52,6 @@ export default function Home() {
         as="footer"
         align="center"
         justify="space-between"
-        gap="1.5rem"
         style={{ backgroundColor: "#171717" }}
         padding="2rem"
       >
