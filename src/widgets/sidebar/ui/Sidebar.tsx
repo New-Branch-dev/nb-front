@@ -10,7 +10,7 @@ import {
   sidebarPanelStyle,
   sidebarTitleStyle,
   sidebarWrapperStyle,
-} from "./sidebar.styles";
+} from "./sidebar.css";
 
 type SidebarMenuItem = {
   label: string;

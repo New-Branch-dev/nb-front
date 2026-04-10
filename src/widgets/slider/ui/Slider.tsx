@@ -9,7 +9,7 @@ import {
   sliderSlideStyle,
   sliderViewportStyle,
   sliderWrapperStyle,
-} from "./Slider.styles";
+} from "./Slider.css";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -27,8 +27,13 @@ export function Slider({ items }: SliderProps) {
       <Swiper
         modules={[Navigation]}
         navigation
-        slidesPerView="auto"
+        slidesPerView={3.2}
         spaceBetween={12}
+        breakpoints={{
+          0: { slidesPerView: 1.15 },
+          640: { slidesPerView: 2.2 },
+          1024: { slidesPerView: 3.2 },
+        }}
         className={sliderViewportStyle}
       >
         {items.map((item) => (

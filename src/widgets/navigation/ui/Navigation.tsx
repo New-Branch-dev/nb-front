@@ -17,7 +17,7 @@ import {
   navInnerStyle,
   navShellStyle,
   triggerLinkStyle,
-} from "./Navigation.styles";
+} from "./Navigation.css";
 
 export function Navigation() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

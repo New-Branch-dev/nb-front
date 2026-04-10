@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent, ReactNode } from "react";
 
-import { modalContainerStyle, modalDialogStyle } from "./Modal.styles";
+import { modalContainerStyle, modalDialogStyle } from "./Modal.css";
 import { ModalTrigger } from "./ModalTrigger";
 
 type ModalRenderChildren = (controls: { close: () => void }) => ReactNode;
