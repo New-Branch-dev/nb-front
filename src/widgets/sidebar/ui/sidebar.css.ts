@@ -1,5 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
+import {
+  alignItemsStyle,
+  flexBaseStyle,
+  flexDirectionStyle,
+  flexGapStyle,
+  flexInlineStyle,
+} from "@shared/ui";
+
 export const sidebarLayerStyle = style({
   position: "fixed",
   inset: 0,
@@ -28,11 +36,11 @@ export const sidebarPanelStyle = style({
   boxShadow: "-8px 0 24px rgba(0, 0, 0, 0.16)",
 });
 
-export const sidebarWrapperStyle = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: "1rem",
-});
+export const sidebarWrapperStyle = style([
+  flexBaseStyle,
+  flexDirectionStyle.column,
+  flexGapStyle.lg,
+]);
 
 export const sidebarTitleStyle = style({
   margin: 0,
@@ -41,27 +49,31 @@ export const sidebarTitleStyle = style({
   color: "#171717",
 });
 
-export const sidebarMenuListStyle = style({
-  listStyle: "none",
-  margin: 0,
-  padding: 0,
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5rem",
-});
+export const sidebarMenuListStyle = style([
+  flexBaseStyle,
+  flexDirectionStyle.column,
+  flexGapStyle.sm,
+  {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+  },
+]);
 
-export const sidebarMenuLinkStyle = style({
-  display: "inline-flex",
-  alignItems: "center",
-  minHeight: "2.5rem",
-  paddingInline: "0.25rem",
-  borderRadius: "0.5rem",
-  color: "#171717",
-  fontSize: "0.95rem",
-  transition: "background-color 0.2s ease",
-  selectors: {
-    "&:hover": {
-      background: "rgba(23, 23, 23, 0.06)",
+export const sidebarMenuLinkStyle = style([
+  flexInlineStyle,
+  alignItemsStyle.center,
+  {
+    minHeight: "2.5rem",
+    paddingInline: "0.25rem",
+    borderRadius: "0.5rem",
+    color: "#171717",
+    fontSize: "0.95rem",
+    transition: "background-color 0.2s ease",
+    selectors: {
+      "&:hover": {
+        background: "rgba(23, 23, 23, 0.06)",
+      },
     },
   },
-});
+]);

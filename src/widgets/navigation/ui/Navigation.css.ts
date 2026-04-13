@@ -1,5 +1,14 @@
 import { style } from "@vanilla-extract/css";
 
+import {
+  alignItemsStyle,
+  flexBaseStyle,
+  flexDirectionStyle,
+  flexGapStyle,
+  flexInlineStyle,
+  justifyContentStyle,
+} from "@shared/ui";
+
 export const navShellStyle = style({
   position: "fixed",
   top: 0,
@@ -37,70 +46,78 @@ export const brandStyle = style({
   color: "#171717",
 });
 
-export const menuStyle = style({
-  display: "flex",
-  alignItems: "center",
-  gap: "0.75rem",
-  listStyle: "none",
-  margin: 0,
-  padding: 0,
-  "@media": {
-    "(min-width: 768px)": {
-      gap: "1.5rem",
+export const menuStyle = style([
+  flexBaseStyle,
+  alignItemsStyle.center,
+  flexGapStyle.md,
+  {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+    "@media": {
+      "(min-width: 768px)": {
+        gap: "1.5rem",
+      },
     },
   },
-});
+]);
 
-export const linkStyle = style({
-  display: "inline-flex",
-  alignItems: "center",
-  minHeight: "2.25rem",
-  color: "#171717",
-  fontSize: "0.9rem",
-  transition: "color 0.2s ease",
-  selectors: {
-    "&:hover": { color: "#171717" },
-  },
-});
-
-export const triggerLinkStyle = style({
-  appearance: "none",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  minHeight: "2.25rem",
-  paddingInline: "0.75rem",
-  border: "1px solid rgba(23, 23, 23, 0.28)",
-  borderRadius: "999px",
-  background: "transparent",
-  color: "rgba(23, 23, 23, 0.9)",
-  fontFamily: "inherit",
-  fontSize: "0.8rem",
-  letterSpacing: "0.06em",
-  textTransform: "uppercase",
-  cursor: "pointer",
-  transition: "border-color 0.2s ease, color 0.2s ease",
-  selectors: {
-    "&:hover": {
-      borderColor: "rgba(23, 23, 23, 0.7)",
-      color: "#171717",
+export const linkStyle = style([
+  flexInlineStyle,
+  alignItemsStyle.center,
+  {
+    minHeight: "2.25rem",
+    color: "#171717",
+    fontSize: "0.9rem",
+    transition: "color 0.2s ease",
+    selectors: {
+      "&:hover": { color: "#171717" },
     },
   },
-});
+]);
 
-export const navActionGroupStyle = style({
-  display: "inline-flex",
-  alignItems: "center",
-  gap: "0.5rem",
-});
+export const triggerLinkStyle = style([
+  flexInlineStyle,
+  alignItemsStyle.center,
+  justifyContentStyle.center,
+  {
+    appearance: "none",
+    minHeight: "2.25rem",
+    paddingInline: "0.75rem",
+    border: "1px solid rgba(23, 23, 23, 0.28)",
+    borderRadius: "999px",
+    background: "transparent",
+    color: "rgba(23, 23, 23, 0.9)",
+    fontFamily: "inherit",
+    fontSize: "0.8rem",
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+    cursor: "pointer",
+    transition: "border-color 0.2s ease, color 0.2s ease",
+    selectors: {
+      "&:hover": {
+        borderColor: "rgba(23, 23, 23, 0.7)",
+        color: "#171717",
+      },
+    },
+  },
+]);
 
-export const modalHeaderStyle = style({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  gap: "0.75rem",
-  marginBottom: "0.75rem",
-});
+export const navActionGroupStyle = style([
+  flexInlineStyle,
+  alignItemsStyle.center,
+  flexGapStyle.sm,
+]);
+
+export const modalHeaderStyle = style([
+  flexBaseStyle,
+  alignItemsStyle.center,
+  justifyContentStyle.between,
+  flexGapStyle.md,
+  {
+    marginBottom: "0.75rem",
+  },
+]);
 
 export const modalCloseButtonStyle = style({
   border: "1px solid rgba(23, 23, 23, 0.25)",
@@ -111,11 +128,13 @@ export const modalCloseButtonStyle = style({
   cursor: "pointer",
 });
 
-export const modalMenuListStyle = style({
-  listStyle: "none",
-  margin: 0,
-  padding: 0,
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5rem",
-});
+export const modalMenuListStyle = style([
+  flexBaseStyle,
+  flexDirectionStyle.column,
+  flexGapStyle.sm,
+  {
+    listStyle: "none",
+    margin: 0,
+    padding: 0,
+  },
+]);

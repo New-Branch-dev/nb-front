@@ -1,5 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
+import { flexBaseStyle, flexDirectionStyle } from "@shared/ui";
+
 export const modalDialogStyle = style({
   width: "min(32rem, calc(100% - 2rem))",
   margin: "auto",
@@ -16,8 +18,10 @@ export const modalDialogStyle = style({
   },
 });
 
-export const modalContainerStyle = style({
-  display: "flex",
-  flexDirection: "column",
-  padding: "1.25rem",
-});
+export const modalContainerStyle = style([
+  flexBaseStyle,
+  flexDirectionStyle.column,
+  {
+    padding: "1.25rem",
+  },
+]);

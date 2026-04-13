@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { Button } from "@shared/ui/Button";
+import { Button } from "@shared/ui/button/Button";
 
 type ModalTriggerProps = {
   text: string;
