@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
-import { themeTokens } from "@shared/ui/styles/theme.css";
+import { themeTokens } from "@shared/styles";
 
 export const flexBaseStyle = style({
   display: "flex",

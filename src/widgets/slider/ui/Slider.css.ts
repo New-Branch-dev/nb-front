@@ -1,11 +1,11 @@
 import { style } from "@vanilla-extract/css";
 
+import { mediaQuery } from "@shared/styles/media-query.css";
 import {
   alignItemsStyle,
   flexBaseStyle,
   justifyContentStyle,
 } from "@shared/ui/layout/flex/Flex.css";
-import { mediaQuery } from "@shared/ui/styles/mediaQuery.css";
 
 export const sliderWrapperStyle = style({ width: "100%" });
 

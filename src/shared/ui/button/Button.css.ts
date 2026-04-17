@@ -1,8 +1,6 @@
 import { recipe } from "@vanilla-extract/recipes";
 
-import { colors } from "@shared/ui/styles/colors.css";
-import { themeTokens } from "@shared/ui/styles/theme.css";
-import { typographyContract } from "@shared/ui/styles/typography.css";
+import { colors, themeTokens, typographyContract } from "@shared/styles";
 
 export const buttonRecipe = recipe({
   base: {

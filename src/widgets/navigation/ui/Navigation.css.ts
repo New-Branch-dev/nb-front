@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
+import { mediaQuery } from "@shared/styles/media-query.css";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 import {
   alignItemsStyle,
@@ -9,7 +10,6 @@ import {
   flexInlineStyle,
   justifyContentStyle,
 } from "@shared/ui/layout/flex/Flex.css";
-import { mediaQuery } from "@shared/ui/styles/mediaQuery.css";
 
 export const navShellStyle = style({
   position: "fixed",

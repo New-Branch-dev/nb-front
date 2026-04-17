@@ -1,9 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
+import { colors, themeTokens, typographyContract } from "@shared/styles";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
-import { colors } from "@shared/ui/styles/colors.css";
-import { themeTokens } from "@shared/ui/styles/theme.css";
-import { typographyContract } from "@shared/ui/styles/typography.css";
 
 export const authFormRootStyle = style({
   width: "100%",
