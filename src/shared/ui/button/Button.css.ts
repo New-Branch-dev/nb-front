@@ -31,6 +31,10 @@ export const buttonRecipe = recipe({
         background: colors.surface,
         color: colors.textPrimary,
       },
+      text: {
+        background: "transparent",
+        color: colors.grayscale.gray500,
+      },
     },
     size: {
       sm: {

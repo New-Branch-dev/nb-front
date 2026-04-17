@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import { Button } from "@shared/ui";
 
+import { AuthForm } from "@features/auth";
+
 import { Modal } from "@widgets/modal";
 import { Sidebar } from "@widgets/sidebar";
 
@@ -13,8 +15,6 @@ import {
   centerSlotStyle,
   linkStyle,
   menuStyle,
-  modalCloseButtonStyle,
-  modalHeaderStyle,
   navActionGroupStyle,
   navInnerStyle,
   navShellStyle,
@@ -68,29 +68,19 @@ export function Navigation() {
               triggerAriaLabel="Open menu modal"
               triggerClassName={triggerLinkStyle}
             >
-              {({ close }) => (
-                <div className={modalHeaderStyle}>
-                  <strong>Menu</strong>
-                  <Button
-                    variant="primary"
-                    size="sm"
-                    className={modalCloseButtonStyle}
-                    onClick={close}
-                  >
-                    Close
-                  </Button>
-                </div>
-              )}
+              <AuthForm />
             </Modal>
 
-            <button
+            <Button
               type="button"
+              variant="ghost"
+              size="sm"
               className={triggerLinkStyle}
               aria-label="Open sidebar"
               onClick={() => setIsSidebarOpen(true)}
             >
               Sidebar
-            </button>
+            </Button>
           </div>
         </nav>
       </header>
