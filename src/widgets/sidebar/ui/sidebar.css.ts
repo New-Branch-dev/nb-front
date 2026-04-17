@@ -6,7 +6,7 @@ import {
   flexDirectionStyle,
   flexGapStyle,
   flexInlineStyle,
-} from "@shared/ui";
+} from "@shared/ui/layout/flex/Flex.css";
 
 export const sidebarLayerStyle = style({
   position: "fixed",

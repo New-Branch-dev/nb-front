@@ -1,31 +1,59 @@
-import { style, styleVariants } from "@vanilla-extract/css";
+import { recipe } from "@vanilla-extract/recipes";
 
-export const buttonBaseStyle = style({
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "0.5rem",
-  border: "none",
-  borderRadius: "0.625rem",
-  fontWeight: 500,
-  transition: "background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease",
-  cursor: "pointer",
-  selectors: {
-    "&:hover": { opacity: 0.92 },
-    "&:disabled": { opacity: 0.5, cursor: "not-allowed" },
+import { colors } from "@shared/ui/styles/colors.css";
+import { themeTokens } from "@shared/ui/styles/theme.css";
+import { typographyContract } from "@shared/ui/styles/typography.css";
+
+export const buttonRecipe = recipe({
+  base: {
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: themeTokens.space.sm,
+    borderRadius: themeTokens.radius.md,
+    fontWeight: 500,
+    border: "none",
+    transition:
+      "background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease",
+    cursor: "pointer",
+    selectors: {
+      "&:hover": { opacity: 0.92 },
+      "&:disabled": { opacity: 0.5, cursor: "not-allowed" },
+    },
+  },
+  variants: {
+    variant: {
+      primary: {
+        background: colors.primary,
+        color: colors.textInverse,
+      },
+      ghost: {
+        background: colors.surface,
+        color: colors.textPrimary,
+      },
+    },
+    size: {
+      sm: {
+        padding: `${themeTokens.space.sm} ${themeTokens.space.md}`,
+        fontSize: typographyContract.D2,
+      },
+      md: {
+        padding: `${themeTokens.space.md} ${themeTokens.space.lg}`,
+        fontSize: typographyContract.D1,
+      },
+      lg: {
+        padding: `${themeTokens.space.lg} ${themeTokens.space.xl}`,
+        fontSize: typographyContract.B2,
+      },
+    },
+    fullWidth: {
+      true: { width: "100%" },
+      false: { width: "auto" },
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+    size: "md",
+    fullWidth: false,
   },
 });
-
-export const variantStyle = styleVariants({
-  primary: { background: "#800080", color: "#ffffff" },
-  ghost: { background: "transparent", color: "#171717" },
-});
-
-export const sizeStyle = styleVariants({
-  sm: { padding: "0.4rem 0.75rem", fontSize: "0.875rem" },
-  md: { padding: "0.625rem 1rem", fontSize: "0.9375rem" },
-  lg: { padding: "0.85rem 1.25rem", fontSize: "1rem" },
-});
-
-export const fullWidthStyle = style({ width: "100%" });
-export const autoWidthStyle = style({ width: "auto" });

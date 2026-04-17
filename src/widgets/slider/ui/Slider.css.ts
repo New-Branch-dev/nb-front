@@ -4,7 +4,8 @@ import {
   alignItemsStyle,
   flexBaseStyle,
   justifyContentStyle,
-} from "@shared/ui/index";
+} from "@shared/ui/layout/flex/Flex.css";
+import { mediaQuery } from "@shared/ui/styles/mediaQuery.css";
 
 export const sliderWrapperStyle = style({ width: "100%" });
 
@@ -28,13 +29,10 @@ export const sliderItemStyle = style([
     background: "#ffffff",
     color: "#171717",
     fontSize: "0.9rem",
-    "@media": {
-      "(max-width: 1024px)": {
-        minHeight: "clamp(11rem, 38vh, 18rem)",
-      },
-      "(max-width: 640px)": {
+    ...mediaQuery({
+      mobile: {
         minHeight: "clamp(10rem, 34vh, 14rem)",
       },
-    },
+    }),
   },
 ]);

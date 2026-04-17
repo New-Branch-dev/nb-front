@@ -10,4 +10,6 @@ export {
   flexWrapStyle,
   justifyContentStyle,
 } from "./layout/flex/Flex.css";
-export { Section } from "./layout/Section";
+export { colors, colorsContract } from "./styles/colors.css";
+export { themeTokens } from "./styles/theme.css";
+export { mobileTypography, pcTypography, typographyContract } from "./styles/typography.css";

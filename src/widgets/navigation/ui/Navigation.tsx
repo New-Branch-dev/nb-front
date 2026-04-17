@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 
+import { Button } from "@shared/ui";
+
 import { Modal } from "@widgets/modal";
 import { Sidebar } from "@widgets/sidebar";
 
@@ -69,13 +71,14 @@ export function Navigation() {
               {({ close }) => (
                 <div className={modalHeaderStyle}>
                   <strong>Menu</strong>
-                  <button
-                    type="button"
+                  <Button
+                    variant="primary"
+                    size="sm"
                     className={modalCloseButtonStyle}
                     onClick={close}
                   >
                     Close
-                  </button>
+                  </Button>
                 </div>
               )}
             </Modal>

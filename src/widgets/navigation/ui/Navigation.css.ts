@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
+import { buttonRecipe } from "@shared/ui/button/Button.css";
 import {
   alignItemsStyle,
   flexBaseStyle,
@@ -7,7 +8,8 @@ import {
   flexGapStyle,
   flexInlineStyle,
   justifyContentStyle,
-} from "@shared/ui";
+} from "@shared/ui/layout/flex/Flex.css";
+import { mediaQuery } from "@shared/ui/styles/mediaQuery.css";
 
 export const navShellStyle = style({
   position: "fixed",
@@ -28,12 +30,12 @@ export const navInnerStyle = style({
   gridTemplateColumns: "auto 1fr auto",
   alignItems: "center",
   gap: "0.75rem",
-  paddingInline: "1rem",
-  "@media": {
-    "(min-width: 768px)": {
-      paddingInline: "5rem",
+  paddingInline: "5rem",
+  ...mediaQuery({
+    mobile: {
+      paddingInline: "1rem",
     },
-  },
+  }),
 });
 
 export const centerSlotStyle = style({ justifySelf: "center" });
@@ -49,16 +51,16 @@ export const brandStyle = style({
 export const menuStyle = style([
   flexBaseStyle,
   alignItemsStyle.center,
-  flexGapStyle.md,
+  flexGapStyle.xl,
   {
     listStyle: "none",
     margin: 0,
     padding: 0,
-    "@media": {
-      "(min-width: 768px)": {
-        gap: "1.5rem",
+    ...mediaQuery({
+      mobile: {
+        gap: "0.75rem",
       },
-    },
+    }),
   },
 ]);
 
@@ -119,14 +121,14 @@ export const modalHeaderStyle = style([
   },
 ]);
 
-export const modalCloseButtonStyle = style({
-  border: "1px solid rgba(23, 23, 23, 0.25)",
-  borderRadius: "999px",
-  background: "transparent",
-  color: "#171717",
-  padding: "0.4rem 0.8rem",
-  cursor: "pointer",
-});
+export const modalCloseButtonStyle = style([
+  buttonRecipe({ variant: "primary", size: "sm", fullWidth: false }),
+  {
+    border: "1px solid rgba(23, 23, 23, 0.25)",
+    borderRadius: "999px",
+    padding: "0.4rem 0.8rem",
+  },
+]);
 
 export const modalMenuListStyle = style([
   flexBaseStyle,

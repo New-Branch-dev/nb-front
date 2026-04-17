@@ -1,5 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 
+import { themeTokens } from "@shared/ui/styles/theme.css";
+
 export const flexBaseStyle = style({
   display: "flex",
 });
@@ -39,10 +41,10 @@ export const alignItemsStyle = styleVariants({
 });
 
 export const flexGapStyle = styleVariants({
-  none: { gap: "0" },
-  xs: { gap: "0.25rem" },
-  sm: { gap: "0.5rem" },
-  md: { gap: "0.75rem" },
-  lg: { gap: "1rem" },
-  xl: { gap: "1.5rem" },
+  none: { gap: themeTokens.space.none },
+  xs: { gap: themeTokens.space.xs },
+  sm: { gap: themeTokens.space.sm },
+  md: { gap: themeTokens.space.md },
+  lg: { gap: themeTokens.space.lg },
+  xl: { gap: themeTokens.space["2xl"] },
 });

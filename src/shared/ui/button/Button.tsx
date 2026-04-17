@@ -1,12 +1,6 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
-import {
-  autoWidthStyle,
-  buttonBaseStyle,
-  fullWidthStyle,
-  sizeStyle,
-  variantStyle,
-} from "./Button.css";
+import { buttonRecipe } from "./Button.css";
 
 type ButtonStyleProps = {
   variant?: "primary" | "ghost";
@@ -24,13 +18,7 @@ export function Button({
   fullWidth = false,
   ...rest
 }: ButtonProps) {
-  const mergedClassName = [
-    buttonBaseStyle,
-    variantStyle[variant],
-    sizeStyle[size],
-    fullWidth ? fullWidthStyle : autoWidthStyle,
-    className,
-  ]
+  const mergedClassName = [buttonRecipe({ variant, size, fullWidth }), className]
     .filter(Boolean)
     .join(" ");
 
