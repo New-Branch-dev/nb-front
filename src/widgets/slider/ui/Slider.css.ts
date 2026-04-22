@@ -1,24 +1,18 @@
 import { style } from "@vanilla-extract/css";
 
+import { flexCenter } from "@shared/styles/flex.css";
 import { mediaQuery } from "@shared/styles/media-query.css";
-import {
-  alignItemsStyle,
-  flexBaseStyle,
-  justifyContentStyle,
-} from "@shared/ui/layout/flex/Flex.css";
 
-export const sliderWrapperStyle = style({ width: "100%" });
+export const sliderWrapper = style({ width: "100%" });
 
-export const sliderViewportStyle = style({ width: "100%" });
+export const sliderViewport = style({ width: "100%" });
 
-export const sliderSlideStyle = style({
+export const sliderSlide = style({
   height: "auto",
 });
 
-export const sliderItemStyle = style([
-  flexBaseStyle,
-  alignItemsStyle.center,
-  justifyContentStyle.center,
+export const sliderItem = style([
+  flexCenter,
   {
     width: "100%",
     minHeight: "clamp(12rem, 42vh, 24rem)",

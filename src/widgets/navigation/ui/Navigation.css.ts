@@ -1,17 +1,10 @@
 import { style } from "@vanilla-extract/css";
 
+import { flexInlineCenter } from "@shared/styles/flex.css";
 import { mediaQuery } from "@shared/styles/media-query.css";
-import { buttonRecipe } from "@shared/ui/button/Button.css";
-import {
-  alignItemsStyle,
-  flexBaseStyle,
-  flexDirectionStyle,
-  flexGapStyle,
-  flexInlineStyle,
-  justifyContentStyle,
-} from "@shared/ui/layout/flex/Flex.css";
+import { themeTokens } from "@shared/styles/theme.css";
 
-export const navShellStyle = style({
+export const navShell = style({
   position: "fixed",
   top: 0,
   left: 0,
@@ -23,24 +16,31 @@ export const navShellStyle = style({
   borderBottom: "1px solid rgba(23, 23, 23, 0.12)",
 });
 
-export const navInnerStyle = style({
-  width: "100%",
-  minHeight: "4rem",
-  display: "grid",
-  gridTemplateColumns: "auto 1fr auto",
-  alignItems: "center",
-  gap: "0.75rem",
-  paddingInline: "5rem",
-  ...mediaQuery({
+export const navInner = style([
+  {
+    width: "100%",
+    minHeight: "4rem",
+    display: "grid",
+    gridTemplateColumns: "auto 1fr auto",
+    alignItems: "center",
+    gap: themeTokens.gap.md,
+    paddingInline: "10rem",
+  },
+  mediaQuery({
     mobile: {
-      paddingInline: "1rem",
+      paddingInline: "1.5rem",
+      gap: themeTokens.gap.sm,
+    },
+    laptop: {
+      paddingInline: "5rem",
+      gap: themeTokens.gap.md,
     },
   }),
-});
+]);
 
-export const centerSlotStyle = style({ justifySelf: "center" });
+export const centerSlot = style({ justifySelf: "center" });
 
-export const brandStyle = style({
+export const brand = style({
   fontSize: "clamp(1rem, 2vw, 1.125rem)",
   letterSpacing: "0.08em",
   textTransform: "uppercase",
@@ -48,25 +48,23 @@ export const brandStyle = style({
   color: "#171717",
 });
 
-export const menuStyle = style([
-  flexBaseStyle,
-  alignItemsStyle.center,
-  flexGapStyle.xl,
+export const menu = style([
   {
+    display: "flex",
+    alignItems: "center",
     listStyle: "none",
+    gap: themeTokens.gap["9xl"],
     margin: 0,
     padding: 0,
-    ...mediaQuery({
-      mobile: {
-        gap: "0.75rem",
-      },
-    }),
   },
+  mediaQuery({
+    laptop: { gap: themeTokens.gap["6xl"] },
+    mobile: { gap: themeTokens.gap.sm },
+  }),
 ]);
 
-export const linkStyle = style([
-  flexInlineStyle,
-  alignItemsStyle.center,
+export const link = style([
+  flexInlineCenter,
   {
     minHeight: "2.25rem",
     color: "#171717",
@@ -78,65 +76,11 @@ export const linkStyle = style([
   },
 ]);
 
-export const triggerLinkStyle = style([
-  flexInlineStyle,
-  alignItemsStyle.center,
-  justifyContentStyle.center,
-  {
-    appearance: "none",
-    minHeight: "2.25rem",
-    paddingInline: "0.75rem",
-    border: "1px solid rgba(23, 23, 23, 0.28)",
-    borderRadius: "999px",
-    background: "transparent",
-    color: "rgba(23, 23, 23, 0.9)",
-    fontFamily: "inherit",
-    fontSize: "0.8rem",
-    letterSpacing: "0.06em",
-    textTransform: "uppercase",
-    cursor: "pointer",
-    transition: "border-color 0.2s ease, color 0.2s ease",
-    selectors: {
-      "&:hover": {
-        borderColor: "rgba(23, 23, 23, 0.7)",
-        color: "#171717",
-      },
-    },
-  },
-]);
-
-export const navActionGroupStyle = style([
-  flexInlineStyle,
-  alignItemsStyle.center,
-  flexGapStyle.sm,
-]);
-
-export const modalHeaderStyle = style([
-  flexBaseStyle,
-  alignItemsStyle.center,
-  justifyContentStyle.between,
-  flexGapStyle.md,
-  {
-    marginBottom: "0.75rem",
-  },
-]);
-
-export const modalCloseButtonStyle = style([
-  buttonRecipe({ variant: "primary", size: "sm", fullWidth: false }),
-  {
-    border: "1px solid rgba(23, 23, 23, 0.25)",
-    borderRadius: "999px",
-    padding: "0.4rem 0.8rem",
-  },
-]);
-
-export const modalMenuListStyle = style([
-  flexBaseStyle,
-  flexDirectionStyle.column,
-  flexGapStyle.sm,
-  {
-    listStyle: "none",
-    margin: 0,
-    padding: 0,
-  },
+export const navActionGroup = style([
+  flexInlineCenter,
+  { gap: themeTokens.gap["2xl"] },
+  mediaQuery({
+    laptop: { gap: themeTokens.gap.lg },
+    mobile: { gap: themeTokens.gap.sm },
+  }),
 ]);

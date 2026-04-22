@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent, ReactNode } from "react";
 
-import { modalContainerStyle, modalDialogStyle } from "./Modal.css";
+import { modalContainer, modalDialog } from "./Modal.css";
 import { ModalTrigger } from "./ModalTrigger";
 
 type ModalRenderChildren = (controls: { close: () => void }) => ReactNode;
@@ -67,11 +67,11 @@ export function Modal({
 
       <dialog
         ref={dialogRef}
-        className={modalDialogStyle}
+        className={modalDialog}
         onClose={() => setIsOpen(false)}
         onClick={handleBackdropClick}
       >
-        <div className={modalContainerStyle}>{content}</div>
+        <div className={modalContainer}>{content}</div>
       </dialog>
     </>
   );

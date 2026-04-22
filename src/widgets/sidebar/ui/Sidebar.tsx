@@ -3,13 +3,13 @@
 import Link from "next/link";
 
 import {
-  sidebarLayerStyle,
-  sidebarMenuLinkStyle,
-  sidebarMenuListStyle,
-  sidebarOverlayStyle,
-  sidebarPanelStyle,
-  sidebarTitleStyle,
-  sidebarWrapperStyle,
+  sidebarLayer,
+  sidebarMenuLink,
+  sidebarMenuList,
+  sidebarOverlay,
+  sidebarPanel,
+  sidebarTitle,
+  sidebarWrapper,
 } from "./Sidebar.css";
 
 type SidebarMenuItem = {
@@ -37,22 +37,22 @@ export function Sidebar({
   }
 
   return (
-    <div className={sidebarLayerStyle}>
+    <div className={sidebarLayer}>
       <button
         type="button"
-        className={sidebarOverlayStyle}
+        className={sidebarOverlay}
         aria-label="Close sidebar"
         onClick={onClose}
       />
-      <aside className={sidebarPanelStyle} aria-label="Sidebar menu">
-        <div className={sidebarWrapperStyle}>
-          <h2 className={sidebarTitleStyle}>{title}</h2>
-          <ul className={sidebarMenuListStyle}>
+      <aside className={sidebarPanel} aria-label="Sidebar menu">
+        <div className={sidebarWrapper}>
+          <h2 className={sidebarTitle}>{title}</h2>
+          <ul className={sidebarMenuList}>
             {items.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={sidebarMenuLinkStyle}
+                  className={sidebarMenuLink}
                   onClick={() => {
                     onItemClick?.();
                     onClose();

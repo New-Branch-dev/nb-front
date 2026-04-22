@@ -1,5 +1,5 @@
-import { MainPage } from "@pages/main";
+import { RendigPage } from "@pages/rendig";
 
 export default function Home() {
-  return <MainPage />;
+  return <RendigPage />;
 }

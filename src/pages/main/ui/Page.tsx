@@ -2,17 +2,17 @@
 
 import Link from "next/link";
 
-import { ContainerInner, ContainerRoot, Flex } from "@shared/ui";
+import { ContainerInner, ContainerRoot } from "@shared/ui";
 
 import { Slider } from "@widgets/slider";
 
-import { sceneSectionStyle, sectionBaseStyle } from "./Page.css";
+import { sceneSection, sectionBase } from "./Page.css";
 
 export const MainPage = () => {
   return (
     <ContainerRoot>
       <ContainerInner>
-        <article id="scene" className={sceneSectionStyle}>
+        <article id="scene" className={sceneSection}>
           <Flex direction="column" align="center" justify="center" gap="1.5rem">
             <p>지식의 새로운 가지를 뻗어 나가세요</p>
             <h1>뉴브랜치</h1>
@@ -27,28 +27,7 @@ export const MainPage = () => {
           </Flex>
         </article>
 
-        <section id="slider" className={sectionBaseStyle}>
-          <Slider
-            items={[
-              {
-                id: "1",
-                card: <div>1</div>,
-              },
-              {
-                id: "2",
-                card: <div>2</div>,
-              },
-              {
-                id: "3",
-                card: <div>1</div>,
-              },
-              {
-                id: "4",
-                card: <div>2</div>,
-              },
-            ]}
-          />
-        </section>
+        <section id="slider" className={sectionBase}></section>
       </ContainerInner>
 
       <Flex

@@ -3,34 +3,34 @@ import { style } from "@vanilla-extract/css";
 import { colors, themeTokens, typographyContract } from "@shared/styles";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 
-export const authFormRootStyle = style({
+export const authFormRoot = style({
   width: "100%",
   marginInline: "auto",
   display: "flex",
   flexDirection: "column",
-  gap: themeTokens.space.lg,
+  gap: themeTokens.gap.lg,
 });
 
-export const authTitleStyle = style({
+export const authTitle = style({
   color: colors.textPrimary,
-  fontSize: typographyContract.H2,
+  fontSize: typographyContract.headingXl,
   fontWeight: 700,
   textAlign: "center",
 });
 
-export const authFieldGroupStyle = style({
+export const authFieldGroup = style({
   display: "flex",
   flexDirection: "column",
-  gap: themeTokens.space.sm,
+  gap: themeTokens.gap.sm,
 });
 
-export const authButtonGroupStyle = style({
+export const authButtonGroup = style({
   display: "flex",
   flexDirection: "column",
-  gap: themeTokens.space.sm,
+  gap: themeTokens.gap.sm,
 });
 
-export const authGoogleButtonStyle = style([
+export const authGoogleButton = style([
   buttonRecipe({ variant: "ghost", size: "md", fullWidth: true }),
   {
     border: `1px solid ${colors.outline}`,
@@ -38,23 +38,23 @@ export const authGoogleButtonStyle = style([
   },
 ]);
 
-export const authSubmitButtonStyle = style([
+export const authSubmitButton = style([
   buttonRecipe({ variant: "primary", size: "md", fullWidth: true }),
 ]);
 
-export const authMetaActionsStyle = style({
+export const authMetaActions = style({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: themeTokens.space.md,
+  gap: themeTokens.gap.md,
 });
 
-export const authMetaButtonStyle = style({
+export const authMetaButton = style({
   padding: 0,
   border: 0,
   background: "transparent",
-  color: colors.grayscale.gray500,
-  fontSize: typographyContract.D2,
+  color: colors.grayscale.gray800,
+  fontSize: typographyContract.bodyMd,
   cursor: "pointer",
   selectors: {
     "&:hover": {

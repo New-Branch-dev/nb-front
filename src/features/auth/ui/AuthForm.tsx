@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { authFormRootStyle } from "./AuthForm.css";
+import { authFormRoot } from "./AuthForm.css";
 import { LoginForm } from "./LoginForm";
 import { SignupForm } from "./SignupForm";
 
@@ -11,7 +11,7 @@ export function AuthForm() {
 
   return (
     <form
-      className={authFormRootStyle}
+      className={authFormRoot}
       onSubmit={(event) => {
         event.preventDefault();
       }}

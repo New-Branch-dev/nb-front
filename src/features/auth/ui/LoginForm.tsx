@@ -1,13 +1,13 @@
 import { Button, Input } from "@shared/ui";
 
 import {
-  authButtonGroupStyle,
-  authFieldGroupStyle,
-  authGoogleButtonStyle,
-  authMetaActionsStyle,
-  authMetaButtonStyle,
-  authSubmitButtonStyle,
-  authTitleStyle,
+  authButtonGroup,
+  authFieldGroup,
+  authGoogleButton,
+  authMetaActions,
+  authMetaButton,
+  authSubmitButton,
+  authTitle,
 } from "./AuthForm.css";
 
 type LoginFormProps = {
@@ -17,9 +17,9 @@ type LoginFormProps = {
 export function LoginForm({ onSwitchToSignup }: LoginFormProps) {
   return (
     <>
-      <h2 className={authTitleStyle}>로그인</h2>
+      <h2 className={authTitle}>로그인</h2>
 
-      <div className={authFieldGroupStyle}>
+      <div className={authFieldGroup}>
         <Input
           type="email"
           name="email"
@@ -36,26 +36,26 @@ export function LoginForm({ onSwitchToSignup }: LoginFormProps) {
         />
       </div>
 
-      <div className={authButtonGroupStyle}>
-        <Button type="submit" className={authSubmitButtonStyle}>
+      <div className={authButtonGroup}>
+        <Button type="submit" className={authSubmitButton}>
           로그인
         </Button>
-        <Button type="button" className={authGoogleButtonStyle}>
+        <Button type="button" className={authGoogleButton}>
           구글로 로그인
         </Button>
       </div>
 
-      <div className={authMetaActionsStyle}>
+      <div className={authMetaActions}>
         <Button
           type="button"
           variant="text"
           size="sm"
-          className={authMetaButtonStyle}
+          className={authMetaButton}
           onClick={onSwitchToSignup}
         >
           회원가입
         </Button>
-        <Button type="button" variant="text" size="sm" className={authMetaButtonStyle}>
+        <Button type="button" variant="text" size="sm" className={authMetaButton}>
           비밀번호 찾기
         </Button>
       </div>

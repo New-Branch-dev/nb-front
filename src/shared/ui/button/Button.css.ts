@@ -7,8 +7,7 @@ export const buttonRecipe = recipe({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: themeTokens.space.sm,
-    borderRadius: themeTokens.radius.md,
+    gap: themeTokens.gap.sm,
     fontWeight: 500,
     border: "none",
     transition:
@@ -25,27 +24,34 @@ export const buttonRecipe = recipe({
         background: colors.primary,
         color: colors.textInverse,
       },
+      secondary: {
+        background: colors.secondary,
+        color: colors.primary,
+      },
       ghost: {
         background: colors.surface,
-        color: colors.textPrimary,
+        color: colors.grayscale.gray900,
       },
       text: {
         background: "transparent",
-        color: colors.grayscale.gray500,
+        color: colors.grayscale.gray900,
       },
     },
     size: {
       sm: {
-        padding: `${themeTokens.space.sm} ${themeTokens.space.md}`,
-        fontSize: typographyContract.D2,
+        padding: `${themeTokens.gap.sm} ${themeTokens.gap.md}`,
+        fontSize: typographyContract.bodyMd,
+        borderRadius: themeTokens.radius.sm,
       },
       md: {
-        padding: `${themeTokens.space.md} ${themeTokens.space.lg}`,
-        fontSize: typographyContract.D1,
+        padding: `${themeTokens.gap.md} ${themeTokens.gap.lg}`,
+        fontSize: typographyContract.bodyLg,
+        borderRadius: themeTokens.radius.md,
       },
       lg: {
-        padding: `${themeTokens.space.lg} ${themeTokens.space.xl}`,
-        fontSize: typographyContract.B2,
+        padding: `${themeTokens.gap.lg} ${themeTokens.gap.xl}`,
+        fontSize: typographyContract.headingSm,
+        borderRadius: themeTokens.radius.lg,
       },
     },
     fullWidth: {

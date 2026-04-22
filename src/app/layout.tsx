@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { ContainerInner, ContainerRoot } from "@shared/ui";
+
 import { Navigation } from "@widgets/navigation";
 
 import "./globals.css";
@@ -29,7 +31,9 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <Navigation />
-        {children}
+        <ContainerRoot>
+          <ContainerInner>{children}</ContainerInner>
+        </ContainerRoot>
       </body>
     </html>
   );

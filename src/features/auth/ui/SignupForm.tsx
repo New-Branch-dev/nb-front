@@ -1,11 +1,11 @@
 import { Button, Input } from "@shared/ui";
 
 import {
-  authFieldGroupStyle,
-  authMetaActionsStyle,
-  authMetaButtonStyle,
-  authSubmitButtonStyle,
-  authTitleStyle,
+  authFieldGroup,
+  authMetaActions,
+  authMetaButton,
+  authSubmitButton,
+  authTitle,
 } from "./AuthForm.css";
 
 type SignupFormProps = {
@@ -15,9 +15,9 @@ type SignupFormProps = {
 export function SignupForm({ onSwitchToLogin }: SignupFormProps) {
   return (
     <>
-      <h2 className={authTitleStyle}>회원가입</h2>
+      <h2 className={authTitle}>회원가입</h2>
 
-      <div className={authFieldGroupStyle}>
+      <div className={authFieldGroup}>
         <Input
           type="email"
           name="signupEmail"
@@ -48,16 +48,16 @@ export function SignupForm({ onSwitchToLogin }: SignupFormProps) {
         />
       </div>
 
-      <Button type="submit" className={authSubmitButtonStyle}>
+      <Button type="submit" className={authSubmitButton}>
         회원가입
       </Button>
 
-      <div className={authMetaActionsStyle}>
+      <div className={authMetaActions}>
         <Button
           type="button"
           variant="text"
           size="sm"
-          className={authMetaButtonStyle}
+          className={authMetaButton}
           onClick={onSwitchToLogin}
         >
           로그인으로 돌아가기

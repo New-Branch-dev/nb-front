@@ -2,36 +2,36 @@ import { style } from "@vanilla-extract/css";
 
 import { colors, themeTokens, typographyContract } from "@shared/styles";
 
-export const inputFieldWrapperStyle = style({
+export const inputFieldWrapper = style({
   display: "flex",
   flexDirection: "column",
-  gap: themeTokens.space.xs,
+  gap: themeTokens.gap.xs,
   width: "100%",
 });
 
-export const inputLabelStyle = style({
+export const inputLabel = style({
   color: colors.textPrimary,
-  fontSize: typographyContract.D2,
+  fontSize: typographyContract.bodyMd,
   fontWeight: 500,
 });
 
-export const inputBaseStyle = style({
+export const inputBase = style({
   width: "100%",
   height: "2.75rem",
-  paddingInline: themeTokens.space.md,
+  paddingInline: themeTokens.gap.md,
   borderRadius: themeTokens.radius.md,
   border: `1px solid ${colors.outline}`,
   background: colors.surface,
   color: colors.textPrimary,
-  fontSize: typographyContract.D1,
+  fontSize: typographyContract.bodyLg,
   outline: "none",
   selectors: {
     "&::placeholder": {
-      color: colors.grayscale.gray500,
+      color: colors.grayscale.gray900,
     },
     "&:focus": {
       borderColor: colors.primary,
-      boxShadow: `0 0 0 3px ${colors.grayscale.gray100}`,
+      boxShadow: `0 0 0 3px ${colors.secondary}`,
     },
   },
 });

@@ -3,7 +3,7 @@ import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 import { buttonRecipe } from "./Button.css";
 
 type ButtonStyleProps = {
-  variant?: "primary" | "ghost" | "text";
+  variant?: "primary" | "secondary" | "ghost" | "text";
   size?: "sm" | "md" | "lg";
   fullWidth?: boolean;
 };

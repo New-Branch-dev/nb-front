@@ -1,13 +1,3 @@
 export { Button } from "./button/Button";
 export { Input } from "./input/Input";
 export { ContainerInner, ContainerRoot } from "./layout/container/Container";
-export { Flex } from "./layout/flex/Flex";
-export {
-  alignItemsStyle,
-  flexBaseStyle,
-  flexDirectionStyle,
-  flexGapStyle,
-  flexInlineStyle,
-  flexWrapStyle,
-  justifyContentStyle,
-} from "./layout/flex/Flex.css";

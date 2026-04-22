@@ -1,29 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-
-import { Button } from "@shared/ui";
-
-import { AuthForm } from "@features/auth";
-
-import { Modal } from "@widgets/modal";
-import { Sidebar } from "@widgets/sidebar";
 
 import {
-  brandStyle,
-  centerSlotStyle,
-  linkStyle,
-  menuStyle,
-  navActionGroupStyle,
-  navInnerStyle,
-  navShellStyle,
-  triggerLinkStyle,
+  brand,
+  centerSlot,
+  link,
+  menu,
+  navActionGroup,
+  navInner,
+  navShell,
 } from "./Navigation.css";
 
 export function Navigation() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const menuItems = [
+    {
+      label: "나만의 학습",
+      href: "/my-learning",
+    },
     {
       label: "학습 목표 달성",
       href: "/learning-goals",
@@ -44,17 +38,17 @@ export function Navigation() {
 
   return (
     <>
-      <header className={navShellStyle}>
-        <nav className={navInnerStyle}>
-          <Link href="/" className={brandStyle}>
+      <header className={navShell}>
+        <nav className={navInner}>
+          <Link href="/" className={brand}>
             NEWBRANCH
           </Link>
 
-          <div className={centerSlotStyle}>
-            <ul className={menuStyle}>
+          <div className={centerSlot}>
+            <ul className={menu}>
               {menuItems.map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className={linkStyle}>
+                  <Link href={item.href} className={link}>
                     {item.label}
                   </Link>
                 </li>
@@ -62,35 +56,16 @@ export function Navigation() {
             </ul>
           </div>
 
-          <div className={navActionGroupStyle}>
-            <Modal
-              triggerText="Menu"
-              triggerAriaLabel="Open menu modal"
-              triggerClassName={triggerLinkStyle}
-            >
-              <AuthForm />
-            </Modal>
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              className={triggerLinkStyle}
-              aria-label="Open sidebar"
-              onClick={() => setIsSidebarOpen(true)}
-            >
-              Sidebar
-            </Button>
+          <div className={navActionGroup}>
+            <Link href="/signin" className={link}>
+              로그인
+            </Link>
+            <Link href="/signup" className={link}>
+              회원가입
+            </Link>
           </div>
         </nav>
       </header>
-
-      <Sidebar
-        title="네비게이션"
-        items={menuItems}
-        open={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-      />
     </>
   );
 }

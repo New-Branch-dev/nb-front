@@ -5,10 +5,10 @@ import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
-  sliderItemStyle,
-  sliderSlideStyle,
-  sliderViewportStyle,
-  sliderWrapperStyle,
+  sliderItem,
+  sliderSlide,
+  sliderViewport,
+  sliderWrapper,
 } from "./Slider.css";
 
 import "swiper/css";
@@ -23,7 +23,7 @@ type SliderProps = {
 
 export function Slider({ items }: SliderProps) {
   return (
-    <section className={sliderWrapperStyle} aria-label="Content slider">
+    <section className={sliderWrapper} aria-label="Content slider">
       <Swiper
         modules={[Navigation]}
         navigation
@@ -34,11 +34,11 @@ export function Slider({ items }: SliderProps) {
           640: { slidesPerView: 2.2 },
           1024: { slidesPerView: 3.2 },
         }}
-        className={sliderViewportStyle}
+        className={sliderViewport}
       >
         {items.map((item) => (
-          <SwiperSlide key={item.id} className={sliderSlideStyle}>
-            <article className={sliderItemStyle}>{item.card}</article>
+          <SwiperSlide key={item.id} className={sliderSlide}>
+            <article className={sliderItem}>{item.card}</article>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
-import { containerInnerStyle, containerRootStyle } from "./Container.css";
+import { containerInner, containerRoot } from "./Container.css";
 
 type ContainerProps = {
   as?: ElementType;
@@ -14,7 +14,7 @@ export function ContainerRoot({
   className,
   ...rest
 }: ContainerProps) {
-  const mergedClassName = [containerRootStyle, className].filter(Boolean).join(" ");
+  const mergedClassName = [containerRoot, className].filter(Boolean).join(" ");
   return (
     <Component className={mergedClassName} {...rest}>
       {children}
@@ -28,7 +28,7 @@ export function ContainerInner({
   className,
   ...rest
 }: ContainerProps) {
-  const mergedClassName = [containerInnerStyle, className].filter(Boolean).join(" ");
+  const mergedClassName = [containerInner, className].filter(Boolean).join(" ");
   return (
     <Component className={mergedClassName} {...rest}>
       {children}
