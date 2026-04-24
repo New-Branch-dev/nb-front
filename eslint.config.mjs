@@ -4,7 +4,7 @@ import nextTs from "eslint-config-next/typescript";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 // FSD 레이어 의존 방향(하위 -> 상위 금지) 기준 순서
-const LAYER_ORDER = ["shared", "entities", "features", "widgets", "pages"];
+const LAYER_ORDER = ["shared", "entities", "features", "widgets", "views"];
 
 // 각 레이어 파일에서 상위 레이어 import를 금지하는 규칙 생성기
 const createFsdLayerRule = (layer) => {
@@ -56,19 +56,21 @@ const eslintConfig = defineConfig([
           leadingUnderscore: "allow",
         },
       ],
-      // Import Convention: 외부 -> shared -> entities -> features -> widgets -> pages -> 상대경로
+      // 함수 선언문 대신 함수 표현식(화살표 함수 포함) 사용 강제
+      "func-style": ["error", "expression", { allowArrowFunctions: true }],
+      // Import Convention: 외부 -> shared -> entities -> features -> widgets -> viwes -> 상대경로
       "simple-import-sort/imports": [
         "error",
         {
           groups: [
-            // 외부 패키지(react/next 포함)
-            ["^react$", "^next", "^@?\\w"],
+            // 외부 패키지(next/react 포함) - prettier sort-imports와 순서 일치
+            ["^next", "^react$", "^@?\\w"],
             // FSD 계층 alias
             ["^@shared(/.*|$)"],
             ["^@entities(/.*|$)"],
             ["^@features(/.*|$)"],
             ["^@widgets(/.*|$)"],
-            ["^@pages(/.*|$)"],
+            ["^@views(/.*|$)"],
             // 현재 파일 기준 상대 경로
             ["^\\."],
           ],
@@ -76,15 +78,6 @@ const eslintConfig = defineConfig([
       ],
       // export 구문도 정렬 기준을 강제
       "simple-import-sort/exports": "error",
-      // Emotion 스타일 네이밍: css tagged template 변수는 *Style 접미사 강제
-      "no-restricted-syntax": [
-        "error",
-        {
-          selector:
-            "VariableDeclarator[init.type='TaggedTemplateExpression'][init.tag.name='css'] > Identifier.id[name!=/Style$/]",
-          message: "Emotion 스타일 변수명은 Style 접미사를 사용해야 합니다.",
-        },
-      ],
     },
   },
   // FSD 아키텍처: 레이어별 상위 레이어 참조 금지 규칙 자동 생성
