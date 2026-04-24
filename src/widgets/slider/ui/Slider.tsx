@@ -21,7 +21,7 @@ type SliderProps = {
   }>;
 };
 
-export function Slider({ items }: SliderProps) {
+export const Slider = ({ items }: SliderProps) => {
   return (
     <section className={sliderWrapper} aria-label="Content slider">
       <Swiper
@@ -44,4 +44,4 @@ export function Slider({ items }: SliderProps) {
       </Swiper>
     </section>
   );
-}
+};

@@ -16,13 +16,13 @@ type ModalProps = {
   children: ReactNode | ModalRenderChildren;
 };
 
-export function Modal({
+export const Modal = ({
   triggerText,
   triggerIcon,
   triggerAriaLabel,
   triggerClassName,
   children,
-}: ModalProps) {
+}: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -75,4 +75,4 @@ export function Modal({
       </dialog>
     </>
   );
-}
+};

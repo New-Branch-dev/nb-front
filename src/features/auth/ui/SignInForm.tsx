@@ -15,7 +15,7 @@ import {
   authTitle,
 } from "./AuthForm.css";
 
-export function SignInForm() {
+export const SignInForm = () => {
   return (
     <>
       <div>
@@ -83,4 +83,4 @@ export function SignInForm() {
       </div>
     </>
   );
-}
+};

@@ -3,7 +3,7 @@ import { containerRootBackground } from "@shared/ui/container/Container.css";
 
 import { RendigPage } from "@views/rendig";
 
-export default function Home() {
+const Home = () => {
   return (
     <ContainerRoot className={containerRootBackground.default}>
       <ContainerInner>
@@ -11,4 +11,6 @@ export default function Home() {
       </ContainerInner>
     </ContainerRoot>
   );
-}
+};
+
+export default Home;

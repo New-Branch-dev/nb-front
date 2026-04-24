@@ -10,14 +10,14 @@ type ButtonStyleProps = {
 
 type ButtonProps = PropsWithChildren<ButtonHTMLAttributes<HTMLButtonElement> & ButtonStyleProps>;
 
-export function Button({
+export const Button = ({
   children,
   className,
   variant = "primary",
   size = "md",
   fullWidth = false,
   ...rest
-}: ButtonProps) {
+}: ButtonProps) => {
   const mergedClassName = [buttonRecipe({ variant, size, fullWidth }), className]
     .filter(Boolean)
     .join(" ");
@@ -27,4 +27,4 @@ export function Button({
       {children}
     </button>
   );
-}
+};

@@ -12,7 +12,7 @@ import {
   navShell,
 } from "./Navigation.css";
 
-export function Navigation() {
+export const Navigation = () => {
   const menuItems = [
     {
       label: "나만의 학습",
@@ -68,4 +68,4 @@ export function Navigation() {
       </header>
     </>
   );
-}
+};

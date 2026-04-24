@@ -6,7 +6,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   placeholder: string;
 };
 
-export function Input({ className, id, ...rest }: InputProps) {
+export const Input = ({ className, id, ...rest }: InputProps) => {
   const inputId = id ?? rest.name;
   const mergedClassName = [inputBase, className].filter(Boolean).join(" ");
 
@@ -15,4 +15,4 @@ export function Input({ className, id, ...rest }: InputProps) {
       <input id={inputId} className={mergedClassName} {...rest} />
     </label>
   );
-}
+};

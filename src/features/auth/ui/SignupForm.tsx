@@ -8,7 +8,7 @@ import {
   authTitle,
 } from "./AuthForm.css";
 
-export function SignUpForm() {
+export const SignUpForm = () => {
   return (
     <>
       <h2 className={authTitle}>회원가입</h2>
@@ -56,4 +56,4 @@ export function SignUpForm() {
       </div>
     </>
   );
-}
+};

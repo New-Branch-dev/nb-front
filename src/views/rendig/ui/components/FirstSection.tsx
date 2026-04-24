@@ -21,7 +21,7 @@ import {
   firstSectionTitle,
 } from "./FirstSection.css";
 
-export function FirstSection() {
+export const FirstSection = () => {
   return (
     <section className={firstSection} aria-label="랜딩 첫 번째 섹션">
       <p className={firstSectionCaption}>뉴브랜치</p>
@@ -95,4 +95,4 @@ export function FirstSection() {
       </div>
     </section>
   );
-}
+};

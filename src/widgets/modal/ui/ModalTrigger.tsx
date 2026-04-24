@@ -10,17 +10,17 @@ type ModalTriggerProps = {
   onOpen: () => void;
 };
 
-export function ModalTrigger({
+export const ModalTrigger = ({
   text,
   icon,
   ariaLabel,
   className,
   onOpen,
-}: ModalTriggerProps) {
+}: ModalTriggerProps) => {
   return (
     <Button className={className} aria-label={ariaLabel} onClick={onOpen}>
       {icon}
       <span>{text}</span>
     </Button>
   );
-}
+};

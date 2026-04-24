@@ -6,7 +6,7 @@ import { authFormRoot } from "./AuthForm.css";
 import { SignInForm } from "./SignInForm";
 import { SignUpForm } from "./SignUpForm";
 
-export function AuthForm() {
+export const AuthForm = () => {
   const pathName = usePathname();
 
   return (
@@ -19,4 +19,4 @@ export function AuthForm() {
       {pathName === "/sign-in" ? <SignInForm /> : <SignUpForm />}
     </form>
   );
-}
+};

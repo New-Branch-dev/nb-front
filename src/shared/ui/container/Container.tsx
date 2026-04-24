@@ -8,30 +8,30 @@ type ContainerProps = {
   className?: string;
 } & ComponentPropsWithoutRef<"div">;
 
-export function ContainerRoot({
+export const ContainerRoot = ({
   as: Component = "div",
   children,
   className,
   ...rest
-}: ContainerProps) {
+}: ContainerProps) => {
   const mergedClassName = [containerRoot, className].filter(Boolean).join(" ");
   return (
     <Component className={mergedClassName} {...rest}>
       {children}
     </Component>
   );
-}
+};
 
-export function ContainerInner({
+export const ContainerInner = ({
   as: Component = "main",
   children,
   className,
   ...rest
-}: ContainerProps) {
+}: ContainerProps) => {
   const mergedClassName = [containerInner, className].filter(Boolean).join(" ");
   return (
     <Component className={mergedClassName} {...rest}>
       {children}
     </Component>
   );
-}
+};

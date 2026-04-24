@@ -25,13 +25,13 @@ type SidebarProps = {
   onItemClick?: () => void;
 };
 
-export function Sidebar({
+export const Sidebar = ({
   title = "메뉴",
   items,
   open,
   onClose,
   onItemClick,
-}: SidebarProps) {
+}: SidebarProps) => {
   if (!open) {
     return null;
   }
@@ -67,4 +67,4 @@ export function Sidebar({
       </aside>
     </div>
   );
-}
+};

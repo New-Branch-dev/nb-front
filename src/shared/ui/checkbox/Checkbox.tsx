@@ -20,7 +20,7 @@ type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"
   labelWeight?: CheckboxLabelWeight;
 };
 
-export function Checkbox({
+export const Checkbox = ({
   label,
   size = "md",
   shape = "square",
@@ -30,7 +30,7 @@ export function Checkbox({
   className,
   id,
   ...rest
-}: CheckboxProps) {
+}: CheckboxProps) => {
   const checkboxId = id ?? rest.name ?? label;
   const mergedClassName = [checkboxRecipe({ size, shape }), className].filter(Boolean).join(" ");
   const labelClassName = checkboxLabelRecipe({
@@ -45,4 +45,4 @@ export function Checkbox({
       <span className={labelClassName}>{label}</span>
     </label>
   );
-}
+};
