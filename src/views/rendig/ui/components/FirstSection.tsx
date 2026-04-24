@@ -30,7 +30,6 @@ export function FirstSection() {
         <header className={firstSectionInner}>
           <h1
             className={firstSectionTitle}
-            style={{ whiteSpace: "pre-line" }}
             dangerouslySetInnerHTML={{
               __html: "지식의 새로운 가지를 \n뻗어 나가는 공간",
             }}
@@ -54,7 +53,7 @@ export function FirstSection() {
               <Link href="/" className={firstSectionGuestLink}>
                 로그인 없이 이용
               </Link>
-              <Link href="/signin" className={firstSectionSigninLink}>
+              <Link href="/sign-in" className={firstSectionSigninLink}>
                 로그인
               </Link>
             </nav>

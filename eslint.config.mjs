@@ -4,7 +4,7 @@ import nextTs from "eslint-config-next/typescript";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 
 // FSD 레이어 의존 방향(하위 -> 상위 금지) 기준 순서
-const LAYER_ORDER = ["shared", "entities", "features", "widgets", "pages"];
+const LAYER_ORDER = ["shared", "entities", "features", "widgets", "views"];
 
 // 각 레이어 파일에서 상위 레이어 import를 금지하는 규칙 생성기
 const createFsdLayerRule = (layer) => {
@@ -56,7 +56,7 @@ const eslintConfig = defineConfig([
           leadingUnderscore: "allow",
         },
       ],
-      // Import Convention: 외부 -> shared -> entities -> features -> widgets -> pages -> 상대경로
+      // Import Convention: 외부 -> shared -> entities -> features -> widgets -> viwes -> 상대경로
       "simple-import-sort/imports": [
         "error",
         {
@@ -68,7 +68,7 @@ const eslintConfig = defineConfig([
             ["^@entities(/.*|$)"],
             ["^@features(/.*|$)"],
             ["^@widgets(/.*|$)"],
-            ["^@pages(/.*|$)"],
+            ["^@views(/.*|$)"],
             // 현재 파일 기준 상대 경로
             ["^\\."],
           ],

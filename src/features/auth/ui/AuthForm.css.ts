@@ -1,6 +1,13 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, themeTokens, typographyContract } from "@shared/styles";
+import {
+  colors,
+  flexBetweenCenter,
+  flexColumnCenter,
+  mediaQuery,
+  themeTokens,
+  typographyContract,
+} from "@shared/styles";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 
 export const authFormRoot = style({
@@ -12,54 +19,94 @@ export const authFormRoot = style({
 });
 
 export const authTitle = style({
-  color: colors.textPrimary,
-  fontSize: typographyContract.headingXl,
-  fontWeight: 700,
+  color: colors.black,
+  fontSize: typographyContract.displayPage,
+  fontWeight: themeTokens.fontWeight.bold,
   textAlign: "center",
+  marginBottom: themeTokens.gap.md,
 });
 
-export const authFieldGroup = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: themeTokens.gap.sm,
+export const authDescription = style({
+  color: colors.grayscale.gray900,
+  fontSize: typographyContract.bodyLg,
+  fontWeight: themeTokens.fontWeight.regular,
+  textAlign: "center",
+  marginBottom: themeTokens.gap.md,
 });
 
-export const authButtonGroup = style({
-  display: "flex",
-  flexDirection: "column",
-  gap: themeTokens.gap.sm,
-});
-
-export const authGoogleButton = style([
-  buttonRecipe({ variant: "ghost", size: "md", fullWidth: true }),
+export const authFieldGroup = style([
+  flexColumnCenter,
   {
-    border: `1px solid ${colors.outline}`,
-    background: colors.white,
+    marginBlock: themeTokens.gap["3xl"],
+    gap: themeTokens.gap.md,
   },
+  mediaQuery({
+    laptop: {
+      marginBlock: themeTokens.gap.md,
+    },
+  }),
 ]);
 
 export const authSubmitButton = style([
   buttonRecipe({ variant: "primary", size: "md", fullWidth: true }),
 ]);
 
-export const authMetaActions = style({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: themeTokens.gap.md,
-});
+export const authMetaActions = style([
+  flexBetweenCenter,
+  {
+    gap: themeTokens.gap.md,
+  },
+]);
 
 export const authMetaButton = style({
+  display: "inline-flex",
+  alignItems: "center",
   padding: 0,
   border: 0,
   background: "transparent",
-  color: colors.grayscale.gray800,
+  color: colors.grayscale.gray600,
   fontSize: typographyContract.bodyMd,
   cursor: "pointer",
   selectors: {
+    "& + &::before": {
+      content: "|",
+      marginInline: themeTokens.gap.sm,
+      color: colors.grayscale.gray800,
+      opacity: 0.5,
+    },
     "&:hover": {
       color: colors.textPrimary,
       textDecoration: "underline",
     },
   },
 });
+
+export const authSimpleFieldGroup = style([
+  flexColumnCenter,
+  {
+    gap: themeTokens.gap.md,
+    marginBlock: themeTokens.gap["9xl"],
+  },
+  mediaQuery({
+    laptop: {
+      marginBlock: themeTokens.gap["3xl"],
+    },
+  }),
+]);
+
+export const authSimpleTitle = style({
+  color: colors.black,
+  fontSize: typographyContract.headingMd,
+  fontWeight: themeTokens.fontWeight.bold,
+  textAlign: "center",
+  marginBottom: themeTokens.gap.md,
+});
+
+export const authGoogleButton = style([
+  buttonRecipe({ variant: "ghost", size: "md", fullWidth: true }),
+  {
+    border: `1px solid ${colors.borderDark}`,
+    background: colors.white,
+    width: "100%",
+  },
+]);

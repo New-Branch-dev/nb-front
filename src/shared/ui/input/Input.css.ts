@@ -5,14 +5,7 @@ import { colors, themeTokens, typographyContract } from "@shared/styles";
 export const inputFieldWrapper = style({
   display: "flex",
   flexDirection: "column",
-  gap: themeTokens.gap.xs,
   width: "100%",
-});
-
-export const inputLabel = style({
-  color: colors.textPrimary,
-  fontSize: typographyContract.bodyMd,
-  fontWeight: 500,
 });
 
 export const inputBase = style({
@@ -20,11 +13,12 @@ export const inputBase = style({
   height: "2.75rem",
   paddingInline: themeTokens.gap.md,
   borderRadius: themeTokens.radius.md,
-  border: `1px solid ${colors.outline}`,
+  border: `1px solid ${colors.border}`,
   background: colors.surface,
   color: colors.textPrimary,
   fontSize: typographyContract.bodyLg,
   outline: "none",
+  cursor: "pointer",
   selectors: {
     "&::placeholder": {
       color: colors.grayscale.gray900,

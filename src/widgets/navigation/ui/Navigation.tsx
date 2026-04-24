@@ -57,10 +57,10 @@ export function Navigation() {
           </div>
 
           <div className={navActionGroup}>
-            <Link href="/signin" className={link}>
+            <Link href="/sign-in" className={link}>
               로그인
             </Link>
-            <Link href="/signup" className={link}>
+            <Link href="/sign-up" className={link}>
               회원가입
             </Link>
           </div>

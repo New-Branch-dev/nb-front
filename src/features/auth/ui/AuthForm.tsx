@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { authFormRoot } from "./AuthForm.css";
-import { LoginForm } from "./LoginForm";
-import { SignupForm } from "./SignupForm";
+import { SignInForm } from "./SignInForm";
+import { SignUpForm } from "./SignUpForm";
 
 export function AuthForm() {
-  const [isSignupMode, setIsSignupMode] = useState(false);
+  const pathName = usePathname();
 
   return (
     <form
@@ -16,11 +16,7 @@ export function AuthForm() {
         event.preventDefault();
       }}
     >
-      {isSignupMode ? (
-        <SignupForm onSwitchToLogin={() => setIsSignupMode(false)} />
-      ) : (
-        <LoginForm onSwitchToSignup={() => setIsSignupMode(true)} />
-      )}
+      {pathName === "/sign-in" ? <SignInForm /> : <SignUpForm />}
     </form>
   );
 }

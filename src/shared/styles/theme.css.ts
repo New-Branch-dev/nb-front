@@ -18,6 +18,7 @@ export const themeTokens = createGlobalTheme(":root", {
     "9xl": "5rem",
   },
   radius: {
+    xs: "0.25rem",
     sm: "0.5rem",
     md: "0.625rem",
     lg: "0.75rem",
