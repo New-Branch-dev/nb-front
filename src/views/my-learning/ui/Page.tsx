@@ -10,8 +10,8 @@ import { contentContainer } from "./Page.css";
 
 const STEP_ITEMS = [
   { title: "프로필" },
-  { title: "목표" },
-  { title: "단권화" },
+  { title: "학습 특성" },
+  { title: "선호 학습 시간" },
   { title: "복습" },
   { title: "실전" },
   { title: "점검" },

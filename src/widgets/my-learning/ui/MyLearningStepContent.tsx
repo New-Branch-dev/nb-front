@@ -7,7 +7,6 @@ import { Button } from "@shared/ui";
 import {
   LearningPattern,
   MyProfile,
-  StepGoalContent,
   StepPlaceholderContent,
 } from "@features/my-learning";
 
