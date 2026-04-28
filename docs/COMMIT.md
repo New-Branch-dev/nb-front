@@ -21,4 +21,4 @@
 - fix: 회원가입 API 에러 처리 수정
 - docs: CONTRIBUTING 문서 업데이트
 - refactor: 캘린더 컴포넌트 구조 개선
-- chore: eslint 설정 및 개발 스크립트 정리
+- chore: eslint 설정 및 개발 스크립트 정리, 간단한 코드 수정
