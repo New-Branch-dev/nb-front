@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Input } from "@shared/ui";
 
-import { fieldGroup } from "./MyLearningContent.css";
+import { fieldGroup } from "./my-profile/MyProfile.css";
 
 type StepPlaceholderContentProps = {
   step: number;

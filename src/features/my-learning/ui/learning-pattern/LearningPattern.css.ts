@@ -26,7 +26,6 @@ export const sectionCard = style([
 ]);
 
 export const sectionTitle = style({
-  margin: 0,
   fontSize: typographyContract.headingSm,
   color: colors.grayscale.gray700,
   fontWeight: themeTokens.fontWeight.bold,

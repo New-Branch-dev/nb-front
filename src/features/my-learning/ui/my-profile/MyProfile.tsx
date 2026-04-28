@@ -4,17 +4,13 @@ import { useEffect, useState } from "react";
 
 import { Button, Input } from "@shared/ui";
 
-import {
-  fieldGroup,
-  fieldRow,
-  searchButtonWrap,
-} from "./MyLearningContent.css";
+import { fieldGroup, fieldRow, searchButtonWrap } from "./MyProfile.css";
 
-type MyLearningContentProps = {
+type MyProfileProps = {
   onValidityChange: (isValid: boolean) => void;
 };
 
-export const MyProfile = ({ onValidityChange }: MyLearningContentProps) => {
+export const MyProfile = ({ onValidityChange }: MyProfileProps) => {
   const [profileForm, setProfileForm] = useState({
     nickname: "",
     ageGroup: "",

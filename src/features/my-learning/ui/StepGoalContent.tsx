@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { Input } from "@shared/ui";
 
-import { fieldGroup } from "./MyLearningContent.css";
+import { fieldGroup } from "./my-profile/MyProfile.css";
 
 type StepGoalContentProps = {
   onValidityChange: (isValid: boolean) => void;

@@ -7,6 +7,7 @@ import { Button } from "@shared/ui";
 import {
   LearningPattern,
   MyProfile,
+  PreferredLearningTime,
   StepPlaceholderContent,
 } from "@features/my-learning";
 
@@ -43,7 +44,10 @@ export const MyLearningStepContent = ({
       {currentStep === 2 && (
         <LearningPattern onValidityChange={handleValidityChange} />
       )}
-      {currentStep > 2 && (
+      {currentStep === 3 && (
+        <PreferredLearningTime onValidityChange={handleValidityChange} />
+      )}
+      {currentStep > 3 && (
         <StepPlaceholderContent
           step={currentStep}
           onValidityChange={handleValidityChange}

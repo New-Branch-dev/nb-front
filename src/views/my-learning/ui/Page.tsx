@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { ContantHeader } from "@widgets/contant-header";
 import { MyLearningStepContent } from "@widgets/my-learning";
@@ -21,6 +21,10 @@ const STEP_ITEMS = [
 
 export const MyLearningPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [currentStep]);
 
   const handlePrevStep = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
