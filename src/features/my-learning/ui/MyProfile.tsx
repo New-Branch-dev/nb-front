@@ -7,18 +7,14 @@ import { Button, Input } from "@shared/ui";
 import {
   fieldGroup,
   fieldRow,
-  formSection,
   searchButtonWrap,
-  stepTitle,
 } from "./MyLearningContent.css";
 
 type MyLearningContentProps = {
   onValidityChange: (isValid: boolean) => void;
 };
 
-export const MyLearningContent = ({
-  onValidityChange,
-}: MyLearningContentProps) => {
+export const MyProfile = ({ onValidityChange }: MyLearningContentProps) => {
   const [profileForm, setProfileForm] = useState({
     nickname: "",
     ageGroup: "",
@@ -34,7 +30,7 @@ export const MyLearningContent = ({
 
   return (
     <>
-      <article className={formSection} aria-label="1단계 프로필 입력">
+      <article aria-label="1단계 프로필 입력">
         <div className={fieldGroup}>
           <Input
             name="nickname"

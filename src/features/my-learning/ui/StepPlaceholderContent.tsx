@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import { Input } from "@shared/ui";
 
-import { fieldGroup, formSection, stepTitle } from "./MyLearningContent.css";
+import { fieldGroup } from "./MyLearningContent.css";
 
 type StepPlaceholderContentProps = {
   step: number;
@@ -18,7 +18,7 @@ export const StepPlaceholderContent = ({
   }, [onValidityChange]);
 
   return (
-    <article className={formSection} aria-label={`${step}단계 콘텐츠`}>
+    <article aria-label={`${step}단계 콘텐츠`}>
       <div className={fieldGroup}>
         <Input
           name={`step-${step}`}

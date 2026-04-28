@@ -1,22 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import {
-  colors,
-  flexColumn,
-  flexStart,
-  themeTokens,
-  typographyContract,
-} from "@shared/styles";
-
-export const formSection = style({
-  width: "100%",
-});
-
-export const stepTitle = style({
-  margin: `0 0 ${themeTokens.gap.lg} 0`,
-  fontSize: typographyContract.headingLg,
-  color: colors.primary,
-});
+import { flexColumn, flexStart, themeTokens } from "@shared/styles";
 
 export const fieldGroup = style([
   flexColumn,
