@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Button } from "@shared/ui";
 
 import {
+  LearningPattern,
   MyProfile,
   StepGoalContent,
   StepPlaceholderContent,
@@ -41,7 +42,7 @@ export const MyLearningStepContent = ({
         <MyProfile onValidityChange={handleValidityChange} />
       )}
       {currentStep === 2 && (
-        <StepGoalContent onValidityChange={handleValidityChange} />
+        <LearningPattern onValidityChange={handleValidityChange} />
       )}
       {currentStep > 2 && (
         <StepPlaceholderContent
