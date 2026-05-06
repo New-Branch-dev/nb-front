@@ -5,7 +5,7 @@ import { ko } from "date-fns/locale";
 import type { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 
-import { calendarBase, dayBase, pickerRoot, weekDay } from "./DatePicker.css";
+import { dayBase, pickerRoot, weekDay } from "./DatePicker.css";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -47,7 +47,6 @@ export const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
         }}
         locale={ko}
         formatWeekDay={(day) => day.slice(0, 1)}
-        calendarClassName={calendarBase}
         weekDayClassName={() => weekDay}
         dayClassName={() => dayBase}
         renderCustomHeader={({ date }: ReactDatePickerCustomHeaderProps) => (

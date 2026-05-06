@@ -11,8 +11,6 @@ export const pickerRoot = style({
   width: "100%",
 });
 
-export const calendarBase = style({});
-
 export const dayBase = style([
   flexInlineCenter,
   {
