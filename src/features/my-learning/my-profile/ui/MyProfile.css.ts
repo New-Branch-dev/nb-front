@@ -12,7 +12,6 @@ export const fieldGroup = style([
 export const fieldRow = style([
   flexStart,
   {
-    alignItems: "stretch",
     gap: themeTokens.gap.md,
   },
 ]);

@@ -14,10 +14,6 @@ export const sectionRoot = style([
   flexColumn,
   {
     gap: themeTokens.gap["2xl"],
-    border: `1px solid ${colors.border}`,
-    borderRadius: themeTokens.radius.lg,
-    backgroundColor: colors.background,
-    padding: themeTokens.gap["3xl"],
   },
 ]);
 

@@ -1,5 +1,6 @@
-export { LearningPattern } from "./ui/learning-pattern/LearningPattern";
-export { MyProfile } from "./ui/my-profile/MyProfile";
-export { PreferredLearningTime } from "./ui/preferred-learning-time/PreferredLearningTime";
-export { StepGoalContent } from "./ui/StepGoalContent";
-export { StepPlaceholderContent } from "./ui/StepPlaceholderContent";
+export { LearningPattern } from "./learning-pattern/ui/LearningPattern";
+export { LearningPreferences } from "./learning-preferences/ui/LearningPreferences";
+export { MyProfile } from "./my-profile/ui/MyProfile";
+export { PreferredLearningPartner } from "./preferred-learning-partner/ui/PreferredLearningPartner";
+export { PreferredLearningTime } from "./preferred-learning-time/ui/PreferredLearningTime";
+export { Register } from "./register/ui/Register";
