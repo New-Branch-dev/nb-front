@@ -1,9 +1,9 @@
 import { FirstSection } from "./components/FirstSection";
-import { rendigPage } from "./Page.css";
+import { rendingPage } from "./Page.css";
 
-export const RendigPage = () => {
+export const RendingPage = () => {
   return (
-    <section className={rendigPage}>
+    <section className={rendingPage}>
       <FirstSection />
     </section>
   );

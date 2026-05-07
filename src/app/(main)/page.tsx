@@ -1,7 +1,7 @@
-import { RendigPage } from "@views/rendig";
+import { RendingPage } from "@views/rending";
 
 const Home = () => {
-  return <RendigPage />;
+  return <RendingPage />;
 };
 
 export default Home;
