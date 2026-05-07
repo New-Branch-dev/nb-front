@@ -1,82 +1,24 @@
 "use client";
 
-import { useState } from "react";
-
-import { Button } from "@shared/ui";
-
-import {
-  LearningPattern,
-  MyProfile,
-  PreferredLearningTime,
-  StepPlaceholderContent,
-} from "@features/my-learning";
-
-import { actionButton, actionRow } from "./MyLearningStepContent.css";
+import { StepFlowPanelsSection } from "@widgets/learning-step-layout";
+import { STEP_PANEL_BY_STEP } from "@widgets/my-learning/lib/stepPanels.consts";
+import { MY_LEARNING_STEPS } from "@widgets/my-learning/model/consts";
 
 type MyLearningStepContentProps = {
   currentStep: number;
-  totalStepCount: number;
-  onPrevStep: () => void;
-  onNextStep: () => void;
+  handlersByStep: Record<number, (isValid: boolean) => void>;
 };
 
 export const MyLearningStepContent = ({
   currentStep,
-  totalStepCount,
-  onPrevStep,
-  onNextStep,
-}: MyLearningStepContentProps) => {
-  const [isStepValid, setIsStepValid] = useState(false);
-
-  const handleValidityChange = (isValid: boolean) => {
-    setIsStepValid(isValid);
-  };
-
-  const isLastStep = currentStep >= totalStepCount;
-  const canGoPrev = currentStep > 1;
-  const canGoNext = isStepValid && !isLastStep;
-
-  return (
-    <>
-      {currentStep === 1 && (
-        <MyProfile onValidityChange={handleValidityChange} />
-      )}
-      {currentStep === 2 && (
-        <LearningPattern onValidityChange={handleValidityChange} />
-      )}
-      {currentStep === 3 && (
-        <PreferredLearningTime onValidityChange={handleValidityChange} />
-      )}
-      {currentStep > 3 && (
-        <StepPlaceholderContent
-          step={currentStep}
-          onValidityChange={handleValidityChange}
-        />
-      )}
-
-      <div className={actionRow}>
-        {canGoPrev && (
-          <Button
-            type="button"
-            size="lg"
-            variant="ghost"
-            className={actionButton}
-            onClick={onPrevStep}
-          >
-            이전
-          </Button>
-        )}
-        <Button
-          type="button"
-          size="lg"
-          fullWidth={!canGoPrev}
-          className={canGoPrev ? actionButton : undefined}
-          disabled={!canGoNext}
-          onClick={onNextStep}
-        >
-          {isLastStep ? "완료" : "다음"}
-        </Button>
-      </div>
-    </>
-  );
-};
+  handlersByStep,
+}: MyLearningStepContentProps) => (
+  <StepFlowPanelsSection
+    steps={MY_LEARNING_STEPS}
+    currentStep={currentStep}
+    handlersByStep={handlersByStep}
+    panelByStep={STEP_PANEL_BY_STEP}
+    ariaLabel="나만의 학습 단계 설정 콘텐츠"
+    activityNamePrefix="my-learning"
+  />
+);
