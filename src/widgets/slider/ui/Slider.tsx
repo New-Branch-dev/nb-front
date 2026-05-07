@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { ComponentType } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -14,14 +14,19 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 
-type SliderProps = {
-  items: Array<{
-    id: string;
-    card: ReactNode;
-  }>;
+type SliderItemBase = {
+  id: string;
 };
 
-export const Slider = ({ items }: SliderProps) => {
+type SliderProps<T extends SliderItemBase> = {
+  items: T[];
+  ItemComponent: ComponentType<{ item: T }>;
+};
+
+export const Slider = <T extends SliderItemBase>({
+  items,
+  ItemComponent,
+}: SliderProps<T>) => {
   return (
     <section className={sliderWrapper} aria-label="Content slider">
       <Swiper
@@ -38,7 +43,9 @@ export const Slider = ({ items }: SliderProps) => {
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} className={sliderSlide}>
-            <article className={sliderItem}>{item.card}</article>
+            <article className={sliderItem}>
+              <ItemComponent item={item} />
+            </article>
           </SwiperSlide>
         ))}
       </Swiper>
