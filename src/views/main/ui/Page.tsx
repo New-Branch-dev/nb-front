@@ -4,12 +4,12 @@ import { Slider } from "@widgets/slider";
 
 import { MAIN_SLIDER_ITEMS } from "@views/main/model/consts";
 
-import { header, main, sliderWrapper } from "./Page.css";
+import { header, sliderWrapper } from "./Page.css";
 import { SliederItems } from "./slider-items/SliederItems";
 
 export const MainPage = () => {
   return (
-    <main className={main}>
+    <main>
       <header>
         <h1 className={header}>
           안녕하세요,

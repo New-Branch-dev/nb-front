@@ -25,22 +25,26 @@ export const infoColumn = style([
   },
 ]);
 
-export const iconText = style({
-  display: "inline-flex",
-  width: "fit-content",
-  lineHeight: 1,
-});
-
 export const titleText = style({
   fontSize: typographyContract.headingMd,
   color: colors.black,
   fontWeight: themeTokens.fontWeight.bold,
+
+  ...mediaQuery({
+    laptop: {
+      marginBottom: "0.2rem",
+    },
+    pc: {
+      marginBottom: "1rem",
+    },
+  }),
 });
 
 export const descriptionText = style({
   fontSize: typographyContract.bodyMd,
   color: colors.grayscale.gray700,
   lineHeight: 1.5,
+  whiteSpace: "pre-line",
 });
 
 export const iconImageWrap = style({
@@ -48,12 +52,14 @@ export const iconImageWrap = style({
   width: "2rem",
   height: "2rem",
   aspectRatio: "1 / 1",
+  marginBottom: "1rem",
   ...mediaQuery({
     laptop: {
       width: "2rem",
       height: "2rem",
     },
     pc: {
+      marginBottom: "2rem",
       width: "3.3125rem",
       height: "3.3125rem",
     },
@@ -62,6 +68,7 @@ export const iconImageWrap = style({
 
 export const iconImage = style({
   objectFit: "contain",
+  marginBottom: "1.5rem",
 });
 
 export const actionRow = style([

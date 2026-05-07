@@ -10,7 +10,6 @@ import {
   firstVisualWrap,
   iconImage,
   iconImageWrap,
-  iconText,
   infoColumn,
   startLink,
   titleText,
@@ -34,24 +33,30 @@ export const SliederItems = ({ item }: SliederItemsProps) => {
     <div>
       <div className={contentColumn}>
         <div className={infoColumn}>
-          <span className={iconText} aria-hidden>
-            <span className={iconImageWrap}>
-              <Image
-                src={item.icon}
-                alt={item.iconAlt}
-                fill
-                sizes="2rem"
-                className={iconImage}
-              />
-            </span>
-          </span>
+          <div className={iconImageWrap}>
+            <Image
+              src={item.icon}
+              alt={item.iconAlt}
+              fill
+              sizes="2rem"
+              className={iconImage}
+            />
+          </div>
+
           <h3 className={titleText}>{item.title}</h3>
           <p className={descriptionText}>{item.description}</p>
         </div>
 
         <div className={actionRow}>
           <Link href={item.href} className={startLink}>
-            시작하기 <span aria-hidden>&gt;</span>
+            시작하기
+            <Image
+              src="/arrow-right-black.svg"
+              alt="화살표 이미지"
+              width={16}
+              height={16}
+              aria-hidden
+            />
           </Link>
         </div>
       </div>

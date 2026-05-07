@@ -4,10 +4,6 @@ import { mediaQuery, themeTokens } from "@shared/styles";
 import { colors } from "@shared/styles/colors.css";
 import { typographyContract } from "@shared/styles/typography.css";
 
-export const main = style({
-  paddingInline: themeTokens.gap["9xl"],
-});
-
 export const sectionBase = style({
   width: "100%",
   paddingBlock: "5rem",
@@ -15,12 +11,14 @@ export const sectionBase = style({
 });
 
 export const header = style({
+  paddingInline: themeTokens.gap["9xl"],
   color: colors.primary,
   fontSize: typographyContract.displayHeadline,
 });
 
 export const sliderWrapper = style({
   paddingBlock: "5rem",
+  overflow: "visible",
   ...mediaQuery({
     laptop: {
       paddingTop: "3rem",
