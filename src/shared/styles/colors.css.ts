@@ -30,7 +30,7 @@ export const colorsDefault: Record<keyof typeof colorsContract, string> = {
   disabled: "#D2D3D7",
   negativeRed: "#FF0000",
   overlay: "rgba(0, 0, 0, 0.35)",
-  border: "#FAF9FF",
+  border: "#D9D9D9",
   borderDark: "E0DDE9",
   background: "#FDFDFF",
   foreground: "#FAF9FF",
