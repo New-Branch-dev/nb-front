@@ -1,17 +1,10 @@
 import { style } from "@vanilla-extract/css";
 
-import {
-  colors,
-  flexBetweenCenter,
-  mediaQuery,
-  themeTokens,
-  typographyContract,
-} from "@shared/styles";
-
-export const rendigPage = style({
-  minHeight: "100%",
-  paddingBottom: "5.5rem",
-});
+import { colors } from "@shared/styles/colors.css";
+import { flexBetweenCenter } from "@shared/styles/flex.css";
+import { mediaQuery } from "@shared/styles/media-query.css";
+import { themeTokens } from "@shared/styles/theme.css";
+import { typographyContract } from "@shared/styles/typography.css";
 
 export const pageFooter = style([
   flexBetweenCenter,

@@ -1,16 +1,21 @@
 import { ContainerInner, ContainerRoot } from "@shared/ui";
 import { containerRootBackground } from "@shared/ui/container/Container.css";
 
-import { RendigPage } from "@views/rendig";
+import { Footer } from "@widgets/footer/ui/Footer";
 
-const Home = () => {
+const MainLayout = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   return (
     <ContainerRoot className={containerRootBackground.default}>
       <ContainerInner>
-        <RendigPage />
+        {children}
+        <Footer />
       </ContainerInner>
     </ContainerRoot>
   );
 };
 
-export default Home;
+export default MainLayout;
