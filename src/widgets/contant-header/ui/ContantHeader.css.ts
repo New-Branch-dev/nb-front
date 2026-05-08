@@ -11,7 +11,7 @@ export const header = style([
   flexColumnCenter,
   {
     gap: themeTokens.gap.md,
-    marginBottom: themeTokens.gap["8xl"],
+    marginBottom: themeTokens.gap["2xl"],
   },
 ]);
 

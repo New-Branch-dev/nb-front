@@ -6,11 +6,7 @@ import {
   themeTokens,
   typographyContract,
 } from "@shared/styles";
-import {
-  flexCenter,
-  flexColumn,
-  flexStart,
-} from "@shared/styles/flex.css";
+import { flexCenter, flexColumn, flexStart } from "@shared/styles/flex.css";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 
 export const firstSection = style([
