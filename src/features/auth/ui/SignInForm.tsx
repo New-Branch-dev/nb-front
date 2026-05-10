@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import { Button, Checkbox, Input } from "@shared/ui";
 
+import { useSocialLogin } from "@features/auth/model/SocialLogin";
+
 import {
   authDescription,
   authFieldGroup,
@@ -16,6 +18,7 @@ import {
 } from "./AuthForm.css";
 
 export const SignInForm = () => {
+  const { handleGoogleLogin } = useSocialLogin();
   return (
     <>
       <div>
@@ -70,7 +73,7 @@ export const SignInForm = () => {
 
       <div className={authSimpleFieldGroup}>
         <h2 className={authSimpleTitle}>간편 로그인</h2>
-        <Button type="button" className={authGoogleButton}>
+        <Button type="button" className={authGoogleButton} onClick={handleGoogleLogin}>
           <Image
             src="/google.png"
             alt="구글"
