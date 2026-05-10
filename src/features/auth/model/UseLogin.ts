@@ -22,6 +22,9 @@ export const useLogin = () => {
       if (response.ok && result.data) {
         localStorage.setItem("accessToken", result.data.accessToken);
         localStorage.setItem("refreshToken", result.data.refreshToken);
+        if (result.data.nickname) {
+          localStorage.setItem("nickname", result.data.nickname);
+        }
 
         window.dispatchEvent(new Event("login-success"));
         window.location.href = "/";

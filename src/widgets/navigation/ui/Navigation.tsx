@@ -16,13 +16,18 @@ import {
 
 export const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [nickname, setNickname] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     const checkLoginStatus = () => {
       const token = localStorage.getItem("accessToken");
+      const savedNickname = localStorage.getItem("nickname");
       if (token) {
         setIsLoggedIn(true);
+        if (savedNickname) {
+          setNickname(decodeURIComponent(savedNickname));
+        }
       }
     };
 
@@ -49,7 +54,9 @@ export const Navigation = () => {
     } finally {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+      localStorage.removeItem("nickname");
       setIsLoggedIn(false);
+      setNickname("");
 
       router.replace("/");
       router.refresh();
@@ -107,11 +114,9 @@ export const Navigation = () => {
               </>
             ) : (
               <>
-
-                {/* TODO: 사용자 이름 */}
-                <span className={link} style={{ fontWeight: 'bold' }}>시원님</span>
+                <span className={link} style={{ fontWeight: 'bold' }}>{nickname}님</span>
                 {/* TODO: 로그아웃 버튼 퍼블 */}
-                <button onClick={handleLogout} className={link} > 로그아웃 </button>
+                <button onClick={handleLogout} className={link}> 로그아웃</button>
               </>
             )}
           </div>
