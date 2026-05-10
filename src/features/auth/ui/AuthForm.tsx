@@ -10,13 +10,13 @@ export const AuthForm = () => {
   const pathName = usePathname();
 
   return (
-    <form
+    <div
       className={authFormRoot}
       onSubmit={(event) => {
         event.preventDefault();
       }}
     >
       {pathName === "/sign-in" ? <SignInForm /> : <SignUpForm />}
-    </form>
+    </div>
   );
 };
