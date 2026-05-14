@@ -1,5 +1,547 @@
 <!-- BEGIN:nextjs-agent-rules -->
+
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+
 <!-- END:nextjs-agent-rules -->
+
+# Project Overview
+
+This project uses a customized Feature-Sliced Design (FSD) architecture.
+
+The architecture is designed for:
+
+- scalability
+- maintainability
+- predictable domain ownership
+- clear separation of responsibilities
+
+Tech Stack:
+
+- Next.js App Router
+- React
+- TypeScript
+- vanilla-extract
+- pnpm
+- Vitest
+
+---
+
+# Core Architecture
+
+Project layers:
+
+```txt
+app
+views
+widgets
+features
+entities
+shared
+```
+
+---
+
+# Layer Responsibilities
+
+## app
+
+Application-level initialization layer.
+
+Contains:
+
+- providers
+- routing
+- layouts
+- global styles
+- app initialization logic
+
+Rules:
+
+- should not contain domain business logic
+- should not contain reusable business UI
+
+---
+
+## views
+
+Page composition layer.
+
+Responsible for:
+
+- composing widgets
+- composing features
+- composing entities
+- page-level layout
+
+Rules:
+
+- keep views declarative
+- avoid heavy business logic
+- avoid direct API handling
+
+---
+
+## widgets
+
+Large UI composition blocks.
+
+Examples:
+
+- sidebar
+- dashboard section
+- complex form section
+- navigation area
+
+Rules:
+
+- compose features/entities together
+- focus on layout and composition
+- avoid owning business rules
+
+---
+
+## features
+
+Dynamic interaction layer.
+
+Responsible for:
+
+- POST requests
+- PUT requests
+- DELETE requests
+- mutations
+- user interactions
+- form actions
+- state transitions
+
+Examples:
+
+- login action
+- submit form
+- create learning goal
+- update profile
+
+Rules:
+
+- features own interactive logic
+- features should not own read-only domain rendering
+- business actions belong here
+
+---
+
+## entities
+
+Read-focused domain layer.
+
+Responsible for:
+
+- GET requests
+- domain models
+- read-only business UI
+- reusable domain state
+
+Examples:
+
+- user profile display
+- learning goal card
+- course information
+
+Rules:
+
+- entities should avoid mutation logic
+- entities focus on displaying and reading data
+
+---
+
+## shared
+
+Global reusable layer.
+
+Contains:
+
+- shared UI
+- utilities
+- configs
+- constants
+- hooks
+- design tokens
+- common types
+
+Rules:
+
+- shared must remain domain-agnostic
+- no business-specific logic
+- no domain ownership
+
+---
+
+# Slice Rules
+
+Slices are separated using two principles:
+
+1. Domain-based separation
+2. Reusable/common functionality separation
+
+Examples:
+
+```txt
+features/my-learning
+features/auth
+features/submit-button
+
+entities/user
+entities/course
+
+shared/modal
+shared/button
+```
+
+Rules:
+
+- a slice should represent either:
+  - a business domain
+  - a reusable functional unit
+- avoid mixing unrelated domains inside one slice
+
+---
+
+# Segment Rules
+
+Each slice is divided by responsibility.
+
+Common segments:
+
+```txt
+ui
+model
+hook
+api
+lib
+types
+consts
+config
+```
+
+---
+
+# Segment Responsibilities
+
+## ui
+
+Visual rendering layer.
+
+Rules:
+
+- focus on rendering only
+- receive clear props
+- avoid heavy business logic
+- avoid direct API calls
+
+---
+
+## model
+
+Business logic layer.
+
+Contains:
+
+- state management
+- validation logic
+- business rules
+- domain state transitions
+
+Rules:
+
+- keep business logic centralized
+- avoid UI rendering logic
+
+---
+
+## hook
+
+Custom React hooks.
+
+Rules:
+
+- encapsulate reusable logic
+- keep hooks focused
+- avoid unnecessary side effects
+
+---
+
+## api
+
+API communication layer.
+
+Responsible for:
+
+- fetch logic
+- request functions
+- API adapters
+
+Rules:
+
+- no UI logic
+- no rendering logic
+- keep request logic isolated
+
+---
+
+## lib
+
+Pure utility functions.
+
+Rules:
+
+- keep functions side-effect free
+- keep reusable
+- avoid React dependency
+
+---
+
+# Import Rules
+
+Follow layer dependency direction strictly.
+
+Allowed direction:
+
+```txt
+shared
+↑
+entities
+↑
+features
+↑
+widgets
+↑
+views
+↑
+app
+```
+
+Rules:
+
+- lower layers must not import upper layers
+- entities cannot import features
+- shared cannot import entities
+- features cannot import widgets
+- widgets cannot import views
+
+---
+
+# Development Principles
+
+## Follow Existing Patterns
+
+Before creating new structures:
+
+- inspect nearby files
+- follow existing patterns
+- maintain naming consistency
+
+Avoid unnecessary abstractions.
+
+---
+
+## Component Principles
+
+Rules:
+
+- keep components small
+- separate UI from business logic
+- prefer composition over massive components
+- avoid deep prop drilling
+- split responsibilities clearly
+
+---
+
+## State Management Principles
+
+Rules:
+
+- keep state local when possible
+- avoid unnecessary global state
+- separate server state from UI state
+- avoid over-engineering
+
+---
+
+# Styling Rules
+
+This project uses vanilla-extract.
+
+Rules:
+
+- separate styles into `.css.ts`
+- avoid inline styles
+- prefer recipe-based variants
+- use design tokens consistently
+- keep styling predictable
+
+---
+
+# TypeScript Rules
+
+Rules:
+
+- avoid `any`
+- prefer explicit typing
+- use meaningful type names
+- keep types near domain ownership
+
+Boolean naming conventions:
+
+- `is`
+- `has`
+- `can`
+- `should`
+
+Examples:
+
+- `isLoading`
+- `hasError`
+- `canSubmit`
+- `shouldRefetch`
+
+---
+
+# API Rules
+
+Rules:
+
+- isolate API requests inside `api`
+- avoid fetch logic inside UI
+- validate response structure when necessary
+- avoid duplicated request logic
+
+---
+
+# Testing Rules
+
+Testing Stack:
+
+- Vitest
+
+Rules:
+
+- test business logic first
+- avoid implementation-detail testing
+- keep tests readable
+- focus on user behavior
+
+---
+
+# Performance Principles
+
+Rules:
+
+- avoid unnecessary re-renders
+- avoid excessive client components
+- prefer server components when possible
+- lazy load heavy UI when necessary
+- memoize only when beneficial
+
+---
+
+# Forbidden Rules
+
+NEVER:
+
+- use `any` unnecessarily
+- place business logic inside `shared`
+- place mutation logic inside `entities`
+- create massive components
+- break import direction
+- mix API logic inside UI components
+- introduce unrelated refactors
+- add libraries without necessity
+- duplicate domain logic
+- bypass existing architecture patterns
+
+---
+
+# Agent Workflow
+
+Before editing:
+
+1. inspect related files
+2. understand existing patterns
+3. verify architecture direction
+4. minimize unnecessary changes
+
+After editing:
+
+1. verify type safety
+2. verify lint
+3. verify test stability
+4. summarize changes clearly
+5. explain architectural decisions briefly
+
+---
+
+# Git Workflow
+
+Branch naming:
+
+```txt
+feat/*
+fix/*
+refactor/*
+chore/*
+docs/*
+```
+
+Commit conventions:
+
+```txt
+feat:
+fix:
+refactor:
+chore:
+docs:
+```
+
+Examples:
+
+```txt
+feat: add learning goal creation flow
+fix: resolve hydration mismatch issue
+refactor: separate validation logic from ui
+docs: update architecture guide
+```
+
+---
+
+# Code Review Checklist
+
+Before finalizing code:
+
+- verify layer direction
+- verify slice ownership
+- verify domain separation
+- verify type safety
+- verify unnecessary rerender risks
+- verify accessibility basics
+- verify API separation
+- verify business logic placement
+
+---
+
+# AI Agent Instructions
+
+When generating code:
+
+- prioritize maintainability
+- prioritize readability
+- follow existing project structure
+- avoid speculative abstractions
+- prefer explicit code over overly clever patterns
+
+When modifying existing code:
+
+- preserve current architecture
+- avoid unrelated refactors
+- keep changes minimal and focused
+- explain major structural decisions
