@@ -1,47 +1,105 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { Navigation } from "swiper/modules";
+import Image from "next/image";
+import { type ComponentType, useState } from "react";
+import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import {
   sliderItem,
+  sliderNavButton,
+  sliderNavIcon,
+  sliderNextButton,
+  sliderPrevButton,
   sliderSlide,
   sliderViewport,
   sliderWrapper,
 } from "./Slider.css";
 
 import "swiper/css";
-import "swiper/css/navigation";
 
-type SliderProps = {
-  items: Array<{
-    id: string;
-    card: ReactNode;
-  }>;
+type SliderItemBase = {
+  id: string;
 };
 
-export const Slider = ({ items }: SliderProps) => {
+type SliderProps<T extends SliderItemBase> = {
+  items: T[];
+  ItemComponent: ComponentType<{ item: T }>;
+};
+
+export const Slider = <T extends SliderItemBase>({
+  items,
+  ItemComponent,
+}: SliderProps<T>) => {
+  const [swiper, setSwiper] = useState<SwiperType | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
+  const syncNavState = (instance: SwiperType) => {
+    setIsBeginning(instance.isBeginning);
+    setIsEnd(instance.isEnd);
+  };
+
   return (
     <section className={sliderWrapper} aria-label="Content slider">
+      <button
+        type="button"
+        className={`${sliderNavButton} ${sliderPrevButton}`}
+        onClick={() => swiper?.slidePrev()}
+        aria-label="이전 슬라이드"
+        disabled={isBeginning}
+      >
+        <Image
+          src="/slider-arrow-left.svg"
+          alt=""
+          width={55}
+          height={32}
+          className={sliderNavIcon}
+          aria-hidden
+        />
+      </button>
+
       <Swiper
-        modules={[Navigation]}
-        navigation
-        slidesPerView={3.2}
+        slidesPerView={3}
+        slidesPerGroup={3}
         spaceBetween={12}
+        onSwiper={(instance) => {
+          setSwiper(instance);
+          syncNavState(instance);
+        }}
+        onSlideChange={syncNavState}
         breakpoints={{
-          0: { slidesPerView: 1.15 },
-          640: { slidesPerView: 2.2 },
-          1024: { slidesPerView: 3.2 },
+          0: { slidesPerView: 1.15, slidesPerGroup: 1 },
+          640: { slidesPerView: 2.2, slidesPerGroup: 2 },
+          1024: { slidesPerView: 3, slidesPerGroup: 3 },
         }}
         className={sliderViewport}
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} className={sliderSlide}>
-            <article className={sliderItem}>{item.card}</article>
+            <article className={sliderItem}>
+              <ItemComponent item={item} />
+            </article>
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <button
+        type="button"
+        className={`${sliderNavButton} ${sliderNextButton}`}
+        onClick={() => swiper?.slideNext()}
+        aria-label="다음 슬라이드"
+        disabled={isEnd}
+      >
+        <Image
+          src="/slider-arrow-right.svg"
+          alt=""
+          width={55}
+          height={32}
+          className={sliderNavIcon}
+          aria-hidden
+        />
+      </button>
     </section>
   );
 };

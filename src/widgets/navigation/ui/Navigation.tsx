@@ -66,7 +66,7 @@ export const Navigation = () => {
   const menuItems = [
     {
       label: "나만의 학습",
-      href: "/my-learning",
+      href: "/my-learning/profile",
     },
     {
       label: "학습 목표 달성",
