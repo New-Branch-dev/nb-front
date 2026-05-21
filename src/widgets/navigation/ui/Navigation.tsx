@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 import {
   brand,
@@ -13,6 +15,54 @@ import {
 } from "./Navigation.css";
 
 export const Navigation = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [nickname, setNickname] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const token = localStorage.getItem("accessToken");
+      const savedNickname = localStorage.getItem("nickname");
+      if (token) {
+        setIsLoggedIn(true);
+        if (savedNickname) {
+          setNickname(decodeURIComponent(savedNickname));
+        }
+      }
+    };
+
+    checkLoginStatus();
+
+    window.addEventListener("storage", checkLoginStatus);
+    return () => window.removeEventListener("storage", checkLoginStatus);
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      const accessToken = localStorage.getItem("accessToken");
+
+      if (accessToken) {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+      }
+    } catch (error) {
+      console.error("로그아웃 중 오류 발생:", error);
+    } finally {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("nickname");
+      setIsLoggedIn(false);
+      setNickname("");
+
+      router.replace("/");
+      router.refresh();
+    }
+  };
+
   const menuItems = [
     {
       label: "나만의 학습",
@@ -57,12 +107,18 @@ export const Navigation = () => {
           </div>
 
           <div className={navActionGroup}>
-            <Link href="/sign-in" className={link}>
-              로그인
-            </Link>
-            <Link href="/sign-up" className={link}>
-              회원가입
-            </Link>
+            {!isLoggedIn ? (
+              <>
+                <Link href="/sign-in" className={link}>로그인</Link>
+                <Link href="/sign-up" className={link}>회원가입</Link>
+              </>
+            ) : (
+              <>
+                <span className={link} style={{ fontWeight: 'bold' }}>{nickname}님</span>
+                {/* TODO: 로그아웃 버튼 퍼블 */}
+                <button onClick={handleLogout} className={link}> 로그아웃</button>
+              </>
+            )}
           </div>
         </nav>
       </header>
