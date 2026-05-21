@@ -71,7 +71,7 @@ export const FirstSection = () => {
             />
 
             <figcaption className={firstSectionShowcaseLinkGroup}>
-              <Link href="/learning-goals" className={firstSectionShowcaseLink}>
+              <Link href="/learning-goals/note-creation" className={firstSectionShowcaseLink}>
                 자세히 알아보기
               </Link>
               <Image

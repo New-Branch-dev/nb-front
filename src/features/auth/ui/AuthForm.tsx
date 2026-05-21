@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 import { authFormRoot } from "./AuthForm.css";
 import { SignInForm } from "./SignInForm";
-import { SignUpForm } from "./SignUpForm";
+import { SignUpForm } from "./SignupForm";
 
 export const AuthForm = () => {
   const pathName = usePathname();

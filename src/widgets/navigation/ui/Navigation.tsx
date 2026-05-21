@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { LEARNING_GOALS_LIST_HREF } from "@features/learning-goals";
+
 import {
   brand,
   centerSlot,
@@ -20,7 +22,7 @@ export const Navigation = () => {
     },
     {
       label: "학습 목표 달성",
-      href: "/learning-goals",
+      href: LEARNING_GOALS_LIST_HREF,
     },
     {
       label: "단권화",
