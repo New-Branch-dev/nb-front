@@ -329,6 +329,29 @@ Rules:
 - features cannot import widgets
 - widgets cannot import views
 
+## Public entry imports (excluding `app`)
+
+For code under `views`, `widgets`, `features`, `entities`, and `shared`, when you import from **another slice folder** (a different top-level directory under `src/` for that layer), import through that slice’s **public `index.ts` barrel** — or the path alias that resolves to it (e.g. `@widgets/navigation`, `@shared/ui/tab`). Avoid deep paths such as `@widgets/foo/ui/Bar.tsx` across slice boundaries so exports stay stable. The **`app`** layer is exempt when wiring routes, layouts, and app-only glue.
+
+---
+
+# React (project version)
+
+This project pins **React 19.2.x** and **`@types/react` 19** (see `package.json`). Prefer APIs and patterns documented for that line of releases (including **React hooks** and concurrent-related behavior). When in doubt, read the current React reference for the installed minor, not older major-version blogs.
+
+## `<Activity>` for `condition ? <Component /> : <nonComponent>`
+
+If UI is written as a ternary (or logical equivalent) of the form **`condition ? <RealComponentTree /> : <nonComponent>`**, where **`<nonComponent>`** is anything that is **not** the same mounted subtree you care about — common cases: **`null`**, **`false`**, bare **text**, or a **different** placeholder element that would **unmount** the real subtree — you **must** wrap the substantive UI in **`<Activity mode={condition ? "visible" : "hidden"}>`** from **`react`** instead of removing the subtree with `null` alone. That keeps the tree and state model aligned with React 19.2’s visibility semantics. See the official reference: [`<Activity>`](https://19.react.dev/reference/react/Activity).
+
+```tsx
+// required pattern (example)
+<Activity mode={isOpen ? "visible" : "hidden"}>
+  <Panel />
+</Activity>
+```
+
+Do **not** use `isOpen ? <Panel /> : null` for mountable UI that should follow this rule; prefer `Activity` + `mode` as above.
+
 ---
 
 # Development Principles
