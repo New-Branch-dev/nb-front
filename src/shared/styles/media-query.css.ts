@@ -21,10 +21,6 @@ export const mediaQuery = <T extends ComplexStyleRule>({
   "@media": {
     ...(mobile ? { [maxWidthMediaQueryText]: mobile } : {}),
     ...(laptop ? { [laptopMediaQueryText]: laptop } : {}),
-    ...(pc
-      ? {
-          [laptop ? pcWithLaptopMediaQueryText : minWidthMediaQueryText]: pc,
-        }
-      : {}),
+    ...(pc ? { [pcWithLaptopMediaQueryText]: pc } : {}),
   },
 });
