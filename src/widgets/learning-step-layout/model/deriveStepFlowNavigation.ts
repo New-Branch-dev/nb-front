@@ -18,8 +18,10 @@ export const deriveStepFlowNavigation = ({
   const canGoNext = isStepValid && !isLastStep;
   const showFinalAction = isStepValid && isLastStep;
 
-  const prevSlug = steps.at(currentStep - 2)?.slug;
-  const nextSlug = steps.at(currentStep)?.slug;
+  const prevSlug =
+    currentStep > 1 ? steps[currentStep - 2]?.slug : undefined;
+  const nextSlug =
+    currentStep < total ? steps[currentStep]?.slug : undefined;
 
   const prevHref = prevSlug ? getStepHref(prevSlug) : "";
   const nextHref = nextSlug ? getStepHref(nextSlug) : "";
