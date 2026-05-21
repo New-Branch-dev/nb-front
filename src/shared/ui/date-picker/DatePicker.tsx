@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { ko } from "date-fns/locale";
-import type { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 
+import { CalendarMonthHeader } from "./CalendarMonthHeader";
 import { dayBase, pickerRoot, weekDay } from "./DatePicker.css";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -49,14 +49,8 @@ export const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
         formatWeekDay={(day) => day.slice(0, 1)}
         weekDayClassName={() => weekDay}
         dayClassName={() => dayBase}
-        renderCustomHeader={({ date }: ReactDatePickerCustomHeaderProps) => (
-          <div
-            className={`react-datepicker__header react-datepicker__header--custom $`}
-          >
-            <h3 className="react-datepicker__current-month">
-              {date.getFullYear()}년 {date.getMonth() + 1}월
-            </h3>
-          </div>
+        renderCustomHeader={({ date }) => (
+          <CalendarMonthHeader date={date} />
         )}
       />
     </div>
