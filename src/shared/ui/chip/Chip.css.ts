@@ -1,6 +1,32 @@
+import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
-import { colors, themeTokens, typographyContract } from "@shared/styles";
+import { colors, mediaQuery, themeTokens, typographyContract } from "@shared/styles";
+
+/** 30px pill radius — all chip sizes */
+const chipPillRadius = "1.875rem";
+
+/** laptop: md, pc: lg */
+export const chipResponsiveLaptopMdPcLg = style([
+  {
+    height: "1.5rem",
+    minWidth: "4rem",
+    paddingInline: themeTokens.gap.lg,
+    fontSize: typographyContract.bodyLg,
+  },
+  mediaQuery({
+    laptop: {
+      height: "1.625rem",
+      minWidth: "4.25rem",
+    },
+    pc: {
+      height: "1.75rem",
+      minWidth: "4.5rem",
+      paddingInline: themeTokens.gap.xl,
+      fontSize: typographyContract.headingSm,
+    },
+  }),
+]);
 
 export const chipRecipe = recipe({
   base: {
@@ -9,31 +35,67 @@ export const chipRecipe = recipe({
     color: colors.black,
     fontWeight: themeTokens.fontWeight.medium,
     cursor: "pointer",
+    borderRadius: chipPillRadius,
     transition: "background-color 0.2s ease, border-color 0.2s ease",
   },
   variants: {
     size: {
-      sm: {
-        height: "1.25rem",
-        minWidth: "3.6rem",
-        paddingInline: themeTokens.gap.md,
-        borderRadius: themeTokens.radius.sm,
-        fontSize: typographyContract.bodyMd,
-      },
-      md: {
-        height: "1.5rem",
-        minWidth: "4rem",
-        paddingInline: themeTokens.gap.lg,
-        borderRadius: themeTokens.radius.sm,
-        fontSize: typographyContract.bodyLg,
-      },
-      lg: {
-        height: "1.75rem",
-        minWidth: "4.5rem",
-        paddingInline: themeTokens.gap.xl,
-        borderRadius: themeTokens.radius.md,
-        fontSize: typographyContract.headingSm,
-      },
+      sm: [
+        {
+          height: "1.375rem",
+          minWidth: "3.75rem",
+          paddingInline: themeTokens.gap.md,
+          fontSize: typographyContract.bodyMd,
+        },
+        mediaQuery({
+          laptop: {
+            height: "1.5rem",
+            minWidth: "4rem",
+          },
+          pc: {
+            height: "1.625rem",
+            minWidth: "4.25rem",
+            paddingInline: themeTokens.gap.lg,
+          },
+        }),
+      ],
+      md: [
+        {
+          height: "1.5rem",
+          minWidth: "4rem",
+          paddingInline: themeTokens.gap.lg,
+          fontSize: typographyContract.bodyLg,
+        },
+        mediaQuery({
+          laptop: {
+            height: "1.625rem",
+            minWidth: "4.25rem",
+          },
+          pc: {
+            height: "1.75rem",
+            minWidth: "4.5rem",
+            paddingInline: themeTokens.gap.xl,
+          },
+        }),
+      ],
+      lg: [
+        {
+          height: "1.625rem",
+          minWidth: "4.25rem",
+          paddingInline: themeTokens.gap.xl,
+          fontSize: typographyContract.headingSm,
+        },
+        mediaQuery({
+          laptop: {
+            height: "1.75rem",
+            minWidth: "4.5rem",
+          },
+          pc: {
+            height: "1.875rem",
+            minWidth: "4.75rem",
+          },
+        }),
+      ],
     },
     selected: {
       true: {
@@ -43,9 +105,49 @@ export const chipRecipe = recipe({
       },
       false: {},
     },
+    labelTone: {
+      default: {},
+      muted: {},
+    },
+    surface: {
+      default: {},
+      onPrimary: {},
+    },
   },
+  compoundVariants: [
+    {
+      variants: { labelTone: "muted", selected: false, surface: "default" },
+      style: {
+        color: colors.grayscale.gray600,
+      },
+    },
+    {
+      variants: { surface: "onPrimary", selected: false },
+      style: {
+        backgroundColor: colors.primary,
+        color: colors.white,
+        borderColor: colors.white,
+      },
+    },
+    {
+      variants: { surface: "onPrimary", selected: true },
+      style: {
+        backgroundColor: colors.white,
+        color: colors.primary,
+        borderColor: colors.white,
+      },
+    },
+    {
+      variants: { surface: "onPrimary", labelTone: "muted", selected: false },
+      style: {
+        color: "rgba(255, 255, 255, 0.75)",
+      },
+    },
+  ],
   defaultVariants: {
     size: "md",
     selected: false,
+    labelTone: "default",
+    surface: "default",
   },
 });

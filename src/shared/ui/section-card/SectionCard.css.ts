@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 import {
   colors,
   flexColumn,
+  flexStart,
   themeTokens,
   typographyContract,
 } from "@shared/styles";
@@ -33,14 +34,22 @@ export const sectionCard = style([
   },
 ]);
 
+export const sectionHeader = style([
+  flexStart,
+  {
+    flexWrap: "wrap",
+    gap: themeTokens.gap.sm,
+  },
+]);
+
 export const sectionTitle = style({
+  margin: 0,
   fontSize: typographyContract.headingSm,
   color: colors.grayscale.gray700,
   fontWeight: themeTokens.fontWeight.bold,
 });
 
 export const sectionDescription = style({
-  marginLeft: themeTokens.gap.sm,
   fontSize: typographyContract.bodyMd,
   color: colors.grayscale.gray700,
   fontWeight: themeTokens.fontWeight.regular,
