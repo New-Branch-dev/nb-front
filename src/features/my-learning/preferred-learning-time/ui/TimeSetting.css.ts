@@ -3,6 +3,7 @@ import { style } from "@vanilla-extract/css";
 import {
   colors,
   flexCenter,
+  flexColumn,
   flexStart,
   themeTokens,
   typographyContract,
@@ -11,27 +12,56 @@ import {
 export const timeControls = style([
   flexStart,
   {
-    alignItems: "stretch",
+    alignItems: "flex-start",
     gap: themeTokens.gap.md,
     width: "100%",
     minWidth: 0,
   },
 ]);
 
-export const timeInputsCluster = style([
+export const timeInputsColumn = style([
+  flexColumn,
+  {
+    flex: "1 1 0",
+    minWidth: 0,
+    gap: themeTokens.gap.xs,
+  },
+]);
+
+export const timeInputsRow = style([
   flexStart,
   {
-    flex: "1 1 60%",
+    width: "100%",
+    minWidth: 0,
     gap: themeTokens.gap.md,
   },
 ]);
 
+export const timeErrorsRow = style([
+  flexStart,
+  {
+    width: "100%",
+    minWidth: 0,
+    alignItems: "flex-start",
+    gap: themeTokens.gap.md,
+  },
+]);
+
+export const timeField = style({
+  flex: "1 1 0",
+  minWidth: 0,
+});
+
+export const timeErrorSlot = style({
+  flex: "1 1 0",
+  minWidth: 0,
+});
+
 export const timeInputWrap = style([
   flexCenter,
   {
-    flex: "1 1 0",
     boxSizing: "border-box",
-    minWidth: "5.5rem",
+    width: "100%",
     height: themeTokens.gap["5xl"],
     border: `1px solid ${colors.border}`,
     borderRadius: themeTokens.radius.md,
@@ -39,6 +69,10 @@ export const timeInputWrap = style([
     paddingInline: themeTokens.gap.sm,
   },
 ]);
+
+export const timeInputWrapInvalid = style({
+  borderColor: colors.negativeRed,
+});
 
 export const timeInput = style({
   width: "100%",
@@ -55,8 +89,19 @@ export const timeInput = style({
   },
 });
 
+export const fieldError = style({
+  display: "block",
+  fontSize: typographyContract.bodyMd,
+  color: colors.negativeRed,
+  lineHeight: 1.35,
+  wordBreak: "keep-all",
+});
+
 export const arrow = style({
   flexShrink: 0,
+  alignSelf: "center",
+  width: themeTokens.gap.lg,
+  textAlign: "center",
   color: colors.grayscale.gray800,
   fontSize: typographyContract.headingMd,
 });
@@ -64,9 +109,10 @@ export const arrow = style({
 export const totalTimeWrap = style([
   flexCenter,
   {
-    flex: "5 6 0",
+    flex: "0 0 auto",
+    flexShrink: 0,
     boxSizing: "border-box",
-    minWidth: "6.25rem",
+    width: "6.25rem",
     minHeight: themeTokens.gap["5xl"],
     border: `1px solid ${colors.border}`,
     borderRadius: themeTokens.radius.md,
@@ -80,6 +126,7 @@ export const totalTimeValue = style({
   fontSize: typographyContract.bodyLg,
   textAlign: "center",
   fontWeight: themeTokens.fontWeight.semibold,
+  wordBreak: "keep-all",
 });
 
 export const totalTimePlaceholder = style({

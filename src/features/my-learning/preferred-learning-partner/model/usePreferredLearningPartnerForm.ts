@@ -1,29 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useSelectableChipWithDirectInput } from "@shared/hook/useSelectableChipWithDirectInput";
 
 export const usePreferredLearningPartnerForm = () => {
-  const [selectedTeacherTypes, setSelectedTeacherTypes] = useState<string[]>(
-    [],
-  );
-  const [selectedFriendTypes, setSelectedFriendTypes] = useState<string[]>([]);
-  const [selectedUserTypes, setSelectedUserTypes] = useState<string[]>([]);
+  const teacherTypes = useSelectableChipWithDirectInput();
+  const friendTypes = useSelectableChipWithDirectInput();
+  const userTypes = useSelectableChipWithDirectInput();
 
-  const isPartnerStepCompleted = useMemo(
-    () =>
-      selectedTeacherTypes.length > 0 &&
-      selectedFriendTypes.length > 0 &&
-      selectedUserTypes.length > 0,
-    [selectedTeacherTypes, selectedFriendTypes, selectedUserTypes],
-  );
+  const isPartnerStepCompleted =
+    teacherTypes.hasSelection &&
+    friendTypes.hasSelection &&
+    userTypes.hasSelection;
 
   return {
-    selectedTeacherTypes,
-    selectedFriendTypes,
-    selectedUserTypes,
+    teacherTypes,
+    friendTypes,
+    userTypes,
     isPartnerStepCompleted,
-    setSelectedTeacherTypes,
-    setSelectedFriendTypes,
-    setSelectedUserTypes,
   };
 };

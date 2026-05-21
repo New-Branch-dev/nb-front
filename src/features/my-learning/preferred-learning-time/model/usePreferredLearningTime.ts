@@ -1,15 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export const usePreferredLearningTime = () => {
   const [restDate, setRestDate] = useState<Date | null>(new Date());
   const [isTimeValid, setIsTimeValid] = useState(false);
 
-  const isPreferredLearningTimeCompleted = useMemo(
-    () => Boolean(restDate) && isTimeValid,
-    [isTimeValid, restDate],
-  );
+  const isPreferredLearningTimeCompleted = Boolean(restDate) && isTimeValid;
 
   const handleMoveMonth = (offset: number) => {
     setRestDate((prev) => {

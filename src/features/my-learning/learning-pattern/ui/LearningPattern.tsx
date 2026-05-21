@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-
+import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import { SectionCard, SectionCardStack, TextArea } from "@shared/ui";
+
 import { SelectableChipSection } from "@features/selectable-chip-section";
 
 import {
@@ -13,22 +13,21 @@ import { useLearningPatternForm } from "../model/useLearningPatternForm";
 
 type LearningPatternProps = {
   onValidityChange: (isValid: boolean) => void;
+  isActive: boolean;
 };
 
-export const LearningPattern = ({ onValidityChange }: LearningPatternProps) => {
-  const {
-    selectedInterests,
-    selectedStrengths,
-    personality,
-    isLearningPatternStepCompleted,
-    setSelectedInterests,
-    setSelectedStrengths,
-    setPersonality,
-  } = useLearningPatternForm();
+export const LearningPattern = ({
+  onValidityChange,
+  isActive,
+}: LearningPatternProps) => {
+  const { interests, strengths, personality, isLearningPatternStepCompleted, setPersonality } =
+    useLearningPatternForm();
 
-  useEffect(() => {
-    onValidityChange(isLearningPatternStepCompleted);
-  }, [isLearningPatternStepCompleted, onValidityChange]);
+  useReportStepValidity(
+    isActive,
+    isLearningPatternStepCompleted,
+    onValidityChange,
+  );
 
   return (
     <SectionCardStack>
@@ -36,16 +35,28 @@ export const LearningPattern = ({ onValidityChange }: LearningPatternProps) => {
         title="흥미"
         description="(복수 선택 가능)"
         items={INTEREST_ITEMS}
-        selectedItems={selectedInterests}
-        onSelectedItems={setSelectedInterests}
+        selectedItems={interests.selectedItems}
+        onSelectedItems={interests.setSelectedItems}
+        isDirectInputActive={interests.isDirectInputActive}
+        onDirectInputActiveChange={interests.setIsDirectInputActive}
+        directInputValue={interests.directInputValue}
+        onDirectInputChange={interests.setDirectInputValue}
+        directInputName="my-learning-interest-direct"
+        directInputPlaceholder="흥미를 입력해 주세요"
       />
 
       <SelectableChipSection
         title="적성"
         description="(복수 선택 가능)"
         items={STRENGTH_ITEMS}
-        selectedItems={selectedStrengths}
-        onSelectedItems={setSelectedStrengths}
+        selectedItems={strengths.selectedItems}
+        onSelectedItems={strengths.setSelectedItems}
+        isDirectInputActive={strengths.isDirectInputActive}
+        onDirectInputActiveChange={strengths.setIsDirectInputActive}
+        directInputValue={strengths.directInputValue}
+        onDirectInputChange={strengths.setDirectInputValue}
+        directInputName="my-learning-strength-direct"
+        directInputPlaceholder="적성을 입력해 주세요"
       />
 
       <SectionCard title="성격">

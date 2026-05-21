@@ -1,13 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { flexColumn, flexStart, themeTokens } from "@shared/styles";
-
-export const fieldGroup = style([
-  flexColumn,
-  {
-    gap: themeTokens.gap.lg,
-  },
-]);
+import { flexStart, themeTokens } from "@shared/styles";
 
 export const fieldRow = style([
   flexStart,

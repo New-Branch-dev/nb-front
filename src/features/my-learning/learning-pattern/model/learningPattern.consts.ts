@@ -1,3 +1,5 @@
+import { DIRECT_INPUT_CHIP_LABEL } from "@shared/ui";
+
 export const INTEREST_ITEMS = [
   "국어",
   "과학",
@@ -11,8 +13,8 @@ export const INTEREST_ITEMS = [
   "기술",
   "철학",
   "심리학",
-  "+",
-];
+  DIRECT_INPUT_CHIP_LABEL,
+] as const;
 
 export const STRENGTH_ITEMS = [
   "논리적 사고",
@@ -24,5 +26,5 @@ export const STRENGTH_ITEMS = [
   "대인 관계",
   "자기 이해",
   "자연 탐구",
-  "+",
-];
+  DIRECT_INPUT_CHIP_LABEL,
+] as const;
