@@ -5,6 +5,11 @@ export {
 export { GoalSettingPanel } from "./goal-setting/ui/GoalSettingPanel";
 export { LearningGoalRegistrationPanel } from "./learning-goal-registration/ui/LearningGoalRegistrationPanel";
 export { LearningGoalsListPanel } from "./list/ui/LearningGoalsListPanel";
+export type {
+  LearningGoalColorTheme,
+  LearningGoalItem,
+  LearningGoalStatus,
+} from "./list/model/learningGoal.types";
 export { MemorizationSettingsPanel } from "./memorization-settings/ui/MemorizationSettingsPanel";
 export { NoteCreationPanel } from "./note-creation/ui/NoteCreationPanel";
 export { OtherLearningSettingsPanel } from "./other-learning-settings/ui/OtherLearningSettingsPanel";

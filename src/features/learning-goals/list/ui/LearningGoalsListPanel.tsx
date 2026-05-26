@@ -2,20 +2,49 @@
 
 import Image from "next/image";
 
-import { emptyListMessage, emptyState, listRoot } from "./LearningGoalsListPanel.css";
+import { LEARNING_GOALS_MOCK } from "../model/learningGoals.mock";
+import { LearningGoalAddCard } from "./LearningGoalAddCard";
+import { LearningGoalCard } from "./LearningGoalCard";
+import {
+  emptyListMessage,
+  emptyState,
+  grid,
+  listRoot,
+} from "./LearningGoalsListPanel.css";
 
-export const LearningGoalsListPanel = () => {
+type LearningGoalsListPanelProps = {
+  createHref?: string;
+};
+
+export const LearningGoalsListPanel = ({
+  createHref = "/learning-goals/note-creation",
+}: LearningGoalsListPanelProps) => {
+  const items = LEARNING_GOALS_MOCK;
+
+  if (items.length === 0) {
+    return (
+      <section className={listRoot} aria-label="내 학습 목표 목록">
+        <div className={emptyState}>
+          <Image
+            src="/target-gray.svg"
+            alt=""
+            width={49}
+            height={48}
+            aria-hidden
+          />
+          <p className={emptyListMessage}>아직 학습 목표가 없어요</p>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={listRoot} aria-label="내 학습 목표 목록">
-      <div className={emptyState}>
-        <Image
-          src="/target-gray.svg"
-          alt=""
-          width={49}
-          height={48}
-          aria-hidden
-        />
-        <p className={emptyListMessage}>아직 학습 목표가 없어요</p>
+      <div className={grid}>
+        {items.map((item) => (
+          <LearningGoalCard key={item.id} item={item} />
+        ))}
+        <LearningGoalAddCard href={createHref} />
       </div>
     </section>
   );

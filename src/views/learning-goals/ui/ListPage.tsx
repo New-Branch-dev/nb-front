@@ -24,7 +24,7 @@ export const LearningGoalsListPage = () => {
         <LearningGoalsTabRail activeTab="list" createHref={createHref} />
       }
     >
-      <LearningGoalsListPanel />
+      <LearningGoalsListPanel createHref={createHref} />
     </LearningStepLayout>
   );
 };

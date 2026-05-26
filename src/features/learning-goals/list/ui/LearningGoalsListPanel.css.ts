@@ -1,16 +1,39 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, flexColumn, flexColumnCenter, themeTokens, typographyContract } from "@shared/styles";
+import {
+  colors,
+  flexColumn,
+  flexColumnCenter,
+  mediaQuery,
+  themeTokens,
+  typographyContract,
+} from "@shared/styles";
 
 export const listRoot = style([
   flexColumn,
   {
     width: "100%",
     gap: themeTokens.gap.lg,
-    padding: themeTokens.gap["2xl"],
-    borderRadius: themeTokens.radius.lg,
-    backgroundColor: colors.white,
   },
+]);
+
+export const grid = style([
+  {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gap: themeTokens.gap.lg,
+    width: "100%",
+  },
+  mediaQuery({
+    laptop: {
+      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+      gap: themeTokens.gap.lg,
+    },
+    pc: {
+      gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+      gap: themeTokens.gap.xl,
+    },
+  }),
 ]);
 
 export const emptyState = style([
@@ -19,6 +42,8 @@ export const emptyState = style([
     width: "100%",
     gap: themeTokens.gap.lg,
     paddingBlock: themeTokens.gap["8xl"],
+    backgroundColor: colors.white,
+    borderRadius: themeTokens.radius.lg,
   },
 ]);
 
