@@ -12,6 +12,12 @@ type SelectableChipSectionProps = {
   onDirectInputChange: (value: string) => void;
   directInputPlaceholder?: string;
   directInputName?: string;
+  /**
+   * 두 prop을 함께 넘기면 직접입력이 TagInput으로 동작합니다.
+   * 쉼표·스페이스·Enter로 한 단어를 chip으로 묶어 이 배열에 반영합니다.
+   */
+  directInputTags?: string[];
+  onDirectInputTagsChange?: (tags: string[]) => void;
 };
 
 export const SelectableChipSection = ({
@@ -26,6 +32,8 @@ export const SelectableChipSection = ({
   onDirectInputChange,
   directInputPlaceholder,
   directInputName,
+  directInputTags,
+  onDirectInputTagsChange,
 }: SelectableChipSectionProps) => {
   return (
     <SectionCard title={title} description={description}>
@@ -39,6 +47,8 @@ export const SelectableChipSection = ({
         onDirectInputChange={onDirectInputChange}
         directInputPlaceholder={directInputPlaceholder}
         directInputName={directInputName}
+        directInputTags={directInputTags}
+        onDirectInputTagsChange={onDirectInputTagsChange}
       />
     </SectionCard>
   );

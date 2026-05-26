@@ -47,6 +47,8 @@ export const RegistrationAiAnalysisPanel = ({
           onDirectInputActiveChange={learningStyle.setIsDirectInputActive}
           directInputValue={learningStyle.directInputValue}
           onDirectInputChange={learningStyle.setDirectInputValue}
+          directInputTags={learningStyle.directInputTags}
+          onDirectInputTagsChange={learningStyle.setDirectInputTags}
           directInputName={learningStyleInputName}
           directInputPlaceholder="학습 스타일을 입력해 주세요"
         />
@@ -62,6 +64,8 @@ export const RegistrationAiAnalysisPanel = ({
           onDirectInputActiveChange={recommendedMethod.setIsDirectInputActive}
           directInputValue={recommendedMethod.directInputValue}
           onDirectInputChange={recommendedMethod.setDirectInputValue}
+          directInputTags={recommendedMethod.directInputTags}
+          onDirectInputTagsChange={recommendedMethod.setDirectInputTags}
           directInputName={recommendedMethodInputName}
           directInputPlaceholder="추천 학습법을 입력해 주세요"
         />

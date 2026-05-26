@@ -38,6 +38,8 @@ export const PreferredLearningPartner = ({
         onDirectInputActiveChange={teacherTypes.setIsDirectInputActive}
         directInputValue={teacherTypes.directInputValue}
         onDirectInputChange={teacherTypes.setDirectInputValue}
+        directInputTags={teacherTypes.directInputTags}
+        onDirectInputTagsChange={teacherTypes.setDirectInputTags}
         directInputName="my-learning-teacher-type-direct"
         directInputPlaceholder="교사 유형을 입력해 주세요"
       />
@@ -51,6 +53,8 @@ export const PreferredLearningPartner = ({
         onDirectInputActiveChange={friendTypes.setIsDirectInputActive}
         directInputValue={friendTypes.directInputValue}
         onDirectInputChange={friendTypes.setDirectInputValue}
+        directInputTags={friendTypes.directInputTags}
+        onDirectInputTagsChange={friendTypes.setDirectInputTags}
         directInputName="my-learning-friend-type-direct"
         directInputPlaceholder="친구 유형을 입력해 주세요"
       />
@@ -64,6 +68,8 @@ export const PreferredLearningPartner = ({
         onDirectInputActiveChange={userTypes.setIsDirectInputActive}
         directInputValue={userTypes.directInputValue}
         onDirectInputChange={userTypes.setDirectInputValue}
+        directInputTags={userTypes.directInputTags}
+        onDirectInputTagsChange={userTypes.setDirectInputTags}
         directInputName="my-learning-user-type-direct"
         directInputPlaceholder="사용자 유형을 입력해 주세요"
       />

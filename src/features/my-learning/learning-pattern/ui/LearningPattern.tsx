@@ -41,6 +41,8 @@ export const LearningPattern = ({
         onDirectInputActiveChange={interests.setIsDirectInputActive}
         directInputValue={interests.directInputValue}
         onDirectInputChange={interests.setDirectInputValue}
+        directInputTags={interests.directInputTags}
+        onDirectInputTagsChange={interests.setDirectInputTags}
         directInputName="my-learning-interest-direct"
         directInputPlaceholder="흥미를 입력해 주세요"
       />
@@ -55,6 +57,8 @@ export const LearningPattern = ({
         onDirectInputActiveChange={strengths.setIsDirectInputActive}
         directInputValue={strengths.directInputValue}
         onDirectInputChange={strengths.setDirectInputValue}
+        directInputTags={strengths.directInputTags}
+        onDirectInputTagsChange={strengths.setDirectInputTags}
         directInputName="my-learning-strength-direct"
         directInputPlaceholder="적성을 입력해 주세요"
       />

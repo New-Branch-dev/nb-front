@@ -46,6 +46,8 @@ export const LearningPreferences = ({
         onDirectInputActiveChange={materialFormats.setIsDirectInputActive}
         directInputValue={materialFormats.directInputValue}
         onDirectInputChange={materialFormats.setDirectInputValue}
+        directInputTags={materialFormats.directInputTags}
+        onDirectInputTagsChange={materialFormats.setDirectInputTags}
         directInputName="my-learning-material-format-direct"
         directInputPlaceholder="자료 형식을 입력해 주세요"
       />
@@ -59,6 +61,8 @@ export const LearningPreferences = ({
         onDirectInputActiveChange={classStyles.setIsDirectInputActive}
         directInputValue={classStyles.directInputValue}
         onDirectInputChange={classStyles.setDirectInputValue}
+        directInputTags={classStyles.directInputTags}
+        onDirectInputTagsChange={classStyles.setDirectInputTags}
         directInputName="my-learning-class-style-direct"
         directInputPlaceholder="수업 방식을 입력해 주세요"
       />
@@ -72,6 +76,8 @@ export const LearningPreferences = ({
         onDirectInputActiveChange={learningMethods.setIsDirectInputActive}
         directInputValue={learningMethods.directInputValue}
         onDirectInputChange={learningMethods.setDirectInputValue}
+        directInputTags={learningMethods.directInputTags}
+        onDirectInputTagsChange={learningMethods.setDirectInputTags}
         directInputName="my-learning-learning-method-direct"
         directInputPlaceholder="학습 방법을 입력해 주세요"
       />
