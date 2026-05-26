@@ -73,6 +73,8 @@ export const GoalSettingPanel = ({
             onDirectInputActiveChange={form.setIsPurposeDirectInput}
             directInputValue={form.purposeDirectText}
             onDirectInputChange={form.setPurposeDirectText}
+            directInputTags={form.purposeDirectTags}
+            onDirectInputTagsChange={form.setPurposeDirectTags}
             directInputName="learning-goals-purpose-direct"
             directInputPlaceholder="학습 목적을 입력해 주세요"
           />
@@ -178,6 +180,8 @@ export const GoalSettingPanel = ({
             onDirectInputActiveChange={form.setIsMethodDirectInput}
             directInputValue={form.methodDirectText}
             onDirectInputChange={form.setMethodDirectText}
+            directInputTags={form.methodDirectTags}
+            onDirectInputTagsChange={form.setMethodDirectTags}
             directInputName="learning-goals-method-direct"
             directInputPlaceholder="학습 방법을 입력해 주세요"
           />

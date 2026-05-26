@@ -32,6 +32,8 @@ export const usePeriodSettingsForm = () => {
     setIsMethodDirectInput: methods.setIsDirectInputActive,
     methodDirectText: methods.directInputValue,
     setMethodDirectText: methods.setDirectInputValue,
+    methodDirectTags: methods.directInputTags,
+    setMethodDirectTags: methods.setDirectInputTags,
     isValid,
   };
 };

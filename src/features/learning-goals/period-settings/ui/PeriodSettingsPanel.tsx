@@ -89,6 +89,8 @@ export const PeriodSettingsPanel = ({
             onDirectInputActiveChange={form.setIsMethodDirectInput}
             directInputValue={form.methodDirectText}
             onDirectInputChange={form.setMethodDirectText}
+            directInputTags={form.methodDirectTags}
+            onDirectInputTagsChange={form.setMethodDirectTags}
             directInputName={config.methodDirectInputName}
             directInputPlaceholder={config.methodDirectInputPlaceholder}
           />

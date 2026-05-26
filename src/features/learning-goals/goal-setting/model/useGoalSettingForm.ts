@@ -67,6 +67,8 @@ export const useGoalSettingForm = () => {
     setIsPurposeDirectInput: purpose.setIsDirectInputActive,
     purposeDirectText: purpose.directInputValue,
     setPurposeDirectText: purpose.setDirectInputValue,
+    purposeDirectTags: purpose.directInputTags,
+    setPurposeDirectTags: purpose.setDirectInputTags,
     targetScore,
     setTargetScore: setTargetScoreClamped,
     maxScore,
@@ -83,6 +85,8 @@ export const useGoalSettingForm = () => {
     setIsMethodDirectInput: methods.setIsDirectInputActive,
     methodDirectText: methods.directInputValue,
     setMethodDirectText: methods.setDirectInputValue,
+    methodDirectTags: methods.directInputTags,
+    setMethodDirectTags: methods.setDirectInputTags,
     isValid,
   };
 };
