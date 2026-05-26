@@ -2,6 +2,7 @@
 
 import { Chip } from "../chip/Chip";
 import { Input } from "../input/Input";
+import { TagInput } from "../tag-input/TagInput";
 import {
   chipRow,
   directInput,
@@ -23,6 +24,12 @@ export type ChipInputGroupProps = {
   directInputName?: string;
   /** 보라색 배경 위 chip 스타일 (AI 분석 패널) */
   chipSurface?: "default" | "onPrimary";
+  /**
+   * 두 prop을 함께 넘기면 직접입력 영역이 TagInput으로 동작합니다.
+   * 쉼표/스페이스/Enter로 단어를 끊어 chip으로 묶고, 이 배열로 반영됩니다.
+   */
+  directInputTags?: string[];
+  onDirectInputTagsChange?: (tags: string[]) => void;
 };
 
 export const ChipInputGroup = ({
@@ -36,7 +43,10 @@ export const ChipInputGroup = ({
   directInputPlaceholder = "직접 입력해 주세요",
   directInputName = "chip-direct-input",
   chipSurface = "default",
+  directInputTags,
+  onDirectInputTagsChange,
 }: ChipInputGroupProps) => {
+  const isTagMode = directInputTags !== undefined && onDirectInputTagsChange !== undefined;
   const presetItems = items.filter((item) => item !== DIRECT_INPUT_CHIP_LABEL);
   const hasDirectInputChip = items.includes(DIRECT_INPUT_CHIP_LABEL);
 
@@ -82,19 +92,32 @@ export const ChipInputGroup = ({
       </div>
 
       {isDirectInputActive ? (
-        <Input
-          className={[
-            directInput,
-            chipSurface === "onPrimary" ? directInputOnPrimary : undefined,
-          ]
-            .filter(Boolean)
-            .join(" ")}
-          name={directInputName}
-          placeholder={directInputPlaceholder}
-          aria-label={directInputPlaceholder}
-          value={directInputValue}
-          onChange={(event) => onDirectInputChange(event.target.value)}
-        />
+        isTagMode ? (
+          <TagInput
+            className={directInput}
+            name={directInputName}
+            placeholder={directInputPlaceholder}
+            surface={chipSurface}
+            tags={directInputTags}
+            onTagsChange={onDirectInputTagsChange}
+            inputValue={directInputValue}
+            onInputValueChange={onDirectInputChange}
+          />
+        ) : (
+          <Input
+            className={[
+              directInput,
+              chipSurface === "onPrimary" ? directInputOnPrimary : undefined,
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            name={directInputName}
+            placeholder={directInputPlaceholder}
+            aria-label={directInputPlaceholder}
+            value={directInputValue}
+            onChange={(event) => onDirectInputChange(event.target.value)}
+          />
+        )
       ) : null}
     </div>
   );

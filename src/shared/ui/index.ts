@@ -26,6 +26,7 @@ export {
   type TabProps,
   type TabSize,
 } from "./tab";
+export { TagInput, type TagInputProps } from "./tag-input";
 export { TextArea } from "./textarea/TextArea";
 export {
   registrationStepRoot,
