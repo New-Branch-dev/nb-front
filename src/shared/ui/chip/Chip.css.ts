@@ -118,7 +118,10 @@ export const chipRecipe = recipe({
     {
       variants: { labelTone: "muted", selected: false, surface: "default" },
       style: {
-        color: colors.grayscale.gray600,
+        backgroundColor: colors.secondary,
+        color: colors.primary,
+        borderStyle: "dashed",
+        borderColor: colors.primary,
       },
     },
     {
