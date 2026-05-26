@@ -16,6 +16,18 @@ export const colorsContract = createThemeContract({
   borderDark: null,
   background: null,
   foreground: null,
+  /** 카테고리 테마 (학습 목표 카드 등) */
+  themeBlue: null,
+  themeOrange: null,
+  themeGreen: null,
+  /** 상태 - 완료 임박 */
+  warning: null,
+  warningSoft: null,
+  /** 상태 - 완료 */
+  success: null,
+  successSoft: null,
+  /** 상태 - 시작 전 등 중립 chip 배경 */
+  neutralSoft: null,
 });
 
 export const colorsDefault: Record<keyof typeof colorsContract, string> = {
@@ -34,6 +46,14 @@ export const colorsDefault: Record<keyof typeof colorsContract, string> = {
   borderDark: "E0DDE9",
   background: "#FDFDFF",
   foreground: "#FAF9FF",
+  themeBlue: "#2EB1EC",
+  themeOrange: "#FA8535",
+  themeGreen: "#30C291",
+  warning: "#F5B423",
+  warningSoft: "#FFF6D8",
+  success: "#30C291",
+  successSoft: "#E3F8EE",
+  neutralSoft: "#F2F2F5",
 };
 
 export const colors = {
@@ -48,6 +68,20 @@ export const colors = {
     gray800: colorsContract.gray800,
     gray700: colorsContract.gray700,
     gray600: colorsContract.gray600,
+  },
+  /** 카테고리 테마 (랜덤 배정용) */
+  theme: {
+    primary: colorsContract.purple900,
+    blue: colorsContract.themeBlue,
+    orange: colorsContract.themeOrange,
+    green: colorsContract.themeGreen,
+  },
+  status: {
+    warning: colorsContract.warning,
+    warningSoft: colorsContract.warningSoft,
+    success: colorsContract.success,
+    successSoft: colorsContract.successSoft,
+    neutralSoft: colorsContract.neutralSoft,
   },
   disabled: colorsContract.disabled,
   negativeRed: colorsContract.negativeRed,
