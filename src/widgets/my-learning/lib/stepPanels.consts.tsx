@@ -11,28 +11,59 @@ import {
   Register,
 } from "@features/my-learning";
 
-export type StepPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-};
+import type { StepFlowPanelProps } from "@widgets/learning-step-layout/model/stepFlow.types";
+
+const MyProfilePanel = ({ onValidityChange, isActive }: StepFlowPanelProps) => (
+  <MyProfile onValidityChange={onValidityChange} isActive={isActive} />
+);
+
+const LearningPatternPanel = ({
+  onValidityChange,
+  isActive,
+}: StepFlowPanelProps) => (
+  <LearningPattern onValidityChange={onValidityChange} isActive={isActive} />
+);
+
+const PreferredLearningTimePanel = ({
+  onValidityChange,
+  isActive,
+}: StepFlowPanelProps) => (
+  <PreferredLearningTime
+    onValidityChange={onValidityChange}
+    isActive={isActive}
+  />
+);
+
+const LearningPreferencesPanel = ({
+  onValidityChange,
+  isActive,
+}: StepFlowPanelProps) => (
+  <LearningPreferences
+    onValidityChange={onValidityChange}
+    isActive={isActive}
+  />
+);
+
+const PreferredLearningPartnerPanel = ({
+  onValidityChange,
+  isActive,
+}: StepFlowPanelProps) => (
+  <PreferredLearningPartner
+    onValidityChange={onValidityChange}
+    isActive={isActive}
+  />
+);
+
+const RegisterPanel = () => <Register />;
 
 export const STEP_PANEL_BY_STEP: Record<
   number,
-  (props: StepPanelProps) => JSX.Element
+  (props: StepFlowPanelProps) => JSX.Element
 > = {
-  1: ({ onValidityChange }) => (
-    <MyProfile onValidityChange={onValidityChange} />
-  ),
-  2: ({ onValidityChange }) => (
-    <LearningPattern onValidityChange={onValidityChange} />
-  ),
-  3: ({ onValidityChange }) => (
-    <PreferredLearningTime onValidityChange={onValidityChange} />
-  ),
-  4: ({ onValidityChange }) => (
-    <LearningPreferences onValidityChange={onValidityChange} />
-  ),
-  5: ({ onValidityChange }) => (
-    <PreferredLearningPartner onValidityChange={onValidityChange} />
-  ),
-  6: () => <Register />,
+  1: MyProfilePanel,
+  2: LearningPatternPanel,
+  3: PreferredLearningTimePanel,
+  4: LearningPreferencesPanel,
+  5: PreferredLearningPartnerPanel,
+  6: RegisterPanel,
 };

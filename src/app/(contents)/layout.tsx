@@ -1,6 +1,8 @@
 import { ContainerInner, ContainerRoot } from "@shared/ui";
 import { containerRootBackground } from "@shared/ui/container/Container.css";
 
+import { Footer } from "@widgets/footer/ui/Footer";
+
 const ContentsLayout = ({
   children,
 }: Readonly<{
@@ -8,7 +10,10 @@ const ContentsLayout = ({
 }>) => {
   return (
     <ContainerRoot className={containerRootBackground.auth}>
-      <ContainerInner>{children}</ContainerInner>
+      <ContainerInner>
+        {children}
+        <Footer />
+      </ContainerInner>
     </ContainerRoot>
   );
 };

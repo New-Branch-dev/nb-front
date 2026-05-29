@@ -1,24 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
+
+import { useSelectableChipWithDirectInput } from "@shared/hook/useSelectableChipWithDirectInput";
 
 export const useLearningPatternForm = () => {
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  const [selectedStrengths, setSelectedStrengths] = useState<string[]>([]);
+  const interests = useSelectableChipWithDirectInput();
+  const strengths = useSelectableChipWithDirectInput();
   const [personality, setPersonality] = useState("");
 
-  const isLearningPatternStepCompleted = useMemo(
-    () => selectedInterests.length > 0 && selectedStrengths.length > 0,
-    [selectedInterests, selectedStrengths],
-  );
+  const isLearningPatternStepCompleted =
+    interests.hasSelection && strengths.hasSelection;
 
   return {
-    selectedInterests,
-    selectedStrengths,
+    interests,
+    strengths,
     personality,
     isLearningPatternStepCompleted,
-    setSelectedInterests,
-    setSelectedStrengths,
     setPersonality,
   };
 };

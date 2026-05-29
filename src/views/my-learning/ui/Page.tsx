@@ -6,7 +6,11 @@ import {
   useStepValidityByStep,
 } from "@widgets/learning-step-layout";
 import { MyLearningStepContent } from "@widgets/my-learning";
-import { MY_LEARNING_STEPS, STEP_ITEMS } from "@widgets/my-learning/model/consts";
+import {
+  MY_LEARNING_STEP_CONTENT_INSTANCE_KEY,
+  MY_LEARNING_STEPS,
+  STEP_ITEMS,
+} from "@widgets/my-learning/model/consts";
 import {
   getStepBySlug,
   type MyLearningStepSlug,
@@ -37,7 +41,7 @@ export const MyLearningPage = ({ slug }: MyLearningPageProps) => {
       actionActivityNamePrefix="my-learning"
     >
       <MyLearningStepContent
-        key={`step-content-${slug}`}
+        key={`step-content-${slug}-${MY_LEARNING_STEP_CONTENT_INSTANCE_KEY}`}
         currentStep={currentStep}
         handlersByStep={handlersByStep}
       />

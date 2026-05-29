@@ -1,26 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
-
-import { Button, Input, SectionCard } from "@shared/ui";
+import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
+import { Button, Input, SectionCard, SectionCardStack } from "@shared/ui";
 
 import { useMyProfileForm } from "../model/useMyProfileForm";
-import { fieldGroup, fieldRow, searchButtonWrap } from "./MyProfile.css";
+import { fieldRow, searchButtonWrap } from "./MyProfile.css";
 
 type MyProfileProps = {
   onValidityChange: (isValid: boolean) => void;
+  isActive: boolean;
 };
 
-export const MyProfile = ({ onValidityChange }: MyProfileProps) => {
+export const MyProfile = ({
+  onValidityChange,
+  isActive,
+}: MyProfileProps) => {
   const { profileForm, isProfileStepCompleted, setProfileField } =
     useMyProfileForm();
 
-  useEffect(() => {
-    onValidityChange(isProfileStepCompleted);
-  }, [isProfileStepCompleted, onValidityChange]);
+  useReportStepValidity(isActive, isProfileStepCompleted, onValidityChange);
 
   return (
-    <article className={fieldGroup} aria-label="1단계 프로필 입력">
+    <SectionCardStack>
       <SectionCard title="닉네임">
         <Input
           name="nickname"
@@ -57,6 +58,6 @@ export const MyProfile = ({ onValidityChange }: MyProfileProps) => {
           </div>
         </div>
       </SectionCard>
-    </article>
+    </SectionCardStack>
   );
 };
