@@ -4,6 +4,7 @@ import {
   sectionCard,
   sectionCardStack,
   sectionDescription,
+  sectionHeader,
   sectionTitle,
 } from "./SectionCard.css";
 
@@ -34,10 +35,12 @@ export const SectionCard = ({
 }: SectionCardProps) => {
   return (
     <article className={sectionCard}>
-      <h3 className={sectionTitle}>{title}</h3>
-      {description ? (
-        <span className={sectionDescription}>{description}</span>
-      ) : null}
+      <div className={sectionHeader}>
+        <h3 className={sectionTitle}>{title}</h3>
+        {description ? (
+          <span className={sectionDescription}>{description}</span>
+        ) : null}
+      </div>
       {children}
     </article>
   );

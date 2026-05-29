@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 export type MyProfileForm = {
   nickname: string;
@@ -19,9 +19,8 @@ export const useMyProfileForm = () => {
     INITIAL_PROFILE_FORM,
   );
 
-  const isProfileStepCompleted = useMemo(
-    () => Object.values(profileForm).every((value) => value.trim().length > 0),
-    [profileForm],
+  const isProfileStepCompleted = Object.values(profileForm).every(
+    (value) => value.trim().length > 0,
   );
 
   const setProfileField = (field: keyof MyProfileForm, value: string) => {

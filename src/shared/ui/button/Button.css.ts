@@ -14,7 +14,6 @@ export const buttonRecipe = recipe({
       "background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease",
     cursor: "pointer",
     selectors: {
-      "&:hover": { opacity: 0.92 },
       "&:disabled": { opacity: 0.5, cursor: "not-allowed" },
     },
   },
@@ -23,18 +22,38 @@ export const buttonRecipe = recipe({
       primary: {
         background: colors.primary,
         color: colors.textInverse,
+        selectors: {
+          "&:hover:not(:disabled)": {
+            background: `color-mix(in srgb, ${colors.primary} 88%, ${colors.black})`,
+          },
+        },
       },
       secondary: {
         background: colors.secondary,
         color: colors.primary,
+        selectors: {
+          "&:hover:not(:disabled)": {
+            background: `color-mix(in srgb, ${colors.secondary} 72%, ${colors.primary})`,
+          },
+        },
       },
       ghost: {
         background: colors.surface,
         color: colors.grayscale.gray900,
+        selectors: {
+          "&:hover:not(:disabled)": {
+            background: `color-mix(in srgb, ${colors.grayscale.gray900} 8%, ${colors.surface})`,
+          },
+        },
       },
       text: {
         background: "transparent",
         color: colors.grayscale.gray900,
+        selectors: {
+          "&:hover:not(:disabled)": {
+            opacity: 0.85,
+          },
+        },
       },
     },
     size: {

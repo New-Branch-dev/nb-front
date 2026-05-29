@@ -27,7 +27,7 @@ export const MAIN_SLIDER_ITEMS: MainSliderItem[] = [
     iconAlt: "학습 목표 달성 아이콘",
     title: "학습 목표 달성",
     description: "개별화 교육으로 나만의 학습 목표를\n 설정하고 달성해 보세요.",
-    href: "/learning-goals",
+    href: "/learning-goals/note-creation",
     imageSrc: "/target.png",
     imageAlt: "학습 목표 달성 일러스트",
   },

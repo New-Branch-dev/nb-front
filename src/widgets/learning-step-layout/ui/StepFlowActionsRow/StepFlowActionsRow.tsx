@@ -45,7 +45,7 @@ export const StepFlowActionsRow = ({
         <Link
           href={prevHref}
           className={[
-            buttonRecipe({ size: "lg", variant: "ghost" }),
+            buttonRecipe({ size: "lg", variant: "secondary" }),
             actionButton,
           ]
             .join(" ")

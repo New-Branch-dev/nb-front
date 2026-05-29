@@ -1,7 +1,7 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return <div> learning-goals</div>;
+const LearningGoalsIndexPage = () => {
+  redirect("/learning-goals/note-creation");
 };
 
-export default page;
+export default LearningGoalsIndexPage;

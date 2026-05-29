@@ -5,6 +5,7 @@ import { ko } from "date-fns/locale";
 import type { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 
+import { CalendarMonthHeader } from "./CalendarMonthHeader";
 import { dayBase, pickerRoot, weekDay } from "./DatePicker.css";
 
 import "react-datepicker/dist/react-datepicker.css";

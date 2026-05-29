@@ -18,6 +18,7 @@ export const MyLearningStepContent = ({
     currentStep={currentStep}
     handlersByStep={handlersByStep}
     panelByStep={STEP_PANEL_BY_STEP}
+    withoutPanelCardSteps={[6]}
     ariaLabel="나만의 학습 단계 설정 콘텐츠"
     activityNamePrefix="my-learning"
   />

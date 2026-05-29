@@ -1,31 +1,21 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useSelectableChipWithDirectInput } from "@shared/hook/useSelectableChipWithDirectInput";
 
 export const useLearningPreferencesForm = () => {
-  const [selectedMaterialFormats, setSelectedMaterialFormats] = useState<
-    string[]
-  >([]);
-  const [selectedClassStyles, setSelectedClassStyles] = useState<string[]>([]);
-  const [selectedLearningMethods, setSelectedLearningMethods] = useState<
-    string[]
-  >([]);
+  const materialFormats = useSelectableChipWithDirectInput();
+  const classStyles = useSelectableChipWithDirectInput();
+  const learningMethods = useSelectableChipWithDirectInput();
 
-  const isPreferencesStepCompleted = useMemo(
-    () =>
-      selectedMaterialFormats.length > 0 &&
-      selectedClassStyles.length > 0 &&
-      selectedLearningMethods.length > 0,
-    [selectedMaterialFormats, selectedClassStyles, selectedLearningMethods],
-  );
+  const isPreferencesStepCompleted =
+    materialFormats.hasSelection &&
+    classStyles.hasSelection &&
+    learningMethods.hasSelection;
 
   return {
-    selectedMaterialFormats,
-    selectedClassStyles,
-    selectedLearningMethods,
+    materialFormats,
+    classStyles,
+    learningMethods,
     isPreferencesStepCompleted,
-    setSelectedMaterialFormats,
-    setSelectedClassStyles,
-    setSelectedLearningMethods,
   };
 };

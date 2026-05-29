@@ -7,6 +7,7 @@ export type StepFlowStep = {
 
 export type StepFlowPanelProps = {
   onValidityChange: (isValid: boolean) => void;
+  isActive: boolean;
 };
 
 export type StepFlowPanelByStep = Record<

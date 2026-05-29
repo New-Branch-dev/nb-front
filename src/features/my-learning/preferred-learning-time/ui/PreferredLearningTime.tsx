@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { useEffect } from "react";
 
+import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import { DatePicker, SectionCardStack } from "@shared/ui";
 
+import { usePreferredLearningTime } from "../model/usePreferredLearningTime";
 import {
   headerRow,
   iconButton,
@@ -11,14 +12,15 @@ import {
   title,
 } from "./PreferredLearningTime.css";
 import { TimeSetting } from "./TimeSetting";
-import { usePreferredLearningTime } from "../model/usePreferredLearningTime";
 
 type PreferredLearningTimeProps = {
   onValidityChange: (isValid: boolean) => void;
+  isActive: boolean;
 };
 
 export const PreferredLearningTime = ({
   onValidityChange,
+  isActive,
 }: PreferredLearningTimeProps) => {
   const {
     restDate,
@@ -28,9 +30,11 @@ export const PreferredLearningTime = ({
     handleMoveMonth,
   } = usePreferredLearningTime();
 
-  useEffect(() => {
-    onValidityChange(isPreferredLearningTimeCompleted);
-  }, [isPreferredLearningTimeCompleted, onValidityChange]);
+  useReportStepValidity(
+    isActive,
+    isPreferredLearningTimeCompleted,
+    onValidityChange,
+  );
 
   return (
     <SectionCardStack>
