@@ -16,6 +16,7 @@ export {
 } from "./registration-ai-analysis";
 export { SearchBar, type SearchBarProps } from "./search-bar";
 export { SectionCard, SectionCardStack } from "./section-card/SectionCard";
+export { Stepper } from "./stepper/Stepper";
 export { Selector, type SelectorOption } from "./selector";
 export {
   LinkTab,

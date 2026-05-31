@@ -18,7 +18,7 @@ import {
   authSubmitButton,
   authTitle,
   authFormRoot,
-} from "./AuthForm.css";
+} from "../AuthForm.css";
 
 export const SignInForm = () => {
   const { handleGoogleLogin } = useSocialLogin();
