@@ -1,9 +1,7 @@
 import Image from "next/image";
 
-import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import { DatePicker, SectionCardStack } from "@shared/ui";
 
-import { usePreferredLearningTime } from "../model/usePreferredLearningTime";
 import {
   headerRow,
   iconButton,
@@ -13,32 +11,10 @@ import {
 } from "./PreferredLearningTime.css";
 import { TimeSetting } from "./TimeSetting";
 
-type PreferredLearningTimeProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const PreferredLearningTime = ({
-  onValidityChange,
-  isActive,
-}: PreferredLearningTimeProps) => {
-  const {
-    restDate,
-    isPreferredLearningTimeCompleted,
-    setRestDate,
-    setIsTimeValid,
-    handleMoveMonth,
-  } = usePreferredLearningTime();
-
-  useReportStepValidity(
-    isActive,
-    isPreferredLearningTimeCompleted,
-    onValidityChange,
-  );
-
+export const PreferredLearningTime = () => {
   return (
     <SectionCardStack>
-      <TimeSetting onValidityChange={setIsTimeValid} />
+      <TimeSetting />
 
       <section className={sectionRoot} aria-label="쉬는 날 설정">
         <div className={headerRow}>
@@ -48,7 +24,6 @@ export const PreferredLearningTime = ({
               type="button"
               className={iconButton}
               aria-label="이전 달"
-              onClick={() => handleMoveMonth(-1)}
             >
               <Image src="/arrow-top.svg" alt="이전 달" width={15} height={5} />
             </button>
@@ -56,7 +31,6 @@ export const PreferredLearningTime = ({
               type="button"
               className={iconButton}
               aria-label="다음 달"
-              onClick={() => handleMoveMonth(1)}
             >
               <Image
                 src="/arrow-bottom.svg"
@@ -68,7 +42,7 @@ export const PreferredLearningTime = ({
           </div>
         </div>
 
-        <DatePicker value={restDate} onChange={setRestDate} />
+        <DatePicker />
       </section>
     </SectionCardStack>
   );

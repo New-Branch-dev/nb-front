@@ -1,13 +1,8 @@
 "use client";
 
-import { PeriodSettingsPanel } from "../../period-settings/ui/PeriodSettingsPanel";
 import { OTHER_LEARNING_PERIOD_CONFIG } from "../../period-settings/model/periodSettings.config";
+import { PeriodSettingsPanel } from "../../period-settings/ui/PeriodSettingsPanel";
 
-type OtherLearningSettingsPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const OtherLearningSettingsPanel = (props: OtherLearningSettingsPanelProps) => (
-  <PeriodSettingsPanel {...props} config={OTHER_LEARNING_PERIOD_CONFIG} />
+export const OtherLearningSettingsPanel = () => (
+  <PeriodSettingsPanel config={OTHER_LEARNING_PERIOD_CONFIG} />
 );

@@ -1,14 +1,10 @@
 "use client";
 
-import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import {
   ChipInputGroup,
   DateField,
-  RegistrationAiAnalysisPanel,
   SectionCard,
   SectionCardStack,
-  registrationStepRoot,
-  stepSummaryPanelCard,
 } from "@shared/ui";
 
 import { useSyncGoalSettingDraft } from "../../draft/hook/useSyncGoalSettingDraft";
@@ -36,18 +32,8 @@ import {
   weeklyGrid,
 } from "./GoalSettingPanel.css";
 
-type GoalSettingPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const GoalSettingPanel = ({
-  onValidityChange,
-  isActive,
-}: GoalSettingPanelProps) => {
+export const GoalSettingPanel = () => {
   const form = useGoalSettingForm();
-
-  useReportStepValidity(isActive, form.isValid, onValidityChange);
 
   useSyncGoalSettingDraft({
     purposeSelections: form.purposeSelections,

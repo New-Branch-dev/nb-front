@@ -9,12 +9,14 @@ import {
   rowLabel,
 } from "./Register.css";
 
+const EMPTY_VALUE = "-";
+
 const ProfileField = ({
   label,
-  value,
+  value = EMPTY_VALUE,
 }: {
   label: string;
-  value: string;
+  value?: string;
 }) => (
   <span className={fieldPair}>
     <span className={mutedKey}>{label}</span>
@@ -33,44 +35,44 @@ export const RegisterProfile = () => {
         <div className={profileRow}>
           <div className={rowLabel}>프로필</div>
           <div className={rowContent}>
-            <ProfileField label="닉네임" value="뉴브랜치" />
-            <ProfileField label="나이" value="2015년생(만 11세)" />
-            <ProfileField label="소속" value="서울초등학교" />
+            <ProfileField label="닉네임" />
+            <ProfileField label="나이" />
+            <ProfileField label="소속" />
           </div>
         </div>
 
         <div className={profileRow}>
           <div className={rowLabel}>학습특성</div>
           <div className={rowContent}>
-            <ProfileField label="흥미" value="국어·영어" />
-            <ProfileField label="적성" value="언어" />
-            <ProfileField label="성격" value="꼼꼼함·계획적" />
+            <ProfileField label="흥미" />
+            <ProfileField label="적성" />
+            <ProfileField label="성격" />
           </div>
         </div>
 
         <div className={profileRow}>
           <div className={rowLabel}>학습시간</div>
           <div className={rowContent}>
-            <ProfileField label="하루" value="16:00 - 20:00" />
-            <ProfileField label="쉬는날" value="총 21일" />
+            <ProfileField label="하루" />
+            <ProfileField label="쉬는날" />
           </div>
         </div>
 
         <div className={profileRow}>
           <div className={rowLabel}>학습유형</div>
           <div className={rowContent}>
-            <ProfileField label="자료" value="텍스트" />
-            <ProfileField label="수업" value="강의" />
-            <ProfileField label="학습" value="문제풀이" />
+            <ProfileField label="자료" />
+            <ProfileField label="수업" />
+            <ProfileField label="학습" />
           </div>
         </div>
 
         <div className={profileRow}>
           <div className={rowLabel}>학습파트너</div>
           <div className={rowContent}>
-            <ProfileField label="교사" value="코칭" />
-            <ProfileField label="친구" value="리더" />
-            <ProfileField label="본인" value="협동" />
+            <ProfileField label="교사" />
+            <ProfileField label="친구" />
+            <ProfileField label="본인" />
           </div>
         </div>
       </div>

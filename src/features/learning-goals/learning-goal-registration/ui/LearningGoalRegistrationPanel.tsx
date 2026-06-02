@@ -1,27 +1,16 @@
 "use client";
 
-import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import {
-  RegistrationAiAnalysisPanel,
   registrationStepRoot,
   stepSummaryPanelCard,
 } from "@shared/ui";
 
 import { useLearningGoalRegistrationAiForm } from "../model/useLearningGoalRegistrationAiForm";
 import { LearningGoalRegistrationSummary } from "./LearningGoalRegistrationSummary";
+import { RegistrationAiAnalysisPanel } from "./registration-ai-analysis";
 
-type LearningGoalRegistrationPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const LearningGoalRegistrationPanel = ({
-  onValidityChange,
-  isActive,
-}: LearningGoalRegistrationPanelProps) => {
+export const LearningGoalRegistrationPanel = () => {
   const aiForm = useLearningGoalRegistrationAiForm();
-
-  useReportStepValidity(isActive, true, onValidityChange);
 
   return (
     <div className={registrationStepRoot} aria-label="학습 목표 등록">

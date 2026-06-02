@@ -111,14 +111,23 @@ export const Navigation = () => {
           <div className={navActionGroup}>
             {!isLoggedIn ? (
               <>
-                <Link href="/sign-in" className={link}>로그인</Link>
-                <Link href="/sign-up" className={link}>회원가입</Link>
+                <Link href="/sign-in" className={link}>
+                  로그인
+                </Link>
+                <Link href="/sign-up" className={link}>
+                  회원가입
+                </Link>
               </>
             ) : (
               <>
-                <span className={link} style={{ fontWeight: 'bold' }}>{nickname}님</span>
+                <span className={link} style={{ fontWeight: "bold" }}>
+                  {nickname}님
+                </span>
                 {/* TODO: 로그아웃 버튼 퍼블 */}
-                <button onClick={handleLogout} className={link}> 로그아웃</button>
+                <button onClick={handleLogout} className={link}>
+                  {" "}
+                  로그아웃
+                </button>
               </>
             )}
           </div>

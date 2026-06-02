@@ -1,33 +1,16 @@
 "use client";
 
-import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import { Button, Input, SectionCard, SectionCardStack } from "@shared/ui";
 
-import { useMyProfileForm } from "../model/useMyProfileForm";
 import { fieldRow, searchButtonWrap } from "./MyProfile.css";
 
-type MyProfileProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const MyProfile = ({
-  onValidityChange,
-  isActive,
-}: MyProfileProps) => {
-  const { profileForm, isProfileStepCompleted, setProfileField } =
-    useMyProfileForm();
-
-  useReportStepValidity(isActive, isProfileStepCompleted, onValidityChange);
-
+export const MyProfile = () => {
   return (
     <SectionCardStack>
       <SectionCard title="닉네임">
         <Input
           name="nickname"
           placeholder="닉네임을 입력해 주세요."
-          value={profileForm.nickname}
-          onChange={(event) => setProfileField("nickname", event.target.value)}
           aria-label="닉네임"
         />
       </SectionCard>
@@ -36,8 +19,6 @@ export const MyProfile = ({
         <Input
           name="ageGroup"
           placeholder="나이를 입력해 주세요."
-          value={profileForm.ageGroup}
-          onChange={(event) => setProfileField("ageGroup", event.target.value)}
           aria-label="나이"
         />
       </SectionCard>
@@ -47,8 +28,6 @@ export const MyProfile = ({
           <Input
             name="school"
             placeholder="소속을 선택해 주세요."
-            value={profileForm.school}
-            onChange={(event) => setProfileField("school", event.target.value)}
             aria-label="학교명"
           />
           <div className={searchButtonWrap}>

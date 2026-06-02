@@ -10,13 +10,13 @@ export { ContainerInner, ContainerRoot } from "./container/Container";
 export { DateField } from "./date-field";
 export { DatePicker } from "./date-picker/DatePicker";
 export { Input } from "./input/Input";
-export {
-  RegistrationAiAnalysisPanel,
-  type RegistrationAiAnalysisPanelProps,
-} from "./registration-ai-analysis";
 export { SearchBar, type SearchBarProps } from "./search-bar";
 export { SectionCard, SectionCardStack } from "./section-card/SectionCard";
 export { Selector, type SelectorOption } from "./selector";
+export {
+  registrationStepRoot,
+  stepSummaryPanelCard,
+} from "./step-summary-panel";
 export {
   LinkTab,
   type LinkTabItem,
@@ -28,7 +28,3 @@ export {
 } from "./tab";
 export { TagInput, type TagInputProps } from "./tag-input";
 export { TextArea } from "./textarea/TextArea";
-export {
-  registrationStepRoot,
-  stepSummaryPanelCard,
-} from "./step-summary-panel";

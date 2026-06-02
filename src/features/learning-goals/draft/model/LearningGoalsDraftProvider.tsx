@@ -8,17 +8,17 @@ import {
   useReducer,
 } from "react";
 
-import {
-  createInitialLearningGoalsDraft,
-  learningGoalsDraftReducer,
-  type LearningGoalsDraftAction,
-} from "./learningGoalsDraftReducer";
 import type {
   LearningGoalsDraft,
   LearningGoalsGoalSettingDraft,
   LearningGoalsNoteItem,
   LearningGoalsPeriodSettingsDraft,
 } from "./learningGoalsDraft.types";
+import {
+  createInitialLearningGoalsDraft,
+  type LearningGoalsDraftAction,
+  learningGoalsDraftReducer,
+} from "./learningGoalsDraftReducer";
 
 type LearningGoalsDraftContextValue = {
   draft: LearningGoalsDraft;

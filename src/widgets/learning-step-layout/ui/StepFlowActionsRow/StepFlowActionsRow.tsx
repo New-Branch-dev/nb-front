@@ -6,7 +6,7 @@ import { Activity } from "react";
 import { Button } from "@shared/ui";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 
-import type { StepFlowNavigation } from "@widgets/learning-step-layout/model/stepFlow.types";
+import type { StepFlowNavigation } from "@widgets/learning-step-layout/lib/stepFlow.types";
 
 import { actionButton, actionRow } from "./StepFlowActionsRow.css";
 

@@ -1,50 +1,24 @@
 "use client";
 
 import { LearningStepLayout } from "@widgets/learning-step-layout";
-import {
-  deriveStepFlowNavigation,
-  useStepValidityByStep,
-} from "@widgets/learning-step-layout";
-import { MyLearningStepContent } from "@widgets/my-learning";
-import {
-  MY_LEARNING_STEP_CONTENT_INSTANCE_KEY,
-  MY_LEARNING_STEPS,
-  STEP_ITEMS,
-} from "@widgets/my-learning/model/consts";
-import {
-  getStepBySlug,
-  type MyLearningStepSlug,
-} from "@widgets/my-learning/model/slug";
 
-type MyLearningPageProps = {
-  slug: MyLearningStepSlug;
-};
+import { useMyLearningStepFlow } from "../lib/useMyLearningStepFlow";
 
-export const MyLearningPage = ({ slug }: MyLearningPageProps) => {
-  const stepMeta = getStepBySlug(slug);
-  const currentStep = stepMeta.step;
-  const { validityByStep, handlersByStep } = useStepValidityByStep(MY_LEARNING_STEPS);
-  const navigation = deriveStepFlowNavigation({
-    steps: MY_LEARNING_STEPS,
-    currentStep,
-    validityByStep,
-    getStepHref: (stepSlug) => `/my-learning/${stepSlug}`,
-  });
+export const MyLearningPage = ({ children }: { children: React.ReactNode }) => {
+  const { currentStep, navigation, progressItems } = useMyLearningStepFlow();
 
   return (
     <LearningStepLayout
+      ariaLabel="나만의 학습 페이지"
       titleText="나만의 학습"
-      descriptionText="경쟁을 강화하여 나만의 학습 시스템을 구축해보세요."
-      progressItems={STEP_ITEMS}
+      descriptionText="정보를 입력하여 나만의 학습 시스템을 구축해보세요."
+      progressItems={progressItems}
       currentStep={currentStep}
       navigation={navigation}
       actionActivityNamePrefix="my-learning"
+      finalDisabledLabel="등록"
     >
-      <MyLearningStepContent
-        key={`step-content-${slug}-${MY_LEARNING_STEP_CONTENT_INSTANCE_KEY}`}
-        currentStep={currentStep}
-        handlersByStep={handlersByStep}
-      />
+      {children}
     </LearningStepLayout>
   );
 };

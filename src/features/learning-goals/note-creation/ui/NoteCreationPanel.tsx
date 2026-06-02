@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { useId } from "react";
 
-import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import { Input } from "@shared/ui";
 
-import { NOTE_FILE_ACCEPT, useNoteCreationForm } from "../model/useNoteCreationForm";
-import { NoteFileManager } from "./NoteFileManager";
+import {
+  NOTE_FILE_ACCEPT,
+  useNoteCreationForm,
+} from "../model/useNoteCreationForm";
 import {
   cardHeaderStack,
   cardHeading,
@@ -19,21 +20,27 @@ import {
   tabPanel,
   uploadButton,
 } from "./NoteCreationPanel.css";
+import { NoteFileManager } from "./NoteFileManager";
 import { fileManagerCard, fileManagerHeader } from "./noteUploadShell.css";
 
-type NoteCreationPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const NoteCreationPanel = ({
-  onValidityChange,
-  isActive,
-}: NoteCreationPanelProps) => {
+export const NoteCreationPanel = () => {
   const fileInputId = useId();
-  const form = useNoteCreationForm();
-
-  useReportStepValidity(isActive, form.canCreateNote, onValidityChange);
+  const {
+    directText,
+    fileInputRef,
+    handleDeleteAll,
+    handleDragEnter,
+    handleDragLeave,
+    handleDragOver,
+    handleDrop,
+    handleFileChange,
+    handleRemoveFile,
+    hasUploadedFiles,
+    isDragging,
+    openFilePicker,
+    setDirectText,
+    uploadedFiles,
+  } = useNoteCreationForm();
 
   return (
     <div className={tabPanel} role="tabpanel">
@@ -49,26 +56,26 @@ export const NoteCreationPanel = ({
           name="learning-goals-direct-text"
           placeholder="텍스트를 직접 입력해주세요"
           aria-label="노트에 사용할 텍스트"
-          value={form.directText}
-          onChange={(event) => form.setDirectText(event.target.value)}
+          value={directText}
+          onChange={(event) => setDirectText(event.target.value)}
         />
 
         <input
-          ref={form.fileInputRef}
+          ref={fileInputRef}
           id={fileInputId}
           type="file"
           accept={NOTE_FILE_ACCEPT}
           multiple
           hidden
-          onChange={form.handleFileChange}
+          onChange={handleFileChange}
         />
 
-        {form.hasUploadedFiles ? (
+        {hasUploadedFiles ? (
           <NoteFileManager
-            files={form.uploadedFiles}
-            onDeleteAll={form.handleDeleteAll}
-            onRemoveFile={form.handleRemoveFile}
-            onAddMore={form.openFilePicker}
+            files={uploadedFiles}
+            onDeleteAll={handleDeleteAll}
+            onRemoveFile={handleRemoveFile}
+            onAddMore={openFilePicker}
           />
         ) : (
           <div className={fileManagerCard}>
@@ -76,16 +83,16 @@ export const NoteCreationPanel = ({
 
             <div
               className={dropzoneBody}
-              data-dragging={form.isDragging}
-              onDragEnter={form.handleDragEnter}
-              onDragOver={form.handleDragOver}
-              onDragLeave={form.handleDragLeave}
-              onDrop={form.handleDrop}
+              data-dragging={isDragging}
+              onDragEnter={handleDragEnter}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
             >
               <button
                 type="button"
                 className={uploadButton}
-                onClick={form.openFilePicker}
+                onClick={openFilePicker}
               >
                 <Image
                   src="/up-load-pupple.svg"

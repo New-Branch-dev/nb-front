@@ -1,17 +1,17 @@
 "use client";
 
 import {
-  RegistrationAiAnalysisPanel,
   registrationStepRoot,
   stepSummaryPanelCard,
 } from "@shared/ui";
 
-import { useRegisterAiForm } from "../model/useRegisterAiForm";
 import { RegisterProfile } from "./RegisterProfile";
+import { RegistrationAiAnalysisPanel } from "./registration-ai-analysis";
+
+const EMPTY_SELECTION: string[] = [];
+const ignoreSelectionChange = () => {};
 
 export const Register = () => {
-  const aiForm = useRegisterAiForm();
-
   return (
     <div className={registrationStepRoot}>
       <div className={stepSummaryPanelCard}>
@@ -20,8 +20,14 @@ export const Register = () => {
 
       <RegistrationAiAnalysisPanel
         titleId="my-learning-register-ai-title"
-        learningStyle={aiForm.learningStyle}
-        recommendedMethod={aiForm.recommendedMethod}
+        learningStyle={{
+          selectedItems: EMPTY_SELECTION,
+          setSelectedItems: ignoreSelectionChange,
+        }}
+        recommendedMethod={{
+          selectedItems: EMPTY_SELECTION,
+          setSelectedItems: ignoreSelectionChange,
+        }}
         learningStyleInputName="my-learning-learning-style-direct"
         recommendedMethodInputName="my-learning-recommended-method-direct"
       />

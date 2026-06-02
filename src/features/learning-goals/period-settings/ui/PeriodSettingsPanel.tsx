@@ -1,6 +1,5 @@
 "use client";
 
-import { useReportStepValidity } from "@shared/hook/useReportStepValidity";
 import { ChipInputGroup, DateField, SectionCard, SectionCardStack } from "@shared/ui";
 
 import { useSyncPeriodSettingsDraft } from "../../draft/hook/useSyncPeriodSettingsDraft";
@@ -17,19 +16,11 @@ import type { PeriodSettingsPanelConfig } from "../model/periodSettings.types";
 import { usePeriodSettingsForm } from "../model/usePeriodSettingsForm";
 
 type PeriodSettingsPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
   config: PeriodSettingsPanelConfig;
 };
 
-export const PeriodSettingsPanel = ({
-  onValidityChange,
-  isActive,
-  config,
-}: PeriodSettingsPanelProps) => {
+export const PeriodSettingsPanel = ({ config }: PeriodSettingsPanelProps) => {
   const form = usePeriodSettingsForm();
-
-  useReportStepValidity(isActive, form.isValid, onValidityChange);
 
   useSyncPeriodSettingsDraft(config.draftKey, {
     startDate: form.startDate,
