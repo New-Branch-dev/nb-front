@@ -374,6 +374,8 @@ Rules:
 
 - keep components small
 - separate UI from business logic
+- when component logic is needed, follow the VAC pattern: keep the container/controller responsible for state, store access, side effects, and event composition, and keep the view component focused on rendering with explicit props
+- for component-local VAC helpers, keep small formatting, normalization, and event mapping utilities inside the container file; move reusable domain validation or shared business rules to `lib` or `model`
 - prefer composition over massive components
 - avoid deep prop drilling
 - split responsibilities clearly

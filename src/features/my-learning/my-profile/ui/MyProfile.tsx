@@ -1,42 +1,50 @@
 "use client";
 
-import { Button, Input, SectionCard, SectionCardStack } from "@shared/ui";
+import { useShallow } from "zustand/react/shallow";
 
-import { fieldRow, searchButtonWrap } from "./MyProfile.css";
+import { useMyLearningStore } from "../../model/useMyLearningStore";
+import { MyProfileView } from "./MyProfileView";
+
+const normalizeAgeInput = (value: string) =>
+  value.replace(/\D/g, "").slice(0, 2);
 
 export const MyProfile = () => {
-  return (
-    <SectionCardStack>
-      <SectionCard title="닉네임">
-        <Input
-          name="nickname"
-          placeholder="닉네임을 입력해 주세요."
-          aria-label="닉네임"
-        />
-      </SectionCard>
-
-      <SectionCard title="나이">
-        <Input
-          name="ageGroup"
-          placeholder="나이를 입력해 주세요."
-          aria-label="나이"
-        />
-      </SectionCard>
-
-      <SectionCard title="소속">
-        <div className={fieldRow}>
-          <Input
-            name="school"
-            placeholder="소속을 선택해 주세요."
-            aria-label="학교명"
-          />
-          <div className={searchButtonWrap}>
-            <Button type="button" size="md" fullWidth>
-              검색
-            </Button>
-          </div>
-        </div>
-      </SectionCard>
-    </SectionCardStack>
+  const { nickname, age, school, setProfileField } = useMyLearningStore(
+    useShallow((state) => ({
+      nickname: state.profile.nickname,
+      age: state.profile.age,
+      school: state.profile.school,
+      setProfileField: state.setProfileField,
+    })),
   );
+
+  const ageValue = age === null ? "" : String(age);
+
+  const handleNicknameChange = (value: string) => {
+    setProfileField("nickname", value);
+  };
+
+  const handleAgeChange = (value: string) => {
+    const age = normalizeAgeInput(value);
+
+    setProfileField("age", age === "" ? null : Number(age));
+  };
+
+  const handleSchoolChange = (value: string) => {
+    setProfileField("school", value);
+  };
+
+  const handleSchoolSearchClick = () => {};
+
+  const viewProps = {
+    nickname: nickname,
+    age: ageValue,
+    school: school,
+    onNicknameChange: handleNicknameChange,
+    onAgeChange: handleAgeChange,
+    onSchoolChange: handleSchoolChange,
+    onSchoolSearchClick: handleSchoolSearchClick,
+  };
+
+  return <MyProfileView {...viewProps} />;
 };
