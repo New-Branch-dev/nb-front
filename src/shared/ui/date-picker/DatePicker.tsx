@@ -12,13 +12,21 @@ import "react-datepicker/dist/react-datepicker.css";
 type DatePickerProps = {
   value?: Date | null;
   onChange?: (date: Date) => void;
+  values?: Date[];
+  onValuesChange?: (dates: Date[]) => void;
   className?: string;
 };
 
 const toMidnight = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-export const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
+export const DatePicker = ({
+  value,
+  onChange,
+  values,
+  onValuesChange,
+  className,
+}: DatePickerProps) => {
   const isControlled = value !== undefined;
   const [internalDate, setInternalDate] = useState<Date | null>(value ?? null);
 
@@ -35,23 +43,61 @@ export const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
     onChange?.(normalizedDate);
   };
 
+  const calendarProps = {
+    inline: true,
+    locale: ko,
+    formatWeekDay: (day: string) => day.slice(0, 1),
+    weekDayClassName: () => weekDay,
+    dayClassName: () => dayBase,
+    renderCustomHeader: ({
+      date,
+      decreaseMonth,
+      increaseMonth,
+      prevMonthButtonDisabled,
+      nextMonthButtonDisabled,
+    }: {
+      date: Date;
+      decreaseMonth: () => void;
+      increaseMonth: () => void;
+      prevMonthButtonDisabled: boolean;
+      nextMonthButtonDisabled: boolean;
+    }) => (
+      <CalendarMonthHeader
+        date={date}
+        showNavigation
+        onPreviousMonth={decreaseMonth}
+        onNextMonth={increaseMonth}
+        isPreviousDisabled={prevMonthButtonDisabled}
+        isNextDisabled={nextMonthButtonDisabled}
+      />
+    ),
+  };
+
+  if (values !== undefined) {
+    return (
+      <div className={mergedClassName}>
+        <ReactDatePicker
+          {...calendarProps}
+          selectsMultiple
+          selectedDates={values}
+          onChange={(dates) =>
+            onValuesChange?.((dates ?? []).map(toMidnight))
+          }
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={mergedClassName}>
       <ReactDatePicker
-        inline
+        {...calendarProps}
         selected={selectedDate}
         onChange={(date: Date | null) => {
           if (date) {
             handleSelectDate(date);
           }
         }}
-        locale={ko}
-        formatWeekDay={(day) => day.slice(0, 1)}
-        weekDayClassName={() => weekDay}
-        dayClassName={() => dayBase}
-        renderCustomHeader={({ date }) => (
-          <CalendarMonthHeader date={date} />
-        )}
       />
     </div>
   );

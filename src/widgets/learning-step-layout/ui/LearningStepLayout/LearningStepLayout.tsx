@@ -34,6 +34,7 @@ type LearningStepLayoutProps = {
   nextLabel?: string;
   finalEnabledLabel?: string;
   finalDisabledLabel?: string;
+  canProceed?: boolean;
   wizardChrome?: boolean;
 };
 
@@ -51,6 +52,7 @@ export const LearningStepLayout = ({
   nextLabel = "다음",
   finalEnabledLabel = "완료",
   finalDisabledLabel = "등록",
+  canProceed,
   wizardChrome = true,
 }: LearningStepLayoutProps) => {
   return (
@@ -80,6 +82,7 @@ export const LearningStepLayout = ({
               nextLabel={nextLabel}
               finalEnabledLabel={finalEnabledLabel}
               finalDisabledLabel={finalDisabledLabel}
+              canProceed={canProceed}
             />
           </div>
         </div>

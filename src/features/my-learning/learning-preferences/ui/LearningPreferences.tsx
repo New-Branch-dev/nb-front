@@ -1,48 +1,45 @@
 "use client";
 
-import { SectionCardStack } from "@shared/ui";
+import { useShallow } from "zustand/react/shallow";
 
-import { SelectableChipSection } from "@features/selectable-chip-section";
-
-import {
-  CLASS_STYLE_ITEMS,
-  LEARNING_METHOD_ITEMS,
-  MATERIAL_FORMAT_ITEMS,
-} from "../model/learningPreferences.consts";
-
-const EMPTY_SELECTION: string[] = [];
-const ignoreSelectionChange = () => {};
+import { useMyLearningStore } from "../../model/useMyLearningStore";
+import { LearningPreferencesView } from "./LearningPreferencesView";
 
 export const LearningPreferences = () => {
-  return (
-    <SectionCardStack>
-      <SelectableChipSection
-        title="자료형식"
-        description="(복수 선택 가능)"
-        items={MATERIAL_FORMAT_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-material-format-direct"
-        directInputPlaceholder="자료 형식을 입력해 주세요"
-      />
-      <SelectableChipSection
-        title="수업방식"
-        description="(복수 선택 가능)"
-        items={CLASS_STYLE_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-class-style-direct"
-        directInputPlaceholder="수업 방식을 입력해 주세요"
-      />
-      <SelectableChipSection
-        title="학습방법"
-        description="(복수 선택 가능)"
-        items={LEARNING_METHOD_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-learning-method-direct"
-        directInputPlaceholder="학습 방법을 입력해 주세요"
-      />
-    </SectionCardStack>
+  const {
+    materialFormats,
+    classStyles,
+    learningMethods,
+    setLearningPreferences,
+  } = useMyLearningStore(
+    useShallow((state) => ({
+      materialFormats: state.learningPreferences.materialFormats,
+      classStyles: state.learningPreferences.classStyles,
+      learningMethods: state.learningPreferences.learningMethods,
+      setLearningPreferences: state.setLearningPreferences,
+    })),
   );
+
+  const handleMaterialFormatsChange = (items: string[]) => {
+    setLearningPreferences({ materialFormats: items });
+  };
+
+  const handleClassStylesChange = (items: string[]) => {
+    setLearningPreferences({ classStyles: items });
+  };
+
+  const handleLearningMethodsChange = (items: string[]) => {
+    setLearningPreferences({ learningMethods: items });
+  };
+
+  const viewProps = {
+    materialFormats,
+    classStyles,
+    learningMethods,
+    onMaterialFormatsChange: handleMaterialFormatsChange,
+    onClassStylesChange: handleClassStylesChange,
+    onLearningMethodsChange: handleLearningMethodsChange,
+  };
+
+  return <LearningPreferencesView {...viewProps} />;
 };

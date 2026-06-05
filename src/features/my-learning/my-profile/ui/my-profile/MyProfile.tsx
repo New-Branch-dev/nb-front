@@ -2,7 +2,7 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
+import { useMyLearningStore } from "../../../model/useMyLearningStore";
 import { MyProfileView } from "./MyProfileView";
 
 const normalizeAgeInput = (value: string) =>
@@ -30,20 +30,12 @@ export const MyProfile = () => {
     setProfileField("age", age === "" ? null : Number(age));
   };
 
-  const handleSchoolChange = (value: string) => {
-    setProfileField("school", value);
-  };
-
-  const handleSchoolSearchClick = () => {};
-
   const viewProps = {
     nickname: nickname,
     age: ageValue,
     school: school,
     onNicknameChange: handleNicknameChange,
     onAgeChange: handleAgeChange,
-    onSchoolChange: handleSchoolChange,
-    onSchoolSearchClick: handleSchoolSearchClick,
   };
 
   return <MyProfileView {...viewProps} />;

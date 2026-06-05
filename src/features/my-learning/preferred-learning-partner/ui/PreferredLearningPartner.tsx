@@ -1,48 +1,41 @@
 "use client";
 
-import { SectionCardStack } from "@shared/ui";
+import { useShallow } from "zustand/react/shallow";
 
-import { SelectableChipSection } from "@features/selectable-chip-section";
-
-import {
-  FRIEND_TYPE_ITEMS,
-  TEACHER_TYPE_ITEMS,
-  USER_TYPE_ITEMS,
-} from "../model/preferredLearningPartner.consts";
-
-const EMPTY_SELECTION: string[] = [];
-const ignoreSelectionChange = () => {};
+import { useMyLearningStore } from "../../model/useMyLearningStore";
+import { PreferredLearningPartnerView } from "./PreferredLearningPartnerView";
 
 export const PreferredLearningPartner = () => {
-  return (
-    <SectionCardStack>
-      <SelectableChipSection
-        title="교사 유형"
-        description="(복수 선택 가능)"
-        items={TEACHER_TYPE_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-teacher-type-direct"
-        directInputPlaceholder="교사 유형을 입력해 주세요"
-      />
-      <SelectableChipSection
-        title="친구 유형"
-        description="(복수 선택 가능)"
-        items={FRIEND_TYPE_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-friend-type-direct"
-        directInputPlaceholder="친구 유형을 입력해 주세요"
-      />
-      <SelectableChipSection
-        title="사용자 유형"
-        description="(복수 선택 가능)"
-        items={USER_TYPE_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-user-type-direct"
-        directInputPlaceholder="사용자 유형을 입력해 주세요"
-      />
-    </SectionCardStack>
-  );
+  const { teacherTypes, friendTypes, userTypes, setPreferredPartner } =
+    useMyLearningStore(
+      useShallow((state) => ({
+        teacherTypes: state.preferredPartner.teacherTypes,
+        friendTypes: state.preferredPartner.friendTypes,
+        userTypes: state.preferredPartner.userTypes,
+        setPreferredPartner: state.setPreferredPartner,
+      })),
+    );
+
+  const handleTeacherTypesChange = (items: string[]) => {
+    setPreferredPartner({ teacherTypes: items });
+  };
+
+  const handleFriendTypesChange = (items: string[]) => {
+    setPreferredPartner({ friendTypes: items });
+  };
+
+  const handleUserTypesChange = (items: string[]) => {
+    setPreferredPartner({ userTypes: items });
+  };
+
+  const viewProps = {
+    teacherTypes,
+    friendTypes,
+    userTypes,
+    onTeacherTypesChange: handleTeacherTypesChange,
+    onFriendTypesChange: handleFriendTypesChange,
+    onUserTypesChange: handleUserTypesChange,
+  };
+
+  return <PreferredLearningPartnerView {...viewProps} />;
 };

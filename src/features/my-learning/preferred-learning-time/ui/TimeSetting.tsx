@@ -9,10 +9,29 @@ import {
   timeInputsRow,
   timeInputWrap,
   totalTimePlaceholder,
+  totalTimeValue,
   totalTimeWrap,
 } from "./TimeSetting.css";
 
-export const TimeSetting = () => {
+type TimeSettingProps = {
+  startTime: string;
+  endTime: string;
+  totalTimeLabel: string | null;
+  onStartTimeChange: (value: string) => void;
+  onEndTimeChange: (value: string) => void;
+  onStartTimeBlur: () => void;
+  onEndTimeBlur: () => void;
+};
+
+export const TimeSetting = ({
+  startTime,
+  endTime,
+  totalTimeLabel,
+  onStartTimeChange,
+  onEndTimeChange,
+  onStartTimeBlur,
+  onEndTimeBlur,
+}: TimeSettingProps) => {
   return (
     <SectionCard title="학습 시간">
       <div className={timeControls}>
@@ -26,6 +45,9 @@ export const TimeSetting = () => {
                   placeholder="00:00"
                   inputMode="numeric"
                   maxLength={5}
+                  value={startTime}
+                  onChange={(event) => onStartTimeChange(event.target.value)}
+                  onBlur={onStartTimeBlur}
                 />
               </label>
             </div>
@@ -42,6 +64,9 @@ export const TimeSetting = () => {
                   placeholder="00:00"
                   inputMode="numeric"
                   maxLength={5}
+                  value={endTime}
+                  onChange={(event) => onEndTimeChange(event.target.value)}
+                  onBlur={onEndTimeBlur}
                 />
               </label>
             </div>
@@ -49,7 +74,11 @@ export const TimeSetting = () => {
         </div>
 
         <div className={totalTimeWrap} aria-label="총 시간">
-          <span className={totalTimePlaceholder}>총 시간</span>
+          {totalTimeLabel ? (
+            <strong className={totalTimeValue}>{totalTimeLabel}</strong>
+          ) : (
+            <span className={totalTimePlaceholder}>총 시간</span>
+          )}
         </div>
       </div>
     </SectionCard>

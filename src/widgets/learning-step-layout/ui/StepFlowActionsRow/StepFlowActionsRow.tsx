@@ -17,6 +17,7 @@ type StepFlowActionsRowProps = {
   finalEnabledLabel?: string;
   finalDisabledLabel?: string;
   activityNamePrefix?: string;
+  canProceed?: boolean;
 };
 
 export const StepFlowActionsRow = ({
@@ -26,6 +27,7 @@ export const StepFlowActionsRow = ({
   finalEnabledLabel = "완료",
   finalDisabledLabel = "등록",
   activityNamePrefix = "step-flow",
+  canProceed,
 }: StepFlowActionsRowProps) => {
   const {
     showPrevLink,
@@ -35,6 +37,9 @@ export const StepFlowActionsRow = ({
     isLastStep,
     hasPreviousStep,
   } = navigation;
+  const isNextEnabled = showNextLink && (canProceed ?? true);
+  const isFinalEnabled = isLastStep && canProceed === true;
+  const isDisabled = !isNextEnabled && !isFinalEnabled;
 
   return (
     <div className={actionRow}>
@@ -56,7 +61,7 @@ export const StepFlowActionsRow = ({
       </Activity>
 
       <Activity
-        mode={showNextLink ? "visible" : "hidden"}
+        mode={isNextEnabled ? "visible" : "hidden"}
         name={`${activityNamePrefix}-action-next-link`}
       >
         <Link
@@ -73,7 +78,21 @@ export const StepFlowActionsRow = ({
       </Activity>
 
       <Activity
-        mode={showNextLink ? "hidden" : "visible"}
+        mode={isFinalEnabled ? "visible" : "hidden"}
+        name={`${activityNamePrefix}-action-final-enabled`}
+      >
+        <Button
+          type="button"
+          size="lg"
+          fullWidth={!hasPreviousStep}
+          className={hasPreviousStep ? actionButton : undefined}
+        >
+          {finalEnabledLabel}
+        </Button>
+      </Activity>
+
+      <Activity
+        mode={isDisabled ? "visible" : "hidden"}
         name={`${activityNamePrefix}-action-next-disabled`}
       >
         <Button

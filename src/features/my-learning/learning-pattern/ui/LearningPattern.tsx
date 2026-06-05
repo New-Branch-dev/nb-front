@@ -1,46 +1,41 @@
 "use client";
 
-import { SectionCard, SectionCardStack, TextArea } from "@shared/ui";
+import { useShallow } from "zustand/react/shallow";
 
-import { SelectableChipSection } from "@features/selectable-chip-section";
-
-import {
-  INTEREST_ITEMS,
-  STRENGTH_ITEMS,
-} from "../model/learningPattern.consts";
-
-const EMPTY_SELECTION: string[] = [];
-const ignoreSelectionChange = () => {};
+import { useMyLearningStore } from "../../model/useMyLearningStore";
+import { LearningPatternView } from "./LearningPatternView";
 
 export const LearningPattern = () => {
-  return (
-    <SectionCardStack>
-      <SelectableChipSection
-        title="흥미"
-        description="(복수 선택 가능)"
-        items={INTEREST_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-interest-direct"
-        directInputPlaceholder="흥미를 입력해 주세요"
-      />
+  const { interests, strengths, personality, setLearningPattern } =
+    useMyLearningStore(
+      useShallow((state) => ({
+        interests: state.learningPattern.interests,
+        strengths: state.learningPattern.strengths,
+        personality: state.learningPattern.personality,
+        setLearningPattern: state.setLearningPattern,
+      })),
+    );
 
-      <SelectableChipSection
-        title="적성"
-        description="(복수 선택 가능)"
-        items={STRENGTH_ITEMS}
-        selectedItems={EMPTY_SELECTION}
-        onSelectedItems={ignoreSelectionChange}
-        directInputName="my-learning-strength-direct"
-        directInputPlaceholder="적성을 입력해 주세요"
-      />
+  const handleInterestsChange = (items: string[]) => {
+    setLearningPattern({ interests: items });
+  };
 
-      <SectionCard title="성격">
-        <TextArea
-          placeholder="나의 성격을 자유롭게 설명해주세요. (예: 꼼꼼하고 계획적인 편)"
-          aria-label="성격 입력"
-        />
-      </SectionCard>
-    </SectionCardStack>
-  );
+  const handleStrengthsChange = (items: string[]) => {
+    setLearningPattern({ strengths: items });
+  };
+
+  const handlePersonalityChange = (value: string) => {
+    setLearningPattern({ personality: value });
+  };
+
+  const viewProps = {
+    interests,
+    strengths,
+    personality,
+    onInterestsChange: handleInterestsChange,
+    onStrengthsChange: handleStrengthsChange,
+    onPersonalityChange: handlePersonalityChange,
+  };
+
+  return <LearningPatternView {...viewProps} />;
 };

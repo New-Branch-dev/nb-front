@@ -1,6 +1,13 @@
-import { Button, Input, SectionCard, SectionCardStack } from "@shared/ui";
+import { Input, SectionCard, SectionCardStack } from "@shared/ui";
 
-import { fieldRow, searchButtonWrap } from "./MyProfile.css";
+import { SchoolSearch } from "../school-search/SchoolSearch";
+import {
+  fieldRow,
+  schoolDisplay,
+  schoolPlaceholder,
+  schoolValue,
+  searchButtonWrap,
+} from "./MyProfile.css";
 
 type MyProfileViewProps = {
   nickname: string;
@@ -8,8 +15,6 @@ type MyProfileViewProps = {
   school: string;
   onNicknameChange: (value: string) => void;
   onAgeChange: (value: string) => void;
-  onSchoolChange: (value: string) => void;
-  onSchoolSearchClick: () => void;
 };
 
 export const MyProfileView = ({
@@ -18,8 +23,6 @@ export const MyProfileView = ({
   school,
   onNicknameChange,
   onAgeChange,
-  onSchoolChange,
-  onSchoolSearchClick,
 }: MyProfileViewProps) => {
   return (
     <SectionCardStack>
@@ -47,22 +50,17 @@ export const MyProfileView = ({
 
       <SectionCard title="소속">
         <div className={fieldRow}>
-          <Input
-            name="school"
-            placeholder="소속을 선택해 주세요."
-            value={school}
-            onChange={(event) => onSchoolChange(event.target.value)}
-            aria-label="학교명"
-          />
+          <div
+            className={schoolDisplay}
+            aria-label="선택한 학교"
+            aria-live="polite"
+          >
+            <span className={school ? schoolValue : schoolPlaceholder}>
+              {school || "검색을 통해 학교를 선택해 주세요."}
+            </span>
+          </div>
           <div className={searchButtonWrap}>
-            <Button
-              type="button"
-              size="md"
-              fullWidth
-              onClick={onSchoolSearchClick}
-            >
-              검색
-            </Button>
+            <SchoolSearch />
           </div>
         </div>
       </SectionCard>

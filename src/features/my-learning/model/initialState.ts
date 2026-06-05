@@ -30,4 +30,9 @@ export const initialMyLearningState: FormState = {
     friendTypes: [],
     userTypes: [],
   },
+
+  aiAnalysis: {
+    learningStyles: [],
+    recommendedMethods: [],
+  },
 };

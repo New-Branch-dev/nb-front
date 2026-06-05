@@ -28,12 +28,18 @@ export type PreferredPartnerState = {
   userTypes: string[];
 };
 
+export type AiAnalysisState = {
+  learningStyles: string[];
+  recommendedMethods: string[];
+};
+
 export type FormState = {
   profile: ProfileState;
   learningPattern: PatternState;
   preferredTime: PreferredTimeState;
   learningPreferences: PreferencesState;
   preferredPartner: PreferredPartnerState;
+  aiAnalysis: AiAnalysisState;
 };
 
 export type StoreState = FormState & {
@@ -50,5 +56,6 @@ export type StoreState = FormState & {
   setPreferredPartner: (
     preferredPartner: Partial<PreferredPartnerState>,
   ) => void;
+  setAiAnalysis: (aiAnalysis: Partial<AiAnalysisState>) => void;
   resetMyLearning: () => void;
 };

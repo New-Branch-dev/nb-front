@@ -89,4 +89,6 @@ export const stepContent = style([
   },
 ]);
 
+export const stepAfterContent = stepPanel;
+
 export const stepActions = stepPanel;

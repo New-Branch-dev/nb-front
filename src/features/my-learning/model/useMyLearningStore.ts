@@ -14,12 +14,14 @@ const pickMyLearningFormState = ({
   preferredTime,
   learningPreferences,
   preferredPartner,
+  aiAnalysis,
 }: StoreState): FormState => ({
   profile,
   learningPattern,
   preferredTime,
   learningPreferences,
   preferredPartner,
+  aiAnalysis,
 });
 
 export const useMyLearningStore = create<StoreState>()(
@@ -66,6 +68,13 @@ export const useMyLearningStore = create<StoreState>()(
           preferredPartner: {
             ...state.preferredPartner,
             ...preferredPartner,
+          },
+        })),
+      setAiAnalysis: (aiAnalysis) =>
+        set((state) => ({
+          aiAnalysis: {
+            ...state.aiAnalysis,
+            ...aiAnalysis,
           },
         })),
       resetMyLearning: () => set(initialMyLearningState),

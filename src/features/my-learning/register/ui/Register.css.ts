@@ -84,5 +84,5 @@ export const profileValueChip = style({
   fontSize: typographyContract.bodyMd,
   fontWeight: themeTokens.fontWeight.semibold,
   lineHeight: 1.3,
-  whiteSpace: "nowrap",
+  overflowWrap: "anywhere",
 });
