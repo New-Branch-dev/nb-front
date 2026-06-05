@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import {
@@ -24,6 +25,10 @@ export const MyLearningPage = ({ children }: { children: React.ReactNode }) => {
     })),
   );
   const canProceed = isMyLearningStepComplete(form, currentStep);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [currentStep]);
 
   return (
     <LearningStepLayout
