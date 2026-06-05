@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
-import { RegisterProfileView } from "./RegisterProfileView";
+import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { RegisterProfileView } from "./register-profile-view";
 
 export const RegisterProfile = () => {
   const formatRestDates = (dates: string[]) =>

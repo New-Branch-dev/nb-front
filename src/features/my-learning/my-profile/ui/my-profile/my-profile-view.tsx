@@ -1,13 +1,13 @@
 import { Input, SectionCard, SectionCardStack } from "@shared/ui";
 
-import { SchoolSearch } from "../school-search/SchoolSearch";
+import { SchoolSearch } from "../school-search/school-search";
 import {
   fieldRow,
   schoolDisplay,
   schoolPlaceholder,
   schoolValue,
   searchButtonWrap,
-} from "./MyProfile.css";
+} from "./my-profile.css";
 
 type MyProfileViewProps = {
   nickname: string;

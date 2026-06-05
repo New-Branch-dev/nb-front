@@ -1,4 +1,4 @@
-import { searchSchoolsFromNeis } from "@features/my-learning/my-profile/api/searchSchoolsFromNeis";
+import { fetchSchoolsFromNeis } from "@features/my-learning/my-profile/api/fetch-schools-from-neis";
 
 export const GET = async (request: Request) => {
   const query = new URL(request.url).searchParams.get("query")?.trim() ?? "";
@@ -11,7 +11,7 @@ export const GET = async (request: Request) => {
   }
 
   try {
-    const schools = await searchSchoolsFromNeis(query);
+    const schools = await fetchSchoolsFromNeis(query);
 
     return Response.json({ schools });
   } catch {

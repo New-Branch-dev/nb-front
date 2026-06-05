@@ -1,8 +1,8 @@
 import { DatePicker, SectionCardStack } from "@shared/ui";
 
-import { sectionRoot, title } from "./PreferredLearningTime.css";
-import { SelectedRestDates } from "./SelectedRestDates";
-import { TimeSetting } from "./TimeSetting";
+import { sectionRoot, title } from "./preferred-learning-time.css";
+import { SelectedRestDates } from "./selected-rest-dates";
+import { TimeSetting } from "./time-setting";
 
 type PreferredLearningTimeViewProps = {
   startTime: string;

@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
-import { LearningPatternView } from "./LearningPatternView";
+import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { LearningPatternView } from "./learning-pattern-view";
 
 export const LearningPattern = () => {
   const { interests, strengths, personality, setLearningPattern } =

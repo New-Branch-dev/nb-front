@@ -6,7 +6,7 @@ import {
   CLASS_STYLE_ITEMS,
   LEARNING_METHOD_ITEMS,
   MATERIAL_FORMAT_ITEMS,
-} from "../model/learningPreferences.consts";
+} from "../model/learning-preferences.consts";
 
 type LearningPreferencesViewProps = {
   materialFormats: string[];

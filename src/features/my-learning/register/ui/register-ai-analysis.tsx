@@ -2,7 +2,7 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
+import { useMyLearningStore } from "../../model/use-my-learning-store";
 import { RegistrationAiAnalysisPanel } from "./registration-ai-analysis";
 
 export const RegisterAiAnalysis = () => {

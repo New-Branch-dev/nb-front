@@ -26,7 +26,7 @@ const toSchool = (school: NeisSchoolRow): School => ({
   address: school.ORG_RDNMA,
 });
 
-export const searchSchoolsFromNeis = async (query: string) => {
+export const fetchSchoolsFromNeis = async (query: string) => {
   const url = new URL("https://open.neis.go.kr/hub/schoolInfo");
   const apiKey = process.env.NEIS_API_KEY;
 

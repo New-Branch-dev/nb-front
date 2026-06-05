@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../../model/useMyLearningStore";
-import { MyProfileView } from "./MyProfileView";
+import { useMyLearningStore } from "../../../model/use-my-learning-store";
+import { MyProfileView } from "./my-profile-view";
 
 const normalizeAgeInput = (value: string) =>
   value.replace(/\D/g, "").slice(0, 2);

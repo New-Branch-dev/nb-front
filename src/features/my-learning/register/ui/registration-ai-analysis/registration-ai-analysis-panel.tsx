@@ -7,13 +7,13 @@ import { ChipInputGroup } from "@shared/ui";
 import {
   LEARNING_STYLE_ITEMS,
   RECOMMENDED_METHOD_ITEMS,
-} from "./registrationAi.consts";
+} from "./registration-ai.consts";
 import {
   aiDivider,
   aiPanel,
   aiPanelInner,
   aiPanelTitle,
-} from "./RegistrationAiAnalysis.css";
+} from "./registration-ai-analysis.css";
 
 type ChipFieldState = {
   selectedItems: string[];

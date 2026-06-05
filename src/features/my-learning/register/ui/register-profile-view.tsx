@@ -7,7 +7,7 @@ import {
   profileValueChip,
   rowContent,
   rowLabel,
-} from "./Register.css";
+} from "./register.css";
 
 const EMPTY_VALUE = "-";
 

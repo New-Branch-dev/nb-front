@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
-import { PreferredLearningTimeView } from "./PreferredLearningTimeView";
+import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { PreferredLearningTimeView } from "./preferred-learning-time-view";
 
 const sanitizeTimeInput = (value: string, previousValue: string) => {
   const sanitizedValue = value.replace(/[^\d:]/g, "");

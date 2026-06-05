@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
-import { LearningPreferencesView } from "./LearningPreferencesView";
+import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { LearningPreferencesView } from "./learning-preferences-view";
 
 export const LearningPreferences = () => {
   const {

@@ -11,7 +11,7 @@ import {
   totalTimePlaceholder,
   totalTimeValue,
   totalTimeWrap,
-} from "./TimeSetting.css";
+} from "./time-setting.css";
 
 type TimeSettingProps = {
   startTime: string;

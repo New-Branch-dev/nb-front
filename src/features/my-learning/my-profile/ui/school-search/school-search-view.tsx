@@ -16,7 +16,7 @@ import {
   schoolName,
   searchInput,
   title,
-} from "./SchoolSearch.css";
+} from "./school-search.css";
 
 type SchoolSearchViewProps = {
   query: string;

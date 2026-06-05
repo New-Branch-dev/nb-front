@@ -5,7 +5,7 @@ import { SelectableChipSection } from "@features/selectable-chip-section";
 import {
   INTEREST_ITEMS,
   STRENGTH_ITEMS,
-} from "../model/learningPattern.consts";
+} from "../model/learning-pattern.consts";
 
 type LearningPatternViewProps = {
   interests: string[];

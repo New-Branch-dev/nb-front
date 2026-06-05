@@ -1,2 +1,2 @@
-export type { RegistrationAiAnalysisPanelProps } from "./RegistrationAiAnalysisPanel";
-export { RegistrationAiAnalysisPanel } from "./RegistrationAiAnalysisPanel";
+export type { RegistrationAiAnalysisPanelProps } from "./registration-ai-analysis-panel";
+export { RegistrationAiAnalysisPanel } from "./registration-ai-analysis-panel";

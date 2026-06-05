@@ -3,7 +3,7 @@ import { Chip } from "@shared/ui";
 import {
   removeMark,
   selectedDatesList,
-} from "./SelectedRestDates.css";
+} from "./selected-rest-dates.css";
 
 type SelectedRestDatesProps = {
   dates: string[];

@@ -1,6 +1,6 @@
 import type { SchoolSearchResponse } from "../model/school.types";
 
-export const searchSchools = async (query: string) => {
+export const fetchSchools = async (query: string) => {
   const response = await fetch(`/api/schools?query=${encodeURIComponent(query)}`);
 
   if (!response.ok) {

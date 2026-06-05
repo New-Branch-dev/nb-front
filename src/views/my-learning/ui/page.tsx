@@ -10,7 +10,7 @@ import {
 
 import { LearningStepLayout } from "@widgets/learning-step-layout";
 
-import { useMyLearningStepFlow } from "../lib/useMyLearningStepFlow";
+import { useMyLearningStepFlow } from "../lib/use-my-learning-step-flow";
 
 export const MyLearningPage = ({ children }: { children: React.ReactNode }) => {
   const { currentStep, navigation, progressItems } = useMyLearningStepFlow();

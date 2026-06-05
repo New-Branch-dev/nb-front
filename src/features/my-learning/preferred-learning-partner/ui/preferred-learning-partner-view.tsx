@@ -6,7 +6,7 @@ import {
   FRIEND_TYPE_ITEMS,
   TEACHER_TYPE_ITEMS,
   USER_TYPE_ITEMS,
-} from "../model/preferredLearningPartner.consts";
+} from "../model/preferred-learning-partner.consts";
 
 type PreferredLearningPartnerViewProps = {
   teacherTypes: string[];

@@ -19,6 +19,20 @@ export interface SignupRequest {
   schoolName: string;
 }
 
+const getApiErrorMessage = (error: unknown, fallback: string): string => {
+  if (axios.isAxiosError(error)) {
+    const message = error.response?.data?.message;
+    if (typeof message === "string") {
+      return message;
+    }
+    return error.message || fallback;
+  }
+  if (error instanceof Error) {
+    return error.message;
+  }
+  return fallback;
+};
+
 /**
  * 이메일 인증번호 발송
  */
@@ -32,10 +46,9 @@ export const requestEmailVerification = async (email: string): Promise<boolean> 
       throw new Error(response.data?.message || "이메일 인증 요청에 실패했습니다.");
     }
     return true;
-  } catch (error: any) {
+  } catch (error) {
     console.error("이메일 인증 발송 API 에러:", error);
-    const errorMsg = error.response?.data?.message || error.message || "서버 연결에 실패했습니다.";
-    alert(errorMsg);
+    alert(getApiErrorMessage(error, "서버 연결에 실패했습니다."));
     return false;
   }
 };
@@ -53,9 +66,9 @@ export const verifyEmailCode = async (email: string, code: string): Promise<bool
       throw new Error(response.data?.message || "인증번호가 일치하지 않거나 만료되었습니다.");
     }
     return true;
-  } catch (error: any) {
+  } catch (error) {
     console.error("인증번호 검증 API 에러:", error);
-    alert(error.response?.data?.message || "인증 실패");
+    alert(getApiErrorMessage(error, "인증 실패"));
     return false;
   }
 };
@@ -71,9 +84,9 @@ export const registerUser = async (signUpData: SignupRequest): Promise<boolean> 
       throw new Error(response.data?.message || "회원가입 요청에 실패했습니다.");
     }
     return true;
-  } catch (error: any) {
+  } catch (error) {
     console.error("회원가입 API 에러:", error);
-    alert(error.response?.data?.message || "회원가입 요청에 실패했습니다.");
+    alert(getApiErrorMessage(error, "회원가입 요청에 실패했습니다."));
     return false;
   }
 };

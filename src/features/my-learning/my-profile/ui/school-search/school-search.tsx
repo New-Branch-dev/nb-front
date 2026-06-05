@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import { useMyLearningStore } from "../../../model/useMyLearningStore";
-import { searchSchools } from "../../api/searchSchools";
+import { useMyLearningStore } from "../../../model/use-my-learning-store";
+import { fetchSchools } from "../../api/fetch-schools";
 import type { School } from "../../model/school.types";
-import { SchoolSearchView } from "./SchoolSearchView";
+import { SchoolSearchView } from "./school-search-view";
 
 export const SchoolSearch = () => {
   const [query, setQuery] = useState("");
@@ -27,7 +27,7 @@ export const SchoolSearch = () => {
     setErrorMessage("");
 
     try {
-      setSchools(await searchSchools(trimmedQuery));
+      setSchools(await fetchSchools(trimmedQuery));
       setHasSearched(true);
     } catch {
       setSchools([]);

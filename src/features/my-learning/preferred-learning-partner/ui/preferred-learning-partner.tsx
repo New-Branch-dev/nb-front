@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/useMyLearningStore";
-import { PreferredLearningPartnerView } from "./PreferredLearningPartnerView";
+import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { PreferredLearningPartnerView } from "./preferred-learning-partner-view";
 
 export const PreferredLearningPartner = () => {
   const { teacherTypes, friendTypes, userTypes, setPreferredPartner } =
