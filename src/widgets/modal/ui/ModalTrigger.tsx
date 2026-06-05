@@ -7,6 +7,7 @@ type ModalTriggerProps = {
   icon?: ReactNode;
   ariaLabel?: string;
   className?: string;
+  fullWidth?: boolean;
   onOpen: () => void;
 };
 
@@ -15,10 +16,17 @@ export const ModalTrigger = ({
   icon,
   ariaLabel,
   className,
+  fullWidth = false,
   onOpen,
 }: ModalTriggerProps) => {
   return (
-    <Button className={className} aria-label={ariaLabel} onClick={onOpen}>
+    <Button
+      type="button"
+      className={className}
+      aria-label={ariaLabel}
+      fullWidth={fullWidth}
+      onClick={onOpen}
+    >
       {icon}
       <span>{text}</span>
     </Button>

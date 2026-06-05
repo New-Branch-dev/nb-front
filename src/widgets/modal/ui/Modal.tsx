@@ -3,16 +3,16 @@
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent, ReactNode } from "react";
 
-import { modalContainer, modalDialog } from "./Modal.css";
-import { ModalTrigger } from "./ModalTrigger";
+import { ModalView } from "./ModalView";
 
-type ModalRenderChildren = (controls: { close: () => void }) => ReactNode;
+export type ModalRenderChildren = (controls: { close: () => void }) => ReactNode;
 
-type ModalProps = {
+export type ModalProps = {
   triggerText: string;
   triggerIcon?: ReactNode;
   triggerAriaLabel?: string;
   triggerClassName?: string;
+  triggerFullWidth?: boolean;
   children: ReactNode | ModalRenderChildren;
 };
 
@@ -21,6 +21,7 @@ export const Modal = ({
   triggerIcon,
   triggerAriaLabel,
   triggerClassName,
+  triggerFullWidth = false,
   children,
 }: ModalProps) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -55,24 +56,18 @@ export const Modal = ({
       ? (children as ModalRenderChildren)({ close })
       : children;
 
-  return (
-    <>
-      <ModalTrigger
-        text={triggerText}
-        icon={triggerIcon}
-        ariaLabel={triggerAriaLabel}
-        className={triggerClassName}
-        onOpen={() => setIsOpen(true)}
-      />
+  const viewProps = {
+    dialogRef,
+    triggerText,
+    triggerIcon,
+    triggerAriaLabel,
+    triggerClassName,
+    triggerFullWidth,
+    content,
+    onOpen: () => setIsOpen(true),
+    onClose: () => setIsOpen(false),
+    onBackdropClick: handleBackdropClick,
+  };
 
-      <dialog
-        ref={dialogRef}
-        className={modalDialog}
-        onClose={() => setIsOpen(false)}
-        onClick={handleBackdropClick}
-      >
-        <div className={modalContainer}>{content}</div>
-      </dialog>
-    </>
-  );
+  return <ModalView {...viewProps} />;
 };
