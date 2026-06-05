@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ko } from "date-fns/locale";
+import type { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 
 import { CalendarMonthHeader } from "./CalendarMonthHeader";
