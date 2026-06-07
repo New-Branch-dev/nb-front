@@ -12,37 +12,24 @@ const authApi = axios.create({
 });
 
 export interface SignupRequest {
+  loginId: string;
   email: string;
   password: string;
   nickname: string;
-  ageGroup: string;
-  schoolName: string;
 }
 
-/**
- * 이메일 인증번호 발송
- */
 export const requestEmailVerification = async (email: string): Promise<boolean> => {
   try {
-    const response = await authApi.post(`/email/request`, null, {
+    await authApi.post(`/email/request`, null, {
       params: { email },
     });
-
-    if (response.data?.status === "error") {
-      throw new Error(response.data?.message || "이메일 인증 요청에 실패했습니다.");
-    }
     return true;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("이메일 인증 발송 API 에러:", error);
-    const errorMsg = error.response?.data?.message || error.message || "서버 연결에 실패했습니다.";
-    alert(errorMsg);
     return false;
   }
 };
 
-/**
- * 이메일 인증 코드
- */
 export const verifyEmailCode = async (email: string, code: string): Promise<boolean> => {
   try {
     const response = await authApi.post(`/email/verify`, null, {
@@ -53,16 +40,20 @@ export const verifyEmailCode = async (email: string, code: string): Promise<bool
       throw new Error(response.data?.message || "인증번호가 일치하지 않거나 만료되었습니다.");
     }
     return true;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("인증번호 검증 API 에러:", error);
-    alert(error.response?.data?.message || "인증 실패");
+
+    if (axios.isAxiosError(error)) {
+      alert(error.response?.data?.message || "인증 실패");
+    } else if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert("인증 실패");
+    }
     return false;
   }
 };
 
-/**
- * 회원가입
- */
 export const registerUser = async (signUpData: SignupRequest): Promise<boolean> => {
   try {
     const response = await authApi.post(`/signup`, signUpData);
@@ -71,9 +62,35 @@ export const registerUser = async (signUpData: SignupRequest): Promise<boolean> 
       throw new Error(response.data?.message || "회원가입 요청에 실패했습니다.");
     }
     return true;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("회원가입 API 에러:", error);
-    alert(error.response?.data?.message || "회원가입 요청에 실패했습니다.");
+
+    if (axios.isAxiosError(error)) {
+      alert(error.response?.data?.message || "회원가입 요청에 실패했습니다.");
+    } else if (error instanceof Error) {
+      alert(error.message);
+    } else {
+      alert("회원가입 요청에 실패했습니다.");
+    }
     return false;
+  }
+};
+
+export const checkIdDuplication = async (id: string): Promise<boolean> => {
+  try {
+    const response = await authApi.get(`/check-userid`, {
+      params: { loginId: id },
+    });
+    return response.data?.data ?? false;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const serverMessage = error.response?.data?.message || "";
+
+      if (serverMessage.includes("exists") || serverMessage.includes("already") || error.response?.status === 500) {
+        return true;
+      }
+    }
+
+    return true;
   }
 };

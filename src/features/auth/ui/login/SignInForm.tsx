@@ -10,6 +10,7 @@ import { useLogin } from "@features/auth/model/UseLogin";
 import {
   authDescription,
   authFieldGroup,
+  authFormRoot,
   authGoogleButton,
   authMetaActions,
   authMetaButton,
@@ -17,20 +18,19 @@ import {
   authSimpleTitle,
   authSubmitButton,
   authTitle,
-  authFormRoot,
 } from "../AuthForm.css";
 
 export const SignInForm = () => {
   const { handleGoogleLogin } = useSocialLogin();
   const { handleLogin, isLoading } = useLogin();
 
-  const [email, setEmail] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // 페이지 새로고침 방지
-    if (!email || !password) return;
-    handleLogin(email, password);
+    if (!loginId || !password) return;
+    handleLogin(loginId, password);
   };
 
   return (
@@ -42,12 +42,12 @@ export const SignInForm = () => {
 
       <div className={authFieldGroup}>
         <Input
-          type="email"
-          name="email"
+          type="id"
+          name="id"
           placeholder="아이디"
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="id"
+          value={loginId}
+          onChange={(e) => setLoginId(e.target.value)}
         />
         <Input
           type="password"

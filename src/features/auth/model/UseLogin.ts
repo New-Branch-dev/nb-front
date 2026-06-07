@@ -1,11 +1,11 @@
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const useLogin = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (email: string, password: string) => {
+  const handleLogin = async (loginId: string, password: string) => {
     setIsLoading(true);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
@@ -13,7 +13,7 @@ export const useLogin = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ loginId, password }),
       });
 
       const result = await response.json();
