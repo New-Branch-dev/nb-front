@@ -1,9 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useId } from "react";
 
-import { Input } from "@shared/ui";
+import { Icon, Input } from "@shared/ui";
 
 import {
   NOTE_FILE_ACCEPT,
@@ -94,11 +93,9 @@ export const NoteCreationPanel = () => {
                 className={uploadButton}
                 onClick={openFilePicker}
               >
-                <Image
+                <Icon
                   src="/up-load-pupple.svg"
-                  alt=""
-                  width={15}
-                  height={15}
+                  size="sm"
                   aria-hidden
                 />
                 업로드

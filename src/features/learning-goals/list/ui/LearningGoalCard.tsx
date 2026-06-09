@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Icon } from "@shared/ui";
 
 import { getLearningGoalColorTheme } from "../lib/getLearningGoalColorTheme";
 import { getLearningGoalThumbnail } from "../lib/getLearningGoalThumbnail";
@@ -52,11 +52,9 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
     <article className={card} aria-label={item.title}>
       <header className={cardHeader}>
         <span className={iconBox} aria-hidden>
-          <Image
+          <Icon
             src={thumbnailSrc}
-            alt=""
-            width={46}
-            height={46}
+            size="lg"
             className={iconImage}
           />
         </span>
@@ -74,11 +72,9 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
       <dl className={metaList}>
         <div className={metaRow}>
           <dt className={metaLabel}>
-            <Image
+            <Icon
               src="/learning-goals/target.svg"
-              alt=""
-              width={18}
-              height={18}
+              size="sm"
               aria-hidden
             />
             목표점수
@@ -94,11 +90,9 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
 
         <div className={metaRow}>
           <dt className={metaLabel}>
-            <Image
+            <Icon
               src="/learning-goals/calander.svg"
-              alt=""
-              width={18}
-              height={18}
+              size="sm"
               aria-hidden
             />
             학습기간

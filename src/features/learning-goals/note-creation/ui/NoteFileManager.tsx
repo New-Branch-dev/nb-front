@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Icon } from "@shared/ui";
 
 import { formatFileAddedDate, formatFileSize } from "../lib/formatFileMeta";
 import { openUploadedFile } from "../lib/openUploadedFile";
@@ -95,11 +95,9 @@ export const NoteFileManager = ({
 
       <div className={fileManagerFooter}>
         <button type="button" className={addMoreButton} onClick={onAddMore}>
-          <Image
+          <Icon
             src="/up-load-pupple.svg"
-            alt=""
-            width={15}
-            height={15}
+            size="sm"
             aria-hidden
           />
           추가하기

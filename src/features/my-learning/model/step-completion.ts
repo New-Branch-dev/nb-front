@@ -1,24 +1,8 @@
+import { convertTimeToMinutes } from "../preferred-learning-time/model/preferred-time";
 import type { FormState } from "./store.types";
 
 const hasText = (value: string) => value.trim().length > 0;
 const hasSelection = (values: string[]) => values.length > 0;
-
-const toMinutes = (value: string) => {
-  const match = value.match(/^(\d{1,2}):(\d{1,2})$/);
-
-  if (!match) {
-    return null;
-  }
-
-  const hours = Number(match[1]);
-  const minutes = Number(match[2]);
-
-  if (hours > 23 || minutes > 60) {
-    return null;
-  }
-
-  return hours * 60 + minutes;
-};
 
 const isProfileComplete = ({ profile }: FormState) =>
   hasText(profile.nickname) &&
@@ -32,8 +16,8 @@ const isLearningPatternComplete = ({ learningPattern }: FormState) =>
   hasText(learningPattern.personality);
 
 const isPreferredTimeComplete = ({ preferredTime }: FormState) => {
-  const startMinutes = toMinutes(preferredTime.startTime);
-  const endMinutes = toMinutes(preferredTime.endTime);
+  const startMinutes = convertTimeToMinutes(preferredTime.startTime);
+  const endMinutes = convertTimeToMinutes(preferredTime.endTime);
 
   return (
     startMinutes !== null &&

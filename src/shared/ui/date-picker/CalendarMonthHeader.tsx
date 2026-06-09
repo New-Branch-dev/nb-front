@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Icon } from "@shared/ui/icon";
 
 import {
   headerRoot,
@@ -59,11 +59,9 @@ export const CalendarMonthHeader = (props: CalendarMonthHeaderProps) => {
           disabled={isPreviousDisabled}
           onClick={onPreviousMonth}
         >
-          <Image
+          <Icon
             src="/slider-arrow-left.svg"
-            alt=""
-            width={24}
-            height={24}
+            size="md"
             aria-hidden
           />
         </button>
@@ -77,11 +75,9 @@ export const CalendarMonthHeader = (props: CalendarMonthHeaderProps) => {
           disabled={isNextDisabled}
           onClick={onNextMonth}
         >
-          <Image
+          <Icon
             src="/slider-arrow-right.svg"
-            alt=""
-            width={24}
-            height={24}
+            size="md"
             aria-hidden
           />
         </button>

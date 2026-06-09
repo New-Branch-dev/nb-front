@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ko } from "date-fns/locale";
 import ReactDatePicker from "react-datepicker";
+
+import { Icon } from "@shared/ui/icon";
 
 import { CalendarMonthHeader } from "../date-picker/CalendarMonthHeader";
 import { dayBase, pickerRoot, weekDay } from "../date-picker/DatePicker.css";
@@ -104,12 +105,10 @@ export const DateField = ({
         <span className={triggerLabel} data-filled={Boolean(displayValue)}>
           {displayValue ?? placeholder}
         </span>
-        <Image
+        <Icon
           className={calendarIcon}
           src="/calender.svg"
-          alt=""
-          width={24}
-          height={24}
+          size="md"
           aria-hidden
         />
       </button>

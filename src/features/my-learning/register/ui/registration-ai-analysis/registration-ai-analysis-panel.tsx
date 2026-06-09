@@ -2,18 +2,14 @@
 
 import { useState } from "react";
 
-import { ChipInputGroup } from "@shared/ui";
-
 import {
   LEARNING_STYLE_ITEMS,
   RECOMMENDED_METHOD_ITEMS,
 } from "./registration-ai.consts";
 import {
-  aiDivider,
-  aiPanel,
-  aiPanelInner,
-  aiPanelTitle,
-} from "./registration-ai-analysis.css";
+  RegistrationAiAnalysisPanelView,
+  type RegistrationAiChipInputViewProps,
+} from "./registration-ai-analysis-panel-view";
 
 type ChipFieldState = {
   selectedItems: string[];
@@ -27,42 +23,36 @@ type RegistrationAiChipInputProps = {
   directInputPlaceholder: string;
 };
 
-const RegistrationAiChipInput = ({
+const useRegistrationAiChipInput = ({
   items,
   field,
   directInputName,
   directInputPlaceholder,
-}: RegistrationAiChipInputProps) => {
+}: RegistrationAiChipInputProps): RegistrationAiChipInputViewProps => {
   const [isDirectInputActive, setIsDirectInputActive] = useState(false);
   const [directInputValue, setDirectInputValue] = useState("");
   const presetItems = items.filter((item) => item !== "직접입력");
-
   const presetSelections = field.selectedItems.filter((item) =>
     presetItems.includes(item),
   );
-
   const customSelections = field.selectedItems.filter(
     (item) => !presetItems.includes(item),
   );
 
-  return (
-    <ChipInputGroup
-      chipSurface="onPrimary"
-      items={items}
-      selectedItems={field.selectedItems}
-      onSelectedItemsChange={field.setSelectedItems}
-      isDirectInputActive={isDirectInputActive}
-      onDirectInputActiveChange={setIsDirectInputActive}
-      directInputValue={directInputValue}
-      onDirectInputChange={setDirectInputValue}
-      directInputTags={customSelections}
-      onDirectInputTagsChange={(tags) =>
-        field.setSelectedItems([...presetSelections, ...tags])
-      }
-      directInputName={directInputName}
-      directInputPlaceholder={directInputPlaceholder}
-    />
-  );
+  return {
+    items,
+    selectedItems: field.selectedItems,
+    onSelectedItemsChange: field.setSelectedItems,
+    isDirectInputActive,
+    onDirectInputActiveChange: setIsDirectInputActive,
+    directInputValue,
+    onDirectInputChange: setDirectInputValue,
+    directInputTags: customSelections,
+    onDirectInputTagsChange: (tags) =>
+      field.setSelectedItems([...presetSelections, ...tags]),
+    directInputName,
+    directInputPlaceholder,
+  };
 };
 
 export type RegistrationAiAnalysisPanelProps = {
@@ -80,29 +70,24 @@ export const RegistrationAiAnalysisPanel = ({
   learningStyleInputName = "registration-learning-style-direct",
   recommendedMethodInputName = "registration-recommended-method-direct",
 }: RegistrationAiAnalysisPanelProps) => {
+  const learningStyleInput = useRegistrationAiChipInput({
+    items: LEARNING_STYLE_ITEMS,
+    field: learningStyle,
+    directInputName: learningStyleInputName,
+    directInputPlaceholder: "학습 스타일을 입력해 주세요",
+  });
+  const recommendedMethodInput = useRegistrationAiChipInput({
+    items: RECOMMENDED_METHOD_ITEMS,
+    field: recommendedMethod,
+    directInputName: recommendedMethodInputName,
+    directInputPlaceholder: "추천 학습법을 입력해 주세요",
+  });
+
   return (
-    <section className={aiPanel} aria-labelledby={titleId}>
-      <div className={aiPanelInner}>
-        <h2 id={titleId} className={aiPanelTitle}>
-          AI 분석
-        </h2>
-
-        <RegistrationAiChipInput
-          items={LEARNING_STYLE_ITEMS}
-          field={learningStyle}
-          directInputName={learningStyleInputName}
-          directInputPlaceholder="학습 스타일을 입력해 주세요"
-        />
-
-        <div className={aiDivider} aria-hidden />
-
-        <RegistrationAiChipInput
-          items={RECOMMENDED_METHOD_ITEMS}
-          field={recommendedMethod}
-          directInputName={recommendedMethodInputName}
-          directInputPlaceholder="추천 학습법을 입력해 주세요"
-        />
-      </div>
-    </section>
+    <RegistrationAiAnalysisPanelView
+      titleId={titleId}
+      learningStyleInput={learningStyleInput}
+      recommendedMethodInput={recommendedMethodInput}
+    />
   );
 };

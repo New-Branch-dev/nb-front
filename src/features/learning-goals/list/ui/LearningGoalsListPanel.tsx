@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Icon } from "@shared/ui";
 
 import { LEARNING_GOALS_MOCK } from "../model/learningGoals.mock";
 import { LearningGoalAddCard } from "./LearningGoalAddCard";
@@ -25,11 +25,9 @@ export const LearningGoalsListPanel = ({
     return (
       <section className={listRoot} aria-label="내 학습 목표 목록">
         <div className={emptyState}>
-          <Image
+          <Icon
             src="/target-gray.svg"
-            alt=""
-            width={49}
-            height={48}
+            size="lg"
             aria-hidden
           />
           <p className={emptyListMessage}>아직 학습 목표가 없어요</p>

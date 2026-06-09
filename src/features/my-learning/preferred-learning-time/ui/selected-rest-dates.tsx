@@ -1,5 +1,6 @@
 import { Chip } from "@shared/ui";
 
+import { convertDateKeyToRestDateLabel } from "../model/preferred-time";
 import {
   removeMark,
   selectedDatesList,
@@ -8,12 +9,6 @@ import {
 type SelectedRestDatesProps = {
   dates: string[];
   onRemove: (dateKey: string) => void;
-};
-
-const formatDateLabel = (dateKey: string) => {
-  const [year, month, day] = dateKey.split("-").map(Number);
-
-  return `${String(year).slice(2)}년 ${month}월 ${day}일`;
 };
 
 export const SelectedRestDates = ({
@@ -31,10 +26,10 @@ export const SelectedRestDates = ({
           <Chip
             size="md"
             selected
-            aria-label={`${formatDateLabel(dateKey)} 삭제`}
+            aria-label={`${convertDateKeyToRestDateLabel(dateKey)} 삭제`}
             onClick={() => onRemove(dateKey)}
           >
-            {formatDateLabel(dateKey)}
+            {convertDateKeyToRestDateLabel(dateKey)}
             <span className={removeMark} aria-hidden>
               ×
             </span>

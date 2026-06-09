@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { Button, Checkbox, Input } from "@shared/ui";
+import { Button, Checkbox, Icon, Input } from "@shared/ui";
 
 import { useSocialLogin } from "@features/auth/model/SocialLogin";
 import { useLogin } from "@features/auth/model/UseLogin";
@@ -10,6 +9,7 @@ import { useLogin } from "@features/auth/model/UseLogin";
 import {
   authDescription,
   authFieldGroup,
+  authFormRoot,
   authGoogleButton,
   authMetaActions,
   authMetaButton,
@@ -17,7 +17,6 @@ import {
   authSimpleTitle,
   authSubmitButton,
   authTitle,
-  authFormRoot,
 } from "../AuthForm.css";
 
 export const SignInForm = () => {
@@ -92,11 +91,10 @@ export const SignInForm = () => {
       <div className={authSimpleFieldGroup}>
         <h2 className={authSimpleTitle}>간편 로그인</h2>
         <Button type="button" className={authGoogleButton} onClick={handleGoogleLogin}>
-          <Image
+          <Icon
             src="/google.png"
             alt="구글"
-            width={20}
-            height={20}
+            size="md"
             quality={100}
           />
           구글 계정으로 로그인

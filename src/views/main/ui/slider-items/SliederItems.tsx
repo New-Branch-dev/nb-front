@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { Icon } from "@shared/ui";
+
 import type { MainSliderItem } from "@views/main/model/consts";
 
 import {
@@ -34,11 +36,10 @@ export const SliederItems = ({ item }: SliederItemsProps) => {
       <div className={contentColumn}>
         <div className={infoColumn}>
           <div className={iconImageWrap}>
-            <Image
+            <Icon
               src={item.icon}
               alt={item.iconAlt}
-              fill
-              sizes="2rem"
+              size="lg"
               className={iconImage}
             />
           </div>
@@ -50,11 +51,10 @@ export const SliederItems = ({ item }: SliederItemsProps) => {
         <div className={actionRow}>
           <Link href={item.href} className={startLink}>
             시작하기
-            <Image
+            <Icon
               src="/arrow-right-black.svg"
               alt="화살표 이미지"
-              width={16}
-              height={16}
+              size="sm"
               aria-hidden
             />
           </Link>
