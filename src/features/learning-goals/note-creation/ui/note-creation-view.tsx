@@ -71,15 +71,17 @@ export const NoteCreationView = ({
   return (
     <div className={tabPanel} role="tabpanel">
       <div className={cardHeaderStack}>
-        <h2 className={cardHeading}>자료 생성하기</h2>
-        <p className={cardLead}>파일을 업로드해주세요</p>
+        <h2 className={cardHeading}>학습 자료 수집</h2>
+        <p className={cardLead}>
+          해당 목표에 필요한 파일이나 텍스트를 모아주세요
+        </p>
       </div>
 
       <div className={fieldsStack}>
         <Input
           name="learning-goals-direct-text"
-          placeholder="텍스트를 직접 입력해주세요"
-          aria-label="노트에 사용할 텍스트"
+          placeholder="텍스트를 입력하거나 붙여넣어주세요 (예:강의 필기 자료, 블로그 글등)"
+          aria-label="학습 자료에 사용할 텍스트"
         />
 
         <div

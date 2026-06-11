@@ -1,5 +1,5 @@
-import { RegisterView } from "./register-view";
+import { RegisterSummary } from "@features/learning-goals/register/ui/register-summary";
 
 export const Register = () => {
-  return <RegisterView />;
+  return <RegisterSummary />;
 };

@@ -3,7 +3,6 @@ import { style } from "@vanilla-extract/css";
 import {
   colors,
   flexColumn,
-  flexStart,
   themeTokens,
   typographyContract,
 } from "@shared/styles";
@@ -17,7 +16,7 @@ export const summaryCard = style([
 ]);
 
 export const section = style({
-  paddingBlock: themeTokens.gap.xl,
+  paddingBlock: themeTokens.gap["3xl"],
   borderBottom: `1px solid ${colors.border}`,
   selectors: {
     "&:first-child": {
@@ -35,88 +34,90 @@ export const sectionHeader = style({
   alignItems: "center",
   justifyContent: "space-between",
   gap: themeTokens.gap.md,
-  marginBottom: themeTokens.gap.lg,
+  marginBottom: themeTokens.gap["2xl"],
 });
 
 export const sectionTitle = style({
   margin: 0,
-  fontSize: typographyContract.bodyLg,
+  fontSize: typographyContract.headingSm,
   fontWeight: themeTokens.fontWeight.bold,
   color: colors.grayscale.gray900,
 });
 
 export const countBadge = style({
   flexShrink: 0,
-  padding: `${themeTokens.gap.xs} ${themeTokens.gap.md}`,
-  borderRadius: themeTokens.radius.full,
+  minWidth: "auto",
+  borderColor: "transparent",
   backgroundColor: colors.secondary,
   color: colors.primary,
-  fontSize: typographyContract.bodySm,
   fontWeight: themeTokens.fontWeight.semibold,
-  lineHeight: 1.2,
+  cursor: "default",
+  pointerEvents: "none",
 });
 
 export const noteCardList = style({
   display: "flex",
   flexWrap: "wrap",
-  gap: themeTokens.gap.md,
+  gap: themeTokens.gap.sm,
 });
 
 export const noteCard = style([
   flexColumn,
-  flexStart,
   {
-    flex: "1 1 12rem",
-    minWidth: "10rem",
-    maxWidth: "100%",
-    padding: themeTokens.gap.lg,
-    borderRadius: themeTokens.radius.md,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "7.5rem",
+    minHeight: "4.5rem",
+    padding: `${themeTokens.gap.sm} ${themeTokens.gap.md}`,
+    borderRadius: themeTokens.radius.sm,
     backgroundColor: colors.primary,
     color: colors.white,
-    gap: themeTokens.gap.xs,
+    gap: "0.125rem",
   },
 ]);
 
 export const noteCardTitle = style({
+  width: "100%",
   margin: 0,
-  fontSize: typographyContract.bodyLg,
+  overflow: "hidden",
+  fontSize: typographyContract.bodyMd,
   fontWeight: themeTokens.fontWeight.bold,
-  lineHeight: 1.35,
-  wordBreak: "break-word",
+  lineHeight: 1.25,
+  textAlign: "center",
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
 
 export const noteCardSubtitle = style({
   margin: 0,
   fontSize: typographyContract.bodySm,
   fontWeight: themeTokens.fontWeight.regular,
-  lineHeight: 1.4,
+  lineHeight: 1.25,
   opacity: 0.92,
+  textAlign: "center",
   wordBreak: "break-word",
 });
 
 export const chipRows = style([
   flexColumn,
   {
-    gap: themeTokens.gap.md,
+    gap: themeTokens.gap.lg,
   },
 ]);
 
 export const chipRow = style({
   display: "flex",
   flexWrap: "wrap",
-  gap: themeTokens.gap.md,
+  gap: themeTokens.gap.sm,
 });
 
 export const summaryChip = style({
-  display: "inline-flex",
-  alignItems: "center",
-  padding: `${themeTokens.gap.sm} ${themeTokens.gap.lg}`,
-  borderRadius: themeTokens.gap.sm,
+  borderColor: "transparent",
   backgroundColor: colors.secondary,
   color: colors.primary,
-  fontSize: typographyContract.bodyMd,
-  fontWeight: themeTokens.fontWeight.medium,
-  lineHeight: 1.35,
+  fontWeight: themeTokens.fontWeight.bold,
+  cursor: "default",
+  pointerEvents: "none",
   wordBreak: "break-word",
 });
 

@@ -1,3 +1,5 @@
+import { Chip } from "@shared/ui";
+
 import {
   chipRow,
   chipRows,
@@ -6,7 +8,7 @@ import {
   sectionHeader,
   sectionTitle,
   summaryChip,
-} from "./register.css";
+} from "@features/learning-goals/register/ui/register.css";
 
 type RegisterSummarySectionProps = {
   title: string;
@@ -19,28 +21,42 @@ export const RegisterSummarySection = ({
   chipRowsData,
   badge,
 }: RegisterSummarySectionProps) => {
-  const hasChips = chipRowsData.some((row) => row.length > 0);
+  const filteredChipRowsData = chipRowsData
+    .map((row) => row.filter(Boolean))
+    .filter((row) => row.length > 0);
+  const hasChips = filteredChipRowsData.length > 0;
 
   return (
     <section className={section} aria-label={title}>
       <header className={sectionHeader}>
         <h3 className={sectionTitle}>{title}</h3>
-        {badge ? <span className={countBadge}>{badge}</span> : null}
+        {badge ? (
+          <Chip
+            className={countBadge}
+            responsiveSize="laptopMdPcLg"
+            tabIndex={-1}
+          >
+            {badge}
+          </Chip>
+        ) : null}
       </header>
 
       {hasChips ? (
         <div className={chipRows}>
-          {chipRowsData.map((row, rowIndex) =>
-            row.length > 0 ? (
-              <div key={`${title}-row-${rowIndex}`} className={chipRow}>
-                {row.map((chip) => (
-                  <span key={chip} className={summaryChip}>
-                    {chip}
-                  </span>
-                ))}
-              </div>
-            ) : null,
-          )}
+          {filteredChipRowsData.map((row, rowIndex) => (
+            <div key={`${title}-row-${rowIndex}`} className={chipRow}>
+              {row.map((chip) => (
+                <Chip
+                  key={chip}
+                  className={summaryChip}
+                  responsiveSize="laptopMdPcLg"
+                  tabIndex={-1}
+                >
+                  {chip}
+                </Chip>
+              ))}
+            </div>
+          ))}
         </div>
       ) : null}
     </section>

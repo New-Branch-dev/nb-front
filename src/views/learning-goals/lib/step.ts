@@ -1,7 +1,7 @@
 export const LEARNING_GOALS_STEPS = [
   {
     step: 1,
-    title: "노트생성",
+    title: "자료수집",
     href: "/learning-goals/note-creation",
   },
   {
