@@ -24,10 +24,6 @@ export const RegisterProfile = () => {
     interests: form.learningPattern.interests,
     strengths: form.learningPattern.strengths,
     personality: form.learningPattern.personality,
-    learningTime:
-      form.preferredTime.startTime && form.preferredTime.endTime
-        ? `${form.preferredTime.startTime} - ${form.preferredTime.endTime}`
-        : "",
     restDates: form.preferredTime.restDates.map(
       convertDateKeyToShortRestDateLabel,
     ),

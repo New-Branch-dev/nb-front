@@ -527,6 +527,13 @@ After editing:
 4. summarize changes clearly
 5. explain architectural decisions briefly
 
+For every step-based feature change:
+
+- review the finished code flow before finalizing
+- verify the flow matches the architecture boundaries
+- remove unused or speculative code introduced during the step
+- check that business logic, UI rendering, state, and API concerns remain separated
+
 When summarizing work:
 
 - group related changes by category

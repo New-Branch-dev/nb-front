@@ -4,7 +4,7 @@ export {
   type CreateMyLearningStepsResponse,
 } from "./api/create-my-learning-steps";
 export { LearningStyle } from "./learning-style/ui/learning-style";
-export { isMyLearningStepComplete } from "./model/step-completion";
+export { isMyLearningStepComplete } from "./model/step-disabled";
 export type {
   AiAnalysisState,
   FormState,

@@ -4,8 +4,8 @@ import { Slider } from "@widgets/slider";
 
 import { MAIN_SLIDER_ITEMS } from "@views/main/model/consts";
 
-import { header, sliderWrapper } from "./Page.css";
 import { SliederItems } from "../slider-items/SliederItems";
+import { header, sliderWrapper } from "./Page.css";
 
 export const MainPage = () => {
   return (

@@ -1,7 +1,11 @@
 import type { SelectorOption } from "@shared/ui";
 import { Selector } from "@shared/ui/selector/Selector";
 
-import { countBox, countSelector, countSuffix } from "./settingsPanel.css";
+import {
+  countBox,
+  countSelector,
+  countSuffix,
+} from "@features/learning-goals/ui/settingsPanel.css";
 
 type ReviewCountFieldProps = {
   name: string;

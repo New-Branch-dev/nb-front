@@ -1,30 +1,36 @@
-"use client";
-
-import { LearningGoalsListPanel, LearningGoalsTabRail } from "@features/learning-goals";
-
 import {
-  INACTIVE_STEP_FLOW_NAVIGATION,
-  LEARNING_GOALS_STEPS,
-  useLearningGoalsCreateHref,
-} from "@widgets/learning-goals";
+  LearningGoalsListPanel,
+  LearningGoalsTabRail,
+} from "@features/learning-goals";
+
 import { LearningStepLayout } from "@widgets/learning-step-layout";
 
-export const LearningGoalsListPage = () => {
-  const createHref = useLearningGoalsCreateHref();
+import {
+  LEARNING_GOALS_DESCRIPTION,
+  LEARNING_GOALS_TITLE,
+} from "../lib/content-title";
+import { INACTIVE_STEP_FLOW_NAVIGATION } from "../lib/inactive-step-flow-navigation";
+import { LEARNING_GOALS_STEPS } from "../lib/step";
 
+const LEARNING_GOALS_CREATE_HREF = "/learning-goals/note-creation";
+
+export const LearningGoalsListPage = () => {
   return (
     <LearningStepLayout
-      titleText="학습 목표 달성"
-      descriptionText="개별화 교육으로 학습 목표를 달성하세요."
+      titleText={LEARNING_GOALS_TITLE}
+      descriptionText={LEARNING_GOALS_DESCRIPTION}
       progressItems={LEARNING_GOALS_STEPS}
       currentStep={1}
       navigation={INACTIVE_STEP_FLOW_NAVIGATION}
       wizardChrome={false}
       belowHeader={
-        <LearningGoalsTabRail activeTab="list" createHref={createHref} />
+        <LearningGoalsTabRail
+          activeTab="list"
+          createHref={LEARNING_GOALS_CREATE_HREF}
+        />
       }
     >
-      <LearningGoalsListPanel createHref={createHref} />
+      <LearningGoalsListPanel createHref={LEARNING_GOALS_CREATE_HREF} />
     </LearningStepLayout>
   );
 };

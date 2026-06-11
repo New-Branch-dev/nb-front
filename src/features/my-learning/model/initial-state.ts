@@ -14,8 +14,6 @@ export const initialMyLearningState: FormState = {
   },
 
   preferredTime: {
-    startTime: "",
-    endTime: "",
     restDates: [],
   },
 
