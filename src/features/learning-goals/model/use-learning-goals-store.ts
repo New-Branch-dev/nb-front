@@ -35,23 +35,64 @@ const convertUploadedFileForStorage = ({
 });
 
 const pickLearningGoalsFormState = ({
+  noteCreation,
   goalSetting,
   memorization,
-  noteCreation,
   otherLearning,
   retrieval,
 }: LearningGoalsStoreState): LearningGoalsFormState => ({
-  goalSetting,
-  memorization,
-  otherLearning,
-  retrieval,
   noteCreation: {
-    ...noteCreation,
     uploadedFileList: noteCreation.uploadedFileList.map(
       convertUploadedFileForStorage,
     ),
   },
+  goalSetting,
+  memorization,
+  otherLearning,
+  retrieval,
 });
+
+const mergePersistedLearningGoalsState = (
+  persistedState: unknown,
+  currentState: LearningGoalsStoreState,
+): LearningGoalsStoreState => {
+  const persistedFormState = persistedState as Partial<LearningGoalsFormState>;
+
+  return {
+    ...currentState,
+    ...persistedFormState,
+    noteCreation: {
+      ...currentState.noteCreation,
+      ...persistedFormState.noteCreation,
+    },
+  };
+};
+
+export const clearUploadedFilesFromLearningGoalsSession = () => {
+  const storageValue = sessionStorage.getItem(LEARNING_GOALS_STORAGE_KEY);
+
+  if (!storageValue) {
+    return;
+  }
+
+  try {
+    const parsedStorage = JSON.parse(storageValue) as {
+      state?: Partial<LearningGoalsFormState>;
+    };
+
+    if (!parsedStorage.state?.noteCreation) {
+      return;
+    }
+
+    parsedStorage.state.noteCreation.uploadedFileList = [];
+    sessionStorage.setItem(
+      LEARNING_GOALS_STORAGE_KEY,
+      JSON.stringify(parsedStorage),
+    );
+  } catch {
+    sessionStorage.removeItem(LEARNING_GOALS_STORAGE_KEY);
+  }
+};
 
 export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
   persist(
@@ -156,6 +197,7 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
       name: LEARNING_GOALS_STORAGE_KEY,
       storage: createJSONStorage(() => sessionStorage),
       partialize: pickLearningGoalsFormState,
+      merge: mergePersistedLearningGoalsState,
     },
   ),
 );

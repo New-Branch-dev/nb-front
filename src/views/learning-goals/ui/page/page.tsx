@@ -4,6 +4,7 @@ import { type ReactNode, useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import {
+  clearUploadedFilesFromLearningGoalsSession,
   isLearningGoalsStepComplete,
   LearningGoalsTabRail,
   useLearningGoalsStore,
@@ -40,6 +41,18 @@ export const LearningGoalsPage = ({
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [currentHref]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      clearUploadedFilesFromLearningGoalsSession();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <LearningStepLayout

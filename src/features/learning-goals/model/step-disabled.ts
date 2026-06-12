@@ -12,7 +12,8 @@ const hasPeriod = ({
   hasText(startDate) && hasText(endDate) && startDate <= endDate;
 
 const isNoteCreationComplete = ({ noteCreation }: LearningGoalsFormState) =>
-  noteCreation.uploadedFileList.length > 0;
+  noteCreation.uploadedFileList.length > 0 &&
+  noteCreation.uploadedFileList.every((file) => Boolean(file.file));
 
 const isGoalSettingComplete = ({ goalSetting }: LearningGoalsFormState) =>
   hasSelection(goalSetting.learningPurposes) &&
