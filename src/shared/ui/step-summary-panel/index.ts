@@ -1,1 +1,4 @@
-export { stepSummaryPanelCard, registrationStepRoot } from "./StepSummaryPanel.css";
+export {
+  registrationStepRoot,
+  stepSummaryPanelCard,
+} from "./StepSummaryPanel.css";

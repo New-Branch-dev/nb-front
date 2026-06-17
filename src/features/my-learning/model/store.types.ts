@@ -11,8 +11,6 @@ export type PatternState = {
 };
 
 export type PreferredTimeState = {
-  startTime: string;
-  endTime: string;
   restDates: string[];
 };
 

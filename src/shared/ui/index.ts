@@ -9,15 +9,17 @@ export {
 export { ContainerInner, ContainerRoot } from "./container/Container";
 export { DateField } from "./date-field";
 export { DatePicker } from "./date-picker/DatePicker";
+export { Icon, type IconSize } from "./icon";
 export { Input } from "./input/Input";
+export { Modal, type ModalProps, type ModalRenderChildren } from "./modal";
 export { SearchBar, type SearchBarProps } from "./search-bar";
 export { SectionCard, SectionCardStack } from "./section-card/SectionCard";
-export { Stepper } from "./stepper/Stepper";
 export { Selector, type SelectorOption } from "./selector";
 export {
   registrationStepRoot,
   stepSummaryPanelCard,
 } from "./step-summary-panel";
+export { Stepper } from "./stepper/Stepper";
 export {
   LinkTab,
   type LinkTabItem,

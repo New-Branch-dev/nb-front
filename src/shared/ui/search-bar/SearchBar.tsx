@@ -1,7 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import type { FormEvent, InputHTMLAttributes } from "react";
+
+import { Icon } from "@shared/ui/icon";
 
 import {
   input,
@@ -52,12 +53,10 @@ export const SearchBar = ({
       onSubmit={handleSubmit}
     >
       <span className={searchIcon} aria-hidden>
-        <Image
+        <Icon
           src="/search-pupple.svg"
-          alt=""
+          size="sm"
           className={searchIconImg}
-          width={16}
-          height={16}
         />
       </span>
 

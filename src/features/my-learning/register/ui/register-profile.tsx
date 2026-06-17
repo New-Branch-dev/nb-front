@@ -3,16 +3,10 @@
 import { useShallow } from "zustand/react/shallow";
 
 import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { convertDateKeyToShortRestDateLabel } from "../../preferred-learning-time/model/preferred-time";
 import { RegisterProfileView } from "./register-profile-view";
 
 export const RegisterProfile = () => {
-  const formatRestDates = (dates: string[]) =>
-    dates.map((date) => {
-      const [, month, day] = date.split("-").map(Number);
-
-      return `${month}월 ${day}일`;
-    });
-
   const form = useMyLearningStore(
     useShallow((state) => ({
       profile: state.profile,
@@ -30,11 +24,9 @@ export const RegisterProfile = () => {
     interests: form.learningPattern.interests,
     strengths: form.learningPattern.strengths,
     personality: form.learningPattern.personality,
-    learningTime:
-      form.preferredTime.startTime && form.preferredTime.endTime
-        ? `${form.preferredTime.startTime} - ${form.preferredTime.endTime}`
-        : "",
-    restDates: formatRestDates(form.preferredTime.restDates),
+    restDates: form.preferredTime.restDates.map(
+      convertDateKeyToShortRestDateLabel,
+    ),
     materialFormats: form.learningPreferences.materialFormats,
     classStyles: form.learningPreferences.classStyles,
     learningMethods: form.learningPreferences.learningMethods,

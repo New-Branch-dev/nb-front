@@ -18,7 +18,6 @@ type RegisterProfileViewProps = {
   interests: string[];
   strengths: string[];
   personality: string;
-  learningTime: string;
   restDates: string[];
   materialFormats: string[];
   classStyles: string[];
@@ -60,7 +59,6 @@ export const RegisterProfileView = ({
   interests,
   strengths,
   personality,
-  learningTime,
   restDates,
   materialFormats,
   classStyles,
@@ -95,9 +93,8 @@ export const RegisterProfileView = ({
         </div>
 
         <div className={profileRow}>
-          <div className={rowLabel}>학습시간</div>
+          <div className={rowLabel}>쉬는날</div>
           <div className={rowContent}>
-            <ProfileField label="하루" value={learningTime} />
             <ProfileField label="쉬는날" value={restDates} />
           </div>
         </div>
