@@ -1,5 +1,8 @@
-import { Icon } from "@shared/ui";
+"use client";
 
+import { Icon, Modal } from "@shared/ui";
+
+import { convertLearningGoalStatus } from "../lib/convert-learning-goal-status";
 import { getLearningGoalColorTheme } from "../lib/getLearningGoalColorTheme";
 import { getLearningGoalThumbnail } from "../lib/getLearningGoalThumbnail";
 import type {
@@ -12,9 +15,16 @@ import {
   cardHeader,
   category,
   dDay,
+  dDayRemaining,
+  dDayTotal,
   deleteButton,
+  deleteModalActions,
+  deleteModalCancelButton,
+  deleteModalConfirmButton,
+  deleteModalContent,
+  deleteModalMessage,
+  deleteModalTitle,
   detailButton,
-  editButton,
   iconBox,
   iconImage,
   metaLabel,
@@ -26,7 +36,6 @@ import {
   progressFill,
   progressHead,
   progressLabel,
-  progressPercent,
   progressTrack,
   statusBadge,
   statusDot,
@@ -47,6 +56,11 @@ type LearningGoalCardProps = {
 export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
   const colorTheme = getLearningGoalColorTheme(item.id);
   const thumbnailSrc = getLearningGoalThumbnail(colorTheme);
+  const status = convertLearningGoalStatus(item);
+  const remainingDays = Math.max(item.dDay, 0);
+  const totalDays = Math.max(item.totalDays, 0);
+  const elapsedDays = Math.min(Math.max(totalDays - remainingDays, 0), totalDays);
+  const deadlineProgress = totalDays > 0 ? (elapsedDays / totalDays) * 100 : 0;
 
   return (
     <article className={card} aria-label={item.title}>
@@ -58,14 +72,14 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
             className={iconImage}
           />
         </span>
-        <span className={statusBadge({ status: item.status })}>
-          <span className={statusDot({ status: item.status })} />
-          {STATUS_LABEL[item.status]}
+        <span className={statusBadge({ status })}>
+          <span className={statusDot({ status })} />
+          {STATUS_LABEL[status]}
         </span>
       </header>
 
       <div>
-        <p className={category({ colorTheme })}>{item.category}</p>
+        <p className={category({ status })}>{item.category}</p>
         <h3 className={titleStyle}>{item.title}</h3>
       </div>
 
@@ -105,36 +119,58 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
 
       <div className={progressBox}>
         <div className={progressHead}>
-          <span>
-            <span className={progressLabel}>진행률</span>
-            <span className={progressPercent}>{item.progress}%</span>
+          <span className={progressLabel}>마감일까지</span>
+          <span className={dDay}>
+            <span className={dDayRemaining}>D-{remainingDays}</span>
+            <span className={dDayTotal}> / {totalDays}</span>
           </span>
-          <span className={dDay}>D-{item.dDay}</span>
         </div>
         <div
           className={progressTrack}
           role="progressbar"
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-valuenow={item.progress}
+          aria-valuenow={deadlineProgress}
         >
           <div
-            className={progressFill({ colorTheme })}
-            style={{ width: `${item.progress}%` }}
+            className={progressFill({ status })}
+            style={{ width: `${deadlineProgress}%` }}
           />
         </div>
       </div>
 
       <div className={actionRow}>
-        <button type="button" className={detailButton}>
+        <button type="button" className={detailButton({ status })}>
           상세보기
         </button>
-        <button type="button" className={editButton}>
-          수정
-        </button>
-        <button type="button" className={deleteButton}>
-          삭제
-        </button>
+        <Modal triggerText="삭제" triggerClassName={deleteButton}>
+          {({ close }) => (
+            <div className={deleteModalContent}>
+              <div>
+                <h2 className={deleteModalTitle}>학습 목표를 삭제할까요?</h2>
+                <p className={deleteModalMessage}>
+                  {item.title} 목표가 목록에서 삭제됩니다.
+                </p>
+              </div>
+              <div className={deleteModalActions}>
+                <button
+                  type="button"
+                  className={deleteModalCancelButton}
+                  onClick={close}
+                >
+                  취소
+                </button>
+                <button
+                  type="button"
+                  className={deleteModalConfirmButton}
+                  onClick={close}
+                >
+                  삭제
+                </button>
+              </div>
+            </div>
+          )}
+        </Modal>
       </div>
     </article>
   );

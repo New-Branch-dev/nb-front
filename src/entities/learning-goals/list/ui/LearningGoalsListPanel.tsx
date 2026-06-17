@@ -3,7 +3,6 @@
 import { Icon } from "@shared/ui";
 
 import { LEARNING_GOALS_MOCK } from "../model/learningGoals.mock";
-import { LearningGoalAddCard } from "./LearningGoalAddCard";
 import { LearningGoalCard } from "./LearningGoalCard";
 import {
   emptyListMessage,
@@ -12,24 +11,14 @@ import {
   listRoot,
 } from "./LearningGoalsListPanel.css";
 
-type LearningGoalsListPanelProps = {
-  createHref?: string;
-};
-
-export const LearningGoalsListPanel = ({
-  createHref = "/learning-goals/note-creation",
-}: LearningGoalsListPanelProps) => {
+export const LearningGoalsListPanel = () => {
   const items = LEARNING_GOALS_MOCK;
 
   if (items.length === 0) {
     return (
       <section className={listRoot} aria-label="내 학습 목표 목록">
         <div className={emptyState}>
-          <Icon
-            src="/target-gray.svg"
-            size="lg"
-            aria-hidden
-          />
+          <Icon src="/target-gray.svg" size="lg" aria-hidden />
           <p className={emptyListMessage}>아직 학습 목표가 없어요</p>
         </div>
       </section>
@@ -42,7 +31,6 @@ export const LearningGoalsListPanel = ({
         {items.map((item) => (
           <LearningGoalCard key={item.id} item={item} />
         ))}
-        <LearningGoalAddCard href={createHref} />
       </div>
     </section>
   );

@@ -81,20 +81,20 @@ export const statusBadge = recipe({
   variants: {
     status: {
       notStarted: {
-        color: colors.grayscale.gray700,
-        backgroundColor: colors.status.neutralSoft,
-      },
-      inProgress: {
         color: colors.primary,
         backgroundColor: colors.secondary,
+      },
+      inProgress: {
+        color: colors.status.success,
+        backgroundColor: colors.status.successSoft,
       },
       imminent: {
         color: colors.status.warning,
         backgroundColor: colors.status.warningSoft,
       },
       completed: {
-        color: colors.status.success,
-        backgroundColor: colors.status.successSoft,
+        color: colors.grayscale.gray700,
+        backgroundColor: colors.status.neutralSoft,
       },
     },
   },
@@ -113,10 +113,10 @@ export const statusDot = recipe({
   },
   variants: {
     status: {
-      notStarted: { backgroundColor: colors.grayscale.gray800 },
-      inProgress: { backgroundColor: colors.primary },
+      notStarted: { backgroundColor: colors.primary },
+      inProgress: { backgroundColor: colors.status.success },
       imminent: { backgroundColor: colors.status.warning },
-      completed: { backgroundColor: colors.status.success },
+      completed: { backgroundColor: colors.grayscale.gray700 },
     },
   },
 });
@@ -130,15 +130,15 @@ export const category = recipe({
     lineHeight: 1.4,
   },
   variants: {
-    colorTheme: {
-      primary: { color: colors.theme.primary },
-      blue: { color: colors.theme.blue },
-      orange: { color: colors.theme.orange },
-      green: { color: colors.theme.green },
+    status: {
+      notStarted: { color: colors.primary },
+      inProgress: { color: colors.status.success },
+      imminent: { color: colors.status.warning },
+      completed: { color: colors.grayscale.gray700 },
     },
   },
   defaultVariants: {
-    colorTheme: "primary",
+    status: "inProgress",
   },
 });
 
@@ -204,15 +204,19 @@ export const progressHead = style([
 
 export const progressLabel = style({
   color: colors.grayscale.gray700,
-});
-
-export const progressPercent = style({
-  marginLeft: "0.25rem",
-  color: colors.black,
-  fontWeight: themeTokens.fontWeight.bold,
+  fontWeight: themeTokens.fontWeight.semibold,
 });
 
 export const dDay = style({
+  color: colors.black,
+  whiteSpace: "nowrap",
+});
+
+export const dDayRemaining = style({
+  fontWeight: themeTokens.fontWeight.bold,
+});
+
+export const dDayTotal = style({
   color: colors.grayscale.gray700,
   fontWeight: themeTokens.fontWeight.semibold,
 });
@@ -232,15 +236,15 @@ export const progressFill = recipe({
     transition: "width 0.3s ease",
   },
   variants: {
-    colorTheme: {
-      primary: { backgroundColor: colors.theme.primary },
-      blue: { backgroundColor: colors.theme.blue },
-      orange: { backgroundColor: colors.theme.orange },
-      green: { backgroundColor: colors.theme.green },
+    status: {
+      notStarted: { backgroundColor: colors.primary },
+      inProgress: { backgroundColor: colors.status.success },
+      imminent: { backgroundColor: colors.status.warning },
+      completed: { backgroundColor: colors.grayscale.gray700 },
     },
   },
   defaultVariants: {
-    colorTheme: "primary",
+    status: "inProgress",
   },
 });
 
@@ -262,26 +266,117 @@ const actionButtonBase = style([
   },
 ]);
 
-export const detailButton = style([
+export const detailButton = recipe({
+  base: [
+    actionButtonBase,
+    {
+      flex: "1.7 1 0",
+      color: colors.white,
+      fontWeight: themeTokens.fontWeight.semibold,
+      border: "none",
+    },
+  ],
+  variants: {
+    status: {
+      notStarted: {
+        backgroundColor: colors.primary,
+        selectors: {
+          "&:hover": {
+            backgroundColor: `color-mix(in srgb, ${colors.primary} 88%, ${colors.black})`,
+          },
+        },
+      },
+      inProgress: {
+        backgroundColor: colors.primary,
+        selectors: {
+          "&:hover": {
+            backgroundColor: `color-mix(in srgb, ${colors.primary} 88%, ${colors.black})`,
+          },
+        },
+      },
+      imminent: {
+        backgroundColor: colors.primary,
+        selectors: {
+          "&:hover": {
+            backgroundColor: `color-mix(in srgb, ${colors.primary} 88%, ${colors.black})`,
+          },
+        },
+      },
+      completed: {
+        backgroundColor: colors.grayscale.gray700,
+        selectors: {
+          "&:hover": {
+            backgroundColor: `color-mix(in srgb, ${colors.grayscale.gray700} 88%, ${colors.black})`,
+          },
+        },
+      },
+    },
+  },
+  defaultVariants: {
+    status: "inProgress",
+  },
+});
+
+export const deleteButton = style([
   actionButtonBase,
   {
-    flex: "1.7 1 0",
-    backgroundColor: colors.primary,
-    color: colors.white,
-    fontWeight: themeTokens.fontWeight.semibold,
-    border: "none",
+    flex: "1 1 0",
+    padding: `0 ${themeTokens.gap.md}`,
+    background: colors.white,
+    color: colors.negativeRed,
+    border: `1px solid ${colors.negativeRed}`,
+    fontWeight: themeTokens.fontWeight.medium,
     selectors: {
       "&:hover": {
-        backgroundColor: `color-mix(in srgb, ${colors.primary} 88%, ${colors.black})`,
+        background: `color-mix(in srgb, ${colors.negativeRed} 6%, ${colors.white})`,
       },
     },
   },
 ]);
 
-export const editButton = style([
-  actionButtonBase,
+export const deleteModalContent = style([
+  flexColumn,
   {
-    flex: "1 1 0",
+    gap: themeTokens.gap.xl,
+  },
+]);
+
+export const deleteModalTitle = style({
+  margin: 0,
+  color: colors.black,
+  fontSize: typographyContract.headingMd,
+  fontWeight: themeTokens.fontWeight.bold,
+  lineHeight: 1.4,
+});
+
+export const deleteModalMessage = style({
+  margin: 0,
+  color: colors.grayscale.gray700,
+  fontSize: typographyContract.bodyLg,
+  lineHeight: 1.6,
+});
+
+export const deleteModalActions = style({
+  display: "flex",
+  justifyContent: "flex-end",
+  gap: themeTokens.gap.sm,
+});
+
+const deleteModalActionButton = style([
+  flexInlineCenter,
+  {
+    height: "2.5rem",
+    paddingInline: themeTokens.gap.lg,
+    borderRadius: "0.5rem",
+    fontSize: typographyContract.bodyLg,
+    fontWeight: themeTokens.fontWeight.semibold,
+    cursor: "pointer",
+  },
+]);
+
+export const deleteModalCancelButton = style([
+  deleteModalActionButton,
+  {
     backgroundColor: colors.white,
     color: colors.grayscale.gray700,
     border: `1px solid ${colors.border}`,
@@ -293,16 +388,15 @@ export const editButton = style([
   },
 ]);
 
-export const deleteButton = style([
-  actionButtonBase,
+export const deleteModalConfirmButton = style([
+  deleteModalActionButton,
   {
-    flex: "1 1 0",
-    backgroundColor: colors.white,
-    color: colors.negativeRed,
-    border: `1px solid ${colors.negativeRed}`,
+    backgroundColor: colors.negativeRed,
+    color: colors.white,
+    border: "none",
     selectors: {
       "&:hover": {
-        backgroundColor: "color-mix(in srgb, currentColor 6%, white)",
+        backgroundColor: `color-mix(in srgb, ${colors.negativeRed} 88%, ${colors.black})`,
       },
     },
   },

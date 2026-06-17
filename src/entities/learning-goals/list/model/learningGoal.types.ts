@@ -17,5 +17,5 @@ export type LearningGoalItem = {
   /** 0 ~ 100 */
   progress: number;
   dDay: number;
-  status: LearningGoalStatus;
+  totalDays: number;
 };

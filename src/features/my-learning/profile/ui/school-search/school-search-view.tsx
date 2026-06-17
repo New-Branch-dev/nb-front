@@ -1,9 +1,6 @@
 import { Activity } from "react";
 
-import { Button, SearchBar } from "@shared/ui";
-
-// eslint-disable-next-line no-restricted-imports -- 요청에 따라 학교 검색 View에서 공통 Modal shell을 직접 조립합니다.
-import { Modal } from "@widgets/modal";
+import { Button, Modal, SearchBar } from "@shared/ui";
 
 import type { School } from "../../model/school.types";
 import {

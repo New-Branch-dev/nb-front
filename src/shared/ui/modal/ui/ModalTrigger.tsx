@@ -19,6 +19,20 @@ export const ModalTrigger = ({
   fullWidth = false,
   onOpen,
 }: ModalTriggerProps) => {
+  if (className) {
+    return (
+      <button
+        type="button"
+        className={className}
+        aria-label={ariaLabel}
+        onClick={onOpen}
+      >
+        {icon}
+        <span>{text}</span>
+      </button>
+    );
+  }
+
   return (
     <Button
       type="button"

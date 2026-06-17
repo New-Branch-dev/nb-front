@@ -1,7 +1,7 @@
 import { Activity } from "react";
 import type { ChangeEvent, DragEvent, RefObject } from "react";
 
-import { Button, Icon, Input } from "@shared/ui";
+import { Button, Icon, Input, Modal } from "@shared/ui";
 
 import {
   cardHeaderStack,
@@ -35,9 +35,6 @@ import {
   UploadedNoteFileRow,
   type UploadedNoteFileRowItem,
 } from "@features/learning-goals/note-creation/ui/uploaded-note-file-row";
-
-// eslint-disable-next-line no-restricted-imports -- 요청에 따라 전체 삭제 확인에 공통 Modal shell을 직접 조립합니다.
-import { Modal } from "@widgets/modal";
 
 type NoteCreationViewProps = {
   fileInputRef: RefObject<HTMLInputElement | null>;

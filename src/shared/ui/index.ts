@@ -11,6 +11,7 @@ export { DateField } from "./date-field";
 export { DatePicker } from "./date-picker/DatePicker";
 export { Icon, type IconSize } from "./icon";
 export { Input } from "./input/Input";
+export { Modal, type ModalProps, type ModalRenderChildren } from "./modal";
 export { SearchBar, type SearchBarProps } from "./search-bar";
 export { SectionCard, SectionCardStack } from "./section-card/SectionCard";
 export { Selector, type SelectorOption } from "./selector";

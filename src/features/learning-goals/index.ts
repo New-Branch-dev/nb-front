@@ -1,10 +1,4 @@
 export { GoalSetting } from "./goal-setting/ui/goal-setting";
-export type {
-  LearningGoalColorTheme,
-  LearningGoalItem,
-  LearningGoalStatus,
-} from "./list/model/learningGoal.types";
-export { LearningGoalsListPanel } from "./list/ui/LearningGoalsListPanel";
 export { Memorization } from "./memorization/ui/memorization";
 export { LEARNING_GOALS_LIST_HREF } from "./model/routes";
 export { isLearningGoalsStepComplete } from "./model/step-disabled";

@@ -11,7 +11,7 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     periodEnd: "2026년 7월 14일",
     progress: 62,
     dDay: 24,
-    status: "inProgress",
+    totalDays: 30,
   },
   {
     id: "goal-2",
@@ -22,8 +22,8 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     periodStart: "2026년 5월 27일",
     periodEnd: "2026년 7월 14일",
     progress: 21,
-    dDay: 24,
-    status: "notStarted",
+    dDay: 6,
+    totalDays: 30,
   },
   {
     id: "goal-3",
@@ -33,9 +33,9 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     maxScore: 100,
     periodStart: "2026년 5월 27일",
     periodEnd: "2026년 7월 14일",
-    progress: 62,
-    dDay: 24,
-    status: "imminent",
+    progress: 100,
+    dDay: 0,
+    totalDays: 30,
   },
   {
     id: "goal-4",
@@ -47,7 +47,7 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     periodEnd: "2026년 7월 14일",
     progress: 62,
     dDay: 24,
-    status: "inProgress",
+    totalDays: 30,
   },
   {
     id: "goal-5",
@@ -59,7 +59,7 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     periodEnd: "2026년 7월 14일",
     progress: 62,
     dDay: 24,
-    status: "inProgress",
+    totalDays: 30,
   },
   {
     id: "goal-6",
@@ -71,7 +71,7 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     periodEnd: "2026년 7월 14일",
     progress: 0,
     dDay: 24,
-    status: "notStarted",
+    totalDays: 30,
   },
   {
     id: "goal-7",
@@ -82,7 +82,7 @@ export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
     periodStart: "2026년 5월 27일",
     periodEnd: "2026년 7월 14일",
     progress: 62,
-    dDay: 24,
-    status: "imminent",
+    dDay: 7,
+    totalDays: 30,
   },
 ];

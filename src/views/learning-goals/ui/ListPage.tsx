@@ -1,7 +1,6 @@
-import {
-  LearningGoalsListPanel,
-  LearningGoalsTabRail,
-} from "@features/learning-goals";
+import { LearningGoalsListPanel } from "@entities/learning-goals";
+
+import { LearningGoalsTabRail } from "@features/learning-goals";
 
 import { LearningStepLayout } from "@widgets/learning-step-layout";
 
@@ -30,7 +29,7 @@ export const LearningGoalsListPage = () => {
         />
       }
     >
-      <LearningGoalsListPanel createHref={LEARNING_GOALS_CREATE_HREF} />
+      <LearningGoalsListPanel />
     </LearningStepLayout>
   );
 };
