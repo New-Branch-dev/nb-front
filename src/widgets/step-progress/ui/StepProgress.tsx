@@ -1,6 +1,12 @@
 import Image from "next/image";
 
 import {
+  clampStep,
+  getStepStatus,
+  getTrackFillPercent,
+  getTrackInsetPercent,
+} from "../lib/stepProgress.utils";
+import {
   checkIcon,
   labelColumn,
   labelsList,
@@ -20,19 +26,13 @@ import {
   trackFill,
   trackWrap,
 } from "./StepProgress.css";
-import {
-  clampStep,
-  getStepStatus,
-  getTrackFillPercent,
-  getTrackInsetPercent,
-} from "../lib/stepProgress.utils";
 
 type StepProgressItem = {
   title: string;
 };
 
 type StepProgressProps = {
-  items: StepProgressItem[];
+  items: readonly StepProgressItem[];
   currentStep: number;
 };
 

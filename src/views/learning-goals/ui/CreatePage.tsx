@@ -2,21 +2,22 @@
 
 import { useEffect } from "react";
 
-import { LearningGoalsTabRail } from "@features/learning-goals";
+import {
+  LearningGoalsDraftProvider,
+  LearningGoalsTabRail,
+} from "@features/learning-goals";
 
 import {
-  getStepBySlug,
-  LEARNING_GOALS_STEP_ITEMS,
   LEARNING_GOALS_STEPS,
-  LearningGoalsStepContent,
   type LearningGoalsStepSlug,
   saveLastCreateSlug,
+  STEP_PANEL_BY_STEP,
   useLearningGoalsCreateHref,
 } from "@widgets/learning-goals";
-import { LearningStepLayout } from "@widgets/learning-step-layout";
 import {
-  deriveStepFlowNavigation,
-  useStepValidityByStep,
+  LearningStepLayout,
+  StepFlowPanelsSection,
+  useStepFlow,
 } from "@widgets/learning-step-layout";
 
 type LearningGoalsCreatePageProps = {
@@ -24,17 +25,10 @@ type LearningGoalsCreatePageProps = {
 };
 
 export const LearningGoalsCreatePage = ({ slug }: LearningGoalsCreatePageProps) => {
-  const stepMeta = getStepBySlug(slug);
-  const currentStep = stepMeta.step;
   const createHref = useLearningGoalsCreateHref(slug);
-
-  const { validityByStep, handlersByStep } = useStepValidityByStep(
-    LEARNING_GOALS_STEPS,
-  );
-  const navigation = deriveStepFlowNavigation({
+  const { currentStep, handlersByStep, navigation } = useStepFlow({
     steps: LEARNING_GOALS_STEPS,
-    currentStep,
-    validityByStep,
+    currentSlug: slug,
     getStepHref: (stepSlug) => `/learning-goals/${stepSlug}`,
   });
 
@@ -46,7 +40,7 @@ export const LearningGoalsCreatePage = ({ slug }: LearningGoalsCreatePageProps) 
     <LearningStepLayout
       titleText="학습 목표 달성"
       descriptionText="개별화 교육으로 학습 목표를 달성하세요."
-      progressItems={LEARNING_GOALS_STEP_ITEMS}
+      progressItems={LEARNING_GOALS_STEPS}
       currentStep={currentStep}
       navigation={navigation}
       actionActivityNamePrefix="learning-goals"
@@ -56,11 +50,17 @@ export const LearningGoalsCreatePage = ({ slug }: LearningGoalsCreatePageProps) 
         <LearningGoalsTabRail activeTab="create" createHref={createHref} />
       }
     >
-      <LearningGoalsStepContent
-        key={`learning-goals-step-${slug}`}
-        currentStep={currentStep}
-        handlersByStep={handlersByStep}
-      />
+      <LearningGoalsDraftProvider>
+        <StepFlowPanelsSection
+          steps={LEARNING_GOALS_STEPS}
+          currentStep={currentStep}
+          handlersByStep={handlersByStep}
+          panelByStep={STEP_PANEL_BY_STEP}
+          withoutPanelCardSteps={[6]}
+          ariaLabel="학습 목표 달성 단계 콘텐츠"
+          activityNamePrefix="learning-goals"
+        />
+      </LearningGoalsDraftProvider>
     </LearningStepLayout>
   );
 };

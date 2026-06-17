@@ -4,7 +4,6 @@ import {
   colors,
   flexBetweenCenter,
   flexCenter,
-  flexColumn,
   flexStart,
   themeTokens,
   typographyContract,

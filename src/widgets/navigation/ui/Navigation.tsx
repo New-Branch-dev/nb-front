@@ -68,7 +68,7 @@ export const Navigation = () => {
   const menuItems = [
     {
       label: "나만의 학습",
-      href: "/my-learning/profile",
+      href: "/my-learning",
     },
     {
       label: "학습 목표 달성",
@@ -111,14 +111,23 @@ export const Navigation = () => {
           <div className={navActionGroup}>
             {!isLoggedIn ? (
               <>
-                <Link href="/sign-in" className={link}>로그인</Link>
-                <Link href="/sign-up" className={link}>회원가입</Link>
+                <Link href="/sign-in" className={link}>
+                  로그인
+                </Link>
+                <Link href="/sign-up" className={link}>
+                  회원가입
+                </Link>
               </>
             ) : (
               <>
-                <span className={link} style={{ fontWeight: 'bold' }}>{nickname}님</span>
+                <span className={link} style={{ fontWeight: "bold" }}>
+                  {nickname}님
+                </span>
                 {/* TODO: 로그아웃 버튼 퍼블 */}
-                <button onClick={handleLogout} className={link}> 로그아웃</button>
+                <button onClick={handleLogout} className={link}>
+                  {" "}
+                  로그아웃
+                </button>
               </>
             )}
           </div>

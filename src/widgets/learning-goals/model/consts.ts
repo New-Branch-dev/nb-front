@@ -6,7 +6,3 @@ export const LEARNING_GOALS_STEPS = [
   { step: 5, slug: "other-learning", title: "기타학습설정" },
   { step: 6, slug: "registration", title: "등록" },
 ] as const;
-
-export const LEARNING_GOALS_STEP_ITEMS = LEARNING_GOALS_STEPS.map(
-  ({ title }) => ({ title }),
-);

@@ -1,13 +1,8 @@
 "use client";
 
-import { PeriodSettingsPanel } from "../../period-settings/ui/PeriodSettingsPanel";
 import { MEMORIZATION_PERIOD_CONFIG } from "../../period-settings/model/periodSettings.config";
+import { PeriodSettingsPanel } from "../../period-settings/ui/PeriodSettingsPanel";
 
-type MemorizationSettingsPanelProps = {
-  onValidityChange: (isValid: boolean) => void;
-  isActive: boolean;
-};
-
-export const MemorizationSettingsPanel = (props: MemorizationSettingsPanelProps) => (
-  <PeriodSettingsPanel {...props} config={MEMORIZATION_PERIOD_CONFIG} />
+export const MemorizationSettingsPanel = () => (
+  <PeriodSettingsPanel config={MEMORIZATION_PERIOD_CONFIG} />
 );

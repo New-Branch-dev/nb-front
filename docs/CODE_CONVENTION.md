@@ -70,26 +70,140 @@ import "./style.css";
 
 ### 📌 Styling Convention
 
-#### Emotion 스타일 네이밍
-
-스타일 변수명은 역할이 드러나도록 작성합니다.
-container, wrapper, title, button 등 의미 기반으로 작성합니다.
-<br>
-const containerStyle = css`  display: flex;`;
-<br>
-const titleStyle = css`  font-size: 20px;`;
-<br>
-
 ##### 스타일 작성 원칙
 
-공통으로 재사용되는 스타일은 shared로 분리합니다.
+이 프로젝트는 `vanilla-extract`를 사용합니다.
 <br>
-특정 컴포넌트에서만 사용하는 스타일은 해당 컴포넌트 내부 또는 동일 폴더에서 관리합니다.
+스타일은 컴포넌트 파일에 직접 작성하지 않고, 같은 `ui` 폴더의 `.css.ts` 파일로 분리합니다.
+
+- 파일명은 컴포넌트 파일명과 동일한 `kebab-case`를 사용합니다.
+  <br>
+  예) `my-profile.tsx` → `my-profile.css.ts`
+
+- 컴포넌트에서는 `.css.ts`에서 export한 className만 import해서 사용합니다.
+
+```tsx
+import { container, title } from "./my-profile.css";
+
+export const MyProfile = () => {
+  return (
+    <section className={container}>
+      <h2 className={title}>내 프로필</h2>
+    </section>
+  );
+};
+```
+
+- 인라인 스타일은 지양합니다.
+  <br>
+  예외적으로 런타임 계산값이 반드시 필요한 경우에도 우선 CSS 변수, variant, props 기반 class 조합을 고려합니다.
+
+```tsx
+// 지양
+<div style={{ marginTop: 24 }} />
+
+// 권장
+<div className={content} />
+```
+
+##### 토큰 사용
+
+색상, 폰트 크기, 반응형 조건은 직접 하드코딩하기보다 `shared/styles`의 토큰을 우선 사용합니다.
 <br>
-단순 레이아웃보다 의미 없는 축약 이름은 지양합니다.
+새 값이 여러 곳에서 반복되거나 의미가 있다면 먼저 토큰 추가를 고려합니다.
+
+- 색상: `@shared/styles/colors.css`
+- 타이포그래피: `@shared/styles/typography.css`
+- 반응형 미디어쿼리: `@shared/styles/media-query.css`
+- 공통 flex 유틸: `@shared/styles/flex.css`
+
+```ts
+import { style } from "@vanilla-extract/css";
+
+import { colors, typography } from "@shared/styles";
+
+export const title = style({
+  color: colors.textPrimary,
+  fontSize: typography.headingLg,
+});
+```
+
+##### class 이름 작성
+
+`.css.ts`에서 export하는 변수명은 역할이 드러나는 `camelCase`를 사용합니다.
 <br>
-// 지양 const boxStyle = css`; 
-// 권장 const loginFormContainerStyle = css`;
+컴포넌트명이나 태그명을 그대로 반복하기보다 레이아웃/역할 중심으로 작성합니다.
+
+- 권장: `container`, `header`, `content`, `fieldRow`, `actionButton`
+- 지양: `divStyle`, `blueText`, `myProfileWrapperStyle`
+
+##### recipe 사용 기준
+
+상태나 크기처럼 variant가 필요한 스타일은 `@vanilla-extract/recipes`의 `recipe`를 사용합니다.
+<br>
+단순 class 분기보다 variant 이름으로 의미가 드러나게 작성합니다.
+
+```ts
+import { recipe } from "@vanilla-extract/recipes";
+
+export const chip = recipe({
+  base: {
+    borderRadius: 999,
+  },
+  variants: {
+    selected: {
+      true: {
+        backgroundColor: colors.primary,
+        color: colors.white,
+      },
+      false: {
+        backgroundColor: colors.white,
+        color: colors.textPrimary,
+      },
+    },
+  },
+});
+```
+
+##### 반응형 작성
+
+반응형 스타일은 프로젝트 미디어쿼리 토큰을 사용합니다.
+<br>
+컴포넌트마다 임의의 breakpoint 문자열을 새로 만들지 않습니다.
+
+```ts
+import { style } from "@vanilla-extract/css";
+
+import { maxWidthMediaQueryText } from "@shared/styles";
+
+export const grid = style({
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  "@media": {
+    [maxWidthMediaQueryText]: {
+      gridTemplateColumns: "1fr",
+    },
+  },
+});
+```
+
+##### 스타일 분리 기준
+
+공통 UI에서 반복되는 스타일은 `shared/ui` 또는 `shared/styles`로 이동합니다.
+<br>
+특정 도메인 화면에서만 쓰이는 스타일은 해당 slice 내부에 둡니다.
+
+- `shared/styles`: 색상, 폰트, 미디어쿼리처럼 전역 토큰
+- `shared/ui`: Button, Chip, Input처럼 재사용 UI 스타일
+- `features/*/ui/*.css.ts`: 해당 기능 컴포넌트 전용 스타일
+- `views/*/ui/*.css.ts`: 페이지 조합 레이아웃 전용 스타일
+
+##### 작성 시 주의사항
+
+- magic number를 남발하지 않습니다. 반복되는 간격/크기는 의미 있는 변수나 토큰화를 고려합니다.
+- 하나의 `.css.ts` 파일이 너무 커지면 컴포넌트 책임이 커진 신호로 보고 UI 분리를 검토합니다.
+- 색상 이름으로 역할을 표현하지 않습니다. `purpleButton`보다 `primaryButton`, `selectedChip`처럼 의미를 드러냅니다.
+- `!important`는 사용하지 않습니다. 필요한 경우 selector 구조나 컴포넌트 책임을 먼저 조정합니다.
 
 ### 📌 Type Convention
 

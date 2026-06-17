@@ -4,7 +4,7 @@ import { LearningGoalsListPanel, LearningGoalsTabRail } from "@features/learning
 
 import {
   INACTIVE_STEP_FLOW_NAVIGATION,
-  LEARNING_GOALS_STEP_ITEMS,
+  LEARNING_GOALS_STEPS,
   useLearningGoalsCreateHref,
 } from "@widgets/learning-goals";
 import { LearningStepLayout } from "@widgets/learning-step-layout";
@@ -16,7 +16,7 @@ export const LearningGoalsListPage = () => {
     <LearningStepLayout
       titleText="학습 목표 달성"
       descriptionText="개별화 교육으로 학습 목표를 달성하세요."
-      progressItems={LEARNING_GOALS_STEP_ITEMS}
+      progressItems={LEARNING_GOALS_STEPS}
       currentStep={1}
       navigation={INACTIVE_STEP_FLOW_NAVIGATION}
       wizardChrome={false}

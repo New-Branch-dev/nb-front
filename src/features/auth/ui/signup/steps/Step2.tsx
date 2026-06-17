@@ -67,7 +67,7 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
         setIsEmailSent(true);
         alert("입력하신 이메일로 인증번호 6자리가 발송되었습니다.");
       }
-    } catch (err) {
+    } catch {
       alert("인증 메일 발송에 실패했습니다.");
     } finally {
       setIsSending(false);
@@ -88,7 +88,7 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
       } else {
         alert("인증번호가 일치하지 않거나 만료되었습니다.");
       }
-    } catch (err) {
+    } catch {
       alert("인증 처리 중 오류가 발생했습니다.");
     } finally {
       setIsVerifying(false);
@@ -140,8 +140,12 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
       if (success) {
         onNext(); // 🚀 DB insert 완벽 성공 시 Step 3 (성공 화면)으로 즉시 렌더링 전환!
       }
-    } catch (err: any) {
-      alert(err.message || "회원가입 처리 중 오류가 발생했습니다.");
+    } catch (err) {
+      const message =
+        err instanceof Error
+          ? err.message
+          : "회원가입 처리 중 오류가 발생했습니다.";
+      alert(message);
     } finally {
       setIsSubmitting(false);
     }

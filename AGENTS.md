@@ -356,6 +356,27 @@ Do **not** use `isOpen ? <Panel /> : null` for mountable UI that should follow t
 
 # Development Principles
 
+## Code Convention
+
+Rules:
+
+- file and folder names use `kebab-case`
+- component names and type names use `PascalCase`
+- variable names and function names use `camelCase`
+- constants use `SCREAMING_SNAKE_CASE`
+- custom hooks use the `use` prefix
+- event handlers use the `handle` prefix
+- read/query functions use the `fetch` prefix
+- create/update/delete functions use the `create`, `update`, or `delete` prefix
+- value conversion functions use the `convert` prefix
+- arrays use the `List` suffix
+- booleans use status-specific prefixes:
+  - `is` for state checks
+  - `has` for data existence checks
+  - `can` for capability checks
+
+---
+
 ## Follow Existing Patterns
 
 Before creating new structures:
@@ -374,6 +395,10 @@ Rules:
 
 - keep components small
 - separate UI from business logic
+- when component logic is needed, follow the VAC pattern: keep the container/controller responsible for state, store access, side effects, and event composition, and keep the view component focused on rendering with explicit props
+- for component-local VAC helpers, keep small formatting, normalization, and event mapping utilities inside the container file; move reusable domain validation or shared business rules to `lib` or `model`
+- when a component needs a modal, use the common `widgets/modal` shell and compose its domain-specific contents from an allowed upper layer such as `app` or `views`
+- keep modal state and dialog event handling in the `widgets/modal` container and keep `ModalView` focused on rendering explicit props
 - prefer composition over massive components
 - avoid deep prop drilling
 - split responsibilities clearly
@@ -502,6 +527,13 @@ After editing:
 4. summarize changes clearly
 5. explain architectural decisions briefly
 
+When summarizing work:
+
+- group related changes by category
+- use larger category titles for each work area
+- describe each category with concise list items
+- keep each list focused on core changes, not exhaustive implementation detail
+
 ---
 
 # Git Workflow
@@ -526,13 +558,19 @@ chore:
 docs:
 ```
 
+Commit and push message rules:
+
+- write commit messages in Korean
+- write push/PR work summaries in Korean
+- keep messages concise and easy for other developers to scan
+
 Examples:
 
 ```txt
-feat: add learning goal creation flow
-fix: resolve hydration mismatch issue
-refactor: separate validation logic from ui
-docs: update architecture guide
+feat: 학습 목표 생성 흐름 추가
+fix: 하이드레이션 불일치 수정
+refactor: 유효성 검사 로직과 UI 분리
+docs: 아키텍처 가이드 갱신
 ```
 
 ---

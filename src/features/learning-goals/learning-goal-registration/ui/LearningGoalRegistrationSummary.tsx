@@ -6,6 +6,7 @@ import {
   buildPeriodSettingsChips,
 } from "../../draft/lib/formatLearningGoalsSummary";
 import {
+  countBadge,
   emptyText,
   noteCard,
   noteCardList,
@@ -15,7 +16,6 @@ import {
   sectionHeader,
   sectionTitle,
   summaryCard,
-  countBadge,
 } from "./LearningGoalRegistrationPanel.css";
 import { LearningGoalSummarySection } from "./LearningGoalSummarySection";
 
