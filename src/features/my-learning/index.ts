@@ -2,9 +2,9 @@ export {
   createMyLearningSteps,
   type CreateMyLearningStepsRequest,
   type CreateMyLearningStepsResponse,
-} from "./api/create-my-learning-steps";
-export { LearningStyle } from "./learning-style/ui/learning-style";
-export { isMyLearningStepComplete } from "./model/step-disabled";
+} from "@features/my-learning/api/create-my-learning-steps";
+export { LearningStyle } from "@features/my-learning/learning-style/ui/learning-style";
+export { isMyLearningStepComplete } from "@features/my-learning/model/step-disabled";
 export type {
   AiAnalysisState,
   FormState,
@@ -14,12 +14,12 @@ export type {
   PreferredTimeState,
   ProfileState,
   StoreState,
-} from "./model/store.types";
-export { useMyLearningStore } from "./model/use-my-learning-store";
-export { PreferredLearningPartner } from "./preferred-learning-partner/ui/preferred-learning-partner";
-export { PreferredLearningTime } from "./preferred-learning-time/ui/preferred-learning-time";
-export { PreferredLearningType } from "./preferred-learning-type/ui/preferred-learning-type";
-export { MyProfile } from "./profile/ui/profile/profile";
-export { SchoolSearch } from "./profile/ui/school-search/school-search";
-export { Register } from "./register/ui/register";
-export { RegisterAiAnalysis } from "./register/ui/register-ai-analysis";
+} from "@features/my-learning/model/store.types";
+export { useMyLearningStore } from "@features/my-learning/model/use-my-learning-store";
+export { PreferredLearningPartner } from "@features/my-learning/preferred-learning-partner/ui/preferred-learning-partner";
+export { PreferredLearningTime } from "@features/my-learning/preferred-learning-time/ui/preferred-learning-time";
+export { PreferredLearningType } from "@features/my-learning/preferred-learning-type/ui/preferred-learning-type";
+export { MyProfile } from "@features/my-learning/profile/ui/profile/profile";
+export { SchoolSearch } from "@features/my-learning/profile/ui/school-search/school-search";
+export { Register } from "@features/my-learning/register/ui/register";
+export { RegisterAiAnalysis } from "@features/my-learning/register/ui/register-ai-analysis";

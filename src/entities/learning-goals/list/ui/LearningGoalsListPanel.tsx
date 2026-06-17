@@ -2,14 +2,14 @@
 
 import { Icon } from "@shared/ui";
 
-import { LEARNING_GOALS_MOCK } from "../model/learningGoals.mock";
-import { LearningGoalCard } from "./LearningGoalCard";
+import { LEARNING_GOALS_MOCK } from "@entities/learning-goals/list/model/learningGoals.mock";
+import { LearningGoalCard } from "@entities/learning-goals/list/ui/LearningGoalCard";
 import {
   emptyListMessage,
   emptyState,
   grid,
   listRoot,
-} from "./LearningGoalsListPanel.css";
+} from "@entities/learning-goals/list/ui/LearningGoalsListPanel.css";
 
 export const LearningGoalsListPanel = () => {
   const items = LEARNING_GOALS_MOCK;

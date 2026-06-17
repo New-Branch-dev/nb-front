@@ -7,7 +7,7 @@ import {
 import {
   laptopMediaQueryText,
   maxWidthMediaQueryText,
-} from "./media-query.css";
+} from "@shared/styles/media-query.css";
 
 export const typographyContract = createThemeContract({
   displayHero: null,

@@ -1,4 +1,4 @@
-import type { SchoolSearchResponse } from "../model/school.types";
+import type { SchoolSearchResponse } from "@features/my-learning/profile/model/school.types";
 
 export const fetchSchools = async (query: string) => {
   const response = await fetch(`/api/schools?query=${encodeURIComponent(query)}`);

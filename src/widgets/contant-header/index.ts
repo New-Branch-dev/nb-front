@@ -1,1 +1,1 @@
-export { ContantHeader } from "./ui/ContantHeader";
+export { ContantHeader } from "@widgets/contant-header/ui/ContantHeader";

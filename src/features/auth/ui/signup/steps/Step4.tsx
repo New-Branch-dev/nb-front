@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "@shared/ui";
 
-import { actionGroup,successBox, successSub, successTitle } from "../SignUpForm.css";
+import { actionGroup,successBox, successSub, successTitle } from "@features/auth/ui/signup/SignUpForm.css";
 
 const Step4 = () => {
   return (

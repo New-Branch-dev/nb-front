@@ -1,6 +1,5 @@
 export type ProfileState = {
   nickname: string;
-  age: number | null;
   school: string;
 };
 

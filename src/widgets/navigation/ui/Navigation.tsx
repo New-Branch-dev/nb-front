@@ -14,7 +14,7 @@ import {
   navActionGroup,
   navInner,
   navShell,
-} from "./Navigation.css";
+} from "@widgets/navigation/ui/Navigation.css";
 
 export const Navigation = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

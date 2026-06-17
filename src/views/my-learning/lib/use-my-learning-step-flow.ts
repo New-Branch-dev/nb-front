@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 import type { StepFlowNavigation } from "@widgets/learning-step-layout";
 
-import { MY_LEARNING_STEPS } from "./step";
+import { MY_LEARNING_STEPS } from "@views/my-learning/lib/step";
 
 export const useMyLearningStepFlow = () => {
   const pathname = usePathname();

@@ -1,10 +1,10 @@
 import { Chip } from "@shared/ui";
 
-import { convertDateKeyToRestDateLabel } from "../model/preferred-time";
+import { convertDateKeyToRestDateLabel } from "@features/my-learning/preferred-learning-time/model/preferred-time";
 import {
   removeMark,
   selectedDatesList,
-} from "./selected-rest-dates.css";
+} from "@features/my-learning/preferred-learning-time/ui/selected-rest-dates.css";
 
 type SelectedRestDatesProps = {
   dates: string[];

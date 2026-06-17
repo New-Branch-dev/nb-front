@@ -1,28 +1,24 @@
 import { Input, SectionCard, SectionCardStack } from "@shared/ui";
 
-import { SchoolSearch } from "../school-search/school-search";
 import {
   fieldRow,
   schoolDisplay,
   schoolPlaceholder,
   schoolValue,
   searchButtonWrap,
-} from "./profile.css";
+} from "@features/my-learning/profile/ui/profile/profile.css";
+import { SchoolSearch } from "@features/my-learning/profile/ui/school-search/school-search";
 
 type MyProfileViewProps = {
   nickname: string;
-  age: string;
   school: string;
   onNicknameChange: (value: string) => void;
-  onAgeChange: (value: string) => void;
 };
 
 export const MyProfileView = ({
   nickname,
-  age,
   school,
   onNicknameChange,
-  onAgeChange,
 }: MyProfileViewProps) => {
   return (
     <SectionCardStack>
@@ -33,18 +29,6 @@ export const MyProfileView = ({
           value={nickname}
           onChange={(event) => onNicknameChange(event.target.value)}
           aria-label="닉네임"
-        />
-      </SectionCard>
-
-      <SectionCard title="나이">
-        <Input
-          name="age"
-          placeholder="나이를 입력해 주세요."
-          value={age}
-          inputMode="numeric"
-          maxLength={2}
-          onChange={(event) => onAgeChange(event.target.value)}
-          aria-label="나이"
         />
       </SectionCard>
 

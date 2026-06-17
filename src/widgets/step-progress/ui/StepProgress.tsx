@@ -5,7 +5,7 @@ import {
   getStepStatus,
   getTrackFillPercent,
   getTrackInsetPercent,
-} from "../lib/stepProgress.utils";
+} from "@widgets/step-progress/lib/stepProgress.utils";
 import {
   checkIcon,
   labelColumn,
@@ -25,7 +25,7 @@ import {
   trackBackground,
   trackFill,
   trackWrap,
-} from "./StepProgress.css";
+} from "@widgets/step-progress/ui/StepProgress.css";
 
 type StepProgressItem = {
   title: string;

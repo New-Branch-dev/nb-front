@@ -1,4 +1,4 @@
 export {
   registrationStepRoot,
   stepSummaryPanelCard,
-} from "./StepSummaryPanel.css";
+} from "@shared/ui/step-summary-panel/StepSummaryPanel.css";

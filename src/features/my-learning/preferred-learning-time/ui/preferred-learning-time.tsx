@@ -2,12 +2,12 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/use-my-learning-store";
+import { useMyLearningStore } from "@features/my-learning/model/use-my-learning-store";
 import {
   convertDateKeyToDate,
   convertDateToDateKey,
-} from "../model/preferred-time";
-import { PreferredLearningTimeView } from "./preferred-learning-time-view";
+} from "@features/my-learning/preferred-learning-time/model/preferred-time";
+import { PreferredLearningTimeView } from "@features/my-learning/preferred-learning-time/ui/preferred-learning-time-view";
 
 export const PreferredLearningTime = () => {
   const { restDates, setPreferredTime } = useMyLearningStore(

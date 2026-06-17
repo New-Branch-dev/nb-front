@@ -4,8 +4,8 @@ import type {
   RefObject,
 } from "react";
 
-import { modalContainer, modalDialog } from "./Modal.css";
-import { ModalTrigger } from "./ModalTrigger";
+import { modalContainer, modalDialog } from "@shared/ui/modal/ui/Modal.css";
+import { ModalTrigger } from "@shared/ui/modal/ui/ModalTrigger";
 
 type ModalViewProps = {
   dialogRef: RefObject<HTMLDialogElement | null>;

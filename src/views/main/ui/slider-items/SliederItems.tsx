@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Icon } from "@shared/ui";
 
 import type { MainSliderItem } from "@views/main/model/consts";
-
 import {
   actionRow,
   contentColumn,
@@ -17,7 +16,7 @@ import {
   titleText,
   visualImage,
   visualWrap,
-} from "./SliederItems.css";
+} from "@views/main/ui/slider-items/SliederItems.css";
 
 type SliederItemsProps = {
   item: MainSliderItem;

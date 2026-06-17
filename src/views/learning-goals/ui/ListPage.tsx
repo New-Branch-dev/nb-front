@@ -7,9 +7,9 @@ import { LearningStepLayout } from "@widgets/learning-step-layout";
 import {
   LEARNING_GOALS_DESCRIPTION,
   LEARNING_GOALS_TITLE,
-} from "../lib/content-title";
-import { INACTIVE_STEP_FLOW_NAVIGATION } from "../lib/inactive-step-flow-navigation";
-import { LEARNING_GOALS_STEPS } from "../lib/step";
+} from "@views/learning-goals/lib/content-title";
+import { INACTIVE_STEP_FLOW_NAVIGATION } from "@views/learning-goals/lib/inactive-step-flow-navigation";
+import { LEARNING_GOALS_STEPS } from "@views/learning-goals/lib/step";
 
 const LEARNING_GOALS_CREATE_HREF = "/learning-goals/note-creation";
 

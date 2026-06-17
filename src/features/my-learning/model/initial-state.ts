@@ -1,9 +1,8 @@
-import type { FormState } from "./store.types";
+import type { FormState } from "@features/my-learning/model/store.types";
 
 export const initialMyLearningState: FormState = {
   profile: {
     nickname: "",
-    age: null,
     school: "",
   },
 

@@ -2,5 +2,5 @@ export type {
   LearningGoalColorTheme,
   LearningGoalItem,
   LearningGoalStatus,
-} from "./list/model/learningGoal.types";
-export { LearningGoalsListPanel } from "./list/ui/LearningGoalsListPanel";
+} from "@entities/learning-goals/list/model/learningGoal.types";
+export { LearningGoalsListPanel } from "@entities/learning-goals/list/ui/LearningGoalsListPanel";

@@ -1,13 +1,10 @@
-import type { FormState } from "./store.types";
+import type { FormState } from "@features/my-learning/model/store.types";
 
 const hasText = (value: string) => value.trim().length > 0;
 const hasSelection = (values: string[]) => values.length > 0;
 
 const isProfileComplete = ({ profile }: FormState) =>
-  hasText(profile.nickname) &&
-  profile.age !== null &&
-  profile.age > 0 &&
-  hasText(profile.school);
+  hasText(profile.nickname) && hasText(profile.school);
 
 const isLearningPatternComplete = ({ learningPattern }: FormState) =>
   hasSelection(learningPattern.interests) &&
@@ -44,8 +41,10 @@ export const isMyLearningStepComplete = (
   currentStep: number,
 ) => {
   if (currentStep === STEP_COMPLETION_RULES.length + 1) {
-    return STEP_COMPLETION_RULES.every((rule) => rule(form)) &&
-      isAiAnalysisComplete(form);
+    return (
+      STEP_COMPLETION_RULES.every((rule) => rule(form)) &&
+      isAiAnalysisComplete(form)
+    );
   }
 
   return STEP_COMPLETION_RULES[currentStep - 1]?.(form) ?? false;

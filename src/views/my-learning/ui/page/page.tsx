@@ -9,8 +9,8 @@ import {
   useMyLearningStore,
 } from "@features/my-learning";
 
-import { useMyLearningStepFlow } from "../../lib/use-my-learning-step-flow";
-import { MyLearningPageView } from "./page-view";
+import { useMyLearningStepFlow } from "@views/my-learning/lib/use-my-learning-step-flow";
+import { MyLearningPageView } from "@views/my-learning/ui/page/page-view";
 
 export const MyLearningPage = ({ children }: { children: ReactNode }) => {
   const { currentStep, navigation, progressItems } = useMyLearningStepFlow();

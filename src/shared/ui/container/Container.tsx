@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ElementType, ReactNode } from "react";
 
-import { containerInner, containerRoot } from "./Container.css";
+import { containerInner, containerRoot } from "@shared/ui/container/Container.css";
 
 type ContainerProps = {
   as?: ElementType;

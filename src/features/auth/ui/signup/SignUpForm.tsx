@@ -5,11 +5,10 @@ import React, { useState } from "react";
 import { Stepper } from "@shared/ui";
 
 import type { SignupFormType } from "@features/auth/model/validation";
-
-import { container, title } from "./SignUpForm.css";
-import Step1 from "./steps/Step1";
-import Step2 from "./steps/Step2";
-import Step3 from "./steps/Step4";
+import { container, title } from "@features/auth/ui/signup/SignUpForm.css";
+import Step1 from "@features/auth/ui/signup/steps/Step1";
+import Step2 from "@features/auth/ui/signup/steps/Step2";
+import Step3 from "@features/auth/ui/signup/steps/Step4";
 
 export const SignUpForm = () => {
   const [step, setStep] = useState(1);

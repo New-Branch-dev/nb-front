@@ -2,9 +2,6 @@ import { ReactNode } from "react";
 
 import { ContantHeader } from "@widgets/contant-header";
 import type { StepFlowNavigation } from "@widgets/learning-step-layout/lib/stepFlow.types";
-import { StepProgress } from "@widgets/step-progress";
-
-import { StepFlowActionsRow } from "../StepFlowActionsRow/StepFlowActionsRow";
 import {
   headerBlock,
   mainColumn,
@@ -14,7 +11,9 @@ import {
   stepProgress,
   tabScopeContentRow,
   tabScopeRow,
-} from "./LearningStepLayout.css";
+} from "@widgets/learning-step-layout/ui/LearningStepLayout/LearningStepLayout.css";
+import { StepFlowActionsRow } from "@widgets/learning-step-layout/ui/StepFlowActionsRow/StepFlowActionsRow";
+import { StepProgress } from "@widgets/step-progress";
 
 type LearningStepLayoutItem = {
   title: string;

@@ -3,8 +3,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-import { initialMyLearningState } from "./initial-state";
-import type { FormState, StoreState } from "./store.types";
+import { initialMyLearningState } from "@features/my-learning/model/initial-state";
+import type { FormState, StoreState } from "@features/my-learning/model/store.types";
 
 export const MY_LEARNING_STORAGE_KEY = "my-learning-store";
 

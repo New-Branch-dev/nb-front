@@ -1,8 +1,7 @@
 import { SectionCard, SectionCardStack, TextArea } from "@shared/ui";
 
+import { INTEREST_ITEMS, STRENGTH_ITEMS } from "@features/my-learning/learning-style/model/learning-style.consts";
 import { SelectableChipSection } from "@features/selectable-chip-section";
-
-import { INTEREST_ITEMS, STRENGTH_ITEMS } from "../model/learning-style.consts";
 
 type LearningPatternViewProps = {
   interests: string[];

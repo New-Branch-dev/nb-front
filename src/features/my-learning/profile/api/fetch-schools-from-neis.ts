@@ -1,4 +1,4 @@
-import type { School } from "../model/school.types";
+import type { School } from "@features/my-learning/profile/model/school.types";
 
 import "server-only";
 

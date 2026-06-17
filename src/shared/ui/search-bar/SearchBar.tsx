@@ -3,14 +3,13 @@
 import type { FormEvent, InputHTMLAttributes } from "react";
 
 import { Icon } from "@shared/ui/icon";
-
 import {
   input,
   inputWrap,
   root,
   searchIcon,
   searchIconImg,
-} from "./SearchBar.css";
+} from "@shared/ui/search-bar/SearchBar.css";
 
 export type SearchBarProps = {
   value: string;

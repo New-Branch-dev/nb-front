@@ -1,4 +1,4 @@
-import { description, header, title } from "./ContantHeader.css";
+import { description, header, title } from "@widgets/contant-header/ui/ContantHeader.css";
 
 type ContantHeaderProps = {
   titleText: string;

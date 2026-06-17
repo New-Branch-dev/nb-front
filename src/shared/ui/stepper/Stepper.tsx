@@ -1,6 +1,6 @@
 import React from "react";
 
-import { activeBar, bar, barContainer, container, stepIndicator, stepText } from "./Stepper.css";
+import { activeBar, bar, barContainer, container, stepIndicator, stepText } from "@shared/ui/stepper/Stepper.css";
 
 interface StepperProps {
   currentStep: number;

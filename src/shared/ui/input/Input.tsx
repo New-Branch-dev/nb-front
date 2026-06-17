@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes, RefObject } from "react";
 
-import { inputBase, inputFieldWrapper } from "./Input.css";
+import { inputBase, inputFieldWrapper } from "@shared/ui/input/Input.css";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   ref?: RefObject<HTMLInputElement | null>;

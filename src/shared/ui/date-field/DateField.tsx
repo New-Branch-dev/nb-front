@@ -4,17 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import { ko } from "date-fns/locale";
 import ReactDatePicker from "react-datepicker";
 
-import { Icon } from "@shared/ui/icon";
-
-import { CalendarMonthHeader } from "../date-picker/CalendarMonthHeader";
-import { dayBase, pickerRoot, weekDay } from "../date-picker/DatePicker.css";
 import {
   calendarIcon,
   calendarPopover,
   fieldWrap,
   triggerButton,
   triggerLabel,
-} from "./DateField.css";
+} from "@shared/ui/date-field/DateField.css";
+import { CalendarMonthHeader } from "@shared/ui/date-picker/CalendarMonthHeader";
+import { dayBase, pickerRoot, weekDay } from "@shared/ui/date-picker/DatePicker.css";
+import { Icon } from "@shared/ui/icon";
 
 import "react-datepicker/dist/react-datepicker.css";
 

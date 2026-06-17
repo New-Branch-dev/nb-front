@@ -4,12 +4,12 @@ import { Activity, useState } from "react";
 
 import { LinkTab, SearchBar, Tab } from "@shared/ui";
 
-import { LEARNING_GOALS_LIST_HREF } from "../../model/routes";
+import { LEARNING_GOALS_LIST_HREF } from "@features/learning-goals/model/routes";
 import {
   LEARNING_GOALS_LIST_SORT_ITEMS,
   type LearningGoalsListSortKey,
-} from "../model/learningGoalsListSort.consts";
-import type { LearningGoalsListCreateTab } from "../model/learningGoalsTab.types";
+} from "@features/learning-goals/tab-scope/model/learningGoalsListSort.consts";
+import type { LearningGoalsListCreateTab } from "@features/learning-goals/tab-scope/model/learningGoalsTab.types";
 import {
   tabWrap,
   toolbar,
@@ -18,7 +18,7 @@ import {
   toolbarEnd,
   toolbarList,
   toolbarStart,
-} from "./LearningGoalsTabRail.css";
+} from "@features/learning-goals/tab-scope/ui/LearningGoalsTabRail.css";
 
 export type LearningGoalsTabRailProps = {
   activeTab: LearningGoalsListCreateTab;

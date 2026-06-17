@@ -1,12 +1,11 @@
 import { SectionCardStack } from "@shared/ui";
 
-import { SelectableChipSection } from "@features/selectable-chip-section";
-
 import {
   FRIEND_TYPE_ITEMS,
   TEACHER_TYPE_ITEMS,
   USER_TYPE_ITEMS,
-} from "../model/preferred-learning-partner.consts";
+} from "@features/my-learning/preferred-learning-partner/model/preferred-learning-partner.consts";
+import { SelectableChipSection } from "@features/selectable-chip-section";
 
 type PreferredLearningPartnerViewProps = {
   teacherTypes: string[];

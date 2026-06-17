@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { tabTriggerRecipe } from "./Tab.css";
-import { TabListShell } from "./TabListShell";
-import type { LinkTabItem, LinkTabProps } from "./types";
+import { tabTriggerRecipe } from "@shared/ui/tab/Tab.css";
+import { TabListShell } from "@shared/ui/tab/TabListShell";
+import type { LinkTabItem, LinkTabProps } from "@shared/ui/tab/types";
 
 export const LinkTab = <V extends string>({
   items,

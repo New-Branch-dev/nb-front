@@ -5,11 +5,11 @@ import { useState } from "react";
 import {
   LEARNING_STYLE_ITEMS,
   RECOMMENDED_METHOD_ITEMS,
-} from "./registration-ai.consts";
+} from "@features/my-learning/register/ui/registration-ai-analysis/registration-ai.consts";
 import {
   RegistrationAiAnalysisPanelView,
   type RegistrationAiChipInputViewProps,
-} from "./registration-ai-analysis-panel-view";
+} from "@features/my-learning/register/ui/registration-ai-analysis/registration-ai-analysis-panel-view";
 
 type ChipFieldState = {
   selectedItems: string[];

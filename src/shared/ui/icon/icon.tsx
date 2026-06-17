@@ -1,7 +1,7 @@
 import type { ImageProps } from "next/image";
 import Image from "next/image";
 
-import { iconRecipe } from "./icon.css";
+import { iconRecipe } from "@shared/ui/icon/icon.css";
 
 export type IconSize = "sm" | "md" | "lg";
 

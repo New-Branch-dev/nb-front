@@ -1,6 +1,6 @@
 "use client";
 
-import type { StepFlowNavigation, StepFlowStep } from "./stepFlow.types";
+import type { StepFlowNavigation, StepFlowStep } from "@widgets/learning-step-layout/lib/stepFlow.types";
 
 type UseStepFlowParams<Slug extends string> = {
   steps: readonly (StepFlowStep & { slug: Slug })[];

@@ -1,7 +1,7 @@
 import { DatePicker, SectionCardStack } from "@shared/ui";
 
-import { sectionRoot, title } from "./preferred-learning-time.css";
-import { SelectedRestDates } from "./selected-rest-dates";
+import { sectionRoot, title } from "@features/my-learning/preferred-learning-time/ui/preferred-learning-time.css";
+import { SelectedRestDates } from "@features/my-learning/preferred-learning-time/ui/selected-rest-dates";
 
 type PreferredLearningTimeViewProps = {
   restDates: string[];

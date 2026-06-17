@@ -9,7 +9,7 @@
 //   formatUseridInput,
 //   step3Schema} from "@features/auth/model/validation";
 //
-// import { actionGroup, fieldGroup, flexInput, rowGroup, sectionTitle } from "../SignUpForm.css";
+// import { actionGroup, fieldGroup, flexInput, rowGroup, sectionTitle } from "@features/auth/ui/signup/SignUpForm.css";
 //
 // interface StepProps {
 //   onNext: () => void;

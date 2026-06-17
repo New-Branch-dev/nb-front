@@ -2,8 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/use-my-learning-store";
-import { RegistrationAiAnalysisPanel } from "./registration-ai-analysis";
+import { useMyLearningStore } from "@features/my-learning/model/use-my-learning-store";
+import { RegistrationAiAnalysisPanel } from "@features/my-learning/register/ui/registration-ai-analysis";
 
 export const RegisterAiAnalysis = () => {
   const { learningStyles, recommendedMethods, setAiAnalysis } =

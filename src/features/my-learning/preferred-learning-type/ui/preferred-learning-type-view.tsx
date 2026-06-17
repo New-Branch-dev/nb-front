@@ -1,12 +1,11 @@
 import { SectionCardStack } from "@shared/ui";
 
-import { SelectableChipSection } from "@features/selectable-chip-section";
-
 import {
   CLASS_STYLE_ITEMS,
   LEARNING_METHOD_ITEMS,
   MATERIAL_FORMAT_ITEMS,
-} from "../model/learning-type.consts";
+} from "@features/my-learning/preferred-learning-type/model/learning-type.consts";
+import { SelectableChipSection } from "@features/selectable-chip-section";
 
 type LearningPreferencesViewProps = {
   materialFormats: string[];

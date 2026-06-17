@@ -1,4 +1,4 @@
-import type { LearningGoalItem } from "./learningGoal.types";
+import type { LearningGoalItem } from "@entities/learning-goals/list/model/learningGoal.types";
 
 export const LEARNING_GOALS_MOCK: readonly LearningGoalItem[] = [
   {

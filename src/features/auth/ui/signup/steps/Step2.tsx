@@ -10,8 +10,7 @@ import {
   type SignupFormType,
   signupSchema
 } from "@features/auth/model/validation";
-
-import { actionGroup, fieldGroup, flexInput, rowGroup, sectionTitle } from "../SignUpForm.css";
+import { actionGroup, fieldGroup, flexInput, rowGroup, sectionTitle } from "@features/auth/ui/signup/SignUpForm.css";
 
 type ModifiedSignupForm = Omit<SignupFormType, 'birthDate'> & { birthDate: Date | null };
 
