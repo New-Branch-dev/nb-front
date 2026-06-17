@@ -2,9 +2,9 @@
 
 import { useShallow } from "zustand/react/shallow";
 
-import { useMyLearningStore } from "../../model/use-my-learning-store";
-import { convertDateKeyToShortRestDateLabel } from "../../preferred-learning-time/model/preferred-time";
-import { RegisterProfileView } from "./register-profile-view";
+import { useMyLearningStore } from "@features/my-learning/model/use-my-learning-store";
+import { convertDateKeyToShortRestDateLabel } from "@features/my-learning/preferred-learning-time/model/preferred-time";
+import { RegisterProfileView } from "@features/my-learning/register/ui/register-profile-view";
 
 export const RegisterProfile = () => {
   const form = useMyLearningStore(
@@ -19,7 +19,6 @@ export const RegisterProfile = () => {
 
   const viewProps = {
     nickname: form.profile.nickname,
-    age: form.profile.age === null ? "" : `${form.profile.age}세`,
     school: form.profile.school,
     interests: form.learningPattern.interests,
     strengths: form.learningPattern.strengths,

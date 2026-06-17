@@ -7,7 +7,7 @@ import { ProfileCard, ProfileField } from "@entities/my-learning";
 import {
   MY_LEARNING_DESCRIPTION,
   MY_LEARNING_TITLE,
-} from "../../lib/content-title";
+} from "@views/my-learning/lib/content-title";
 import {
   actionLink,
   actionRow,
@@ -24,13 +24,21 @@ import {
   profileName,
   sectionTitle,
   title,
-} from "./configured-page.css";
+} from "@views/my-learning/ui/configured-page/configured-page.css";
 
 const SAMPLE_PROFILE = {
   nickname: "뉴브랜치",
   ageText: "2015년생(만 11세)",
   school: "한국초등학교",
 };
+
+const EDIT_HREF = {
+  profile: "/my-learning/edit/profile",
+  learningStyle: "/my-learning/edit/learning-style",
+  preferredLearningType: "/my-learning/edit/preferred-learning-type",
+  preferredLearningTime: "/my-learning/edit/preferred-learning-time",
+  preferredLearningPartner: "/my-learning/edit/preferred-learning-partner",
+} as const;
 
 export const MyLearningConfiguredPage = () => {
   return (
@@ -41,7 +49,12 @@ export const MyLearningConfiguredPage = () => {
       </header>
 
       <section className={contentGrid}>
-        <ProfileCard title="프로필" icon="profile" className={profileCard}>
+        <ProfileCard
+          title="프로필"
+          icon="profile"
+          className={profileCard}
+          editHref={EDIT_HREF.profile}
+        >
           <div className={profileBody}>
             <Icon src="/brand-icon.svg" size="lg" />
 
@@ -54,24 +67,40 @@ export const MyLearningConfiguredPage = () => {
           </div>
         </ProfileCard>
 
-        <ProfileCard title="학습특성" icon="style">
+        <ProfileCard
+          title="학습특성"
+          icon="style"
+          editHref={EDIT_HREF.learningStyle}
+        >
           <ProfileField label="흥미" values={["국어", "영어"]} />
           <ProfileField label="적성" values={["언어"]} />
           <ProfileField label="성격" values={["꼼꼼함", "계획적"]} />
         </ProfileCard>
 
-        <ProfileCard title="학습유형" icon="type">
+        <ProfileCard
+          title="학습유형"
+          icon="type"
+          editHref={EDIT_HREF.preferredLearningType}
+        >
           <ProfileField label="자료" values={["텍스트"]} />
           <ProfileField label="수업" values={["강의"]} />
           <ProfileField label="학습" values={["문제풀이"]} />
         </ProfileCard>
 
-        <ProfileCard title="학습시간" icon="time">
-          <ProfileField label="하루" values={["16:00 - 21:00"]} />
+        <ProfileCard
+          title="학습시간"
+          icon="time"
+          editHref={EDIT_HREF.preferredLearningTime}
+        >
           <ProfileField label="쉬는날" values={["총 21일"]} />
         </ProfileCard>
 
-        <ProfileCard title="학습파트너" icon="partner" className={partnerCard}>
+        <ProfileCard
+          title="학습파트너"
+          icon="partner"
+          className={partnerCard}
+          editHref={EDIT_HREF.preferredLearningPartner}
+        >
           <ProfileField label="교사" values={["코칭"]} />
           <ProfileField label="친구" values={["리더"]} />
           <ProfileField label="본인" values={["협동"]} />
@@ -86,7 +115,7 @@ export const MyLearningConfiguredPage = () => {
           전체 수정
         </Link>
         <Link href="/learning-goals" className={`${actionLink} ${actionRow}`}>
-          학습 시작하기
+          홈으로 이동
         </Link>
       </div>
     </main>

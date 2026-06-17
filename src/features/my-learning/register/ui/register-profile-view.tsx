@@ -7,13 +7,12 @@ import {
   profileValueChip,
   rowContent,
   rowLabel,
-} from "./register.css";
+} from "@features/my-learning/register/ui/register.css";
 
 const EMPTY_VALUE = "-";
 
 type RegisterProfileViewProps = {
   nickname: string;
-  age: string;
   school: string;
   interests: string[];
   strengths: string[];
@@ -54,7 +53,6 @@ const ProfileField = ({
 
 export const RegisterProfileView = ({
   nickname,
-  age,
   school,
   interests,
   strengths,
@@ -78,7 +76,6 @@ export const RegisterProfileView = ({
           <div className={rowLabel}>프로필</div>
           <div className={rowContent}>
             <ProfileField label="닉네임" value={nickname} />
-            <ProfileField label="나이" value={age} />
             <ProfileField label="소속" value={school} />
           </div>
         </div>
