@@ -16,6 +16,7 @@ const isNoteCreationComplete = ({ noteCreation }: LearningGoalsFormState) =>
   noteCreation.uploadedFileList.every((file) => Boolean(file.file));
 
 const isGoalSettingComplete = ({ goalSetting }: LearningGoalsFormState) =>
+  hasText(goalSetting.title) &&
   hasSelection(goalSetting.learningPurposes) &&
   hasText(goalSetting.targetScore) &&
   hasText(goalSetting.maxScore) &&
@@ -23,31 +24,9 @@ const isGoalSettingComplete = ({ goalSetting }: LearningGoalsFormState) =>
   Object.values(goalSetting.weeklyStudyHours).some(hasText) &&
   hasSelection(goalSetting.learningMethods);
 
-const isMemorizationComplete = ({
-  memorization,
-}: LearningGoalsFormState) =>
-  hasPeriod(memorization) &&
-  hasText(memorization.reviewCount) &&
-  hasSelection(memorization.memorizationMethods);
-
-const isRetrievalComplete = ({ retrieval }: LearningGoalsFormState) =>
-  hasPeriod(retrieval) &&
-  hasText(retrieval.reviewCount) &&
-  hasSelection(retrieval.retrievalMethods);
-
-const isOtherLearningComplete = ({
-  otherLearning,
-}: LearningGoalsFormState) =>
-  hasPeriod(otherLearning) &&
-  hasText(otherLearning.reviewCount) &&
-  hasSelection(otherLearning.otherLearningMethods);
-
 const STEP_COMPLETION_RULES = [
   isNoteCreationComplete,
   isGoalSettingComplete,
-  isMemorizationComplete,
-  isRetrievalComplete,
-  isOtherLearningComplete,
 ] as const;
 
 export const isLearningGoalsStepComplete = (

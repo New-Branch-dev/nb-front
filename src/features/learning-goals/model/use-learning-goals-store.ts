@@ -35,9 +35,6 @@ const convertUploadedFileForStorage = ({
 const pickLearningGoalsFormState = ({
   noteCreation,
   goalSetting,
-  memorization,
-  otherLearning,
-  retrieval,
 }: LearningGoalsStoreState): LearningGoalsFormState => ({
   noteCreation: {
     uploadedFileList: noteCreation.uploadedFileList.map(
@@ -45,9 +42,6 @@ const pickLearningGoalsFormState = ({
     ),
   },
   goalSetting,
-  memorization,
-  otherLearning,
-  retrieval,
 });
 
 const mergePersistedLearningGoalsState = (
@@ -60,13 +54,20 @@ const mergePersistedLearningGoalsState = (
 
   return {
     ...currentState,
-    ...persistedFormState,
     noteCreation: {
       ...currentState.noteCreation,
       ...persistedFormState.noteCreation,
       uploadedFileList: persistedUploadedFileList.map(
         convertUploadedFileForStorage,
       ),
+    },
+    goalSetting: {
+      ...currentState.goalSetting,
+      ...persistedFormState.goalSetting,
+      weeklyStudyHours: {
+        ...currentState.goalSetting.weeklyStudyHours,
+        ...persistedFormState.goalSetting?.weeklyStudyHours,
+      },
     },
   };
 };
@@ -171,27 +172,6 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
               ...state.goalSetting.weeklyStudyHours,
               [field]: value,
             },
-          },
-        })),
-      setMemorization: (memorization) =>
-        set((state) => ({
-          memorization: {
-            ...state.memorization,
-            ...memorization,
-          },
-        })),
-      setRetrieval: (retrieval) =>
-        set((state) => ({
-          retrieval: {
-            ...state.retrieval,
-            ...retrieval,
-          },
-        })),
-      setOtherLearning: (otherLearning) =>
-        set((state) => ({
-          otherLearning: {
-            ...state.otherLearning,
-            ...otherLearning,
           },
         })),
       resetLearningGoals: () => set(initialLearningGoalsState),

@@ -1,19 +1,35 @@
-import { Chip } from "@shared/ui";
+import { Chip, Icon } from "@shared/ui";
 
-import type { WeeklyStudyHours } from "@features/learning-goals/model/store.types";
 import {
-  countBadge,
-  emptyText,
-  noteCard,
-  noteCardList,
-  noteCardSubtitle,
-  noteCardTitle,
-  section,
-  sectionHeader,
-  sectionTitle,
+  checkIconBox,
+  headerDescription,
+  headerText,
+  headerTitle,
+  noteIconBox,
+  noteItem,
+  noteList as noteListStyle,
+  noteName,
+  noteSize,
+  periodMeta,
+  periodText,
+  row,
+  rowContent,
+  rowCount,
+  rowLabel,
+  rowTitle,
+  scoreMaxText,
+  scoreText,
   summaryCard,
+  summaryChip,
+  summaryHeader,
+  titleText,
+  weeklyCard,
+  weeklyCardActive,
+  weeklyCardDimmed,
+  weeklyGrid,
+  weeklyHeader,
+  weeklyHour,
 } from "@features/learning-goals/register/ui/register.css";
-import { RegisterSummarySection } from "@features/learning-goals/register/ui/register-summary-section";
 
 type RegisterSummaryNote = {
   id: string;
@@ -21,142 +37,153 @@ type RegisterSummaryNote = {
   sizeLabel: string;
 };
 
-type RegisterSummaryGoalSetting = {
+type RegisterSummaryWeeklyStudyHour = {
+  field: string;
+  label: string;
+  hour: string;
+  hasHour: boolean;
+  isExcludedWeekday: boolean;
+};
+
+type RegisterSummaryData = {
+  title: string;
   learningPurposes: string[];
   targetScore: string;
   maxScore: string;
-  startDate: string;
-  endDate: string;
-  weeklyStudyHours: WeeklyStudyHours;
+  startDateLabel: string;
+  endDateLabel: string;
+  excludedDateLabelList: string[];
+  weeklyStudyHourList: RegisterSummaryWeeklyStudyHour[];
   learningMethods: string[];
-};
-
-type RegisterSummaryPeriod = {
-  startDate: string;
-  endDate: string;
-  reviewCount: string;
-  methods: string[];
+  totalPeriodDayCount: number;
+  studyDayCount: number;
+  excludedDateCount: number;
+  learningMethodCount: number;
+  noteCount: number;
 };
 
 type RegisterSummaryViewProps = {
   noteList: RegisterSummaryNote[];
-  goalSetting: RegisterSummaryGoalSetting;
-  memorization: RegisterSummaryPeriod;
-  retrieval: RegisterSummaryPeriod;
-  otherLearning: RegisterSummaryPeriod;
+  summary: RegisterSummaryData;
 };
 
-const convertPeriodLabel = (startDate: string, endDate: string) =>
-  startDate && endDate
-    ? `${convertDateKeyToShortLabel(startDate)} - ${convertDateKeyToShortLabel(endDate)}`
-    : "";
-
-const convertScoreLabel = (targetScore: string, maxScore: string) =>
-  targetScore && maxScore ? `${targetScore} / ${maxScore}점` : "";
-
-const convertReviewCountLabel = (reviewCount: string) =>
-  reviewCount ? `${reviewCount}회독` : "";
-
-const convertDateKeyToShortLabel = (dateKey: string) => {
-  const [year, month, day] = dateKey.split("-");
-
-  if (!year || !month || !day) {
-    return "";
-  }
-
-  return `${year.slice(2)}.${month}.${day}`;
-};
-
-const convertWeeklyStudyHourList = (weeklyStudyHours: WeeklyStudyHours) => {
-  const weekdayLabels: Record<keyof WeeklyStudyHours, string> = {
-    monday: "월",
-    tuesday: "화",
-    wednesday: "수",
-    thursday: "목",
-    friday: "금",
-    saturday: "토",
-    sunday: "일",
-  };
-
-  const weeklyStudyHourList = Object.entries(weeklyStudyHours).flatMap(
-    ([field, hour]) =>
-      hour ? [`${weekdayLabels[field as keyof WeeklyStudyHours]} ${hour}시간`] : [],
-  );
-
-  return weeklyStudyHourList.length > 0 ? [weeklyStudyHourList.join(" · ")] : [];
-};
+const renderChipList = (items: string[]) =>
+  items.map((item) => (
+    <Chip
+      key={item}
+      className={summaryChip}
+      responsiveSize="laptopMdPcLg"
+      tabIndex={-1}
+    >
+      {item}
+    </Chip>
+  ));
 
 export const RegisterSummaryView = ({
   noteList,
-  goalSetting,
-  memorization,
-  retrieval,
-  otherLearning,
+  summary,
 }: RegisterSummaryViewProps) => {
   return (
     <article className={summaryCard} aria-label="학습 목표 등록 요약">
-      <section className={section} aria-label="학습노트">
-        <header className={sectionHeader}>
-          <h3 className={sectionTitle}>학습자료</h3>
-          <Chip
-            className={countBadge}
-            responsiveSize="laptopMdPcLg"
-            tabIndex={-1}
-          >
-            총 {noteList.length}개
-          </Chip>
-        </header>
+      <header className={summaryHeader}>
+        <span className={checkIconBox}>
+          <Icon
+            src="/my-learning-icon/check-box-pupple.svg"
+            size="md"
+            aria-hidden
+          />
+        </span>
+        <div className={headerText}>
+          <h3 className={headerTitle}>최종확인</h3>
+          <p className={headerDescription}>
+            아래 내용으로 단원화 자료를 생성합니다. 확인 후 생성해주세요.
+          </p>
+        </div>
+      </header>
 
-        {noteList.length > 0 ? (
-          <div className={noteCardList}>
-            {noteList.map((note) => (
-              <div key={note.id} className={noteCard}>
-                <h4 className={noteCardTitle}>{note.name}</h4>
-                <p className={noteCardSubtitle}>{note.sizeLabel}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className={emptyText}>등록된 학습 노트가 없습니다.</p>
-        )}
+      <section className={row} aria-label="제목">
+        <h4 className={rowTitle}>제목</h4>
+        <p className={titleText}>{summary.title}</p>
       </section>
 
-      <RegisterSummarySection
-        title="학습목표"
-        chipRowsData={[
-          goalSetting.learningPurposes,
-          [
-            convertScoreLabel(goalSetting.targetScore, goalSetting.maxScore),
-            convertPeriodLabel(goalSetting.startDate, goalSetting.endDate),
-          ],
-          convertWeeklyStudyHourList(goalSetting.weeklyStudyHours),
-          goalSetting.learningMethods,
-        ]}
-      />
-      <RegisterSummarySection
-        title="암기"
-        badge={convertReviewCountLabel(memorization.reviewCount)}
-        chipRowsData={[
-          [convertPeriodLabel(memorization.startDate, memorization.endDate)],
-          memorization.methods,
-        ]}
-      />
-      <RegisterSummarySection
-        title="인출"
-        badge={convertReviewCountLabel(retrieval.reviewCount)}
-        chipRowsData={[
-          [convertPeriodLabel(retrieval.startDate, retrieval.endDate)],
-          retrieval.methods,
-        ]}
-      />
-      <RegisterSummarySection
-        title="기타학습"
-        badge={convertReviewCountLabel(otherLearning.reviewCount)}
-        chipRowsData={[
-          [convertPeriodLabel(otherLearning.startDate, otherLearning.endDate)],
-          otherLearning.methods,
-        ]}
-      />
+      <section className={row} aria-label="학습목적">
+        <span className={rowLabel}>학습목적</span>
+        <div className={rowContent}>{renderChipList(summary.learningPurposes)}</div>
+      </section>
+
+      <section className={row} aria-label="목표점수">
+        <span className={rowLabel}>목표점수</span>
+        <div className={rowContent}>
+          <strong className={scoreText}>{summary.targetScore}</strong>
+          <span className={scoreMaxText}>/ {summary.maxScore}점</span>
+        </div>
+      </section>
+
+      <section className={row} aria-label="학습기간">
+        <span className={rowLabel}>학습기간</span>
+        <div className={rowContent}>
+          <strong className={periodText}>{summary.startDateLabel}</strong>
+          <span className={periodText}>→</span>
+          <strong className={periodText}>{summary.endDateLabel}</strong>
+          <span className={periodMeta}>
+            총 {summary.totalPeriodDayCount}일 중 {summary.studyDayCount}일 학습
+          </span>
+        </div>
+      </section>
+
+      <section className={row} aria-label="학습제외일">
+        <span className={rowLabel}>
+          학습제외일 <strong className={rowCount}>{summary.excludedDateCount}</strong>
+        </span>
+        <div className={rowContent}>
+          {renderChipList(summary.excludedDateLabelList)}
+        </div>
+      </section>
+
+      <section className={row} aria-label="공부시간">
+        <span className={rowLabel}>공부시간</span>
+        <div className={weeklyGrid}>
+          {summary.weeklyStudyHourList.map(
+            ({ field, label, hour, hasHour, isExcludedWeekday }) => (
+              <div
+                key={field}
+                className={[
+                  weeklyCard,
+                  hasHour ? weeklyCardActive : undefined,
+                  isExcludedWeekday ? weeklyCardDimmed : undefined,
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+              >
+                <span className={weeklyHeader}>{label}</span>
+                <strong className={weeklyHour}>{hour}시간</strong>
+              </div>
+            ),
+          )}
+        </div>
+      </section>
+
+      <section className={row} aria-label="학습방법">
+        <span className={rowLabel}>
+          학습방법 <strong className={rowCount}>{summary.learningMethodCount}</strong>
+        </span>
+        <div className={rowContent}>{renderChipList(summary.learningMethods)}</div>
+      </section>
+
+      <section className={row} aria-label="학습자료">
+        <span className={rowLabel}>
+          학습자료 <strong className={rowCount}>{summary.noteCount}</strong>
+        </span>
+        <div className={noteListStyle}>
+          {noteList.map((note) => (
+            <div key={note.id} className={noteItem}>
+              <span className={noteIconBox} aria-hidden />
+              <strong className={noteName}>{note.name}</strong>
+              <span className={noteSize}>{note.sizeLabel}</span>
+            </div>
+          ))}
+        </div>
+      </section>
     </article>
   );
 };

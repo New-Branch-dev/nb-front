@@ -113,6 +113,13 @@ globalStyle(`${pickerRoot} .react-datepicker__day--keyboard-selected`, {
   color: colors.grayscale.gray700,
 });
 
+globalStyle(
+  `${pickerRoot} .react-datepicker__day--today:not(.react-datepicker__day--selected):not(.react-datepicker__day--keyboard-selected)`,
+  {
+    color: `${colors.grayscale.gray700} !important`,
+  },
+);
+
 globalStyle(`${pickerRoot} .react-datepicker__day--outside-month`, {
   color: `${colors.grayscale.gray800} !important`,
 });
@@ -179,8 +186,25 @@ globalStyle(
   },
 );
 
-globalStyle(`${pickerRoot} .react-datepicker__day:hover`, {
-  borderRadius: `${themeTokens.radius.md} !important`,
+globalStyle(
+  `${pickerRoot} .react-datepicker__day:not(.react-datepicker__day--selected):not(.react-datepicker__day--disabled):hover`,
+  {
+    borderRadius: `${themeTokens.radius.md} !important`,
+    backgroundColor: `${colors.secondary} !important`,
+    color: `${colors.grayscale.gray700} !important`,
+  },
+);
+
+globalStyle(
+  `${pickerRoot} .react-datepicker__day--today:not(.react-datepicker__day--selected):hover`,
+  {
+    color: `${colors.grayscale.gray700} !important`,
+  },
+);
+
+globalStyle(`${pickerRoot} .react-datepicker__day--disabled:hover`, {
+  backgroundColor: "transparent !important",
+  color: `${colors.grayscale.gray800} !important`,
 });
 
 globalStyle(`${pickerRoot} .react-datepicker__triangle`, {

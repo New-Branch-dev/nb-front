@@ -5,11 +5,13 @@ export const initialLearningGoalsState: LearningGoalsFormState = {
     uploadedFileList: [],
   },
   goalSetting: {
+    title: "",
     learningPurposes: [],
     targetScore: "",
     maxScore: "",
     startDate: "",
     endDate: "",
+    excludedDateList: [],
     weeklyStudyHours: {
       monday: "",
       tuesday: "",
@@ -20,23 +22,5 @@ export const initialLearningGoalsState: LearningGoalsFormState = {
       sunday: "",
     },
     learningMethods: [],
-  },
-  memorization: {
-    startDate: "",
-    endDate: "",
-    reviewCount: "",
-    memorizationMethods: [],
-  },
-  retrieval: {
-    startDate: "",
-    endDate: "",
-    reviewCount: "",
-    retrievalMethods: [],
-  },
-  otherLearning: {
-    startDate: "",
-    endDate: "",
-    reviewCount: "",
-    otherLearningMethods: [],
   },
 };

@@ -31,9 +31,6 @@ export const LearningGoalsPage = ({
     useShallow((state) => ({
       noteCreation: state.noteCreation,
       goalSetting: state.goalSetting,
-      memorization: state.memorization,
-      retrieval: state.retrieval,
-      otherLearning: state.otherLearning,
     })),
   );
   const canProceed = isLearningGoalsStepComplete(form, currentStep);
