@@ -8,6 +8,8 @@ import {
   typographyContract,
 } from "@shared/styles";
 
+const FILE_LIST_GRID_COLUMNS = "minmax(0, 15rem) 5rem 1fr 6rem 2rem";
+
 export const fileManagerCard = style([
   flexColumn,
   {
@@ -64,8 +66,9 @@ export const fileListTable = style({
 
 export const fileListHeadRow = style({
   display: "grid",
-  gridTemplateColumns: "minmax(0, 1fr) 5rem 7rem 6rem 2rem",
+  gridTemplateColumns: FILE_LIST_GRID_COLUMNS,
   alignItems: "center",
+  justifyContent: "space-between",
   columnGap: themeTokens.gap.md,
   padding: `${themeTokens.gap.md} ${themeTokens.gap.lg}`,
   borderBottom: `1px solid ${colors.border}`,
@@ -81,22 +84,22 @@ export const fileListHeadCell = style({
 export const fileListHeadCellActions = style([
   fileListHeadCell,
   {
+    gridColumn: 4,
     textAlign: "right",
     visibility: "hidden",
   },
 ]);
 
-export const fileListHeadCellDate = style([
-  fileListHeadCell,
-  {
-    textAlign: "center",
-  },
-]);
+export const fileSizeCell = style({
+  justifySelf: "center",
+  textAlign: "center",
+});
 
 export const fileRow = style({
   display: "grid",
-  gridTemplateColumns: "minmax(0, 1fr) 5rem 7rem 6rem 2rem",
+  gridTemplateColumns: FILE_LIST_GRID_COLUMNS,
   alignItems: "center",
+  justifyContent: "space-between",
   columnGap: themeTokens.gap.md,
   padding: `${themeTokens.gap.md} ${themeTokens.gap.lg}`,
   borderBottom: `1px solid ${colors.border}`,
@@ -126,19 +129,20 @@ export const fileMetaCell = style({
   whiteSpace: "nowrap",
 });
 
-export const fileDateCell = style([
-  fileMetaCell,
-  {
-    textAlign: "center",
-  },
-]);
-
 export const fileRowActions = style({
+  gridColumn: 4,
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
   gap: themeTokens.gap.sm,
 });
+
+export const fileRowDeleteActions = style([
+  fileRowActions,
+  {
+    gridColumn: 5,
+  },
+]);
 
 export const openFileButton = style({
   flexShrink: 0,

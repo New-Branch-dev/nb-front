@@ -4,7 +4,6 @@ export type UploadedNoteFile = {
   size: number;
   lastModified: number;
   sizeLabel: string;
-  addedAtLabel: string;
   file?: File;
 };
 

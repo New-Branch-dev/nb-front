@@ -25,10 +25,7 @@ export const NoteCreation = () => {
   const [isDragging, setIsDragging] = useState(false);
 
   const appendFiles = (fileList: FileList | File[]) => {
-    const nextFileList = convertFilesToUploadedNoteFileList(
-      fileList,
-      new Date(),
-    );
+    const nextFileList = convertFilesToUploadedNoteFileList(fileList);
 
     appendUploadedFiles(nextFileList);
   };

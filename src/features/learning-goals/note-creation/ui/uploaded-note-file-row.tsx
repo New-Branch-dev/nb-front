@@ -1,11 +1,12 @@
 import { Button } from "@shared/ui";
 
 import {
-  fileDateCell,
   fileMetaCell,
   fileNameCell,
   fileRow,
   fileRowActions,
+  fileRowDeleteActions,
+  fileSizeCell,
   openFileButton,
   removeFileButton,
 } from "@features/learning-goals/note-creation/ui/note-upload-shell.css";
@@ -15,7 +16,6 @@ export type UploadedNoteFileRowItem = {
   file?: File;
   name: string;
   sizeLabel: string;
-  addedAtLabel: string;
 };
 
 type UploadedNoteFileRowProps = {
@@ -36,11 +36,8 @@ export const UploadedNoteFileRow = ({
       <span className={fileNameCell} role="cell">
         {file.name}
       </span>
-      <span className={fileMetaCell} role="cell">
+      <span className={`${fileMetaCell} ${fileSizeCell}`} role="cell">
         {file.sizeLabel}
-      </span>
-      <span className={fileDateCell} role="cell">
-        {file.addedAtLabel}
       </span>
       <div className={fileRowActions} role="cell">
         <Button
@@ -54,7 +51,7 @@ export const UploadedNoteFileRow = ({
           자료열기
         </Button>
       </div>
-      <div className={fileRowActions} role="cell">
+      <div className={fileRowDeleteActions} role="cell">
         <Button
           type="button"
           variant="text"

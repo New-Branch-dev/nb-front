@@ -28,7 +28,6 @@ export const RegisterSummary = () => {
         id: file.id,
         name: file.name,
         sizeLabel: file.sizeLabel,
-        addedAtLabel: file.addedAtLabel,
       }))}
       goalSetting={{
         learningPurposes: goalSetting.learningPurposes,

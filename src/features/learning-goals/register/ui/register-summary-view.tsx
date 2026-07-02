@@ -19,7 +19,6 @@ type RegisterSummaryNote = {
   id: string;
   name: string;
   sizeLabel: string;
-  addedAtLabel: string;
 };
 
 type RegisterSummaryGoalSetting = {
@@ -113,9 +112,7 @@ export const RegisterSummaryView = ({
             {noteList.map((note) => (
               <div key={note.id} className={noteCard}>
                 <h4 className={noteCardTitle}>{note.name}</h4>
-                <p className={noteCardSubtitle}>
-                  {note.sizeLabel} · {note.addedAtLabel}
-                </p>
+                <p className={noteCardSubtitle}>{note.sizeLabel}</p>
               </div>
             ))}
           </div>

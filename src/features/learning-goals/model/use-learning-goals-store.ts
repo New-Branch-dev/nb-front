@@ -24,14 +24,12 @@ const convertUploadedFileForStorage = ({
   size,
   lastModified,
   sizeLabel,
-  addedAtLabel,
 }: UploadedNoteFile): UploadedNoteFile => ({
   id,
   name,
   size,
   lastModified,
   sizeLabel,
-  addedAtLabel,
 });
 
 const pickLearningGoalsFormState = ({
@@ -57,6 +55,8 @@ const mergePersistedLearningGoalsState = (
   currentState: LearningGoalsStoreState,
 ): LearningGoalsStoreState => {
   const persistedFormState = persistedState as Partial<LearningGoalsFormState>;
+  const persistedUploadedFileList =
+    persistedFormState.noteCreation?.uploadedFileList ?? [];
 
   return {
     ...currentState,
@@ -64,6 +64,9 @@ const mergePersistedLearningGoalsState = (
     noteCreation: {
       ...currentState.noteCreation,
       ...persistedFormState.noteCreation,
+      uploadedFileList: persistedUploadedFileList.map(
+        convertUploadedFileForStorage,
+      ),
     },
   };
 };
