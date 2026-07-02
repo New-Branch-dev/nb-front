@@ -6,12 +6,19 @@ import { LearningStyleView } from "@features/my-learning/learning-style/ui/learn
 import { useMyLearningStore } from "@features/my-learning/model/use-my-learning-store";
 
 export const LearningStyle = () => {
-  const { interests, strengths, personality, setLearningPattern } =
+  const {
+    interests,
+    strengths,
+    personality,
+    learningTendencies,
+    setLearningPattern,
+  } =
     useMyLearningStore(
       useShallow((state) => ({
         interests: state.learningPattern.interests,
         strengths: state.learningPattern.strengths,
         personality: state.learningPattern.personality,
+        learningTendencies: state.learningPattern.learningTendencies,
         setLearningPattern: state.setLearningPattern,
       })),
     );
@@ -24,17 +31,23 @@ export const LearningStyle = () => {
     setLearningPattern({ strengths: items });
   };
 
-  const handlePersonalityChange = (value: string) => {
-    setLearningPattern({ personality: value });
+  const handlePersonalityChange = (items: string[]) => {
+    setLearningPattern({ personality: items });
+  };
+
+  const handleLearningTendenciesChange = (items: string[]) => {
+    setLearningPattern({ learningTendencies: items });
   };
 
   const viewProps = {
     interests,
     strengths,
     personality,
+    learningTendencies,
     onInterestsChange: handleInterestsChange,
     onStrengthsChange: handleStrengthsChange,
     onPersonalityChange: handlePersonalityChange,
+    onLearningTendenciesChange: handleLearningTendenciesChange,
   };
 
   return <LearningStyleView {...viewProps} />;

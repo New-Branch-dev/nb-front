@@ -32,7 +32,7 @@ export const MyProfileView = ({
         />
       </SectionCard>
 
-      <SectionCard title="소속">
+      <SectionCard title="학교">
         <div className={fieldRow}>
           <div
             className={schoolDisplay}

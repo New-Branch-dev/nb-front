@@ -31,8 +31,7 @@ export const MyLearningEditPage = ({
     useShallow((state) => ({
       profile: state.profile,
       learningPattern: state.learningPattern,
-      preferredTime: state.preferredTime,
-      learningPreferences: state.learningPreferences,
+      learningType: state.learningType,
       preferredPartner: state.preferredPartner,
       aiAnalysis: state.aiAnalysis,
     })),

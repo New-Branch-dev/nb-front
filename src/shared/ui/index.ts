@@ -12,6 +12,7 @@ export { DatePicker } from "@shared/ui/date-picker/DatePicker";
 export { Icon, type IconSize } from "@shared/ui/icon";
 export { Input } from "@shared/ui/input/Input";
 export { Modal, type ModalProps, type ModalRenderChildren } from "@shared/ui/modal";
+export { PageHeader } from "@shared/ui/page-header";
 export { SearchBar, type SearchBarProps } from "@shared/ui/search-bar";
 export { SectionCard, SectionCardStack } from "@shared/ui/section-card/SectionCard";
 export { Selector, type SelectorOption } from "@shared/ui/selector";

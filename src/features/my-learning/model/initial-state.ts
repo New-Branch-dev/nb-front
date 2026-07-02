@@ -9,23 +9,19 @@ export const initialMyLearningState: FormState = {
   learningPattern: {
     interests: [],
     strengths: [],
-    personality: "",
+    personality: [],
+    learningTendencies: [],
   },
 
-  preferredTime: {
-    restDates: [],
-  },
-
-  learningPreferences: {
+  learningType: {
     materialFormats: [],
     classStyles: [],
     learningMethods: [],
   },
 
   preferredPartner: {
-    teacherTypes: [],
-    friendTypes: [],
-    userTypes: [],
+    teacherStyles: [],
+    teamMemberStyles: [],
   },
 
   aiAnalysis: {

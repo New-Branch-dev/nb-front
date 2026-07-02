@@ -7,17 +7,13 @@ export const MY_LEARNING_EDIT_STEPS = {
     title: "학습 특성",
     step: 2,
   },
-  preferredLearningTime: {
-    title: "쉬는 날 설정",
-    step: 3,
-  },
   preferredLearningType: {
-    title: "선호 학습 유형",
-    step: 4,
+    title: "학습 유형",
+    step: 3,
   },
   preferredLearningPartner: {
     title: "선호 학습 파트너",
-    step: 5,
+    step: 4,
   },
 } as const;
 

@@ -7,7 +7,7 @@ import {
 } from "@features/my-learning/preferred-learning-type/model/learning-type.consts";
 import { SelectableChipSection } from "@features/selectable-chip-section";
 
-type LearningPreferencesViewProps = {
+type LearningTypeViewProps = {
   materialFormats: string[];
   classStyles: string[];
   learningMethods: string[];
@@ -16,19 +16,19 @@ type LearningPreferencesViewProps = {
   onLearningMethodsChange: (items: string[]) => void;
 };
 
-export const LearningPreferencesView = ({
+export const LearningTypeView = ({
   materialFormats,
   classStyles,
   learningMethods,
   onMaterialFormatsChange,
   onClassStylesChange,
   onLearningMethodsChange,
-}: LearningPreferencesViewProps) => {
+}: LearningTypeViewProps) => {
   return (
     <SectionCardStack>
       <SelectableChipSection
         title="자료형식"
-        description="(복수 선택 가능)"
+        description="배울 때 선호하는 자료 형태를 선택해주세요. (복수선택가능)"
         items={MATERIAL_FORMAT_ITEMS}
         selectedItems={materialFormats}
         onSelectedItems={onMaterialFormatsChange}
@@ -38,7 +38,7 @@ export const LearningPreferencesView = ({
 
       <SelectableChipSection
         title="수업방식"
-        description="(복수 선택 가능)"
+        description="배울 때 선호하는 수업 방식을 선택해주세요. (복수선택가능)"
         items={CLASS_STYLE_ITEMS}
         selectedItems={classStyles}
         onSelectedItems={onClassStylesChange}
@@ -48,7 +48,7 @@ export const LearningPreferencesView = ({
 
       <SelectableChipSection
         title="학습방법"
-        description="(복수 선택 가능)"
+        description="배울 때 선호하는 학습 방법을 선택해주세요. (복수선택)"
         items={LEARNING_METHOD_ITEMS}
         selectedItems={learningMethods}
         onSelectedItems={onLearningMethodsChange}

@@ -7,24 +7,29 @@ import {
   typographyContract,
 } from "@shared/styles";
 
-export const header = style([
+export const pageHeader = style([
   flexColumnCenter,
   {
+    width: "100%",
+    maxWidth: "42rem",
+    marginInline: "auto",
+    marginBottom: themeTokens.gap["4xl"],
     gap: themeTokens.gap.md,
-    marginBottom: themeTokens.gap["2xl"],
   },
 ]);
 
-export const title = style({
+export const pageHeaderTitle = style({
   margin: 0,
+  marginBottom: themeTokens.gap.sm,
   color: colors.primary,
   fontSize: typographyContract.displaySection,
   fontWeight: themeTokens.fontWeight.bold,
-  marginBottom: themeTokens.gap.sm,
+  lineHeight: 1.2,
 });
 
-export const description = style({
+export const pageHeaderDescription = style({
   margin: 0,
   color: colors.grayscale.gray700,
   fontSize: typographyContract.bodyLg,
+  fontWeight: themeTokens.fontWeight.medium,
 });

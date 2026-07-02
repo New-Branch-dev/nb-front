@@ -6,35 +6,28 @@ import { useMyLearningStore } from "@features/my-learning/model/use-my-learning-
 import { PreferredLearningPartnerView } from "@features/my-learning/preferred-learning-partner/ui/preferred-learning-partner-view";
 
 export const PreferredLearningPartner = () => {
-  const { teacherTypes, friendTypes, userTypes, setPreferredPartner } =
+  const { teacherStyles, teamMemberStyles, setPreferredPartner } =
     useMyLearningStore(
       useShallow((state) => ({
-        teacherTypes: state.preferredPartner.teacherTypes,
-        friendTypes: state.preferredPartner.friendTypes,
-        userTypes: state.preferredPartner.userTypes,
+        teacherStyles: state.preferredPartner.teacherStyles,
+        teamMemberStyles: state.preferredPartner.teamMemberStyles,
         setPreferredPartner: state.setPreferredPartner,
       })),
     );
 
-  const handleTeacherTypesChange = (items: string[]) => {
-    setPreferredPartner({ teacherTypes: items });
+  const handleTeacherStylesChange = (items: string[]) => {
+    setPreferredPartner({ teacherStyles: items });
   };
 
-  const handleFriendTypesChange = (items: string[]) => {
-    setPreferredPartner({ friendTypes: items });
-  };
-
-  const handleUserTypesChange = (items: string[]) => {
-    setPreferredPartner({ userTypes: items });
+  const handleTeamMemberStylesChange = (items: string[]) => {
+    setPreferredPartner({ teamMemberStyles: items });
   };
 
   const viewProps = {
-    teacherTypes,
-    friendTypes,
-    userTypes,
-    onTeacherTypesChange: handleTeacherTypesChange,
-    onFriendTypesChange: handleFriendTypesChange,
-    onUserTypesChange: handleUserTypesChange,
+    teacherStyles,
+    teamMemberStyles,
+    onTeacherStylesChange: handleTeacherStylesChange,
+    onTeamMemberStylesChange: handleTeamMemberStylesChange,
   };
 
   return <PreferredLearningPartnerView {...viewProps} />;

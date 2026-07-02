@@ -2,8 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 import { colors, flexColumn, mediaQuery, themeTokens } from "@shared/styles";
 
-/** 기존 공통 레이아웃 기준(42rem)에서 progress는 조금 넓게, 패널은 조금 좁게 */
-const LAYOUT_BASE_MAX_WIDTH = "42rem";
+/** progress는 조금 넓게, 패널은 조금 좁게 */
 const STEP_PROGRESS_MAX_WIDTH = "46rem";
 const STEP_PANEL_MAX_WIDTH = "40rem";
 
@@ -30,13 +29,6 @@ export const mainColumn = style([
   },
 ]);
 
-export const headerBlock = style({
-  width: "100%",
-  maxWidth: LAYOUT_BASE_MAX_WIDTH,
-  marginInline: "auto",
-  marginBottom: themeTokens.gap["2xl"],
-});
-
 /** tab-scope · list 등 동일 가로 inset */
 export const tabScopeInset = style([
   {
@@ -59,7 +51,7 @@ export const tabScopeInset = style([
 export const tabScopeRow = style([
   tabScopeInset,
   {
-    marginBottom: themeTokens.gap["4xl"],
+    marginBottom: themeTokens.gap["5xl"],
   },
 ]);
 

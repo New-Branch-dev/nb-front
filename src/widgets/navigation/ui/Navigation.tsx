@@ -9,7 +9,7 @@ import { NavigationView } from "@widgets/navigation/ui/NavigationView";
 
 const NAVIGATION_MENU_ITEM_LIST = [
   {
-    label: "나만의 학습",
+    label: "학습 프로필 설정",
     href: "/my-learning",
   },
   {

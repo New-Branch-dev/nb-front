@@ -56,7 +56,7 @@ export const ProfileCard = ({
           className={editButton}
           aria-label={`${title} 수정`}
         >
-          <Icon src="/my-learning-icon/edit-icon.svg" size="md" />
+          <Icon src="/my-learning-icon/pencil.svg" size="md" />
         </Link>
       </div>
       {children}

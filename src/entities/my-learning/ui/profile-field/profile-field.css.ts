@@ -4,10 +4,9 @@ import { colors, themeTokens, typographyContract } from "@shared/styles";
 
 export const fieldRow = style({
   display: "grid",
-  gridTemplateColumns: "3rem 1fr",
+  gridTemplateColumns: "5.5rem 1fr",
   alignItems: "center",
-  gap: themeTokens.gap.lg,
-  marginTop: "1.25rem",
+  gap: themeTokens.gap.xl,
 });
 
 export const fieldLabel = style({
@@ -27,11 +26,11 @@ export const chip = style({
   alignItems: "center",
   justifyContent: "center",
   minWidth: "3.5rem",
-  minHeight: "1.875rem",
-  paddingInline: themeTokens.gap.lg,
+  minHeight: "2rem",
+  paddingInline: themeTokens.gap.xl,
   borderRadius: themeTokens.radius.full,
-  backgroundColor: colors.primary,
-  color: colors.white,
+  backgroundColor: colors.secondary,
+  color: colors.primary,
   fontSize: typographyContract.bodyMd,
   fontWeight: themeTokens.fontWeight.bold,
   lineHeight: 1,
