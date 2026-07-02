@@ -3,7 +3,7 @@ import React from "react";
 
 import { Button, Checkbox } from "@shared/ui";
 
-import { actionGroup,linkText, termsItem, termsWrapper } from "../SignUpForm.css";
+import { actionGroup,linkText, termsItem, termsWrapper } from "@features/auth/ui/signup/SignUpForm.css";
 
 interface StepProps {
   onNext: () => void;

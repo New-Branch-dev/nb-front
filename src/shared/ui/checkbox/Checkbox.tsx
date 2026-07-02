@@ -4,7 +4,7 @@ import {
   checkboxField,
   checkboxLabelRecipe,
   checkboxRecipe,
-} from "./Checkbox.css";
+} from "@shared/ui/checkbox/Checkbox.css";
 
 type CheckboxLabelColor = "primary" | "textPrimary" | "gray700" | "gray800" | "white";
 type CheckboxLabelSize = "sm" | "md" | "lg";

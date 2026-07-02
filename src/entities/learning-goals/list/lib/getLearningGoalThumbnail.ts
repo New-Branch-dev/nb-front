@@ -1,4 +1,4 @@
-import type { LearningGoalColorTheme } from "../model/learningGoal.types";
+import type { LearningGoalColorTheme } from "@entities/learning-goals/list/model/learningGoal.types";
 
 const THUMBNAIL_BY_THEME: Record<LearningGoalColorTheme, string> = {
   primary: "/learning-goals/title-icon-pupple.svg",

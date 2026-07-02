@@ -2,7 +2,7 @@ import { Activity } from "react";
 
 import { Button, Modal, SearchBar } from "@shared/ui";
 
-import type { School } from "../../model/school.types";
+import type { School } from "@features/my-learning/profile/model/school.types";
 import {
   actions,
   message,
@@ -13,7 +13,7 @@ import {
   schoolName,
   searchInput,
   title,
-} from "./school-search.css";
+} from "@features/my-learning/profile/ui/school-search/school-search.css";
 
 type SchoolSearchViewProps = {
   query: string;

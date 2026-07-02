@@ -15,7 +15,7 @@ import {
   sliderSlide,
   sliderViewport,
   sliderWrapper,
-} from "./Slider.css";
+} from "@widgets/slider/ui/Slider.css";
 
 import "swiper/css";
 

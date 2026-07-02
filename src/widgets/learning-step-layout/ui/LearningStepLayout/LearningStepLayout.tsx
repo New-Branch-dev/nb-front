@@ -1,12 +1,9 @@
 import { ReactNode } from "react";
 
-import { ContantHeader } from "@widgets/contant-header";
-import type { StepFlowNavigation } from "@widgets/learning-step-layout/lib/stepFlow.types";
-import { StepProgress } from "@widgets/step-progress";
+import { PageHeader } from "@shared/ui";
 
-import { StepFlowActionsRow } from "../StepFlowActionsRow/StepFlowActionsRow";
+import type { StepFlowNavigation } from "@widgets/learning-step-layout/lib/stepFlow.types";
 import {
-  headerBlock,
   mainColumn,
   pageRoot,
   stepActions,
@@ -14,7 +11,9 @@ import {
   stepProgress,
   tabScopeContentRow,
   tabScopeRow,
-} from "./LearningStepLayout.css";
+} from "@widgets/learning-step-layout/ui/LearningStepLayout/LearningStepLayout.css";
+import { StepFlowActionsRow } from "@widgets/learning-step-layout/ui/StepFlowActionsRow/StepFlowActionsRow";
+import { StepProgress } from "@widgets/step-progress";
 
 type LearningStepLayoutItem = {
   title: string;
@@ -57,12 +56,7 @@ export const LearningStepLayout = ({
 }: LearningStepLayoutProps) => {
   return (
     <section className={pageRoot} aria-label={ariaLabel}>
-      <div className={headerBlock}>
-        <ContantHeader
-          titleText={titleText}
-          descriptionText={descriptionText}
-        />
-      </div>
+      <PageHeader titleText={titleText} descriptionText={descriptionText} />
 
       {belowHeader ? <div className={tabScopeRow}>{belowHeader}</div> : null}
 

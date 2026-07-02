@@ -1,2 +1,2 @@
-export { ProfileCard } from "./ui/profile-card/profile-card";
-export { ProfileField } from "./ui/profile-field/profile-field";
+export { ProfileCard } from "@entities/my-learning/ui/profile-card/profile-card";
+export { ProfileField } from "@entities/my-learning/ui/profile-field/profile-field";

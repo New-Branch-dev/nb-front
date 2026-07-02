@@ -1,8 +1,11 @@
 import { style } from "@vanilla-extract/css";
 
-import { flexInlineCenter } from "@shared/styles/flex.css";
-import { mediaQuery } from "@shared/styles/media-query.css";
-import { themeTokens } from "@shared/styles/theme.css";
+import {
+  colors,
+  flexInlineCenter,
+  mediaQuery,
+  themeTokens,
+} from "@shared/styles";
 
 export const navShell = style({
   position: "fixed",
@@ -66,6 +69,7 @@ export const menu = style([
 export const link = style([
   flexInlineCenter,
   {
+    position: "relative",
     minHeight: "2.25rem",
     color: "#171717",
     fontSize: "0.9rem",
@@ -75,6 +79,38 @@ export const link = style([
     },
   },
 ]);
+
+export const activeLink = style({
+  color: colors.primary,
+  fontWeight: themeTokens.fontWeight.semibold,
+  selectors: {
+    "&:hover": {
+      color: colors.primary,
+    },
+    "&::after": {
+      content: "",
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: "-0.875rem",
+      height: "0.1875rem",
+      borderRadius: themeTokens.radius.full,
+      backgroundColor: colors.primary,
+    },
+  },
+});
+
+export const nicknameText = style({
+  fontWeight: themeTokens.fontWeight.bold,
+});
+
+export const navButton = style({
+  border: 0,
+  padding: 0,
+  background: "transparent",
+  cursor: "pointer",
+  fontFamily: "inherit",
+});
 
 export const navActionGroup = style([
   flexInlineCenter,

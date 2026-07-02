@@ -2,9 +2,9 @@
 
 import { usePathname } from "next/navigation";
 
-import { authFormRoot } from "./AuthForm.css";
-import { SignInForm } from "./login/SignInForm";
-import { SignUpForm } from "./signup/SignUpForm";
+import { authFormRoot } from "@features/auth/ui/AuthForm.css";
+import { SignInForm } from "@features/auth/ui/login/SignInForm";
+import { SignUpForm } from "@features/auth/ui/signup/SignUpForm";
 
 export const AuthForm = () => {
   const pathName = usePathname();

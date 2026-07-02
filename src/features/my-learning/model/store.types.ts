@@ -1,29 +1,24 @@
 export type ProfileState = {
   nickname: string;
-  age: number | null;
   school: string;
 };
 
 export type PatternState = {
   interests: string[];
   strengths: string[];
-  personality: string;
+  personality: string[];
+  learningTendencies: string[];
 };
 
-export type PreferredTimeState = {
-  restDates: string[];
-};
-
-export type PreferencesState = {
+export type LearningTypeState = {
   materialFormats: string[];
   classStyles: string[];
   learningMethods: string[];
 };
 
 export type PreferredPartnerState = {
-  teacherTypes: string[];
-  friendTypes: string[];
-  userTypes: string[];
+  teacherStyles: string[];
+  teamMemberStyles: string[];
 };
 
 export type AiAnalysisState = {
@@ -34,8 +29,7 @@ export type AiAnalysisState = {
 export type FormState = {
   profile: ProfileState;
   learningPattern: PatternState;
-  preferredTime: PreferredTimeState;
-  learningPreferences: PreferencesState;
+  learningType: LearningTypeState;
   preferredPartner: PreferredPartnerState;
   aiAnalysis: AiAnalysisState;
 };
@@ -47,10 +41,7 @@ export type StoreState = FormState & {
     value: ProfileState[Field],
   ) => void;
   setLearningPattern: (learningPattern: Partial<PatternState>) => void;
-  setPreferredTime: (preferredTime: Partial<PreferredTimeState>) => void;
-  setLearningPreferences: (
-    learningPreferences: Partial<PreferencesState>,
-  ) => void;
+  setLearningType: (learningType: Partial<LearningTypeState>) => void;
   setPreferredPartner: (
     preferredPartner: Partial<PreferredPartnerState>,
   ) => void;

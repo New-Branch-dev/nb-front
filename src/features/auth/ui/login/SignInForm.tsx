@@ -5,7 +5,6 @@ import { Button, Checkbox, Icon, Input } from "@shared/ui";
 
 import { useSocialLogin } from "@features/auth/model/SocialLogin";
 import { useLogin } from "@features/auth/model/UseLogin";
-
 import {
   authDescription,
   authFieldGroup,
@@ -17,7 +16,7 @@ import {
   authSimpleTitle,
   authSubmitButton,
   authTitle,
-} from "../AuthForm.css";
+} from "@features/auth/ui/AuthForm.css";
 
 export const SignInForm = () => {
   const { handleGoogleLogin } = useSocialLogin();

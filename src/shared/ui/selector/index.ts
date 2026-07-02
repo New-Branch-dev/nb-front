@@ -1,1 +1,1 @@
-export { Selector, type SelectorOption } from "./Selector";
+export { Selector, type SelectorOption } from "@shared/ui/selector/Selector";

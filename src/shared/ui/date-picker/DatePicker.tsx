@@ -4,8 +4,8 @@ import { useState } from "react";
 import { ko } from "date-fns/locale";
 import ReactDatePicker from "react-datepicker";
 
-import { CalendarMonthHeader } from "./CalendarMonthHeader";
-import { dayBase, pickerRoot, weekDay } from "./DatePicker.css";
+import { CalendarMonthHeader } from "@shared/ui/date-picker/CalendarMonthHeader";
+import { dayBase, pickerRoot, weekDay } from "@shared/ui/date-picker/DatePicker.css";
 
 import "react-datepicker/dist/react-datepicker.css";
 

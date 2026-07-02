@@ -1,1 +1,1 @@
-export { TagInput, type TagInputProps } from "./TagInput";
+export { TagInput, type TagInputProps } from "@shared/ui/tag-input/TagInput";

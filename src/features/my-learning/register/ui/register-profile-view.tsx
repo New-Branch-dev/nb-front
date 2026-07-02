@@ -1,121 +1,152 @@
+import type { ReactNode } from "react";
+
+import { Icon } from "@shared/ui";
+
 import {
-  cardTitle,
-  fieldPair,
-  mutedKey,
+  confirmCard,
+  confirmDescription,
+  confirmHeader,
+  confirmIcon,
+  confirmTitle,
+  fieldRow,
   profileBody,
+  profileFieldBox,
+  profileFieldLabel,
+  profileFieldValue,
+  profileGrid,
   profileRow,
   profileValueChip,
   rowContent,
+  rowHeading,
   rowLabel,
-} from "./register.css";
+  rowTitle,
+  stepBadge,
+} from "@features/my-learning/register/ui/register.css";
 
 const EMPTY_VALUE = "-";
 
 type RegisterProfileViewProps = {
   nickname: string;
-  age: string;
   school: string;
   interests: string[];
   strengths: string[];
-  personality: string;
-  restDates: string[];
+  personality: string[];
+  learningTendencies: string[];
   materialFormats: string[];
   classStyles: string[];
   learningMethods: string[];
-  teacherTypes: string[];
-  friendTypes: string[];
-  userTypes: string[];
+  teacherStyles: string[];
+  teamMemberStyles: string[];
 };
 
-const ProfileField = ({
-  label,
-  value,
-}: {
-  label: string;
-  value: string | string[];
-}) => {
-  const values = Array.isArray(value) ? value : [value];
+type SummarySectionProps = {
+  step: number;
+  title: string;
+  children: ReactNode;
+};
+
+const displayText = (value: string) => value || EMPTY_VALUE;
+
+const SummarySection = ({ step, title, children }: SummarySectionProps) => {
+  return (
+    <section className={profileRow} aria-labelledby={`register-step-${step}`}>
+      <div className={rowHeading}>
+        <span className={stepBadge}>{step}</span>
+        <h3 id={`register-step-${step}`} className={rowTitle}>
+          {title}
+        </h3>
+      </div>
+      {children}
+    </section>
+  );
+};
+
+const ProfileBox = ({ label, value }: { label: string; value: string }) => {
+  return (
+    <div className={profileFieldBox}>
+      <span className={profileFieldLabel}>{label}</span>
+      <strong className={profileFieldValue}>{displayText(value)}</strong>
+    </div>
+  );
+};
+
+const ChipList = ({ label, values }: { label: string; values: string[] }) => {
   const displayValues = values.length > 0 ? values : [EMPTY_VALUE];
 
   return (
-    <span className={fieldPair}>
-      <span className={mutedKey}>{label}</span>
-      {displayValues.map((displayValue, index) => (
-        <span
-          key={`${label}-${displayValue || EMPTY_VALUE}-${index}`}
-          className={profileValueChip}
-        >
-          {displayValue || EMPTY_VALUE}
-        </span>
-      ))}
-    </span>
+    <div className={fieldRow}>
+      <span className={rowLabel}>{label}</span>
+      <div className={rowContent}>
+        {displayValues.map((value, index) => (
+          <span
+            key={`${label}-${value || EMPTY_VALUE}-${index}`}
+            className={profileValueChip}
+          >
+            {value || EMPTY_VALUE}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 };
 
 export const RegisterProfileView = ({
   nickname,
-  age,
   school,
   interests,
   strengths,
   personality,
-  restDates,
+  learningTendencies,
   materialFormats,
   classStyles,
   learningMethods,
-  teacherTypes,
-  friendTypes,
-  userTypes,
+  teacherStyles,
+  teamMemberStyles,
 }: RegisterProfileViewProps) => {
   return (
-    <section aria-labelledby="register-profile-title">
-      <h2 id="register-profile-title" className={cardTitle}>
-        내 학습 프로필
-      </h2>
+    <section className={confirmCard} aria-labelledby="register-profile-title">
+      <header className={confirmHeader}>
+        <span className={confirmIcon} aria-hidden="true">
+          <Icon
+            src="/my-learning-icon/check-box-pupple.svg"
+            size="md"
+          />
+        </span>
+        <div>
+          <h2 id="register-profile-title" className={confirmTitle}>
+            최종확인
+          </h2>
+          <p className={confirmDescription}>
+            아래 내용으로 단권화 자료를 생성합니다. 확인 후 생성해주세요.
+          </p>
+        </div>
+      </header>
 
       <div className={profileBody}>
-        <div className={profileRow}>
-          <div className={rowLabel}>프로필</div>
-          <div className={rowContent}>
-            <ProfileField label="닉네임" value={nickname} />
-            <ProfileField label="나이" value={age} />
-            <ProfileField label="소속" value={school} />
+        <SummarySection step={1} title="프로필">
+          <div className={profileGrid}>
+            <ProfileBox label="닉네임" value={nickname} />
+            <ProfileBox label="소속" value={school} />
           </div>
-        </div>
+        </SummarySection>
 
-        <div className={profileRow}>
-          <div className={rowLabel}>학습특성</div>
-          <div className={rowContent}>
-            <ProfileField label="흥미" value={interests} />
-            <ProfileField label="적성" value={strengths} />
-            <ProfileField label="성격" value={personality} />
-          </div>
-        </div>
+        <SummarySection step={2} title="사용자특성">
+          <ChipList label="흥미" values={interests} />
+          <ChipList label="적성" values={strengths} />
+          <ChipList label="성격" values={personality} />
+          <ChipList label="성향" values={learningTendencies} />
+        </SummarySection>
 
-        <div className={profileRow}>
-          <div className={rowLabel}>쉬는날</div>
-          <div className={rowContent}>
-            <ProfileField label="쉬는날" value={restDates} />
-          </div>
-        </div>
+        <SummarySection step={3} title="학습유형">
+          <ChipList label="자료형식" values={materialFormats} />
+          <ChipList label="수업방식" values={classStyles} />
+          <ChipList label="학습방법" values={learningMethods} />
+        </SummarySection>
 
-        <div className={profileRow}>
-          <div className={rowLabel}>학습유형</div>
-          <div className={rowContent}>
-            <ProfileField label="자료" value={materialFormats} />
-            <ProfileField label="수업" value={classStyles} />
-            <ProfileField label="학습" value={learningMethods} />
-          </div>
-        </div>
-
-        <div className={profileRow}>
-          <div className={rowLabel}>학습파트너</div>
-          <div className={rowContent}>
-            <ProfileField label="교사" value={teacherTypes} />
-            <ProfileField label="친구" value={friendTypes} />
-            <ProfileField label="본인" value={userTypes} />
-          </div>
-        </div>
+        <SummarySection step={4} title="학습파트너">
+          <ChipList label="교사스타일" values={teacherStyles} />
+          <ChipList label="팀원스타일" values={teamMemberStyles} />
+        </SummarySection>
       </div>
     </section>
   );

@@ -7,7 +7,7 @@ import {
   selectorFieldCompact,
   selectorWrap,
   selectorWrapCompact,
-} from "./Selector.css";
+} from "@shared/ui/selector/Selector.css";
 
 export type SelectorOption = {
   value: string;

@@ -2,41 +2,53 @@ import { style } from "@vanilla-extract/css";
 
 import { colors, themeTokens, typographyContract } from "@shared/styles";
 
-const CARD_MIN_HEIGHT = "11.75rem";
-
 export const card = style({
-  minHeight: CARD_MIN_HEIGHT,
-  padding: "1.375rem 1.625rem",
-  border: `1px solid ${colors.border}`,
-  borderRadius: themeTokens.radius.lg,
+  display: "flex",
+  flexDirection: "column",
+  gap: themeTokens.gap.xl,
+  paddingBottom: "2.5rem",
+  borderBottom: `1px solid ${colors.border}`,
   backgroundColor: colors.white,
+  selectors: {
+    "&:last-child": {
+      paddingBottom: 0,
+      borderBottom: "none",
+    },
+  },
 });
 
 export const cardHeader = style({
   display: "grid",
-  gridTemplateColumns: "1.5rem 1fr auto",
+  gridTemplateColumns: "1.875rem 1fr auto",
   alignItems: "center",
-  gap: themeTokens.gap.sm,
+  gap: themeTokens.gap.md,
 });
 
 export const cardIcon = style({
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  width: "1.375rem",
-  height: "1.375rem",
+  width: "1.875rem",
+  height: "1.875rem",
   borderRadius: themeTokens.radius.sm,
-  backgroundColor: colors.foreground,
+  backgroundColor: colors.secondary,
   color: colors.grayscale.gray700,
 });
 
 export const cardTitle = style({
   margin: 0,
-  color: "#4f4b60",
+  color: colors.black,
   fontSize: typographyContract.headingSm,
   fontWeight: themeTokens.fontWeight.bold,
 });
 
 export const editButton = style({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "1.875rem",
+  height: "1.875rem",
+  borderRadius: themeTokens.radius.sm,
+  backgroundColor: colors.secondary,
   cursor: "pointer",
 });

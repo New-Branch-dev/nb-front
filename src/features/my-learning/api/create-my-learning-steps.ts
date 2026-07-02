@@ -1,4 +1,4 @@
-import type { FormState } from "../model/store.types";
+import type { FormState } from "@features/my-learning/model/store.types";
 
 export type CreateMyLearningStepsRequest = FormState;
 

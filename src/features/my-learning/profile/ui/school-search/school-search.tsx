@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 
-import { useMyLearningStore } from "../../../model/use-my-learning-store";
-import { fetchSchools } from "../../api/fetch-schools";
-import type { School } from "../../model/school.types";
-import { SchoolSearchView } from "./school-search-view";
+import { useMyLearningStore } from "@features/my-learning/model/use-my-learning-store";
+import { fetchSchools } from "@features/my-learning/profile/api/fetch-schools";
+import type { School } from "@features/my-learning/profile/model/school.types";
+import { SchoolSearchView } from "@features/my-learning/profile/ui/school-search/school-search-view";
 
 export const SchoolSearch = () => {
   const [query, setQuery] = useState("");

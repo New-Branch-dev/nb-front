@@ -1,32 +1,27 @@
-import type { FormState } from "./store.types";
+import type { FormState } from "@features/my-learning/model/store.types";
 
 export const initialMyLearningState: FormState = {
   profile: {
     nickname: "",
-    age: null,
     school: "",
   },
 
   learningPattern: {
     interests: [],
     strengths: [],
-    personality: "",
+    personality: [],
+    learningTendencies: [],
   },
 
-  preferredTime: {
-    restDates: [],
-  },
-
-  learningPreferences: {
+  learningType: {
     materialFormats: [],
     classStyles: [],
     learningMethods: [],
   },
 
   preferredPartner: {
-    teacherTypes: [],
-    friendTypes: [],
-    userTypes: [],
+    teacherStyles: [],
+    teamMemberStyles: [],
   },
 
   aiAnalysis: {

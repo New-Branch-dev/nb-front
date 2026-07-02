@@ -1,25 +1,26 @@
-export { Button } from "./button/Button";
-export { Checkbox } from "./checkbox/Checkbox";
-export { Chip } from "./chip/Chip";
+export { Button } from "@shared/ui/button/Button";
+export { Checkbox } from "@shared/ui/checkbox/Checkbox";
+export { Chip } from "@shared/ui/chip/Chip";
 export {
   ChipInputGroup,
   type ChipInputGroupProps,
   DIRECT_INPUT_CHIP_LABEL,
-} from "./chip-input-group";
-export { ContainerInner, ContainerRoot } from "./container/Container";
-export { DateField } from "./date-field";
-export { DatePicker } from "./date-picker/DatePicker";
-export { Icon, type IconSize } from "./icon";
-export { Input } from "./input/Input";
-export { Modal, type ModalProps, type ModalRenderChildren } from "./modal";
-export { SearchBar, type SearchBarProps } from "./search-bar";
-export { SectionCard, SectionCardStack } from "./section-card/SectionCard";
-export { Selector, type SelectorOption } from "./selector";
+} from "@shared/ui/chip-input-group";
+export { ContainerInner, ContainerRoot } from "@shared/ui/container/Container";
+export { DateField } from "@shared/ui/date-field";
+export { DatePicker } from "@shared/ui/date-picker/DatePicker";
+export { Icon, type IconSize } from "@shared/ui/icon";
+export { Input } from "@shared/ui/input/Input";
+export { Modal, type ModalProps, type ModalRenderChildren } from "@shared/ui/modal";
+export { PageHeader } from "@shared/ui/page-header";
+export { SearchBar, type SearchBarProps } from "@shared/ui/search-bar";
+export { SectionCard, SectionCardStack } from "@shared/ui/section-card/SectionCard";
+export { Selector, type SelectorOption } from "@shared/ui/selector";
 export {
   registrationStepRoot,
   stepSummaryPanelCard,
-} from "./step-summary-panel";
-export { Stepper } from "./stepper/Stepper";
+} from "@shared/ui/step-summary-panel";
+export { Stepper } from "@shared/ui/stepper/Stepper";
 export {
   LinkTab,
   type LinkTabItem,
@@ -28,6 +29,6 @@ export {
   type TabItem,
   type TabProps,
   type TabSize,
-} from "./tab";
-export { TagInput, type TagInputProps } from "./tag-input";
-export { TextArea } from "./textarea/TextArea";
+} from "@shared/ui/tab";
+export { TagInput, type TagInputProps } from "@shared/ui/tag-input";
+export { TextArea } from "@shared/ui/textarea/TextArea";

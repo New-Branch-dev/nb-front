@@ -1,6 +1,6 @@
 import type { TextareaHTMLAttributes } from "react";
 
-import { textAreaBase } from "./TextArea.css";
+import { textAreaBase } from "@shared/ui/textarea/TextArea.css";
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement>;
 

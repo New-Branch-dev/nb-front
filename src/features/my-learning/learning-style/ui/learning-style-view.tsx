@@ -1,25 +1,33 @@
-import { SectionCard, SectionCardStack, TextArea } from "@shared/ui";
+import { SectionCardStack } from "@shared/ui";
 
+import {
+  INTEREST_ITEMS,
+  LEARNING_TENDENCY_ITEMS,
+  PERSONALITY_ITEMS,
+  STRENGTH_ITEMS,
+} from "@features/my-learning/learning-style/model/learning-style.consts";
 import { SelectableChipSection } from "@features/selectable-chip-section";
-
-import { INTEREST_ITEMS, STRENGTH_ITEMS } from "../model/learning-style.consts";
 
 type LearningPatternViewProps = {
   interests: string[];
   strengths: string[];
-  personality: string;
+  personality: string[];
+  learningTendencies: string[];
   onInterestsChange: (items: string[]) => void;
   onStrengthsChange: (items: string[]) => void;
-  onPersonalityChange: (value: string) => void;
+  onPersonalityChange: (items: string[]) => void;
+  onLearningTendenciesChange: (items: string[]) => void;
 };
 
 export const LearningStyleView = ({
   interests,
   strengths,
   personality,
+  learningTendencies,
   onInterestsChange,
   onStrengthsChange,
   onPersonalityChange,
+  onLearningTendenciesChange,
 }: LearningPatternViewProps) => {
   return (
     <SectionCardStack>
@@ -43,14 +51,25 @@ export const LearningStyleView = ({
         directInputPlaceholder="적성을 입력해 주세요"
       />
 
-      <SectionCard title="성격">
-        <TextArea
-          value={personality}
-          onChange={(event) => onPersonalityChange(event.target.value)}
-          placeholder="나의 성격을 자유롭게 설명해주세요. (예: 꼼꼼하고 계획적인 편)"
-          aria-label="성격 입력"
-        />
-      </SectionCard>
+      <SelectableChipSection
+        title="성격"
+        description="(복수 선택 가능)"
+        items={PERSONALITY_ITEMS}
+        selectedItems={personality}
+        onSelectedItems={onPersonalityChange}
+        directInputName="my-learning-personality-direct"
+        directInputPlaceholder="성격을 입력해 주세요"
+      />
+
+      <SelectableChipSection
+        title="학습성향"
+        description="(복수 선택 가능)"
+        items={LEARNING_TENDENCY_ITEMS}
+        selectedItems={learningTendencies}
+        onSelectedItems={onLearningTendenciesChange}
+        directInputName="my-learning-learning-tendency-direct"
+        directInputPlaceholder="학습성향을 입력해 주세요"
+      />
     </SectionCardStack>
   );
 };

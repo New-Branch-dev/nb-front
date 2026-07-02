@@ -9,7 +9,7 @@ import {
   cardIcon,
   cardTitle,
   editButton,
-} from "./profile-card.css";
+} from "@entities/my-learning/ui/profile-card/profile-card.css";
 
 export type MyLearningProfileCardIcon =
   | "profile"
@@ -23,7 +23,7 @@ type MyLearningProfileCardProps = {
   icon: MyLearningProfileCardIcon;
   children: ReactNode;
   className?: string;
-  editHref?: string;
+  editHref: string;
 };
 
 const ICON_SRC: Record<MyLearningProfileCardIcon, string> = {
@@ -39,7 +39,7 @@ export const ProfileCard = ({
   icon,
   children,
   className,
-  editHref = "/my-learning/profile",
+  editHref,
 }: MyLearningProfileCardProps) => {
   const mergedClassName = [card, className].filter(Boolean).join(" ");
 
@@ -56,7 +56,7 @@ export const ProfileCard = ({
           className={editButton}
           aria-label={`${title} 수정`}
         >
-          <Icon src="/my-learning-icon/edit-icon.svg" size="md" />
+          <Icon src="/my-learning-icon/pencil.svg" size="md" />
         </Link>
       </div>
       {children}

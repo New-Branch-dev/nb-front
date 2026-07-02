@@ -2,13 +2,13 @@
 
 import { Icon, Modal } from "@shared/ui";
 
-import { convertLearningGoalStatus } from "../lib/convert-learning-goal-status";
-import { getLearningGoalColorTheme } from "../lib/getLearningGoalColorTheme";
-import { getLearningGoalThumbnail } from "../lib/getLearningGoalThumbnail";
+import { convertLearningGoalStatus } from "@entities/learning-goals/list/lib/convert-learning-goal-status";
+import { getLearningGoalColorTheme } from "@entities/learning-goals/list/lib/getLearningGoalColorTheme";
+import { getLearningGoalThumbnail } from "@entities/learning-goals/list/lib/getLearningGoalThumbnail";
 import type {
   LearningGoalItem,
   LearningGoalStatus,
-} from "../model/learningGoal.types";
+} from "@entities/learning-goals/list/model/learningGoal.types";
 import {
   actionRow,
   card,
@@ -40,7 +40,7 @@ import {
   statusBadge,
   statusDot,
   title as titleStyle,
-} from "./LearningGoalCard.css";
+} from "@entities/learning-goals/list/ui/LearningGoalCard.css";
 
 const STATUS_LABEL: Record<LearningGoalStatus, string> = {
   notStarted: "시작전",

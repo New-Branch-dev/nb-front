@@ -1,4 +1,4 @@
-import type { LearningGoalColorTheme } from "../model/learningGoal.types";
+import type { LearningGoalColorTheme } from "@entities/learning-goals/list/model/learningGoal.types";
 
 const COLOR_THEME_OPTIONS: readonly LearningGoalColorTheme[] = [
   "primary",

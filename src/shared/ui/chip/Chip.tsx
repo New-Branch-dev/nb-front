@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
-import { chipRecipe, chipResponsiveLaptopMdPcLg } from "./Chip.css";
+import { chipRecipe, chipResponsiveLaptopMdPcLg } from "@shared/ui/chip/Chip.css";
 
 export type ChipResponsiveSize = "laptopMdPcLg";
 

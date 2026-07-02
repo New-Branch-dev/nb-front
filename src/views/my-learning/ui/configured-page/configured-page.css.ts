@@ -7,52 +7,47 @@ import {
   typographyContract,
 } from "@shared/styles";
 
-const RESULT_MAX_WIDTH = "75rem";
+const RESULT_MAX_WIDTH = "50rem";
 
 export const pageRoot = style([
   {
     width: "100%",
     minHeight: "100dvh",
-    padding: "0 1.5rem 5rem",
+    padding: "0 1.5rem 3rem",
   },
   mediaQuery({
     mobile: {
-      padding: "0 1rem 3rem",
+      padding: "0 1rem 2rem",
     },
   }),
 ]);
 
-export const header = style({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  gap: themeTokens.gap.md,
-  marginBottom: "4rem",
-});
-
-export const title = style({
-  margin: 0,
-  color: colors.primary,
-  fontSize: typographyContract.displaySection,
-  fontWeight: themeTokens.fontWeight.bold,
-  lineHeight: 1.2,
-});
-
-export const sectionTitle = style({
-  margin: 0,
-  color: colors.grayscale.gray700,
-  fontSize: typographyContract.bodyLg,
-  fontWeight: themeTokens.fontWeight.medium,
-});
-
-export const contentGrid = style([
+export const contentPanel = style([
   {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-    gap: themeTokens.gap.lg,
+    display: "flex",
+    flexDirection: "column",
+    gap: "2.5rem",
     width: "100%",
     maxWidth: RESULT_MAX_WIDTH,
     marginInline: "auto",
+    padding: "2rem 1.5rem",
+    border: `1px solid ${colors.border}`,
+    borderRadius: themeTokens.radius.lg,
+    backgroundColor: colors.white,
+  },
+  mediaQuery({
+    mobile: {
+      gap: themeTokens.gap["2xl"],
+      padding: "1.5rem 1rem",
+    },
+  }),
+]);
+
+export const profileFieldGrid = style([
+  {
+    display: "grid",
+    gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+    gap: themeTokens.gap.md,
   },
   mediaQuery({
     mobile: {
@@ -61,44 +56,30 @@ export const contentGrid = style([
   }),
 ]);
 
-export const profileCard = style([
-  {
-    gridColumn: "span 2",
-  },
-  mediaQuery({
-    mobile: {
-      gridColumn: "auto",
-    },
-  }),
-]);
-
-export const partnerCard = style({});
-
-export const profileBody = style({
-  display: "flex",
-  alignItems: "center",
-  gap: themeTokens.gap.lg,
-  paddingTop: "2rem",
-});
-
-export const profileInfo = style({
+export const profileFieldBox = style({
   display: "flex",
   flexDirection: "column",
-  gap: themeTokens.gap.sm,
-  minWidth: 0,
+  justifyContent: "center",
+  gap: themeTokens.gap.xs,
+  minHeight: "4rem",
+  padding: "0.75rem 1.25rem",
+  border: `1px solid ${colors.border}`,
+  borderRadius: themeTokens.radius.md,
+  backgroundColor: colors.foreground,
 });
 
-export const profileName = style({
-  color: colors.black,
-  fontSize: typographyContract.displayPage,
+export const profileFieldLabel = style({
+  color: "#a4a0b1",
+  fontSize: typographyContract.bodySm,
   fontWeight: themeTokens.fontWeight.bold,
-  lineHeight: 1.2,
+  lineHeight: 1,
 });
 
-export const profileAge = style({
-  color: "#4f4b60",
+export const profileFieldValue = style({
+  color: colors.black,
   fontSize: typographyContract.bodyLg,
-  fontWeight: themeTokens.fontWeight.medium,
+  fontWeight: themeTokens.fontWeight.bold,
+  lineHeight: 1.3,
 });
 
 export const actions = style([
@@ -108,7 +89,7 @@ export const actions = style([
     gap: themeTokens.gap.md,
     width: "100%",
     maxWidth: RESULT_MAX_WIDTH,
-    margin: "3rem auto 0",
+    margin: "3.5rem auto 0",
   },
   mediaQuery({
     mobile: {
@@ -135,4 +116,5 @@ export const actionSecondary = style({
 export const actionRow = style({
   backgroundColor: colors.primary,
   color: colors.white,
+  boxShadow: `0 0.5rem 0.875rem ${colors.primary}33`,
 });

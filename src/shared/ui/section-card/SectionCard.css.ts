@@ -3,7 +3,6 @@ import { style } from "@vanilla-extract/css";
 import {
   colors,
   flexColumn,
-  flexStart,
   themeTokens,
   typographyContract,
 } from "@shared/styles";
@@ -35,10 +34,10 @@ export const sectionCard = style([
 ]);
 
 export const sectionHeader = style([
-  flexStart,
+  flexColumn,
   {
-    flexWrap: "wrap",
-    gap: themeTokens.gap.sm,
+    alignItems: "flex-start",
+    gap: themeTokens.gap.xs,
   },
 ]);
 

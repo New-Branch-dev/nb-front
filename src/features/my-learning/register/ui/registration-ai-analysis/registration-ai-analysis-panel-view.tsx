@@ -5,7 +5,7 @@ import {
   aiPanel,
   aiPanelInner,
   aiPanelTitle,
-} from "./registration-ai-analysis.css";
+} from "@features/my-learning/register/ui/registration-ai-analysis/registration-ai-analysis.css";
 
 export type RegistrationAiChipInputViewProps = {
   items: readonly string[];

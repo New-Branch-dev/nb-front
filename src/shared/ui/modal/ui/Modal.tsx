@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent, ReactNode } from "react";
 
-import { ModalView } from "./ModalView";
+import { ModalView } from "@shared/ui/modal/ui/ModalView";
 
 export type ModalRenderChildren = (controls: { close: () => void }) => ReactNode;
 

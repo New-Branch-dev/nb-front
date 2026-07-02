@@ -1,7 +1,7 @@
 import type {
   LearningGoalItem,
   LearningGoalStatus,
-} from "../model/learningGoal.types";
+} from "@entities/learning-goals/list/model/learningGoal.types";
 
 type ConvertLearningGoalStatusParams = Pick<
   LearningGoalItem,

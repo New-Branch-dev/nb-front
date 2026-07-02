@@ -1,2 +1,2 @@
-export type { IconSize } from "./icon";
-export { Icon } from "./icon";
+export type { IconSize } from "@shared/ui/icon/icon";
+export { Icon } from "@shared/ui/icon/icon";

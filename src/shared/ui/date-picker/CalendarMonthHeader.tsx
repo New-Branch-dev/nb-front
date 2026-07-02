@@ -1,11 +1,10 @@
-import { Icon } from "@shared/ui/icon";
-
 import {
   headerRoot,
   monthTitle,
   monthTitleWithNav,
   navButton,
-} from "./CalendarMonthHeader.css";
+} from "@shared/ui/date-picker/CalendarMonthHeader.css";
+import { Icon } from "@shared/ui/icon";
 
 type CalendarMonthHeaderBaseProps = {
   date: Date;

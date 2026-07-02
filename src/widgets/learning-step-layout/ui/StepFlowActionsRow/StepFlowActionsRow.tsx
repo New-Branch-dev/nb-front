@@ -7,8 +7,7 @@ import { Button } from "@shared/ui";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 
 import type { StepFlowNavigation } from "@widgets/learning-step-layout/lib/stepFlow.types";
-
-import { actionButton, actionRow } from "./StepFlowActionsRow.css";
+import { actionButton, actionRow } from "@widgets/learning-step-layout/ui/StepFlowActionsRow/StepFlowActionsRow.css";
 
 type StepFlowActionsRowProps = {
   navigation: StepFlowNavigation;

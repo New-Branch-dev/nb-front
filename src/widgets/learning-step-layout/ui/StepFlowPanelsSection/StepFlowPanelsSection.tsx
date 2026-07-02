@@ -5,8 +5,8 @@ import { Activity } from "react";
 import type {
   StepFlowPanelByStep,
   StepFlowStep,
-} from "../../lib/stepFlow.types";
-import { contentRoot, panelCard } from "./StepFlowPanelsSection.css";
+} from "@widgets/learning-step-layout/lib/stepFlow.types";
+import { contentRoot, panelCard } from "@widgets/learning-step-layout/ui/StepFlowPanelsSection/StepFlowPanelsSection.css";
 
 type StepFlowPanelsSectionProps = {
   steps: readonly StepFlowStep[];

@@ -5,7 +5,7 @@ import {
   pageFooterLink,
   pageFooterNavList,
   pageFooterTitle,
-} from "./footer.css";
+} from "@widgets/footer/ui/footer.css";
 
 export const Footer = () => {
   return (
