@@ -4,6 +4,7 @@ import { type ChangeEvent, type DragEvent, useRef, useState } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 import { useLearningGoalsStore } from "@features/learning-goals/model/use-learning-goals-store";
+import { filterAllowedNoteFileList } from "@features/learning-goals/note-creation/lib/note-file-upload";
 import { convertFilesToUploadedNoteFileList } from "@features/learning-goals/note-creation/lib/uploaded-note-file";
 import { NoteCreationView } from "@features/learning-goals/note-creation/ui/note-creation-view";
 
@@ -14,21 +15,28 @@ export const NoteCreation = () => {
     appendUploadedFiles,
     deleteAllUploadedFiles,
     deleteUploadedFile,
+    directText,
+    setNoteDirectText,
   } = useLearningGoalsStore(
     useShallow((state) => ({
       uploadedFileList: state.noteCreation.uploadedFileList,
+      directText: state.noteCreation.directText,
       appendUploadedFiles: state.appendUploadedFiles,
       deleteAllUploadedFiles: state.deleteAllUploadedFiles,
       deleteUploadedFile: state.deleteUploadedFile,
+      setNoteDirectText: state.setNoteDirectText,
     })),
   );
   const [isDragging, setIsDragging] = useState(false);
 
   const appendFiles = (fileList: FileList | File[]) => {
-    const nextFileList = convertFilesToUploadedNoteFileList(
-      fileList,
-      new Date(),
-    );
+    const allowedFileList = filterAllowedNoteFileList(fileList);
+
+    if (allowedFileList.length === 0) {
+      return;
+    }
+
+    const nextFileList = convertFilesToUploadedNoteFileList(allowedFileList);
 
     appendUploadedFiles(nextFileList);
   };
@@ -43,6 +51,10 @@ export const NoteCreation = () => {
 
   const handleRemoveFile = (fileId: string) => {
     deleteUploadedFile(fileId);
+  };
+
+  const handleDirectTextChange = (value: string) => {
+    setNoteDirectText(value);
   };
 
   const handleOpenFile = (fileId: string) => {
@@ -87,11 +99,13 @@ export const NoteCreation = () => {
     <NoteCreationView
       fileInputRef={fileInputRef}
       uploadedFileList={uploadedFileList}
+      directText={directText}
       isDragging={isDragging}
       onUploadClick={handleUploadClick}
       onDeleteAll={handleDeleteAll}
       onRemoveFile={handleRemoveFile}
       onOpenFile={handleOpenFile}
+      onDirectTextChange={handleDirectTextChange}
       onFileInputChange={handleFileInputChange}
       onDropzoneDragOver={handleDropzoneDragOver}
       onDropzoneDragLeave={handleDropzoneDragLeave}

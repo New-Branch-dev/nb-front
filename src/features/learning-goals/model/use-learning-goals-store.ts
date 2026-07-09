@@ -24,32 +24,25 @@ const convertUploadedFileForStorage = ({
   size,
   lastModified,
   sizeLabel,
-  addedAtLabel,
 }: UploadedNoteFile): UploadedNoteFile => ({
   id,
   name,
   size,
   lastModified,
   sizeLabel,
-  addedAtLabel,
 });
 
 const pickLearningGoalsFormState = ({
   noteCreation,
   goalSetting,
-  memorization,
-  otherLearning,
-  retrieval,
 }: LearningGoalsStoreState): LearningGoalsFormState => ({
   noteCreation: {
+    directText: noteCreation.directText,
     uploadedFileList: noteCreation.uploadedFileList.map(
       convertUploadedFileForStorage,
     ),
   },
   goalSetting,
-  memorization,
-  otherLearning,
-  retrieval,
 });
 
 const mergePersistedLearningGoalsState = (
@@ -57,13 +50,25 @@ const mergePersistedLearningGoalsState = (
   currentState: LearningGoalsStoreState,
 ): LearningGoalsStoreState => {
   const persistedFormState = persistedState as Partial<LearningGoalsFormState>;
+  const persistedUploadedFileList =
+    persistedFormState.noteCreation?.uploadedFileList ?? [];
 
   return {
     ...currentState,
-    ...persistedFormState,
     noteCreation: {
       ...currentState.noteCreation,
       ...persistedFormState.noteCreation,
+      uploadedFileList: persistedUploadedFileList.map(
+        convertUploadedFileForStorage,
+      ),
+    },
+    goalSetting: {
+      ...currentState.goalSetting,
+      ...persistedFormState.goalSetting,
+      weeklyStudyHours: {
+        ...currentState.goalSetting.weeklyStudyHours,
+        ...persistedFormState.goalSetting?.weeklyStudyHours,
+      },
     },
   };
 };
@@ -153,6 +158,13 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
             uploadedFileList: [],
           },
         })),
+      setNoteDirectText: (directText) =>
+        set((state) => ({
+          noteCreation: {
+            ...state.noteCreation,
+            directText,
+          },
+        })),
       setGoalSetting: (goalSetting) =>
         set((state) => ({
           goalSetting: {
@@ -168,27 +180,6 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
               ...state.goalSetting.weeklyStudyHours,
               [field]: value,
             },
-          },
-        })),
-      setMemorization: (memorization) =>
-        set((state) => ({
-          memorization: {
-            ...state.memorization,
-            ...memorization,
-          },
-        })),
-      setRetrieval: (retrieval) =>
-        set((state) => ({
-          retrieval: {
-            ...state.retrieval,
-            ...retrieval,
-          },
-        })),
-      setOtherLearning: (otherLearning) =>
-        set((state) => ({
-          otherLearning: {
-            ...state.otherLearning,
-            ...otherLearning,
           },
         })),
       resetLearningGoals: () => set(initialLearningGoalsState),

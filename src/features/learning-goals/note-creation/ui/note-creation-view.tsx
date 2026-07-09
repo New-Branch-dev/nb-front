@@ -3,6 +3,7 @@ import type { ChangeEvent, DragEvent, RefObject } from "react";
 
 import { Button, Icon, Input, Modal } from "@shared/ui";
 
+import { NOTE_FILE_ACCEPT } from "@features/learning-goals/note-creation/lib/note-file-upload";
 import {
   cardHeaderStack,
   cardHeading,
@@ -23,13 +24,13 @@ import {
   deleteAllButton,
   fileListHeadCell,
   fileListHeadCellActions,
-  fileListHeadCellDate,
   fileListHeadRow,
   fileListScroll,
   fileListTable,
   fileManagerCard,
   fileManagerFooter,
   fileManagerHeader,
+  fileSizeCell,
 } from "@features/learning-goals/note-creation/ui/note-upload-shell.css";
 import {
   UploadedNoteFileRow,
@@ -39,11 +40,13 @@ import {
 type NoteCreationViewProps = {
   fileInputRef: RefObject<HTMLInputElement | null>;
   uploadedFileList: UploadedNoteFileRowItem[];
+  directText: string;
   isDragging: boolean;
   onUploadClick: () => void;
   onDeleteAll: () => void;
   onRemoveFile: (fileId: string) => void;
   onOpenFile: (fileId: string) => void;
+  onDirectTextChange: (value: string) => void;
   onFileInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onDropzoneDragOver: (event: DragEvent<HTMLDivElement>) => void;
   onDropzoneDragLeave: () => void;
@@ -53,11 +56,13 @@ type NoteCreationViewProps = {
 export const NoteCreationView = ({
   fileInputRef,
   uploadedFileList,
+  directText,
   isDragging,
   onUploadClick,
   onDeleteAll,
   onRemoveFile,
   onOpenFile,
+  onDirectTextChange,
   onFileInputChange,
   onDropzoneDragOver,
   onDropzoneDragLeave,
@@ -70,15 +75,17 @@ export const NoteCreationView = ({
       <div className={cardHeaderStack}>
         <h2 className={cardHeading}>학습 자료 수집</h2>
         <p className={cardLead}>
-          해당 목표에 필요한 파일이나 텍스트를 모아주세요
+          해당 목표에 필요한 파일이나 텍스트를 모아주세요 (텍스트 또는 파일 1개 이상 필수)
         </p>
       </div>
 
       <div className={fieldsStack}>
         <Input
           name="learning-goals-direct-text"
-          placeholder="텍스트를 입력하거나 붙여넣어주세요 (예:강의 필기 자료, 블로그 글등)"
+          placeholder="텍스트를 입력하거나 붙여넣어주세요 (예: 강의 필기 자료, 블로그 글 등)"
           aria-label="학습 자료에 사용할 텍스트"
+          value={directText}
+          onChange={(event) => onDirectTextChange(event.target.value)}
         />
 
         <div
@@ -92,6 +99,7 @@ export const NoteCreationView = ({
             className={hiddenFileInput}
             type="file"
             multiple
+            accept={NOTE_FILE_ACCEPT}
             onChange={onFileInputChange}
             aria-label="학습 자료 파일 업로드"
           />
@@ -141,17 +149,14 @@ export const NoteCreationView = ({
                   <span className={fileListHeadCell} role="columnheader">
                     파일명
                   </span>
-                  <span className={fileListHeadCell} role="columnheader">
+                  <span
+                    className={`${fileListHeadCell} ${fileSizeCell}`}
+                    role="columnheader"
+                  >
                     파일크기
-                  </span>
-                  <span className={fileListHeadCellDate} role="columnheader">
-                    추가일자
                   </span>
                   <span className={fileListHeadCellActions} role="columnheader">
                     작업
-                  </span>
-                  <span className={fileListHeadCellActions} role="columnheader">
-                    삭제
                   </span>
                 </div>
 

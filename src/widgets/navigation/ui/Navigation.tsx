@@ -11,22 +11,27 @@ const NAVIGATION_MENU_ITEM_LIST = [
   {
     label: "학습 프로필 설정",
     href: "/my-learning",
+    activePath: "/my-learning",
   },
   {
     label: "학습 목표 달성",
     href: LEARNING_GOALS_LIST_HREF,
+    activePath: "/learning-goals",
   },
   {
     label: "단권화",
     href: "/condensed-notes",
+    activePath: "/condensed-notes",
   },
   {
     label: "진정한 학습",
     href: "/deep-learning",
+    activePath: "/deep-learning",
   },
   {
     label: "창의적 체험활동",
     href: "/creative-activities",
+    activePath: "/creative-activities",
   },
 ];
 
@@ -85,7 +90,7 @@ export const Navigation = () => {
 
   const menuItems = NAVIGATION_MENU_ITEM_LIST.map((item) => ({
     ...item,
-    isActive: checkIsActivePath(pathname, item.href),
+    isActive: checkIsActivePath(pathname, item.activePath),
   }));
 
   return (

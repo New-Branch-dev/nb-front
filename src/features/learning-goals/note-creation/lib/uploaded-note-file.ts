@@ -18,25 +18,17 @@ export const convertFileSizeToLabel = (size: number): string => {
   return `${roundedSize} ${BYTE_UNITS[unitIndex]}`;
 };
 
-export const convertDateToAddedAtLabel = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-
-  return `${year}.${month}.${day}`;
-};
-
 export const convertFilesToUploadedNoteFileList = (
   fileList: FileList | File[],
-  addedAt: Date,
 ): UploadedNoteFile[] => {
+  const uploadIdSeed = Date.now();
+
   return Array.from(fileList).map((file, index) => ({
-    id: `${file.name}-${file.size}-${file.lastModified}-${addedAt.getTime()}-${index}`,
+    id: `${file.name}-${file.size}-${file.lastModified}-${uploadIdSeed}-${index}`,
     file,
     name: file.name,
     size: file.size,
     lastModified: file.lastModified,
     sizeLabel: convertFileSizeToLabel(file.size),
-    addedAtLabel: convertDateToAddedAtLabel(addedAt),
   }));
 };

@@ -14,6 +14,7 @@ import {
 const CARD_RADIUS = "1.25rem";
 const PROGRESS_BOX_RADIUS = "0.75rem";
 const STATUS_DOT_SIZE = "0.375rem";
+const STATUS_DANGER_SOFT = "#FFECEC";
 const PILL_RADIUS = "999px";
 
 export const card = style([
@@ -89,8 +90,8 @@ export const statusBadge = recipe({
         backgroundColor: colors.status.successSoft,
       },
       imminent: {
-        color: colors.status.warning,
-        backgroundColor: colors.status.warningSoft,
+        color: colors.negativeRed,
+        backgroundColor: STATUS_DANGER_SOFT,
       },
       completed: {
         color: colors.grayscale.gray700,
@@ -115,7 +116,7 @@ export const statusDot = recipe({
     status: {
       notStarted: { backgroundColor: colors.primary },
       inProgress: { backgroundColor: colors.status.success },
-      imminent: { backgroundColor: colors.status.warning },
+      imminent: { backgroundColor: colors.negativeRed },
       completed: { backgroundColor: colors.grayscale.gray700 },
     },
   },
@@ -132,8 +133,8 @@ export const category = recipe({
   variants: {
     status: {
       notStarted: { color: colors.primary },
-      inProgress: { color: colors.status.success },
-      imminent: { color: colors.status.warning },
+      inProgress: { color: colors.primary },
+      imminent: { color: colors.primary },
       completed: { color: colors.grayscale.gray700 },
     },
   },
@@ -262,6 +263,7 @@ const actionButtonBase = style([
     paddingInline: themeTokens.gap.md,
     borderRadius: "0.5rem",
     fontSize: typographyContract.bodyLg,
+    textDecoration: "none",
     cursor: "pointer",
   },
 ]);

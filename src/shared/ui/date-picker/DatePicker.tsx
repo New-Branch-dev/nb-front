@@ -14,6 +14,8 @@ type DatePickerProps = {
   onChange?: (date: Date) => void;
   values?: Date[];
   onValuesChange?: (dates: Date[]) => void;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   className?: string;
 };
 
@@ -25,6 +27,8 @@ export const DatePicker = ({
   onChange,
   values,
   onValuesChange,
+  minDate,
+  maxDate,
   className,
 }: DatePickerProps) => {
   const isControlled = value !== undefined;
@@ -46,6 +50,8 @@ export const DatePicker = ({
   const calendarProps = {
     inline: true,
     locale: ko,
+    minDate: minDate ?? undefined,
+    maxDate: maxDate ?? undefined,
     formatWeekDay: (day: string) => day.slice(0, 1),
     weekDayClassName: () => weekDay,
     dayClassName: () => dayBase,

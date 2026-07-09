@@ -25,6 +25,10 @@ export const GoalSetting = () => {
       })),
     );
 
+  const handleTitleChange = (value: string) => {
+    setGoalSetting({ title: value });
+  };
+
   const handleLearningPurposesChange = (items: string[]) => {
     setGoalSetting({ learningPurposes: items });
   };
@@ -45,6 +49,10 @@ export const GoalSetting = () => {
     setGoalSetting({ endDate: convertDateToDateKey(date) });
   };
 
+  const handleExcludedDateListChange = (dateKeyList: string[]) => {
+    setGoalSetting({ excludedDateList: dateKeyList });
+  };
+
   const handleWeeklyStudyHourChange = (
     field: WeeklyStudyHourField,
     value: string,
@@ -58,18 +66,22 @@ export const GoalSetting = () => {
 
   return (
     <GoalSettingView
+      title={goalSetting.title}
       learningPurposes={goalSetting.learningPurposes}
       targetScore={goalSetting.targetScore}
       maxScore={goalSetting.maxScore}
       startDate={convertDateKeyToDate(goalSetting.startDate)}
       endDate={convertDateKeyToDate(goalSetting.endDate)}
+      excludedDateList={goalSetting.excludedDateList}
       weeklyStudyHours={goalSetting.weeklyStudyHours}
       learningMethods={goalSetting.learningMethods}
+      onTitleChange={handleTitleChange}
       onLearningPurposesChange={handleLearningPurposesChange}
       onTargetScoreChange={handleTargetScoreChange}
       onMaxScoreChange={handleMaxScoreChange}
       onStartDateChange={handleStartDateChange}
       onEndDateChange={handleEndDateChange}
+      onExcludedDateListChange={handleExcludedDateListChange}
       onWeeklyStudyHourChange={handleWeeklyStudyHourChange}
       onLearningMethodsChange={handleLearningMethodsChange}
     />

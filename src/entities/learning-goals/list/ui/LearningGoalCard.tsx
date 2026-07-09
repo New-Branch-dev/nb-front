@@ -1,10 +1,15 @@
 "use client";
 
+import Link from "next/link";
+
 import { Icon, Modal } from "@shared/ui";
 
-import { convertLearningGoalStatus } from "@entities/learning-goals/list/lib/convert-learning-goal-status";
-import { getLearningGoalColorTheme } from "@entities/learning-goals/list/lib/getLearningGoalColorTheme";
 import { getLearningGoalThumbnail } from "@entities/learning-goals/list/lib/getLearningGoalThumbnail";
+import {
+  convertLearningGoalRemainingDayCount,
+  convertLearningGoalStatus,
+  convertLearningGoalTotalDayCount,
+} from "@entities/learning-goals/list/lib/learning-goal-period";
 import type {
   LearningGoalItem,
   LearningGoalStatus,
@@ -49,16 +54,21 @@ const STATUS_LABEL: Record<LearningGoalStatus, string> = {
   completed: "완료",
 };
 
+const STATUS_DOT_VISIBLE_SET = new Set<LearningGoalStatus>([
+  "inProgress",
+  "imminent",
+]);
+
 type LearningGoalCardProps = {
   item: LearningGoalItem;
 };
 
 export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
-  const colorTheme = getLearningGoalColorTheme(item.id);
-  const thumbnailSrc = getLearningGoalThumbnail(colorTheme);
+  const thumbnailSrc = getLearningGoalThumbnail(item.category);
   const status = convertLearningGoalStatus(item);
-  const remainingDays = Math.max(item.dDay, 0);
-  const totalDays = Math.max(item.totalDays, 0);
+  const hasStatusDot = STATUS_DOT_VISIBLE_SET.has(status);
+  const remainingDays = convertLearningGoalRemainingDayCount(item.deadlineAt);
+  const totalDays = convertLearningGoalTotalDayCount(item);
   const elapsedDays = Math.min(Math.max(totalDays - remainingDays, 0), totalDays);
   const deadlineProgress = totalDays > 0 ? (elapsedDays / totalDays) * 100 : 0;
 
@@ -73,7 +83,7 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
           />
         </span>
         <span className={statusBadge({ status })}>
-          <span className={statusDot({ status })} />
+          {hasStatusDot && <span className={statusDot({ status })} />}
           {STATUS_LABEL[status]}
         </span>
       </header>
@@ -140,9 +150,9 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
       </div>
 
       <div className={actionRow}>
-        <button type="button" className={detailButton({ status })}>
+        <Link href={`/learning-goals/${item.id}`} className={detailButton({ status })}>
           상세보기
-        </button>
+        </Link>
         <Modal triggerText="삭제" triggerClassName={deleteButton}>
           {({ close }) => (
             <div className={deleteModalContent}>

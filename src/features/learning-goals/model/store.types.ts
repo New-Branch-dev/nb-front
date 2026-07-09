@@ -4,12 +4,12 @@ export type UploadedNoteFile = {
   size: number;
   lastModified: number;
   sizeLabel: string;
-  addedAtLabel: string;
   file?: File;
 };
 
 export type NoteCreationState = {
   uploadedFileList: UploadedNoteFile[];
+  directText: string;
 };
 
 export type WeeklyStudyHours = {
@@ -25,55 +25,31 @@ export type WeeklyStudyHours = {
 export type WeeklyStudyHourField = keyof WeeklyStudyHours;
 
 export type GoalSettingState = {
+  title: string;
   learningPurposes: string[];
   targetScore: string;
   maxScore: string;
   startDate: string;
   endDate: string;
+  excludedDateList: string[];
   weeklyStudyHours: WeeklyStudyHours;
   learningMethods: string[];
-};
-
-export type MemorizationState = {
-  startDate: string;
-  endDate: string;
-  reviewCount: string;
-  memorizationMethods: string[];
-};
-
-export type RetrievalState = {
-  startDate: string;
-  endDate: string;
-  reviewCount: string;
-  retrievalMethods: string[];
-};
-
-export type OtherLearningState = {
-  startDate: string;
-  endDate: string;
-  reviewCount: string;
-  otherLearningMethods: string[];
 };
 
 export type LearningGoalsFormState = {
   noteCreation: NoteCreationState;
   goalSetting: GoalSettingState;
-  memorization: MemorizationState;
-  retrieval: RetrievalState;
-  otherLearning: OtherLearningState;
 };
 
 export type LearningGoalsStoreState = LearningGoalsFormState & {
   appendUploadedFiles: (uploadedFileList: UploadedNoteFile[]) => void;
   deleteUploadedFile: (fileId: string) => void;
   deleteAllUploadedFiles: () => void;
+  setNoteDirectText: (directText: string) => void;
   setGoalSetting: (goalSetting: Partial<GoalSettingState>) => void;
   setWeeklyStudyHour: (
     field: WeeklyStudyHourField,
     value: WeeklyStudyHours[WeeklyStudyHourField],
   ) => void;
-  setMemorization: (memorization: Partial<MemorizationState>) => void;
-  setRetrieval: (retrieval: Partial<RetrievalState>) => void;
-  setOtherLearning: (otherLearning: Partial<OtherLearningState>) => void;
   resetLearningGoals: () => void;
 };
