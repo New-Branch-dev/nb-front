@@ -26,6 +26,10 @@ const OAuth2RedirectContent = () => {
   }, [router, searchParams]);
 
   /*TODO: 리다이렉트페이지 퍼블 필요*/
+  return <RedirectStatus />;
+};
+
+const OAuth2RedirectPage = () => {
   return (
     <div
       style={{
