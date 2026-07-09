@@ -1,1 +1,1 @@
-export { MainPage } from "./ui/Page";
+export { MainPage } from "@views/main/ui/page/Page";

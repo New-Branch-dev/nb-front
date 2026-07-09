@@ -2,14 +2,14 @@
 
 import type { KeyboardEvent } from "react";
 
-import { Chip, type ChipResponsiveSize } from "../chip/Chip";
-import { inputBase } from "../input/Input.css";
+import { Chip, type ChipResponsiveSize } from "@shared/ui/chip/Chip";
+import { inputBase } from "@shared/ui/input/Input.css";
 import {
   chipRow,
   inputOnPrimary,
   removeMark,
   root,
-} from "./TagInput.css";
+} from "@shared/ui/tag-input/TagInput.css";
 
 const DEFAULT_SEPARATORS = [","] as const;
 

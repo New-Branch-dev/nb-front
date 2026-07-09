@@ -1,11 +1,8 @@
-export { deriveStepFlowNavigation } from "./model/deriveStepFlowNavigation";
 export type {
   StepFlowNavigation,
   StepFlowPanelByStep,
-  StepFlowPanelProps,
   StepFlowStep,
-} from "./model/stepFlow.types";
-export { useStepValidityByStep } from "./model/useStepValidityByStep";
-export { LearningStepLayout } from "./ui/LearningStepLayout";
-export { StepFlowActionsRow } from "./ui/StepFlowActionsRow/StepFlowActionsRow";
-export { StepFlowPanelsSection } from "./ui/StepFlowPanelsSection/StepFlowPanelsSection";
+} from "@widgets/learning-step-layout/lib/stepFlow.types";
+export { useStepFlow } from "@widgets/learning-step-layout/lib/useStepFlow";
+export { LearningStepLayout } from "@widgets/learning-step-layout/ui/LearningStepLayout/LearningStepLayout";
+export { StepFlowPanelsSection } from "@widgets/learning-step-layout/ui/StepFlowPanelsSection/StepFlowPanelsSection";

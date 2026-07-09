@@ -19,7 +19,7 @@ import {
   firstSectionShowcaseText,
   firstSectionSigninLink,
   firstSectionTitle,
-} from "./FirstSection.css";
+} from "@views/rending/ui/components/FirstSection.css";
 
 export const FirstSection = () => {
   return (

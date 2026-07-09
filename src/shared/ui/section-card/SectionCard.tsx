@@ -6,7 +6,7 @@ import {
   sectionDescription,
   sectionHeader,
   sectionTitle,
-} from "./SectionCard.css";
+} from "@shared/ui/section-card/SectionCard.css";
 
 type SectionCardStackProps = PropsWithChildren<{
   className?: string;

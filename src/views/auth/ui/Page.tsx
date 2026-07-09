@@ -1,6 +1,6 @@
 import { AuthForm } from "@features/auth";
 
-import { authPage } from "./Page.css";
+import { authPage } from "@views/auth/ui/Page.css";
 
 export const Page = () => {
   return (

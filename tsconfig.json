@@ -24,7 +24,8 @@
       "@entities/*": ["./src/entities/*"],
       "@features/*": ["./src/features/*"],
       "@widgets/*": ["./src/widgets/*"],
-      "@views/*": ["src/views/*"]
+      "@views/*": ["src/views/*"],
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": [

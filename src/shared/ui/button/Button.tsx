@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
-import { buttonRecipe } from "./Button.css";
+import { buttonRecipe } from "@shared/ui/button/Button.css";
 
 type ButtonStyleProps = {
   variant?: "primary" | "secondary" | "ghost" | "text";

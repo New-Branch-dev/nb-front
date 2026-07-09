@@ -1,18 +1,19 @@
-import type { InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes, RefObject } from "react";
 
-import { inputBase, inputFieldWrapper } from "./Input.css";
+import { inputBase, inputFieldWrapper } from "@shared/ui/input/Input.css";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
+  ref?: RefObject<HTMLInputElement | null>;
   placeholder: string;
 };
 
-export const Input = ({ className, id, ...rest }: InputProps) => {
+export const Input = ({ className, id, ref, ...rest }: InputProps) => {
   const inputId = id ?? rest.name;
   const mergedClassName = [inputBase, className].filter(Boolean).join(" ");
 
   return (
     <label className={inputFieldWrapper} htmlFor={inputId}>
-      <input id={inputId} className={mergedClassName} {...rest} />
+      <input id={inputId} ref={ref} className={mergedClassName} {...rest} />
     </label>
   );
 };

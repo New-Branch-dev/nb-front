@@ -11,8 +11,10 @@ import {
 
 import "@shared/styles/suiteFont.css";
 
-const CIRCLE_SIZE = "2.25rem";
-const TRACK_HEIGHT = "0.5rem";
+const CIRCLE_SIZE = "2.75rem";
+const STEP_CIRCLE_BORDER_SIZE = "0.375rem";
+const STEP_CIRCLE_BORDER_COLOR = "#B5A1FF";
+const TRACK_HEIGHT = "0.375rem";
 
 /** 원 안 단계 숫자 — SUITE 로드 후 적용 (shared/styles/suiteFont.css) */
 const stepCircleNumberFontFamily = `"SUITE", Arial, Helvetica, sans-serif`;
@@ -101,7 +103,7 @@ export const stepCirclePrimary = style([
     borderRadius: themeTokens.radius.full,
     flexShrink: 0,
     boxSizing: "border-box",
-    border: "none",
+    border: `${STEP_CIRCLE_BORDER_SIZE} solid ${STEP_CIRCLE_BORDER_COLOR}`,
     backgroundColor: colors.primary,
   },
 ]);

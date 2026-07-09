@@ -1,1 +1,1 @@
-export { DateField } from "./DateField";
+export { DateField } from "@shared/ui/date-field/DateField";

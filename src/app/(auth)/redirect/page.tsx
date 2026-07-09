@@ -3,14 +3,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
-const RedirectStatus = () => {
-  return (
-    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <p>로그인 완료 중입니다. 잠시만 기다려주세요...</p>
-    </div>
-  );
-};
-
 const OAuth2RedirectContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -39,7 +31,22 @@ const OAuth2RedirectContent = () => {
 
 const OAuth2RedirectPage = () => {
   return (
-    <Suspense fallback={<RedirectStatus />}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <p>로그인 완료 중입니다. 잠시만 기다려주세요...</p>
+    </div>
+  );
+};
+
+const OAuth2RedirectPage = () => {
+  return (
+    <Suspense fallback={null}>
       <OAuth2RedirectContent />
     </Suspense>
   );

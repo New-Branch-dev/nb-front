@@ -1,0 +1,771 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>학습목표달성 - 쉬는날 미설정 플로우</title>
+    <style>
+      :root {
+        --primary: #6641df;
+        --primary-soft: #f3efff;
+        --green: #30c291;
+        --orange: #f5b423;
+        --red: #f26161;
+        --gray-900: #34313f;
+        --gray-700: #73707e;
+        --gray-500: #a9a5b7;
+        --gray-300: #e6e2ef;
+        --gray-100: #f7f5fb;
+        --white: #ffffff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #fbfaff;
+        color: var(--gray-900);
+        font-family:
+          Pretendard,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      button {
+        font: inherit;
+      }
+
+      .page {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 56px 0 72px;
+      }
+
+      .title-area {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: flex-start;
+        margin-bottom: 36px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 32px;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      .description {
+        margin: 0;
+        color: var(--gray-700);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        height: 36px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-weight: 800;
+        white-space: nowrap;
+      }
+
+      .layout {
+        display: grid;
+        gap: 24px;
+      }
+
+      .panel {
+        background: var(--white);
+        border: 1px solid var(--gray-300);
+        border-radius: 18px;
+        padding: 24px;
+      }
+
+      .panel h2 {
+        margin: 0 0 18px;
+        font-size: 22px;
+        line-height: 1.35;
+      }
+
+      .flow {
+        display: grid;
+        gap: 12px;
+      }
+
+      .flow-step {
+        position: relative;
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 16px;
+        border-radius: 14px;
+        background: var(--gray-100);
+      }
+
+      .flow-step::after {
+        content: "";
+        position: absolute;
+        left: 35px;
+        bottom: -14px;
+        width: 2px;
+        height: 14px;
+        background: var(--gray-300);
+      }
+
+      .flow-step:last-child::after {
+        display: none;
+      }
+
+      .step-number {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: var(--white);
+        font-weight: 900;
+      }
+
+      .flow-step strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      .flow-step span {
+        color: var(--gray-700);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .result-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        color: var(--gray-700);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .legend span::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .legend .complete::before {
+        background: var(--green);
+      }
+
+      .legend .incomplete::before {
+        background: var(--orange);
+      }
+
+      .legend .failed::before {
+        background: var(--red);
+      }
+
+      .legend .rest::before {
+        background: var(--gray-500);
+      }
+
+      .schedule-actions {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 18px;
+        padding: 16px;
+        border-radius: 14px;
+        background: var(--gray-100);
+      }
+
+      .schedule-actions-side {
+        display: grid;
+        gap: 8px;
+      }
+
+      .selected-date-text {
+        margin: 0;
+        color: var(--gray-700);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .schedule-button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .schedule-button {
+        height: 38px;
+        padding: 0 14px;
+        border: 0;
+        border-radius: 999px;
+        color: var(--white);
+        font-size: 14px;
+        font-weight: 900;
+        cursor: pointer;
+      }
+
+      .schedule-button:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+      }
+
+      .schedule-button.complete {
+        background: var(--green);
+      }
+
+      .schedule-button.incomplete {
+        background: var(--orange);
+      }
+
+      .schedule-button.failed {
+        background: var(--red);
+      }
+
+      .schedule-button.rest {
+        background: var(--gray-700);
+      }
+
+      .schedule-button.clear {
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+
+      .calendar {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .day-name {
+        text-align: center;
+        color: var(--gray-700);
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .calendar-day {
+        min-height: 82px;
+        padding: 10px;
+        border: 1px solid var(--gray-300);
+        border-radius: 12px;
+        background: var(--white);
+        color: inherit;
+        cursor: pointer;
+        font: inherit;
+        text-align: left;
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease,
+          transform 0.2s ease;
+      }
+
+      .calendar-day.empty {
+        border-color: transparent;
+        background: transparent;
+        cursor: default;
+      }
+
+      .calendar-day:not(.empty):hover {
+        transform: translateY(-2px);
+      }
+
+      .calendar-day.selected-day {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+      }
+
+      .calendar-day.complete-day {
+        border-color: color-mix(in srgb, var(--green) 35%, var(--gray-300));
+        background: color-mix(in srgb, var(--green) 10%, var(--white));
+      }
+
+      .calendar-day.incomplete-day {
+        border-color: color-mix(in srgb, var(--orange) 35%, var(--gray-300));
+        background: color-mix(in srgb, var(--orange) 12%, var(--white));
+      }
+
+      .calendar-day.failed-day {
+        border-color: color-mix(in srgb, var(--red) 35%, var(--gray-300));
+        background: color-mix(in srgb, var(--red) 10%, var(--white));
+      }
+
+      .calendar-day.auto-rest-day {
+        color: var(--gray-500);
+        background: var(--gray-100);
+      }
+
+      .day-number {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 8px;
+        font-weight: 900;
+      }
+
+      .day-tag {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding: 0 8px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 900;
+      }
+
+      .complete-day .day-tag {
+        background: var(--green);
+        color: var(--white);
+      }
+
+      .incomplete-day .day-tag {
+        background: var(--orange);
+        color: var(--white);
+      }
+
+      .failed-day .day-tag {
+        background: var(--red);
+        color: var(--white);
+      }
+
+      .auto-rest-day .day-tag {
+        background: var(--gray-300);
+        color: var(--gray-700);
+      }
+
+      .day-hour {
+        color: var(--gray-700);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .summary-card {
+        padding: 14px;
+        border-radius: 12px;
+        background: var(--gray-100);
+      }
+
+      .summary-card span {
+        display: block;
+        color: var(--gray-700);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .summary-card strong {
+        display: block;
+        margin-top: 6px;
+        color: var(--gray-900);
+        font-size: 22px;
+      }
+
+      @media (max-width: 900px) {
+        .layout,
+        .summary {
+          grid-template-columns: 1fr;
+        }
+
+        .calendar {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .schedule-actions {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="title-area">
+        <div>
+          <h1>쉬는날 미설정 기준 학습 일정 플로우</h1>
+          <p class="description">
+            나만의 학습에 별도 쉬는날이 없으면, 학습목표달성에서 입력한 요일별
+            공부 시간만으로 학습일과 자동 쉬는날을 계산합니다.
+          </p>
+        </div>
+        <span class="status-pill">개인 쉬는날 없음</span>
+      </section>
+
+      <section class="layout">
+        <article class="panel">
+          <h2>유저 플로우</h2>
+          <div class="flow" aria-label="쉬는날 미설정 유저 플로우">
+            <div class="flow-step">
+              <div class="step-number">1</div>
+              <div>
+                <strong>학습 목표 생성</strong>
+                <span>학습 기간과 요일별 공부 가능 시간을 입력합니다.</span>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="step-number">2</div>
+              <div>
+                <strong>요일 기준 자동 계산</strong>
+                <span>
+                  시간이 있는 요일은 학습일, 시간이 없는 요일은 자동 쉬는날로
+                  처리합니다.
+                </span>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="step-number">3</div>
+              <div>
+                <strong>개인 쉬는날 병합 생략</strong>
+                <span>
+                  나만의 학습 쉬는날이 없으므로 추가 제외 날짜는 적용하지
+                  않습니다.
+                </span>
+              </div>
+            </div>
+            <div class="flow-step">
+              <div class="step-number">4</div>
+              <div>
+                <strong>상세 일정 조회</strong>
+                <span>
+                  상세 페이지에서는 계산된 일정을 조회하고, 여러 날짜를 선택해
+                  학습 상태를 한 번에 변경합니다.
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel" style="margin-top: 24px">
+        <div class="result-header">
+          <h2 style="margin: 0">학습 일정 조회</h2>
+          <div class="legend">
+            <span class="complete">완료</span>
+            <span class="incomplete">진행중</span>
+            <span class="failed">실패</span>
+            <span class="rest">쉬는날</span>
+          </div>
+        </div>
+
+        <div class="schedule-actions">
+          <div class="schedule-actions-side">
+            <p class="selected-date-text" id="selectedDateText">
+              날짜를 여러 개 선택하면 상태를 변경할 수 있습니다.
+            </p>
+            <p class="selected-date-text">
+              예시 일정: 2026.06.01 - 2026.06.30 / 월·화·수 각 2시간
+            </p>
+          </div>
+          <div class="schedule-button-row">
+            <button
+              class="schedule-button complete"
+              data-status-action="complete"
+              type="button"
+              disabled
+            >
+              완료
+            </button>
+            <button
+              class="schedule-button incomplete"
+              data-status-action="incomplete"
+              type="button"
+              disabled
+            >
+              진행중
+            </button>
+            <button
+              class="schedule-button failed"
+              data-status-action="failed"
+              type="button"
+              disabled
+            >
+              실패
+            </button>
+            <button
+              class="schedule-button rest"
+              data-status-action="rest"
+              type="button"
+              disabled
+            >
+              쉬는날
+            </button>
+            <button
+              class="schedule-button clear"
+              id="clearSelectionButton"
+              type="button"
+              disabled
+            >
+              선택 해제
+            </button>
+          </div>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+
+        <div class="summary">
+          <div class="summary-card">
+            <span>전체 기간</span>
+            <strong id="totalDays">0일</strong>
+          </div>
+          <div class="summary-card">
+            <span>완료</span>
+            <strong id="completeDays">0일</strong>
+          </div>
+          <div class="summary-card">
+            <span>진행중</span>
+            <strong id="inProgressDays">0일</strong>
+          </div>
+          <div class="summary-card">
+            <span>실패</span>
+            <strong id="failedDays">0일</strong>
+          </div>
+          <div class="summary-card">
+            <span>쉬는날</span>
+            <strong id="restDays">0일</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const scheduleConfig = {
+        startDate: "2026-06-01",
+        endDate: "2026-06-30",
+        weekdayHours: {
+          1: "2",
+          2: "2",
+          3: "2",
+        },
+      };
+
+      const calendar = document.querySelector("#calendar");
+      const totalDaysElement = document.querySelector("#totalDays");
+      const completeDaysElement = document.querySelector("#completeDays");
+      const inProgressDaysElement = document.querySelector("#inProgressDays");
+      const failedDaysElement = document.querySelector("#failedDays");
+      const restDaysElement = document.querySelector("#restDays");
+      const selectedDateText = document.querySelector("#selectedDateText");
+      const clearSelectionButton = document.querySelector("#clearSelectionButton");
+      const statusActionButtonList = document.querySelectorAll(
+        "[data-status-action]",
+      );
+      const scheduleStatusMap = new Map();
+      const selectedDateKeySet = new Set();
+
+      const convertDateToKey = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+
+        return `${year}-${month}-${day}`;
+      };
+
+      const createLocalDate = (dateKey) => {
+        const [year, month, day] = dateKey.split("-").map(Number);
+
+        return new Date(year, month - 1, day);
+      };
+
+      const createDateRange = (startDateKey, endDateKey) => {
+        const startDate = createLocalDate(startDateKey);
+        const endDate = createLocalDate(endDateKey);
+        const dateList = [];
+
+        for (
+          const date = new Date(startDate);
+          date <= endDate;
+          date.setDate(date.getDate() + 1)
+        ) {
+          dateList.push(new Date(date));
+        }
+
+        return dateList;
+      };
+
+      const getStatusLabel = (status) => {
+        if (status === "complete") {
+          return "완료";
+        }
+
+        if (status === "incomplete") {
+          return "진행중";
+        }
+
+        if (status === "failed") {
+          return "실패";
+        }
+
+        return "쉬는날";
+      };
+
+      const updateSelectedDateState = () => {
+        const selectedCount = selectedDateKeySet.size;
+
+        statusActionButtonList.forEach((button) => {
+          button.disabled = selectedCount === 0;
+        });
+
+        clearSelectionButton.disabled = selectedCount === 0;
+        selectedDateText.textContent =
+          selectedCount > 0
+            ? `${selectedCount}개 날짜를 선택했습니다.`
+            : "날짜를 여러 개 선택하면 상태를 변경할 수 있습니다.";
+      };
+
+      const renderCalendar = () => {
+        const dateList = createDateRange(
+          scheduleConfig.startDate,
+          scheduleConfig.endDate,
+        );
+        const firstDay = dateList[0].getDay();
+        let completeDays = 0;
+        let inProgressDays = 0;
+        let failedDays = 0;
+        let restDays = 0;
+
+        const calendarHeader = ["일", "월", "화", "수", "목", "금", "토"]
+          .map((dayName) => `<div class="day-name">${dayName}</div>`)
+          .join("");
+
+        const emptyCells = Array.from({ length: firstDay })
+          .map(() => `<div class="calendar-day empty"></div>`)
+          .join("");
+
+        const dayCells = dateList
+          .map((date) => {
+            const dateKey = convertDateToKey(date);
+            const hour = scheduleConfig.weekdayHours[date.getDay()] ?? "";
+            const isStudyDay = hour !== "" && Number(hour) > 0;
+            const baseStatus = isStudyDay ? "incomplete" : "rest";
+            const status = scheduleStatusMap.get(dateKey) ?? baseStatus;
+            const className =
+              status === "complete"
+                ? "complete-day"
+                : status === "failed"
+                  ? "failed-day"
+                : status === "incomplete"
+                  ? "incomplete-day"
+                  : "auto-rest-day";
+            const label = getStatusLabel(status);
+            const hourText =
+              status === "rest"
+                ? "공부 시간 없음"
+                : `${hour || 0}시간 공부`;
+
+            if (status === "complete") {
+              completeDays += 1;
+            }
+
+            if (status === "incomplete") {
+              inProgressDays += 1;
+            }
+
+            if (status === "failed") {
+              failedDays += 1;
+            }
+
+            if (status === "rest") {
+              restDays += 1;
+            }
+
+            return `
+              <button class="calendar-day ${className} ${
+                selectedDateKeySet.has(dateKey) ? "selected-day" : ""
+              }" data-date="${dateKey}" type="button">
+                <div class="day-number">
+                  <span>${date.getDate()}</span>
+                  <span class="day-tag">${label}</span>
+                </div>
+                <div class="day-hour">${hourText}</div>
+              </button>
+            `;
+          })
+          .join("");
+
+        calendar.innerHTML = calendarHeader + emptyCells + dayCells;
+        totalDaysElement.textContent = `${dateList.length}일`;
+        completeDaysElement.textContent = `${completeDays}일`;
+        inProgressDaysElement.textContent = `${inProgressDays}일`;
+        failedDaysElement.textContent = `${failedDays}일`;
+        restDaysElement.textContent = `${restDays}일`;
+        updateSelectedDateState();
+      };
+
+      renderCalendar();
+
+      calendar.addEventListener("click", (event) => {
+        const selectedDay = event.target.closest("[data-date]");
+
+        if (!selectedDay) {
+          return;
+        }
+
+        const dateKey = selectedDay.dataset.date;
+
+        if (selectedDateKeySet.has(dateKey)) {
+          selectedDateKeySet.delete(dateKey);
+        } else {
+          selectedDateKeySet.add(dateKey);
+        }
+
+        renderCalendar();
+      });
+
+      statusActionButtonList.forEach((button) => {
+        button.addEventListener("click", () => {
+          if (selectedDateKeySet.size === 0) {
+            return;
+          }
+
+          selectedDateKeySet.forEach((dateKey) => {
+            scheduleStatusMap.set(dateKey, button.dataset.statusAction);
+          });
+
+          renderCalendar();
+        });
+      });
+
+      clearSelectionButton.addEventListener("click", () => {
+        selectedDateKeySet.clear();
+        renderCalendar();
+      });
+    </script>
+  </body>
+</html>

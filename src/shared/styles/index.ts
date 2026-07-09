@@ -1,4 +1,4 @@
-export { colors } from "./colors.css";
+export { colors } from "@shared/styles/colors.css";
 export {
   flexBetweenCenter,
   flexCenter,
@@ -7,7 +7,7 @@ export {
   flexColumnCenter,
   flexInlineCenter,
   flexStart,
-} from "./flex.css";
-export { mediaQuery } from "./media-query.css";
-export { themeTokens } from "./theme.css";
-export { typographyContract } from "./typography.css";
+} from "@shared/styles/flex.css";
+export { mediaQuery } from "@shared/styles/media-query.css";
+export { themeTokens } from "@shared/styles/theme.css";
+export { typographyContract } from "@shared/styles/typography.css";

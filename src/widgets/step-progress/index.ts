@@ -1,1 +1,1 @@
-export { StepProgress } from "./ui/StepProgress";
+export { StepProgress } from "@widgets/step-progress/ui/StepProgress";

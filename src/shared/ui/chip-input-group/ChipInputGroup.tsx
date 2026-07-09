@@ -1,14 +1,14 @@
 "use client";
 
-import { Chip } from "../chip/Chip";
-import { Input } from "../input/Input";
-import { TagInput } from "../tag-input/TagInput";
+import { Chip } from "@shared/ui/chip/Chip";
 import {
   chipRow,
   directInput,
   directInputOnPrimary,
   root,
-} from "./ChipInputGroup.css";
+} from "@shared/ui/chip-input-group/ChipInputGroup.css";
+import { Input } from "@shared/ui/input/Input";
+import { TagInput } from "@shared/ui/tag-input/TagInput";
 
 export const DIRECT_INPUT_CHIP_LABEL = "직접입력";
 

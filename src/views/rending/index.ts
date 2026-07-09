@@ -1,1 +1,1 @@
-export { RendingPage } from "./ui/Page";
+export { RendingPage } from "@views/rending/ui/Page";

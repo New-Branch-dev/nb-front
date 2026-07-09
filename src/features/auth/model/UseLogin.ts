@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 
 export const useLogin = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (email: string, password: string) => {

@@ -1,11 +1,10 @@
-import Image from "next/image";
-
 import {
   headerRoot,
   monthTitle,
   monthTitleWithNav,
   navButton,
-} from "./CalendarMonthHeader.css";
+} from "@shared/ui/date-picker/CalendarMonthHeader.css";
+import { Icon } from "@shared/ui/icon";
 
 type CalendarMonthHeaderBaseProps = {
   date: Date;
@@ -59,11 +58,9 @@ export const CalendarMonthHeader = (props: CalendarMonthHeaderProps) => {
           disabled={isPreviousDisabled}
           onClick={onPreviousMonth}
         >
-          <Image
+          <Icon
             src="/slider-arrow-left.svg"
-            alt=""
-            width={24}
-            height={24}
+            size="md"
             aria-hidden
           />
         </button>
@@ -77,11 +74,9 @@ export const CalendarMonthHeader = (props: CalendarMonthHeaderProps) => {
           disabled={isNextDisabled}
           onClick={onNextMonth}
         >
-          <Image
+          <Icon
             src="/slider-arrow-right.svg"
-            alt=""
-            width={24}
-            height={24}
+            size="md"
             aria-hidden
           />
         </button>
