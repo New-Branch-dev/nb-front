@@ -3,6 +3,8 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { API_ENDPOINT } from "@shared/config";
+
 import { LEARNING_GOALS_LIST_HREF } from "@features/learning-goals";
 
 import { NavigationView } from "@widgets/navigation/ui/NavigationView";
@@ -67,7 +69,7 @@ export const Navigation = () => {
       const accessToken = localStorage.getItem("accessToken");
 
       if (accessToken) {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`, {
+        await fetch(API_ENDPOINT.auth.logout, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${accessToken}`,

@@ -1,12 +1,14 @@
 import { useState } from "react";
 
+import { API_ENDPOINT } from "@shared/config";
+
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
+      const response = await fetch(API_ENDPOINT.auth.login, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
