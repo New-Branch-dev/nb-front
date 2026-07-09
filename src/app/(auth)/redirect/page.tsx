@@ -29,7 +29,7 @@ const OAuth2RedirectContent = () => {
   return <RedirectStatus />;
 };
 
-const OAuth2RedirectPage = () => {
+const RedirectStatus = () => {
   return (
     <div
       style={{
