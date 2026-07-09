@@ -3,6 +3,7 @@ import type { LearningGoalsFormState } from "@features/learning-goals/model/stor
 export const initialLearningGoalsState: LearningGoalsFormState = {
   noteCreation: {
     uploadedFileList: [],
+    directText: "",
   },
   goalSetting: {
     title: "",

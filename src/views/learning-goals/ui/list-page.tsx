@@ -1,4 +1,11 @@
-import { LearningGoalsListPanel } from "@entities/learning-goals";
+"use client";
+
+import { useState } from "react";
+
+import {
+  LearningGoalsListPanel,
+  type LearningGoalsListSortKey,
+} from "@entities/learning-goals";
 
 import { LearningGoalsTabRail } from "@features/learning-goals";
 
@@ -14,6 +21,9 @@ import { LEARNING_GOALS_STEPS } from "@views/learning-goals/lib/step";
 const LEARNING_GOALS_CREATE_HREF = "/learning-goals/note-creation";
 
 export const LearningGoalsListPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortKey, setSortKey] = useState<LearningGoalsListSortKey>("latest");
+
   return (
     <LearningStepLayout
       titleText={LEARNING_GOALS_TITLE}
@@ -26,10 +36,14 @@ export const LearningGoalsListPage = () => {
         <LearningGoalsTabRail
           activeTab="list"
           createHref={LEARNING_GOALS_CREATE_HREF}
+          searchQuery={searchQuery}
+          sortKey={sortKey}
+          onSearchQueryChange={setSearchQuery}
+          onSortChange={setSortKey}
         />
       }
     >
-      <LearningGoalsListPanel />
+      <LearningGoalsListPanel searchQuery={searchQuery} sortKey={sortKey} />
     </LearningStepLayout>
   );
 };

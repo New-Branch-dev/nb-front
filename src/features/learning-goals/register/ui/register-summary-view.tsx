@@ -10,6 +10,7 @@ import {
   noteList as noteListStyle,
   noteName,
   noteSize,
+  periodArrowIcon,
   periodMeta,
   periodText,
   row,
@@ -34,6 +35,7 @@ import {
 type RegisterSummaryNote = {
   id: string;
   name: string;
+  iconSrc: string;
   sizeLabel: string;
 };
 
@@ -123,7 +125,12 @@ export const RegisterSummaryView = ({
         <span className={rowLabel}>학습기간</span>
         <div className={rowContent}>
           <strong className={periodText}>{summary.startDateLabel}</strong>
-          <span className={periodText}>→</span>
+          <Icon
+            src="/learning-goals/→.svg"
+            size="sm"
+            className={periodArrowIcon}
+            aria-hidden
+          />
           <strong className={periodText}>{summary.endDateLabel}</strong>
           <span className={periodMeta}>
             총 {summary.totalPeriodDayCount}일 중 {summary.studyDayCount}일 학습
@@ -177,7 +184,9 @@ export const RegisterSummaryView = ({
         <div className={noteListStyle}>
           {noteList.map((note) => (
             <div key={note.id} className={noteItem}>
-              <span className={noteIconBox} aria-hidden />
+              <span className={noteIconBox} aria-hidden>
+                <Icon src={note.iconSrc} size="sm" />
+              </span>
               <strong className={noteName}>{note.name}</strong>
               <span className={noteSize}>{note.sizeLabel}</span>
             </div>

@@ -7,6 +7,7 @@ import type {
   WeeklyStudyHours,
 } from "@features/learning-goals/model/store.types";
 import { useLearningGoalsStore } from "@features/learning-goals/model/use-learning-goals-store";
+import { convertNoteIconSrc } from "@features/learning-goals/register/lib/convert-note-icon-src";
 import { RegisterSummaryView } from "@features/learning-goals/register/ui/register-summary-view";
 
 const WEEKDAY_LABELS: Record<keyof WeeklyStudyHours, string> = {
@@ -148,14 +149,29 @@ export const RegisterSummary = () => {
   const excludedWeekdayFieldSet = convertExcludedWeekdayFieldSet(
     goalSetting.excludedDateList,
   );
+  const directText = noteCreation.directText.trim();
+  const noteList = [
+    ...noteCreation.uploadedFileList.map((file) => ({
+      id: file.id,
+      name: file.name,
+      iconSrc: convertNoteIconSrc(file.name),
+      sizeLabel: file.sizeLabel,
+    })),
+    ...(directText
+      ? [
+          {
+            id: "direct-text",
+            name: directText,
+            iconSrc: convertNoteIconSrc("direct.text"),
+            sizeLabel: "텍스트",
+          },
+        ]
+      : []),
+  ];
 
   return (
     <RegisterSummaryView
-      noteList={noteCreation.uploadedFileList.map((file) => ({
-        id: file.id,
-        name: file.name,
-        sizeLabel: file.sizeLabel,
-      }))}
+      noteList={noteList}
       summary={{
         title: goalSetting.title,
         learningPurposes: goalSetting.learningPurposes,
@@ -179,7 +195,7 @@ export const RegisterSummary = () => {
         studyDayCount,
         excludedDateCount: goalSetting.excludedDateList.length,
         learningMethodCount: goalSetting.learningMethods.length,
-        noteCount: noteCreation.uploadedFileList.length,
+        noteCount: noteList.length,
       }}
     />
   );

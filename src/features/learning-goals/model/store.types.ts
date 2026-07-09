@@ -9,6 +9,7 @@ export type UploadedNoteFile = {
 
 export type NoteCreationState = {
   uploadedFileList: UploadedNoteFile[];
+  directText: string;
 };
 
 export type WeeklyStudyHours = {
@@ -44,6 +45,7 @@ export type LearningGoalsStoreState = LearningGoalsFormState & {
   appendUploadedFiles: (uploadedFileList: UploadedNoteFile[]) => void;
   deleteUploadedFile: (fileId: string) => void;
   deleteAllUploadedFiles: () => void;
+  setNoteDirectText: (directText: string) => void;
   setGoalSetting: (goalSetting: Partial<GoalSettingState>) => void;
   setWeeklyStudyHour: (
     field: WeeklyStudyHourField,

@@ -3,6 +3,7 @@ import type { ChangeEvent, DragEvent, RefObject } from "react";
 
 import { Button, Icon, Input, Modal } from "@shared/ui";
 
+import { NOTE_FILE_ACCEPT } from "@features/learning-goals/note-creation/lib/note-file-upload";
 import {
   cardHeaderStack,
   cardHeading,
@@ -39,11 +40,13 @@ import {
 type NoteCreationViewProps = {
   fileInputRef: RefObject<HTMLInputElement | null>;
   uploadedFileList: UploadedNoteFileRowItem[];
+  directText: string;
   isDragging: boolean;
   onUploadClick: () => void;
   onDeleteAll: () => void;
   onRemoveFile: (fileId: string) => void;
   onOpenFile: (fileId: string) => void;
+  onDirectTextChange: (value: string) => void;
   onFileInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onDropzoneDragOver: (event: DragEvent<HTMLDivElement>) => void;
   onDropzoneDragLeave: () => void;
@@ -53,11 +56,13 @@ type NoteCreationViewProps = {
 export const NoteCreationView = ({
   fileInputRef,
   uploadedFileList,
+  directText,
   isDragging,
   onUploadClick,
   onDeleteAll,
   onRemoveFile,
   onOpenFile,
+  onDirectTextChange,
   onFileInputChange,
   onDropzoneDragOver,
   onDropzoneDragLeave,
@@ -79,6 +84,8 @@ export const NoteCreationView = ({
           name="learning-goals-direct-text"
           placeholder="텍스트를 입력하거나 붙여넣어주세요 (예: 강의 필기 자료, 블로그 글 등)"
           aria-label="학습 자료에 사용할 텍스트"
+          value={directText}
+          onChange={(event) => onDirectTextChange(event.target.value)}
         />
 
         <div
@@ -92,6 +99,7 @@ export const NoteCreationView = ({
             className={hiddenFileInput}
             type="file"
             multiple
+            accept={NOTE_FILE_ACCEPT}
             onChange={onFileInputChange}
             aria-label="학습 자료 파일 업로드"
           />

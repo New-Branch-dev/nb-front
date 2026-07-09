@@ -37,6 +37,7 @@ const pickLearningGoalsFormState = ({
   goalSetting,
 }: LearningGoalsStoreState): LearningGoalsFormState => ({
   noteCreation: {
+    directText: noteCreation.directText,
     uploadedFileList: noteCreation.uploadedFileList.map(
       convertUploadedFileForStorage,
     ),
@@ -155,6 +156,13 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
           noteCreation: {
             ...state.noteCreation,
             uploadedFileList: [],
+          },
+        })),
+      setNoteDirectText: (directText) =>
+        set((state) => ({
+          noteCreation: {
+            ...state.noteCreation,
+            directText,
           },
         })),
       setGoalSetting: (goalSetting) =>

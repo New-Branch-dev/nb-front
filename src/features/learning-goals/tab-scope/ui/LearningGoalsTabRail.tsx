@@ -23,6 +23,10 @@ import {
 export type LearningGoalsTabRailProps = {
   activeTab: LearningGoalsListCreateTab;
   createHref: string;
+  searchQuery?: string;
+  sortKey?: LearningGoalsListSortKey;
+  onSearchQueryChange?: (value: string) => void;
+  onSortChange?: (value: LearningGoalsListSortKey) => void;
 };
 
 const buildNavItems = (createHref: string) =>
@@ -34,12 +38,20 @@ const buildNavItems = (createHref: string) =>
 export const LearningGoalsTabRail = ({
   activeTab,
   createHref,
+  searchQuery,
+  sortKey,
+  onSearchQueryChange,
+  onSortChange,
 }: LearningGoalsTabRailProps) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortBy, setSortBy] = useState<LearningGoalsListSortKey>("latest");
+  const [localSearchQuery, setLocalSearchQuery] = useState("");
+  const [localSortKey, setLocalSortKey] = useState<LearningGoalsListSortKey>("latest");
 
   const isListTab = activeTab === "list";
   const navItems = buildNavItems(createHref);
+  const currentSearchQuery = searchQuery ?? localSearchQuery;
+  const currentSortKey = sortKey ?? localSortKey;
+  const handleSearchQueryChange = onSearchQueryChange ?? setLocalSearchQuery;
+  const handleSortChange = onSortChange ?? setLocalSortKey;
 
   return (
     <div className={`${toolbar} ${isListTab ? toolbarList : toolbarCreate}`}>
@@ -58,8 +70,8 @@ export const LearningGoalsTabRail = ({
       <Activity mode={isListTab ? "visible" : "hidden"}>
         <div className={toolbarCenter}>
           <SearchBar
-            value={searchQuery}
-            onChange={setSearchQuery}
+            value={currentSearchQuery}
+            onChange={handleSearchQueryChange}
             aria-label="학습 목표 검색"
           />
         </div>
@@ -70,8 +82,8 @@ export const LearningGoalsTabRail = ({
           <Tab
             aria-label="학습 목표 정렬"
             items={LEARNING_GOALS_LIST_SORT_ITEMS}
-            value={sortBy}
-            onValueChange={setSortBy}
+            value={currentSortKey}
+            onValueChange={handleSortChange}
             size="toolbarSort"
             fullWidth={false}
             listTone="surface"

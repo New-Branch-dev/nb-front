@@ -138,6 +138,11 @@ export const periodText = style({
   fontWeight: themeTokens.fontWeight.bold,
 });
 
+export const periodArrowIcon = style({
+  width: "0.8125rem",
+  height: "0.8125rem",
+});
+
 export const periodMeta = style({
   color: colors.grayscale.gray600,
   fontSize: typographyContract.bodySm,
@@ -231,15 +236,6 @@ export const noteIconBox = style([
     height: "1.75rem",
     borderRadius: themeTokens.radius.xs,
     backgroundColor: colors.secondary,
-    selectors: {
-      "&::before": {
-        content: '""',
-        width: "0.625rem",
-        height: "0.875rem",
-        border: `2px solid ${colors.primary}`,
-        borderRadius: "0.125rem",
-      },
-    },
   },
 ]);
 
