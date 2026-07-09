@@ -17,6 +17,9 @@ importers:
       axios:
         specifier: ^1.16.1
         version: 1.17.0
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.3.0
       next:
         specifier: 16.2.1
         version: 16.2.1(@babel/core@7.29.7)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
