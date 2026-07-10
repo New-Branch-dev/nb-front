@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { saveAuthToken } from "@shared/api";
 import { API_ENDPOINT } from "@shared/config";
 
 export const useLogin = () => {
@@ -20,11 +21,11 @@ export const useLogin = () => {
       console.log("서버 응답 데이터:", result);
 
       if (response.ok && result.data) {
-        localStorage.setItem("accessToken", result.data.accessToken);
-        localStorage.setItem("refreshToken", result.data.refreshToken);
-        if (result.data.nickname) {
-          localStorage.setItem("nickname", result.data.nickname);
-        }
+        saveAuthToken({
+          accessToken: result.data.accessToken,
+          refreshToken: result.data.refreshToken,
+          nickname: result.data.nickname,
+        });
 
         window.dispatchEvent(new Event("login-success"));
         window.location.href = "/";
