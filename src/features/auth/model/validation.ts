@@ -28,7 +28,9 @@ export const signupSchema = z.object({
     .string()
     .min(1, "이메일은 필수입니다.")
     .email("올바른 이메일 형식이 아닙니다."),
-  isEmailVerified: z.boolean(),
+  isEmailVerified: z
+    .boolean()
+    .refine((val) => val === true, { message: "이메일 인증이 필요합니다." }),
 }).refine((data) => data.password === data.passwordConfirm, {
   message: "비밀번호가 일치하지 않습니다.",
   path: ["passwordConfirm"],
@@ -43,6 +45,3 @@ export const formatNameInput = (value: string): string => {
 export const formatUseridInput = (value: string): string => {
   return value.replace(/[^a-zA-Z{} [\]/?.,;:|)*~`!^\-_+<>@###$%&\\\=\(\'\"]/g, "").slice(0, 20);
 };
-
-export class AccountInfoType {
-}

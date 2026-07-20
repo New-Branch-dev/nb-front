@@ -1,8 +1,8 @@
-import { API_BASE_URL, API_ENDPOINT } from "@shared/config";
-
 export const useSocialLogin = () => {
+
   const handleGoogleLogin = () => {
-    const GOOGLE_AUTH_URL = API_ENDPOINT.auth.googleOAuth(API_BASE_URL);
+    const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+    const GOOGLE_AUTH_URL = `${BACKEND_URL}/oauth2/authorization/google`;
     window.location.href = GOOGLE_AUTH_URL;
   };
 

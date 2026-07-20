@@ -1,16 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { z } from "zod";
 
 import { Button, DatePicker, Input } from "@shared/ui";
 
-import { registerUser, requestEmailVerification } from "@features/auth/model/api";
+import { checkIdDuplication, registerUser, requestEmailVerification, verifyEmailCode } from "@features/auth/model/api";
 import {
   formatNameInput,
   formatUseridInput,
   type SignupFormType,
   signupSchema
 } from "@features/auth/model/validation";
-import { actionGroup, fieldGroup, flexInput, rowGroup, sectionTitle } from "@features/auth/ui/signup/SignUpForm.css";
+
+import { actionGroup, fieldGroup, flexInput, rowGroup, sectionTitle } from "../SignUpForm.css";
 
 type ModifiedSignupForm = Omit<SignupFormType, 'birthDate'> & { birthDate: Date | null };
 
@@ -24,8 +26,13 @@ interface StepProps {
 const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [isSending, setIsSending] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); // 회원가입 대기 상태
+  const [verificationCode, setVerificationCode] = useState("");
+  const [isEmailDuplicate, setIsEmailDuplicate] = useState<boolean>(false);
+  const [isIdDuplicate, setIsIdDuplicate] = useState<boolean | null>(null);
 
   const calendarRef = useRef<HTMLDivElement>(null);
 
@@ -39,10 +46,25 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === "name") { return setFormData((prev) => ({ ...prev, [name]: formatNameInput(value) })); }
-    if (name === "userid") { return setFormData((prev) => ({ ...prev, [name]: formatUseridInput(value) })); }
+    if (name === "name") {
+      setFormData((prev) => ({ ...prev, [name]: formatNameInput(value) }));
+      return;
+    }
+
+    if (name === "userid") {
+      const formattedId = formatUseridInput(value);
+      setFormData((prev) => ({ ...prev, [name]: formattedId }));
+
+      if (formattedId.trim().length >= 2) {
+        const duplicated = await checkIdDuplication(formattedId);
+        setIsIdDuplicate(duplicated);
+      } else {
+        setIsIdDuplicate(null);
+      }
+      return;
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -56,17 +78,42 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
       alert("이메일을 입력해주세요.");
       return;
     }
-
     setIsSending(true);
-    try {
-      const success = await requestEmailVerification(formData.email);
+    setIsEmailDuplicate(false);
 
+    const success = await requestEmailVerification(formData.email);
+
+    if (success) {
+      setIsEmailSent(true);
+      alert("입력하신 이메일로 인증번호 6자리가 발송되었습니다.");
+    } else {
+      setIsEmailDuplicate(true);
+    }
+    setIsSending(false);
+  }
+
+  const handleCodeConfirmClick = async () => {
+    if (verificationCode.length !== 6) {
+      alert("인증번호 6자리를 정확히 입력해주세요.");
+      return;
+    }
+    setIsVerifying(true);
+    try {
+      const success = await verifyEmailCode(formData.email, verificationCode);
       if (success) {
-        setIsEmailSent(true);
-        alert("입력하신 이메일로 인증 메일이 발송되었습니다.");
+        setFormData((prev) => ({ ...prev, isEmailVerified: true }));
+        alert("이메일 인증이 성공적으로 완료되었습니다!");
+      } else {
+        alert("인증번호가 일치하지 않거나 만료되었습니다.");
+      }
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        alert(err.response?.data?.message || "인증 처리 중 오류가 발생했습니다.");
+      } else {
+        alert("인증 처리 중 오류가 발생했습니다.");
       }
     } finally {
-      setIsSending(false);
+      setIsVerifying(false);
     }
   };
 
@@ -84,17 +131,20 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
   };
 
   const parsedResult = signupSchema.safeParse(getSubmittableData());
-  const isValid = parsedResult.success;
-
+  const isValid = parsedResult.success && isIdDuplicate === false && !isEmailDuplicate;
   const showPasswordError =
     formData.passwordConfirm.length > 0 &&
     !parsedResult.success &&
     parsedResult.error.issues.some((err: z.ZodIssue) => err.path.includes("passwordConfirm"));
 
-  // 💡 가입 버튼 클릭 시 호출 및 Step3 전환 핸들러
   const handleFormSubmit = async () => {
+    if (isIdDuplicate) {
+      alert("사용할 수 없는 아이디입니다.");
+      return;
+    }
+
     const submittableData = getSubmittableData();
-    const result = signupSchema.safeParse(submittableData); // ✅ 가공 데이터로 검증
+    const result = signupSchema.safeParse(submittableData);
 
     if (!result.success) {
       alert(result.error.issues[0].message);
@@ -103,24 +153,24 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
 
     setIsSubmitting(true);
     try {
-      // Swagger 명세서 구조에 1:1 대응하여 payload 구성
       const success = await registerUser({
+        loginId : submittableData.userid,
         email: submittableData.email,
         password: submittableData.password,
-        nickname: submittableData.name,         // 입력한 이름을 nickname 자리에 매핑
-        ageGroup: "20대",
-        schoolName: "한국방송통신대학교"
+        nickname: submittableData.name
       });
 
       if (success) {
-        onNext(); // 🚀 DB insert 완벽 성공 시 Step 3 (성공 화면)으로 즉시 렌더링 전환!
+        onNext();
       }
     } catch (err) {
-      const message =
-        err instanceof Error
-          ? err.message
-          : "회원가입 처리 중 오류가 발생했습니다.";
-      alert(message);
+      if (axios.isAxiosError(err)) {
+        alert(err.response?.data?.message || "회원가입 처리 중 오류가 발생했습니다.");
+      } else if (err instanceof Error) {
+        alert(err.message);
+      } else {
+        alert("회원가입 처리 중 오류가 발생했습니다.");
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -144,7 +194,25 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
           )}
         </div>
 
-        <Input type="text" name="userid" placeholder="아이디" value={formData.userid} onChange={handleInputChange} />
+        <Input
+          type="text"
+          name="userid"
+          placeholder="아이디"
+          value={formData.userid}
+          onChange={handleInputChange}
+          style={{ borderColor: isIdDuplicate ? "#FF4D4F" : "inherit" }}
+        />
+        {isIdDuplicate && (
+          <p style={{ color: "#FF4D4F", fontSize: "12px", marginTop: "-12px", marginBottom: "8px" }}>
+            사용할 수 없는 아이디입니다.
+          </p>
+        )}
+        {isIdDuplicate === false && formData.userid.trim().length >= 2 && (
+          <p style={{ color: "#2BBE6C", fontSize: "12px", marginTop: "-12px", marginBottom: "8px" }}>
+            사용 가능한 아이디입니다.
+          </p>
+        )}
+
         <Input type="password" name="password" placeholder="비밀번호" value={formData.password} onChange={handleInputChange} />
         <Input
           type="password"
@@ -165,28 +233,29 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
 
         <div className={rowGroup}>
           <div className={flexInput}>
-            <Input type="email" name="email" placeholder="이메일" value={formData.email} onChange={handleInputChange} />
+            <Input type="email" name="email" placeholder="이메일" value={formData.email} onChange={handleInputChange} disabled={formData.isEmailVerified} />
           </div>
-          <Button
-            variant="secondary"
-            onClick={handleEmailVerifyClick}
-            disabled={isSending}
-            style={{
-              backgroundColor: isEmailSent ? "#E8E5F4" : "#6641DF",
-              color: isEmailSent ? "#999999" : "#FFFFFF",
-              padding: "0 20px",
-            }}
-          >
-            {isSending ? "발송 중..." : isEmailSent ? "재발송" : "인증 메일 발송"}
+          <Button variant="secondary" onClick={handleEmailVerifyClick} disabled={isSending || formData.isEmailVerified} style={{ backgroundColor: formData.isEmailVerified ? "#E8E5F4" : "#6641DF", color: formData.isEmailVerified ? "#999999" : "#FFFFFF", padding: "0 20px" }}>
+            {isSending ? "요청중..." : formData.isEmailVerified ? "인증됨" : "인증번호 발송"}
           </Button>
         </div>
+
+        {isEmailSent && !formData.isEmailVerified && (
+          <div className={rowGroup} style={{ marginTop: "8px" }}>
+            <div className={flexInput}>
+              <Input type="text" placeholder="인증번호 6자리 입력" value={verificationCode} onChange={(e) => setVerificationCode(e.target.value.replace(/[^0-9]/g, "").slice(0, 6))} />
+            </div>
+            <Button variant="primary" onClick={handleCodeConfirmClick} disabled={isVerifying || verificationCode.length !== 6} style={{ padding: "0 20px", backgroundColor: "#6641DF" }}>
+              {isVerifying ? "확인중..." : "인증 확인"}
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className={actionGroup}>
         <Button variant="secondary" onClick={onPrev} disabled={isSubmitting} style={{ flex: 1, backgroundColor: "#F3EFFF", color: "#6641DF", border: "none" }}>
           이전
         </Button>
-        {/* ✅ 다음 -> 가입 완료 텍스트 변경 및 로딩/비활성화 속성 바인딩 확장 */}
         <Button
           variant="primary"
           onClick={handleFormSubmit}

@@ -1,31 +1,28 @@
 import { useState } from "react";
 
-import { saveAuthToken } from "@shared/api";
-import { API_ENDPOINT, createApiUrl } from "@shared/config";
-
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (email: string, password: string) => {
+  const handleLogin = async (loginId: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(createApiUrl(API_ENDPOINT.auth.login), {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ loginId, password }),
       });
 
       const result = await response.json();
       console.log("서버 응답 데이터:", result);
 
       if (response.ok && result.data) {
-        saveAuthToken({
-          accessToken: result.data.accessToken,
-          refreshToken: result.data.refreshToken,
-          nickname: result.data.nickname,
-        });
+        localStorage.setItem("accessToken", result.data.accessToken);
+        localStorage.setItem("refreshToken", result.data.refreshToken);
+        if (result.data.nickname) {
+          localStorage.setItem("nickname", result.data.nickname);
+        }
 
         window.dispatchEvent(new Event("login-success"));
         window.location.href = "/";

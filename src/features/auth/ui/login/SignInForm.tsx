@@ -1,10 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
-import { Button, Checkbox, Icon, Input } from "@shared/ui";
+import { Button, Checkbox, Input } from "@shared/ui";
 
 import { useSocialLogin } from "@features/auth/model/SocialLogin";
 import { useLogin } from "@features/auth/model/UseLogin";
+
 import {
   authDescription,
   authFieldGroup,
@@ -16,19 +18,19 @@ import {
   authSimpleTitle,
   authSubmitButton,
   authTitle,
-} from "@features/auth/ui/AuthForm.css";
+} from "../AuthForm.css";
 
 export const SignInForm = () => {
   const { handleGoogleLogin } = useSocialLogin();
   const { handleLogin, isLoading } = useLogin();
 
-  const [email, setEmail] = useState("");
+  const [loginId, setLoginId] = useState("");
   const [password, setPassword] = useState("");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault(); // 페이지 새로고침 방지
-    if (!email || !password) return;
-    handleLogin(email, password);
+    if (!loginId || !password) return;
+    handleLogin(loginId, password);
   };
 
   return (
@@ -40,12 +42,12 @@ export const SignInForm = () => {
 
       <div className={authFieldGroup}>
         <Input
-          type="email"
-          name="email"
+          type="id"
+          name="id"
           placeholder="아이디"
-          autoComplete="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          autoComplete="id"
+          value={loginId}
+          onChange={(e) => setLoginId(e.target.value)}
         />
         <Input
           type="password"
@@ -90,10 +92,11 @@ export const SignInForm = () => {
       <div className={authSimpleFieldGroup}>
         <h2 className={authSimpleTitle}>간편 로그인</h2>
         <Button type="button" className={authGoogleButton} onClick={handleGoogleLogin}>
-          <Icon
+          <Image
             src="/google.png"
             alt="구글"
-            size="md"
+            width={20}
+            height={20}
             quality={100}
           />
           구글 계정으로 로그인

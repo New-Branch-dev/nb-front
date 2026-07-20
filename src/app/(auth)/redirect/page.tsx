@@ -3,10 +3,12 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
-import { saveAuthToken } from "@shared/api";
-
 const RedirectStatus = () => {
-  return <p>로그인 완료 중입니다. 잠시만 기다려주세요...</p>;
+  return (
+    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <p>로그인 완료 중입니다. 잠시만 기다려주세요...</p>
+    </div>
+  );
 };
 
 const OAuth2RedirectContent = () => {
@@ -19,11 +21,11 @@ const OAuth2RedirectContent = () => {
     const nickname = searchParams.get("nickname");
 
     if (accessToken && refreshToken) {
-      saveAuthToken({
-        accessToken,
-        refreshToken,
-        nickname: nickname ? decodeURIComponent(nickname) : undefined,
-      });
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      if (nickname) {
+        localStorage.setItem("nickname", decodeURIComponent(nickname));
+      }
 
       window.location.href = "/";
     } else {
@@ -31,7 +33,6 @@ const OAuth2RedirectContent = () => {
     }
   }, [router, searchParams]);
 
-  /*TODO: 리다이렉트페이지 퍼블 필요*/
   return <RedirectStatus />;
 };
 
