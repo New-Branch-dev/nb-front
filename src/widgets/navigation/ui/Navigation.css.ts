@@ -44,6 +44,9 @@ export const navInner = style([
 export const centerSlot = style({ justifySelf: "center" });
 
 export const brand = style({
+  display: "inline-flex",
+  alignItems: "center",
+  gap: themeTokens.gap.sm,
   fontSize: "clamp(1rem, 2vw, 1.125rem)",
   letterSpacing: "0.08em",
   textTransform: "uppercase",
@@ -96,6 +99,17 @@ export const activeLink = style({
       height: "0.1875rem",
       borderRadius: themeTokens.radius.full,
       backgroundColor: colors.primary,
+    },
+  },
+});
+
+export const disabledLink = style({
+  color: "#A7A3B4",
+  cursor: "not-allowed",
+  pointerEvents: "none",
+  selectors: {
+    "&:hover": {
+      color: "#A7A3B4",
     },
   },
 });

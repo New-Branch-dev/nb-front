@@ -17,6 +17,7 @@ type StepFlowActionsRowProps = {
   finalDisabledLabel?: string;
   activityNamePrefix?: string;
   canProceed?: boolean;
+  onFinalAction?: () => Promise<void> | void;
 };
 
 export const StepFlowActionsRow = ({
@@ -27,6 +28,7 @@ export const StepFlowActionsRow = ({
   finalDisabledLabel = "등록",
   activityNamePrefix = "step-flow",
   canProceed,
+  onFinalAction,
 }: StepFlowActionsRowProps) => {
   const {
     showPrevLink,
@@ -85,6 +87,7 @@ export const StepFlowActionsRow = ({
           size="lg"
           fullWidth={!hasPreviousStep}
           className={hasPreviousStep ? actionButton : undefined}
+          onClick={onFinalAction}
         >
           {finalEnabledLabel}
         </Button>

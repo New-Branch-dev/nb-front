@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
+import { getApiErrorMessage } from "@shared/api";
+import { API_BASE_URL, API_ENDPOINT } from "@shared/config";
 
 const authApi = axios.create({
-  baseURL: `${BACKEND_URL}/api/v1/auth`,
+  baseURL: API_BASE_URL,
   headers: {
-    "Content-Type": "application/json",
     "Accept": "application/json",
   },
   timeout: 5000,
@@ -19,27 +19,15 @@ export interface SignupRequest {
   schoolName: string;
 }
 
-const getApiErrorMessage = (error: unknown, fallback: string): string => {
-  if (axios.isAxiosError(error)) {
-    const message = error.response?.data?.message;
-    if (typeof message === "string") {
-      return message;
-    }
-    return error.message || fallback;
-  }
-  if (error instanceof Error) {
-    return error.message;
-  }
-  return fallback;
-};
-
 /**
- * 이메일 인증번호 발송
+ * 이메일 인증 메일 발송
  */
-export const requestEmailVerification = async (email: string): Promise<boolean> => {
+export const requestEmailVerification = async (
+  email: string,
+): Promise<boolean> => {
   try {
-    const response = await authApi.post(`/email/request`, null, {
-      params: { email },
+    const response = await authApi.get(API_ENDPOINT.auth.requestEmailVerification, {
+      params: { email: email.trim() },
     });
 
     if (response.data?.status === "error") {
@@ -48,28 +36,27 @@ export const requestEmailVerification = async (email: string): Promise<boolean> 
     return true;
   } catch (error) {
     console.error("이메일 인증 발송 API 에러:", error);
-    alert(getApiErrorMessage(error, "서버 연결에 실패했습니다."));
+    alert(getApiErrorMessage(error, "이메일 인증 요청에 실패했습니다."));
     return false;
   }
 };
 
 /**
- * 이메일 인증 코드
+ * 이메일 인증 토큰 확인
  */
-export const verifyEmailCode = async (email: string, code: string): Promise<boolean> => {
+export const verifyEmail = async (token: string): Promise<boolean> => {
   try {
-    const response = await authApi.post(`/email/verify`, null, {
-      params: { email, code },
+    const response = await authApi.get(API_ENDPOINT.auth.verifyEmail, {
+      params: { token },
     });
 
     if (response.data?.status === "error") {
-      throw new Error(response.data?.message || "인증번호가 일치하지 않거나 만료되었습니다.");
+      throw new Error(response.data?.message || "이메일 인증에 실패했습니다.");
     }
     return true;
   } catch (error) {
-    console.error("인증번호 검증 API 에러:", error);
-    alert(getApiErrorMessage(error, "인증 실패"));
-    return false;
+    console.error("이메일 인증 API 에러:", error);
+    throw new Error(getApiErrorMessage(error, "이메일 인증에 실패했습니다."));
   }
 };
 
@@ -78,7 +65,11 @@ export const verifyEmailCode = async (email: string, code: string): Promise<bool
  */
 export const registerUser = async (signUpData: SignupRequest): Promise<boolean> => {
   try {
-    const response = await authApi.post(`/signup`, signUpData);
+    const response = await authApi.post(API_ENDPOINT.auth.signup, signUpData, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     if (response.data?.status === "error") {
       throw new Error(response.data?.message || "회원가입 요청에 실패했습니다.");

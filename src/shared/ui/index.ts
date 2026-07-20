@@ -4,6 +4,7 @@ export { Chip } from "@shared/ui/chip/Chip";
 export {
   ChipInputGroup,
   type ChipInputGroupProps,
+  type ChipInputItem,
   DIRECT_INPUT_CHIP_LABEL,
 } from "@shared/ui/chip-input-group";
 export { ContainerInner, ContainerRoot } from "@shared/ui/container/Container";

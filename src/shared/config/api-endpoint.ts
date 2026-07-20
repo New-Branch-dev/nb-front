@@ -1,4 +1,5 @@
 export const API_V1_ENDPOINT = "/api/v1";
+export const MY_LEARNING_API_ENDPOINT = "/api/mylearning";
 
 export const API_ENDPOINT = {
   auth: {
@@ -18,6 +19,12 @@ export const API_ENDPOINT = {
     detail: (goalId: string) => `${API_V1_ENDPOINT}/goals/${goalId}`,
     update: (goalId: string) => `${API_V1_ENDPOINT}/goals/${goalId}`,
     delete: (goalId: string) => `${API_V1_ENDPOINT}/goals/${goalId}`,
+  },
+  myLearning: {
+    create: MY_LEARNING_API_ENDPOINT,
+    detail: (usersId: number | string) => `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
+    update: (usersId: number | string) => `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
+    delete: (usersId: number | string) => `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
   },
   notes: {
     create: `${API_V1_ENDPOINT}/notes`,

@@ -1,12 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { useShallow } from "zustand/react/shallow";
 
+import { getApiErrorMessage } from "@shared/api";
+
 import {
   isLearningGoalsStepComplete,
+  updateLearningGoal,
   useLearningGoalsStore,
 } from "@features/learning-goals";
 
@@ -30,18 +33,38 @@ export const LearningGoalsEditPage = ({
   stepKey,
 }: LearningGoalsEditPageProps) => {
   const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const detailHref = goalId ? `/learning-goals/${goalId}` : DEFAULT_DETAIL_HREF;
   const editStep = LEARNING_GOALS_EDIT_STEPS[stepKey];
-  const form = useLearningGoalsStore(
+  const { goalSetting, noteCreation } = useLearningGoalsStore(
     useShallow((state) => ({
       noteCreation: state.noteCreation,
       goalSetting: state.goalSetting,
     })),
   );
-  const canSubmit = isLearningGoalsStepComplete(form, editStep.step);
+  const form = useMemo(
+    () => ({
+      noteCreation,
+      goalSetting,
+    }),
+    [goalSetting, noteCreation],
+  );
+  const canSubmit = isLearningGoalsStepComplete(form, editStep.step) && !isSubmitting;
 
-  const handleSubmit = () => {
-    router.push(detailHref);
+  const handleSubmit = async () => {
+    try {
+      setIsSubmitting(true);
+
+      if (goalId) {
+        await updateLearningGoal(goalId, form);
+      }
+
+      router.push(detailHref);
+    } catch (error) {
+      alert(getApiErrorMessage(error, "학습 목표 수정에 실패했습니다."));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {

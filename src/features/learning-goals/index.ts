@@ -1,3 +1,6 @@
+export { createLearningGoal } from "@features/learning-goals/api/create-learning-goal";
+export { deleteLearningGoal } from "@features/learning-goals/api/delete-learning-goal";
+export { updateLearningGoal } from "@features/learning-goals/api/update-learning-goal";
 export { GoalSetting } from "@features/learning-goals/goal-setting/ui/goal-setting";
 export { LEARNING_GOALS_LIST_HREF } from "@features/learning-goals/model/routes";
 export { isLearningGoalsStepComplete } from "@features/learning-goals/model/step-disabled";

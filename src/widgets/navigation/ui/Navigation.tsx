@@ -8,7 +8,7 @@ import {
   fetchAccessToken,
   fetchStoredNickname,
 } from "@shared/api";
-import { API_ENDPOINT } from "@shared/config";
+import { API_ENDPOINT, createApiUrl } from "@shared/config";
 
 import { LEARNING_GOALS_LIST_HREF } from "@features/learning-goals";
 
@@ -81,7 +81,7 @@ export const Navigation = () => {
       const accessToken = fetchAccessToken();
 
       if (accessToken) {
-        await fetch(API_ENDPOINT.auth.logout, {
+        await fetch(createApiUrl(API_ENDPOINT.auth.logout), {
           method: "POST",
           headers: {
             Authorization: `Bearer ${accessToken}`,

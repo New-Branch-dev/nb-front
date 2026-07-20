@@ -11,7 +11,7 @@ import {
   fetchRefreshToken,
   saveAuthToken,
 } from "@shared/api/auth-token";
-import { API_ENDPOINT } from "@shared/config";
+import { API_BASE_URL, API_ENDPOINT, createApiUrl } from "@shared/config";
 
 export type ApiResponse<TData> = {
   status?: string;
@@ -23,6 +23,7 @@ export type ApiResponse<TData> = {
 export type ApiRequestConfig = AxiosRequestConfig;
 
 const apiClient = axios.create({
+  baseURL: API_BASE_URL,
   timeout: 10000,
 });
 
@@ -49,6 +50,14 @@ const checkIsAuthenticationError = (error: AxiosError<ApiResponse<unknown>>) => 
   );
 };
 
+const checkIsAuthenticationResponse = (response: ApiResponse<unknown>) => {
+  return (
+    response.code === "A001" ||
+    response.code === "A002" ||
+    response.message === "Authentication is required"
+  );
+};
+
 let refreshTokenRequest: Promise<string | null> | null = null;
 
 const refreshAccessToken = async () => {
@@ -61,7 +70,7 @@ const refreshAccessToken = async () => {
   if (!refreshTokenRequest) {
     refreshTokenRequest = axios
       .post<ApiResponse<TokenResponse>>(
-        API_ENDPOINT.auth.refresh,
+        createApiUrl(API_ENDPOINT.auth.refresh),
         { refreshToken },
         { timeout: 10000 },
       )
@@ -104,7 +113,30 @@ apiClient.interceptors.request.use((config) => {
 });
 
 apiClient.interceptors.response.use(
-  (response) => response,
+  async (response) => {
+    const requestConfig = response.config as RetryableRequestConfig;
+    const responseData = response.data as ApiResponse<unknown>;
+
+    if (
+      requestConfig.isRetryRequest ||
+      !responseData ||
+      typeof responseData !== "object" ||
+      !checkIsAuthenticationResponse(responseData)
+    ) {
+      return response;
+    }
+
+    const accessToken = await refreshAccessToken();
+
+    if (!accessToken) {
+      return response;
+    }
+
+    requestConfig.isRetryRequest = true;
+    setAuthorizationHeader(requestConfig, accessToken);
+
+    return apiClient(requestConfig);
+  },
   async (error: AxiosError<ApiResponse<unknown>>) => {
     const requestConfig = error.config as RetryableRequestConfig | undefined;
 

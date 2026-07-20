@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { saveAuthToken } from "@shared/api";
-import { API_ENDPOINT } from "@shared/config";
+import { API_ENDPOINT, createApiUrl } from "@shared/config";
 
 export const useLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,7 +9,7 @@ export const useLogin = () => {
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch(API_ENDPOINT.auth.login, {
+      const response = await fetch(createApiUrl(API_ENDPOINT.auth.login), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
