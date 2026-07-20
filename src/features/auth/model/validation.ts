@@ -45,6 +45,3 @@ export const formatNameInput = (value: string): string => {
 export const formatUseridInput = (value: string): string => {
   return value.replace(/[^a-zA-Z{} [\]/?.,;:|)*~`!^\-_+<>@###$%&\\\=\(\'\"]/g, "").slice(0, 20);
 };
-
-export class AccountInfoType {
-}

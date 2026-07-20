@@ -9,7 +9,7 @@ import type { SignupFormType } from "@features/auth/model/validation";
 import { container, title } from "./SignUpForm.css";
 import Step1 from "./steps/Step1";
 import Step2 from "./steps/Step2";
-import Step3 from "./steps/Step4";
+import Step4 from "./steps/Step4";
 
 export const SignUpForm = () => {
   const [step, setStep] = useState(1);
@@ -58,7 +58,7 @@ export const SignUpForm = () => {
         />
       )}
 
-      {step === 3 && <Step3 />}
+      {step === 3 && <Step4 />}
     </div>
   );
 };
