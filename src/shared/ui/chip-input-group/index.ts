@@ -1,5 +1,6 @@
 export {
   ChipInputGroup,
   type ChipInputGroupProps,
+  type ChipInputItem,
   DIRECT_INPUT_CHIP_LABEL,
-} from "./ChipInputGroup";
+} from "@shared/ui/chip-input-group/ChipInputGroup";

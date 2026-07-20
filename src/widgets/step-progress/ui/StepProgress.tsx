@@ -1,5 +1,11 @@
-import Image from "next/image";
+import { Icon } from "@shared/ui/icon";
 
+import {
+  clampStep,
+  getStepStatus,
+  getTrackFillPercent,
+  getTrackInsetPercent,
+} from "@widgets/step-progress/lib/stepProgress.utils";
 import {
   checkIcon,
   labelColumn,
@@ -19,20 +25,14 @@ import {
   trackBackground,
   trackFill,
   trackWrap,
-} from "./StepProgress.css";
-import {
-  clampStep,
-  getStepStatus,
-  getTrackFillPercent,
-  getTrackInsetPercent,
-} from "../lib/stepProgress.utils";
+} from "@widgets/step-progress/ui/StepProgress.css";
 
 type StepProgressItem = {
   title: string;
 };
 
 type StepProgressProps = {
-  items: StepProgressItem[];
+  items: readonly StepProgressItem[];
   currentStep: number;
 };
 
@@ -77,12 +77,10 @@ export const StepProgress = ({ items, currentStep }: StepProgressProps) => {
                   aria-current={status === "current" ? "step" : undefined}
                 >
                   {status === "completed" ? (
-                    <Image
+                    <Icon
                       className={checkIcon}
                       src="/check-white.svg"
-                      alt=""
-                      width={18}
-                      height={15}
+                      size="sm"
                       aria-hidden
                     />
                   ) : null}

@@ -1,8 +1,8 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 
-import { tabListRecipe } from "./Tab.css";
-import { getTabItemTitle } from "./lib/getTabItemTitle";
-import type { TabItem, TabListTone, TabSize } from "./types";
+import { getTabItemTitle } from "@shared/ui/tab/lib/getTabItemTitle";
+import { tabListRecipe } from "@shared/ui/tab/Tab.css";
+import type { TabItem, TabListTone, TabSize } from "@shared/ui/tab/types";
 
 type TabListShellProps<
   V extends string,

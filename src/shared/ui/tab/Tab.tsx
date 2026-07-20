@@ -1,6 +1,6 @@
-import { tabTriggerRecipe } from "./Tab.css";
-import { TabListShell } from "./TabListShell";
-import type { TabProps } from "./types";
+import { tabTriggerRecipe } from "@shared/ui/tab/Tab.css";
+import { TabListShell } from "@shared/ui/tab/TabListShell";
+import type { TabProps } from "@shared/ui/tab/types";
 
 export const Tab = <V extends string,>({
   items,

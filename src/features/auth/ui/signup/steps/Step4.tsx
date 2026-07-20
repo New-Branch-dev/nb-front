@@ -2,14 +2,16 @@ import React from "react";
 
 import { Button } from "@shared/ui";
 
-import { actionGroup,successBox, successSub, successTitle } from "../SignUpForm.css";
+import { actionGroup,successBox, successSub, successTitle } from "@features/auth/ui/signup/SignUpForm.css";
 
 const Step4 = () => {
   return (
     <>
       <div className={successBox}>
         <h3 className={successTitle}>환영합니다, 뉴브랜치님</h3>
-        <p className={successSub}>회원가입이 완료되었습니다.</p>
+        <p className={successSub}>
+          회원가입이 완료되었습니다. 메일함에서 이메일 인증을 진행해주세요.
+        </p>
       </div>
 
       <div className={actionGroup}>

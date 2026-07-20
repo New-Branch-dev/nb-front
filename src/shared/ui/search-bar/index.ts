@@ -1,1 +1,1 @@
-export { SearchBar, type SearchBarProps } from "./SearchBar";
+export { SearchBar, type SearchBarProps } from "@shared/ui/search-bar/SearchBar";

@@ -2,24 +2,35 @@
 
 import { useState } from "react";
 import { ko } from "date-fns/locale";
-import type { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import ReactDatePicker from "react-datepicker";
 
-import { CalendarMonthHeader } from "./CalendarMonthHeader";
-import { dayBase, pickerRoot, weekDay } from "./DatePicker.css";
+import { CalendarMonthHeader } from "@shared/ui/date-picker/CalendarMonthHeader";
+import { dayBase, pickerRoot, weekDay } from "@shared/ui/date-picker/DatePicker.css";
 
 import "react-datepicker/dist/react-datepicker.css";
 
 type DatePickerProps = {
   value?: Date | null;
   onChange?: (date: Date) => void;
+  values?: Date[];
+  onValuesChange?: (dates: Date[]) => void;
+  minDate?: Date | null;
+  maxDate?: Date | null;
   className?: string;
 };
 
 const toMidnight = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-export const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
+export const DatePicker = ({
+  value,
+  onChange,
+  values,
+  onValuesChange,
+  minDate,
+  maxDate,
+  className,
+}: DatePickerProps) => {
   const isControlled = value !== undefined;
   const [internalDate, setInternalDate] = useState<Date | null>(value ?? null);
 
@@ -36,84 +47,63 @@ export const DatePicker = ({ value, onChange, className }: DatePickerProps) => {
     onChange?.(normalizedDate);
   };
 
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 101 }, (_, i) => currentYear - i); // [2026, 2025, ..., 1926]
-  const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+  const calendarProps = {
+    inline: true,
+    locale: ko,
+    minDate: minDate ?? undefined,
+    maxDate: maxDate ?? undefined,
+    formatWeekDay: (day: string) => day.slice(0, 1),
+    weekDayClassName: () => weekDay,
+    dayClassName: () => dayBase,
+    renderCustomHeader: ({
+      date,
+      decreaseMonth,
+      increaseMonth,
+      prevMonthButtonDisabled,
+      nextMonthButtonDisabled,
+    }: {
+      date: Date;
+      decreaseMonth: () => void;
+      increaseMonth: () => void;
+      prevMonthButtonDisabled: boolean;
+      nextMonthButtonDisabled: boolean;
+    }) => (
+      <CalendarMonthHeader
+        date={date}
+        showNavigation
+        onPreviousMonth={decreaseMonth}
+        onNextMonth={increaseMonth}
+        isPreviousDisabled={prevMonthButtonDisabled}
+        isNextDisabled={nextMonthButtonDisabled}
+      />
+    ),
+  };
+
+  if (values !== undefined) {
+    return (
+      <div className={mergedClassName}>
+        <ReactDatePicker
+          {...calendarProps}
+          selectsMultiple
+          selectedDates={values}
+          onChange={(dates) =>
+            onValuesChange?.((dates ?? []).map(toMidnight))
+          }
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={mergedClassName}>
       <ReactDatePicker
-        inline
+        {...calendarProps}
         selected={selectedDate}
         onChange={(date: Date | null) => {
           if (date) {
             handleSelectDate(date);
           }
         }}
-        locale={ko}
-        formatWeekDay={(day) => day.slice(0, 1)}
-        weekDayClassName={() => weekDay}
-        dayClassName={() => dayBase}
-        renderCustomHeader={({
-                               date,
-                               decreaseMonth,
-                               increaseMonth,
-                               changeYear,
-                               changeMonth,
-                             }: ReactDatePickerCustomHeaderProps) => (
-          <div
-            className={`react-datepicker__header react-datepicker__header--custom`}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              padding: "8px 10px",
-              gap: "8px"
-            }}
-          >
-            <button
-              type="button"
-              onClick={decreaseMonth}
-              style={{ background: "none", border: "none", cursor: "pointer", fontSize: "16px", fontWeight: "bold" }}
-            >
-              &lt;
-            </button>
-
-            <div style={{ display: "flex", gap: "6px" }}>
-              <select
-                value={date.getFullYear()}
-                onChange={({ target: { value } }) => changeYear(Number(value))}
-                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #D6D4DF", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}
-              >
-                {years.map((year) => (
-                  <option key={year} value={year}>
-                    {year}년
-                  </option>
-                ))}
-              </select>
-
-              <select
-                value={date.getMonth()}
-                onChange={({ target: { value } }) => changeMonth(Number(value))}
-                style={{ padding: "4px 8px", borderRadius: "4px", border: "1px solid #D6D4DF", cursor: "pointer", fontSize: "14px", fontWeight: "600" }}
-              >
-                {months.map((month, index) => (
-                  <option key={month} value={index}>
-                    {month}월
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <button
-              type="button"
-              onClick={increaseMonth}
-              style={{ background: "none", border: "none", cursor: "pointer", fontSize: "16px", fontWeight: "bold" }}
-            >
-              &gt;
-            </button>
-          </div>
-        )}
       />
     </div>
   );

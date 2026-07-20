@@ -1,5 +1,5 @@
-export { LinkTab } from "./LinkTab";
-export { Tab } from "./Tab";
+export { LinkTab } from "@shared/ui/tab/LinkTab";
+export { Tab } from "@shared/ui/tab/Tab";
 export type {
   LinkTabItem,
   LinkTabProps,
@@ -7,4 +7,4 @@ export type {
   TabListTone,
   TabProps,
   TabSize,
-} from "./types";
+} from "@shared/ui/tab/types";

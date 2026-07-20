@@ -67,8 +67,9 @@ export const iconImageWrap = style({
 });
 
 export const iconImage = style({
+  width: "100%",
+  height: "100%",
   objectFit: "contain",
-  marginBottom: "1.5rem",
 });
 
 export const actionRow = style([

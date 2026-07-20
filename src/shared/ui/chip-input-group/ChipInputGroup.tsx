@@ -1,19 +1,24 @@
 "use client";
 
-import { Chip } from "../chip/Chip";
-import { Input } from "../input/Input";
-import { TagInput } from "../tag-input/TagInput";
+import { Chip } from "@shared/ui/chip/Chip";
 import {
   chipRow,
   directInput,
   directInputOnPrimary,
   root,
-} from "./ChipInputGroup.css";
+} from "@shared/ui/chip-input-group/ChipInputGroup.css";
+import { Input } from "@shared/ui/input/Input";
+import { TagInput } from "@shared/ui/tag-input/TagInput";
 
 export const DIRECT_INPUT_CHIP_LABEL = "직접입력";
 
+export type ChipInputItem = string | {
+  label: string;
+  value: string;
+};
+
 export type ChipInputGroupProps = {
-  items: readonly string[];
+  items: readonly ChipInputItem[];
   selectedItems: string[];
   onSelectedItemsChange: (items: string[]) => void;
   isDirectInputActive: boolean;
@@ -32,6 +37,17 @@ export type ChipInputGroupProps = {
   onDirectInputTagsChange?: (tags: string[]) => void;
 };
 
+const convertChipInputItemToOption = (item: ChipInputItem) => {
+  if (typeof item === "string") {
+    return {
+      label: item,
+      value: item,
+    };
+  }
+
+  return item;
+};
+
 export const ChipInputGroup = ({
   items,
   selectedItems,
@@ -47,21 +63,28 @@ export const ChipInputGroup = ({
   onDirectInputTagsChange,
 }: ChipInputGroupProps) => {
   const isTagMode = directInputTags !== undefined && onDirectInputTagsChange !== undefined;
-  const presetItems = items.filter((item) => item !== DIRECT_INPUT_CHIP_LABEL);
-  const hasDirectInputChip = items.includes(DIRECT_INPUT_CHIP_LABEL);
+  const itemOptions = items.map(convertChipInputItemToOption);
+  const presetItems = itemOptions.filter(
+    (item) => item.label !== DIRECT_INPUT_CHIP_LABEL,
+  );
+  const hasDirectInputChip = itemOptions.some(
+    (item) => item.label === DIRECT_INPUT_CHIP_LABEL,
+  );
 
-  const handleChipClick = (item: string) => {
-    if (item === DIRECT_INPUT_CHIP_LABEL) {
+  const handleChipClick = (item: { label: string; value: string }) => {
+    if (item.label === DIRECT_INPUT_CHIP_LABEL) {
       onDirectInputActiveChange(!isDirectInputActive);
       return;
     }
 
-    if (selectedItems.includes(item)) {
-      onSelectedItemsChange(selectedItems.filter((entry) => entry !== item));
+    if (selectedItems.includes(item.value)) {
+      onSelectedItemsChange(
+        selectedItems.filter((entry) => entry !== item.value),
+      );
       return;
     }
 
-    onSelectedItemsChange([...selectedItems, item]);
+    onSelectedItemsChange([...selectedItems, item.value]);
   };
 
   return (
@@ -69,13 +92,13 @@ export const ChipInputGroup = ({
       <div className={chipRow}>
         {presetItems.map((item) => (
           <Chip
-            key={item}
+            key={item.value}
             responsiveSize="laptopMdPcLg"
             surface={chipSurface}
-            selected={selectedItems.includes(item)}
+            selected={selectedItems.includes(item.value)}
             onClick={() => handleChipClick(item)}
           >
-            {item}
+            {item.label}
           </Chip>
         ))}
         {hasDirectInputChip ? (
@@ -84,7 +107,12 @@ export const ChipInputGroup = ({
             surface={chipSurface}
             labelTone="muted"
             selected={isDirectInputActive}
-            onClick={() => handleChipClick(DIRECT_INPUT_CHIP_LABEL)}
+            onClick={() =>
+              handleChipClick({
+                label: DIRECT_INPUT_CHIP_LABEL,
+                value: DIRECT_INPUT_CHIP_LABEL,
+              })
+            }
           >
             {DIRECT_INPUT_CHIP_LABEL}
           </Chip>

@@ -2,7 +2,14 @@
 
 import type { FormEvent, InputHTMLAttributes } from "react";
 
-import { input, inputWrap, root, searchIcon, searchIconImg } from "./SearchBar.css";
+import { Icon } from "@shared/ui/icon";
+import {
+  input,
+  inputWrap,
+  root,
+  searchIcon,
+  searchIconImg,
+} from "@shared/ui/search-bar/SearchBar.css";
 
 export type SearchBarProps = {
   value: string;
@@ -45,7 +52,11 @@ export const SearchBar = ({
       onSubmit={handleSubmit}
     >
       <span className={searchIcon} aria-hidden>
-        <img src="/search-pupple.svg" alt="" className={searchIconImg} />
+        <Icon
+          src="/search-pupple.svg"
+          size="sm"
+          className={searchIconImg}
+        />
       </span>
 
       <div className={inputWrap}>

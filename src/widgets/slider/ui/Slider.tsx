@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { type ComponentType, useState } from "react";
 import type { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import { Icon } from "@shared/ui/icon";
 
 import {
   sliderItem,
@@ -14,7 +15,7 @@ import {
   sliderSlide,
   sliderViewport,
   sliderWrapper,
-} from "./Slider.css";
+} from "@widgets/slider/ui/Slider.css";
 
 import "swiper/css";
 
@@ -49,11 +50,9 @@ export const Slider = <T extends SliderItemBase>({
         aria-label="이전 슬라이드"
         disabled={isBeginning}
       >
-        <Image
+        <Icon
           src="/slider-arrow-left.svg"
-          alt=""
-          width={55}
-          height={32}
+          size="lg"
           className={sliderNavIcon}
           aria-hidden
         />
@@ -91,11 +90,9 @@ export const Slider = <T extends SliderItemBase>({
         aria-label="다음 슬라이드"
         disabled={isEnd}
       >
-        <Image
+        <Icon
           src="/slider-arrow-right.svg"
-          alt=""
-          width={55}
-          height={32}
+          size="lg"
           className={sliderNavIcon}
           aria-hidden
         />
