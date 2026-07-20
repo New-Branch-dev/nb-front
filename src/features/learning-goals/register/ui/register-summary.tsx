@@ -2,6 +2,8 @@
 
 import { useShallow } from "zustand/react/shallow";
 
+import { convertCommonCodeValueListToLabelList } from "@shared/config";
+
 import type {
   WeeklyStudyHourField,
   WeeklyStudyHours,
@@ -174,7 +176,10 @@ export const RegisterSummary = () => {
       noteList={noteList}
       summary={{
         title: goalSetting.title,
-        learningPurposes: goalSetting.learningPurposes,
+        learningPurposes: convertCommonCodeValueListToLabelList(
+          "LEARNING_PURPOSE_CD",
+          goalSetting.learningPurposes,
+        ),
         targetScore: goalSetting.targetScore,
         maxScore: goalSetting.maxScore,
         startDateLabel: convertDateKeyToDotLabel(goalSetting.startDate),
@@ -190,7 +195,10 @@ export const RegisterSummary = () => {
             weeklyStudyHour.hasHour &&
             excludedWeekdayFieldSet.has(weeklyStudyHour.field),
         })),
-        learningMethods: goalSetting.learningMethods,
+        learningMethods: convertCommonCodeValueListToLabelList(
+          "LEARNING_METHOD_CD",
+          goalSetting.learningMethods,
+        ),
         totalPeriodDayCount,
         studyDayCount,
         excludedDateCount: goalSetting.excludedDateList.length,

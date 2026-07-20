@@ -3,6 +3,13 @@
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import {
+  clearAuthToken,
+  fetchAccessToken,
+  fetchStoredNickname,
+} from "@shared/api";
+import { API_ENDPOINT, createApiUrl } from "@shared/config";
+
 import { LEARNING_GOALS_LIST_HREF } from "@features/learning-goals";
 
 import { NavigationView } from "@widgets/navigation/ui/NavigationView";
@@ -27,11 +34,13 @@ const NAVIGATION_MENU_ITEM_LIST = [
     label: "진정한 학습",
     href: "/deep-learning",
     activePath: "/deep-learning",
+    isDisabled: true,
   },
   {
     label: "창의적 체험활동",
     href: "/creative-activities",
     activePath: "/creative-activities",
+    isDisabled: true,
   },
 ];
 
@@ -46,28 +55,33 @@ export const Navigation = () => {
 
   useEffect(() => {
     const checkLoginStatus = () => {
-      const token = localStorage.getItem("accessToken");
-      const savedNickname = localStorage.getItem("nickname");
-      if (token) {
-        setIsLoggedIn(true);
-        if (savedNickname) {
-          setNickname(decodeURIComponent(savedNickname));
-        }
+      const token = fetchAccessToken();
+      const savedNickname = fetchStoredNickname();
+
+      if (!token) {
+        setIsLoggedIn(false);
+        setNickname("");
+        return;
+      }
+
+      setIsLoggedIn(true);
+      if (savedNickname) {
+        setNickname(savedNickname);
       }
     };
 
     checkLoginStatus();
 
-    window.addEventListener("storage", checkLoginStatus);
-    return () => window.removeEventListener("storage", checkLoginStatus);
+    window.addEventListener("login-success", checkLoginStatus);
+    return () => window.removeEventListener("login-success", checkLoginStatus);
   }, []);
 
   const handleLogout = async () => {
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = fetchAccessToken();
 
       if (accessToken) {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/logout`, {
+        await fetch(createApiUrl(API_ENDPOINT.auth.logout), {
           method: "POST",
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -77,9 +91,7 @@ export const Navigation = () => {
     } catch (error) {
       console.error("로그아웃 중 오류 발생:", error);
     } finally {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("nickname");
+      clearAuthToken();
       setIsLoggedIn(false);
       setNickname("");
 
@@ -90,7 +102,8 @@ export const Navigation = () => {
 
   const menuItems = NAVIGATION_MENU_ITEM_LIST.map((item) => ({
     ...item,
-    isActive: checkIsActivePath(pathname, item.activePath),
+    isActive: !item.isDisabled && checkIsActivePath(pathname, item.activePath),
+    isDisabled: item.isDisabled ?? false,
   }));
 
   return (

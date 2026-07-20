@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import {
   ChipInputGroup,
+  type ChipInputItem,
   DIRECT_INPUT_CHIP_LABEL,
   SectionCard,
 } from "@shared/ui";
@@ -9,7 +10,7 @@ import {
 type SelectableChipSectionProps = {
   title: string;
   description?: string;
-  items: readonly string[];
+  items: readonly ChipInputItem[];
   selectedItems: string[];
   onSelectedItems: (items: string[]) => void;
   isDirectInputActive?: boolean;
@@ -44,12 +45,18 @@ export const SelectableChipSection = ({
   const [internalIsDirectInputActive, setInternalIsDirectInputActive] =
     useState(false);
   const [internalDirectInputValue, setInternalDirectInputValue] = useState("");
-  const presetItems = items.filter((item) => item !== DIRECT_INPUT_CHIP_LABEL);
+  const presetValues = items.flatMap((item) => {
+    if (typeof item === "string") {
+      return item === DIRECT_INPUT_CHIP_LABEL ? [] : [item];
+    }
+
+    return item.label === DIRECT_INPUT_CHIP_LABEL ? [] : [item.value];
+  });
   const presetSelections = selectedItems.filter((item) =>
-    presetItems.includes(item),
+    presetValues.includes(item),
   );
   const customSelections = selectedItems.filter(
-    (item) => !presetItems.includes(item),
+    (item) => !presetValues.includes(item),
   );
   const resolvedIsDirectInputActive =
     isDirectInputActive ?? internalIsDirectInputActive;

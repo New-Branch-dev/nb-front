@@ -61,9 +61,10 @@ const STATUS_DOT_VISIBLE_SET = new Set<LearningGoalStatus>([
 
 type LearningGoalCardProps = {
   item: LearningGoalItem;
+  onDelete?: (goalId: string) => Promise<void> | void;
 };
 
-export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
+export const LearningGoalCard = ({ item, onDelete }: LearningGoalCardProps) => {
   const thumbnailSrc = getLearningGoalThumbnail(item.category);
   const status = convertLearningGoalStatus(item);
   const hasStatusDot = STATUS_DOT_VISIBLE_SET.has(status);
@@ -173,7 +174,10 @@ export const LearningGoalCard = ({ item }: LearningGoalCardProps) => {
                 <button
                   type="button"
                   className={deleteModalConfirmButton}
-                  onClick={close}
+                  onClick={async () => {
+                    await onDelete?.(item.id);
+                    close();
+                  }}
                 >
                   삭제
                 </button>

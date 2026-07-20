@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { Activity } from "react";
 
+import { Icon } from "@shared/ui";
+
 import {
   activeLink,
   brand,
   centerSlot,
+  disabledLink,
   link,
   menu,
   navActionGroup,
@@ -18,6 +21,7 @@ type NavigationMenuItem = {
   label: string;
   href: string;
   isActive: boolean;
+  isDisabled: boolean;
 };
 
 type NavigationViewProps = {
@@ -39,6 +43,7 @@ export const NavigationView = ({
   <header className={navShell}>
     <nav className={navInner}>
       <Link href="/" className={brand}>
+        <Icon src="/brand-icon.svg" alt="NEWBRANCH 로고" size="sm" />
         NEWBRANCH
       </Link>
 
@@ -46,9 +51,18 @@ export const NavigationView = ({
         <ul className={menu}>
           {menuItems.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} className={createLinkClassName(item.isActive)}>
-                {item.label}
-              </Link>
+              {item.isDisabled ? (
+                <span className={[link, disabledLink].join(" ")}>
+                  {item.label}
+                </span>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={createLinkClassName(item.isActive)}
+                >
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
