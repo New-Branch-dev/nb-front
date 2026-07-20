@@ -3,6 +3,12 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
+import { saveAuthToken } from "@shared/api";
+
+const RedirectStatus = () => {
+  return <p>로그인 완료 중입니다. 잠시만 기다려주세요...</p>;
+};
+
 const OAuth2RedirectContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -13,11 +19,11 @@ const OAuth2RedirectContent = () => {
     const nickname = searchParams.get("nickname");
 
     if (accessToken && refreshToken) {
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      if (nickname) {
-        localStorage.setItem("nickname", decodeURIComponent(nickname));
-      }
+      saveAuthToken({
+        accessToken,
+        refreshToken,
+        nickname: nickname ? decodeURIComponent(nickname) : undefined,
+      });
 
       window.location.href = "/";
     } else {
@@ -30,21 +36,6 @@ const OAuth2RedirectContent = () => {
 };
 
 const RedirectStatus = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <p>로그인 완료 중입니다. 잠시만 기다려주세요...</p>
-    </div>
-  );
-};
-
-const OAuth2RedirectPage = () => {
   return (
     <Suspense fallback={null}>
       <OAuth2RedirectContent />

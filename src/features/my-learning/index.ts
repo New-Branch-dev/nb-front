@@ -1,7 +1,11 @@
 export {
   createMyLearningSteps,
-  type CreateMyLearningStepsRequest,
   type CreateMyLearningStepsResponse,
+  deleteMyLearningSteps,
+  type DeleteMyLearningStepsResponse,
+  type MyLearningStepsRequestBody,
+  updateMyLearningSteps,
+  type UpdateMyLearningStepsResponse,
 } from "@features/my-learning/api/create-my-learning-steps";
 export { LearningStyle } from "@features/my-learning/learning-style/ui/learning-style";
 export { isMyLearningStepComplete } from "@features/my-learning/model/step-disabled";

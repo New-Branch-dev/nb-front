@@ -13,6 +13,7 @@ type MyLearningPageViewProps = {
   currentStep: number;
   navigation: StepFlowNavigation;
   canProceed: boolean;
+  onFinalAction: () => Promise<void> | void;
 };
 
 export const MyLearningPageView = ({
@@ -21,6 +22,7 @@ export const MyLearningPageView = ({
   currentStep,
   navigation,
   canProceed,
+  onFinalAction,
 }: MyLearningPageViewProps) => {
   return (
     <LearningStepLayout
@@ -34,6 +36,7 @@ export const MyLearningPageView = ({
       finalDisabledLabel="등록"
       finalEnabledLabel="등록"
       canProceed={canProceed}
+      onFinalAction={onFinalAction}
     >
       {children}
     </LearningStepLayout>

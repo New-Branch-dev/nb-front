@@ -35,6 +35,7 @@ type LearningStepLayoutProps = {
   finalDisabledLabel?: string;
   canProceed?: boolean;
   wizardChrome?: boolean;
+  onFinalAction?: () => Promise<void> | void;
 };
 
 export const LearningStepLayout = ({
@@ -53,6 +54,7 @@ export const LearningStepLayout = ({
   finalDisabledLabel = "등록",
   canProceed,
   wizardChrome = true,
+  onFinalAction,
 }: LearningStepLayoutProps) => {
   return (
     <section className={pageRoot} aria-label={ariaLabel}>
@@ -77,6 +79,7 @@ export const LearningStepLayout = ({
               finalEnabledLabel={finalEnabledLabel}
               finalDisabledLabel={finalDisabledLabel}
               canProceed={canProceed}
+              onFinalAction={onFinalAction}
             />
           </div>
         </div>

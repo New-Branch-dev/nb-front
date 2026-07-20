@@ -1,3 +1,5 @@
+import { API_ENDPOINT } from "@shared/config";
+
 import type { School } from "@features/my-learning/profile/model/school.types";
 
 import "server-only";
@@ -27,7 +29,7 @@ const toSchool = (school: NeisSchoolRow): School => ({
 });
 
 export const fetchSchoolsFromNeis = async (query: string) => {
-  const url = new URL("https://open.neis.go.kr/hub/schoolInfo");
+  const url = new URL(API_ENDPOINT.schools.neisSchoolInfo);
   const apiKey = process.env.NEIS_API_KEY;
 
   url.searchParams.set("Type", "json");

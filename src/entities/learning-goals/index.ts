@@ -1,4 +1,5 @@
-export { findLearningGoalDetailById } from "@entities/learning-goals/detail/lib/find-learning-goal-detail-by-id";
+export { fetchLearningGoalDetail } from "@entities/learning-goals/api/fetch-learning-goal-detail";
+export { fetchLearningGoals } from "@entities/learning-goals/api/fetch-learning-goals";
 export type {
   LearningGoalDetail,
   LearningGoalDetailChipGroup,

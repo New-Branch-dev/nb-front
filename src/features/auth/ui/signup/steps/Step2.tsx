@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { Button, DatePicker, Input } from "@shared/ui";
 
-import { registerUser, requestEmailVerification, verifyEmailCode } from "@features/auth/model/api";
+import { registerUser, requestEmailVerification } from "@features/auth/model/api";
 import {
   formatNameInput,
   formatUseridInput,
@@ -24,11 +24,8 @@ interface StepProps {
 const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
   const [isOpenCalendar, setIsOpenCalendar] = useState(false);
   const [isSending, setIsSending] = useState(false);
-  const [isVerifying, setIsVerifying] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false); // 회원가입 대기 상태
-
   const [isEmailSent, setIsEmailSent] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // 회원가입 대기 상태
 
   const calendarRef = useRef<HTMLDivElement>(null);
 
@@ -59,38 +56,17 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
       alert("이메일을 입력해주세요.");
       return;
     }
+
     setIsSending(true);
     try {
       const success = await requestEmailVerification(formData.email);
+
       if (success) {
         setIsEmailSent(true);
-        alert("입력하신 이메일로 인증번호 6자리가 발송되었습니다.");
+        alert("입력하신 이메일로 인증 메일이 발송되었습니다.");
       }
-    } catch {
-      alert("인증 메일 발송에 실패했습니다.");
     } finally {
       setIsSending(false);
-    }
-  };
-
-  const handleCodeConfirmClick = async () => {
-    if (verificationCode.length !== 6) {
-      alert("인증번호 6자리를 정확히 입력해주세요.");
-      return;
-    }
-    setIsVerifying(true);
-    try {
-      const success = await verifyEmailCode(formData.email, verificationCode);
-      if (success) {
-        setFormData((prev) => ({ ...prev, isEmailVerified: true }));
-        alert("이메일 인증이 성공적으로 완료되었습니다!");
-      } else {
-        alert("인증번호가 일치하지 않거나 만료되었습니다.");
-      }
-    } catch {
-      alert("인증 처리 중 오류가 발생했습니다.");
-    } finally {
-      setIsVerifying(false);
     }
   };
 
@@ -189,23 +165,21 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
 
         <div className={rowGroup}>
           <div className={flexInput}>
-            <Input type="email" name="email" placeholder="이메일" value={formData.email} onChange={handleInputChange} disabled={formData.isEmailVerified} />
+            <Input type="email" name="email" placeholder="이메일" value={formData.email} onChange={handleInputChange} />
           </div>
-          <Button variant="secondary" onClick={handleEmailVerifyClick} disabled={isSending || formData.isEmailVerified} style={{ backgroundColor: formData.isEmailVerified ? "#E8E5F4" : "#6641DF", color: formData.isEmailVerified ? "#999999" : "#FFFFFF", padding: "0 20px" }}>
-            {isSending ? "요청중..." : formData.isEmailVerified ? "인증됨" : "인증번호 발송"}
+          <Button
+            variant="secondary"
+            onClick={handleEmailVerifyClick}
+            disabled={isSending}
+            style={{
+              backgroundColor: isEmailSent ? "#E8E5F4" : "#6641DF",
+              color: isEmailSent ? "#999999" : "#FFFFFF",
+              padding: "0 20px",
+            }}
+          >
+            {isSending ? "발송 중..." : isEmailSent ? "재발송" : "인증 메일 발송"}
           </Button>
         </div>
-
-        {isEmailSent && !formData.isEmailVerified && (
-          <div className={rowGroup} style={{ marginTop: "8px" }}>
-            <div className={flexInput}>
-              <Input type="text" placeholder="인증번호 6자리 입력" value={verificationCode} onChange={(e) => setVerificationCode(e.target.value.replace(/[^0-9]/g, "").slice(0, 6))} />
-            </div>
-            <Button variant="primary" onClick={handleCodeConfirmClick} disabled={isVerifying || verificationCode.length !== 6} style={{ padding: "0 20px", backgroundColor: "#6641DF" }}>
-              {isVerifying ? "확인중..." : "인증 확인"}
-            </Button>
-          </div>
-        )}
       </div>
 
       <div className={actionGroup}>

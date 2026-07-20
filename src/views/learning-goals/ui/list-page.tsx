@@ -7,7 +7,7 @@ import {
   type LearningGoalsListSortKey,
 } from "@entities/learning-goals";
 
-import { LearningGoalsTabRail } from "@features/learning-goals";
+import { deleteLearningGoal, LearningGoalsTabRail } from "@features/learning-goals";
 
 import { LearningStepLayout } from "@widgets/learning-step-layout";
 
@@ -43,7 +43,11 @@ export const LearningGoalsListPage = () => {
         />
       }
     >
-      <LearningGoalsListPanel searchQuery={searchQuery} sortKey={sortKey} />
+      <LearningGoalsListPanel
+        searchQuery={searchQuery}
+        sortKey={sortKey}
+        onDelete={deleteLearningGoal}
+      />
     </LearningStepLayout>
   );
 };

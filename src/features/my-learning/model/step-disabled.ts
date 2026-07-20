@@ -21,10 +21,6 @@ const isPreferredPartnerComplete = ({ preferredPartner }: FormState) =>
   hasSelection(preferredPartner.teacherStyles) &&
   hasSelection(preferredPartner.teamMemberStyles);
 
-const isAiAnalysisComplete = ({ aiAnalysis }: FormState) =>
-  hasSelection(aiAnalysis.learningStyles) &&
-  hasSelection(aiAnalysis.recommendedMethods);
-
 const STEP_COMPLETION_RULES = [
   isProfileComplete,
   isLearningPatternComplete,
@@ -37,10 +33,7 @@ export const isMyLearningStepComplete = (
   currentStep: number,
 ) => {
   if (currentStep === STEP_COMPLETION_RULES.length + 1) {
-    return (
-      STEP_COMPLETION_RULES.every((rule) => rule(form)) &&
-      isAiAnalysisComplete(form)
-    );
+    return STEP_COMPLETION_RULES.every((rule) => rule(form));
   }
 
   return STEP_COMPLETION_RULES[currentStep - 1]?.(form) ?? false;
