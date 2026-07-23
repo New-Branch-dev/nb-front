@@ -41,37 +41,4 @@ export const MAIN_SLIDER_ITEMS: MainSliderItem[] = [
     imageSrc: "/book.png",
     imageAlt: "단권화 일러스트",
   },
-  {
-    id: "4",
-    icon: "/book-mark-icon.png",
-    iconAlt: "나만의 학습 프로필 만들기 아이콘",
-    title: "나만의 학습 프로필 만들기",
-    description:
-      "학습 성향을 분석하고 나에게 맞는 학습 흐름을 바로 시작해보세요.",
-    href: "/my-learning/profile",
-    imageSrc: "/book.png",
-    imageAlt: "학습 시작 일러스트",
-  },
-  {
-    id: "5",
-    icon: "/book-mark-icon.png",
-    iconAlt: "나만의 학습 프로필 만들기 아이콘",
-    title: "나만의 학습 프로필 만들기",
-    description:
-      "학습 성향을 분석하고 나에게 맞는 학습 흐름을 바로 시작해보세요.",
-    href: "/my-learning/profile",
-    imageSrc: "/book.png",
-    imageAlt: "학습 시작 일러스트",
-  },
-  {
-    id: "6",
-    icon: "/book-mark-icon.png",
-    iconAlt: "나만의 학습 프로필 만들기 아이콘",
-    title: "나만의 학습 프로필 만들기",
-    description:
-      "학습 성향을 분석하고 나에게 맞는 학습 흐름을 바로 시작해보세요.",
-    href: "/my-learning/profile",
-    imageSrc: "/book.png",
-    imageAlt: "학습 시작 일러스트",
-  },
 ];

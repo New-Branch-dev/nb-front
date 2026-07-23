@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { useShallow } from "zustand/react/shallow";
 
-import {
-  fetchAccessToken,
-  getApiErrorMessage,
-} from "@shared/api";
+import { fetchAccessToken, getApiErrorMessage } from "@shared/api";
 
 import {
   createMyLearningSteps,
   isMyLearningStepComplete,
+  saveMyLearningSetupCompleted,
   useMyLearningStore,
 } from "@features/my-learning";
 
@@ -29,10 +27,10 @@ export const MyLearningPage = ({ children }: { children: ReactNode }) => {
       learningPattern: state.learningPattern,
       learningType: state.learningType,
       preferredPartner: state.preferredPartner,
-      aiAnalysis: state.aiAnalysis,
     })),
   );
-  const canProceed = isMyLearningStepComplete(form, currentStep) && !isSubmitting;
+  const canProceed =
+    isMyLearningStepComplete(form, currentStep) && !isSubmitting;
 
   const handleFinalAction = async () => {
     if (!fetchAccessToken()) {
@@ -45,12 +43,11 @@ export const MyLearningPage = ({ children }: { children: ReactNode }) => {
       setIsSubmitting(true);
 
       await createMyLearningSteps(form);
+      saveMyLearningSetupCompleted();
 
       router.push("/my-learning/result");
     } catch (error) {
-      alert(
-        getApiErrorMessage(error, "학습 프로필 설정 생성에 실패했습니다."),
-      );
+      alert(getApiErrorMessage(error, "학습 프로필 설정 생성에 실패했습니다."));
     } finally {
       setIsSubmitting(false);
     }

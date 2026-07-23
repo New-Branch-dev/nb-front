@@ -42,9 +42,10 @@ type NoteCreationViewProps = {
   uploadedFileList: UploadedNoteFileRowItem[];
   directText: string;
   isDragging: boolean;
+  isUploading: boolean;
   onUploadClick: () => void;
-  onDeleteAll: () => void;
-  onRemoveFile: (fileId: string) => void;
+  onDeleteAll: () => Promise<void>;
+  onRemoveFile: (fileId: string) => Promise<void>;
   onOpenFile: (fileId: string) => void;
   onDirectTextChange: (value: string) => void;
   onFileInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -58,6 +59,7 @@ export const NoteCreationView = ({
   uploadedFileList,
   directText,
   isDragging,
+  isUploading,
   onUploadClick,
   onDeleteAll,
   onRemoveFile,
@@ -75,7 +77,8 @@ export const NoteCreationView = ({
       <div className={cardHeaderStack}>
         <h2 className={cardHeading}>학습 자료 수집</h2>
         <p className={cardLead}>
-          해당 목표에 필요한 파일이나 텍스트를 모아주세요 (텍스트 또는 파일 1개 이상 필수)
+          해당 목표에 필요한 파일이나 텍스트를 모아주세요 (텍스트 또는 파일 1개
+          이상 필수)
         </p>
       </div>
 
@@ -100,6 +103,7 @@ export const NoteCreationView = ({
             type="file"
             multiple
             accept={NOTE_FILE_ACCEPT}
+            disabled={isUploading}
             onChange={onFileInputChange}
             aria-label="학습 자료 파일 업로드"
           />
@@ -164,7 +168,7 @@ export const NoteCreationView = ({
                   <UploadedNoteFileRow
                     key={file.id}
                     file={file}
-                    canOpen={Boolean(file.file)}
+                    canOpen={Boolean(file.file || file.fileUrl || file.content)}
                     onOpenFile={onOpenFile}
                     onRemoveFile={onRemoveFile}
                   />
@@ -179,9 +183,10 @@ export const NoteCreationView = ({
                 size="md"
                 className={addMoreButton}
                 onClick={onUploadClick}
+                disabled={isUploading}
               >
                 <Icon src="/up-load-pupple.svg" size="sm" aria-hidden />
-                추가하기
+                {isUploading ? "업로드 중" : "추가하기"}
               </Button>
             </div>
           </Activity>
@@ -194,9 +199,10 @@ export const NoteCreationView = ({
                 size="md"
                 className={uploadButton}
                 onClick={onUploadClick}
+                disabled={isUploading}
               >
                 <Icon src="/up-load-pupple.svg" size="sm" aria-hidden />
-                업로드
+                {isUploading ? "업로드 중" : "업로드"}
               </Button>
               <p className={dropzoneHint}>
                 파일을 업로드하거나 마우스로 끌어오세요

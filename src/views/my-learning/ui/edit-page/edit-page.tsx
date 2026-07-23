@@ -33,7 +33,6 @@ export const MyLearningEditPage = ({
       learningPattern: state.learningPattern,
       learningType: state.learningType,
       preferredPartner: state.preferredPartner,
-      aiAnalysis: state.aiAnalysis,
     })),
   );
   const canSubmit = isMyLearningStepComplete(form, editStep.step);

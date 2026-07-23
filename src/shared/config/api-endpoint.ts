@@ -20,21 +20,27 @@ export const API_ENDPOINT = {
     update: (goalId: string) => `${API_V1_ENDPOINT}/goals/${goalId}`,
     delete: (goalId: string) => `${API_V1_ENDPOINT}/goals/${goalId}`,
   },
+  users: {
+    me: `${API_V1_ENDPOINT}/users/me`,
+  },
   myLearning: {
     create: MY_LEARNING_API_ENDPOINT,
-    detail: (usersId: number | string) => `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
-    update: (usersId: number | string) => `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
-    delete: (usersId: number | string) => `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
+    detail: (usersId: number | string) =>
+      `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
+    update: (usersId: number | string) =>
+      `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
+    delete: (usersId: number | string) =>
+      `${MY_LEARNING_API_ENDPOINT}/${usersId}`,
   },
-  notes: {
-    create: `${API_V1_ENDPOINT}/notes`,
-    uploadFiles: (noteId: number) =>
-      `${API_V1_ENDPOINT}/notes/${noteId}/materials/file`,
-    saveText: (noteId: number) =>
-      `${API_V1_ENDPOINT}/notes/${noteId}/materials/text`,
+  attachments: {
+    uploadFiles: `${API_V1_ENDPOINT}/attachments/file`,
+    saveText: `${API_V1_ENDPOINT}/attachments/text`,
+    delete: (attachmentId: number) =>
+      `${API_V1_ENDPOINT}/attachments/${attachmentId}`,
   },
   schools: {
-    search: (query: string) => `/api/schools?query=${encodeURIComponent(query)}`,
+    search: (query: string) =>
+      `/api/schools?query=${encodeURIComponent(query)}`,
     neisSchoolInfo: "https://open.neis.go.kr/hub/schoolInfo",
   },
 } as const;

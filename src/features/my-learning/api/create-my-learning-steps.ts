@@ -8,22 +8,20 @@ import {
 } from "@shared/api";
 import { API_ENDPOINT } from "@shared/config";
 
+import { fetchCurrentUser } from "@entities/user";
+
 import type { FormState } from "@features/my-learning/model/store.types";
 
 export type MyLearningStepsRequestBody = {
   usersId: number;
   nickname: string;
   schoolName: string;
-  preferredStudyTime: string;
-  offDays: string;
   preferredMaterialFormat: string;
   preferredClassStyle: string;
   preferredStudyMethod: string;
   preferredTeacherStyle: string;
   preferredFriendStyle: string;
   extraNotes: string;
-  learningStyle: string;
-  recommendedMethod: string;
 };
 
 export type CreateMyLearningStepsResponse = {
@@ -60,20 +58,12 @@ export const buildMyLearningStepsRequestBody = ({
   form: FormState;
   usersId?: number;
 }): MyLearningStepsRequestBody => {
-  const {
-    aiAnalysis,
-    learningPattern,
-    learningType,
-    preferredPartner,
-    profile,
-  } = form;
+  const { learningPattern, learningType, preferredPartner, profile } = form;
 
   return {
     usersId,
     nickname: profile.nickname,
     schoolName: profile.school,
-    preferredStudyTime: "",
-    offDays: "",
     preferredMaterialFormat: convertSelectedValueListToRequestValue(
       learningType.materialFormats,
     ),
@@ -95,12 +85,6 @@ export const buildMyLearningStepsRequestBody = ({
       ...learningPattern.personality,
       ...learningPattern.learningTendencies,
     ].join(","),
-    learningStyle: convertSelectedValueListToRequestValue(
-      aiAnalysis.learningStyles,
-    ),
-    recommendedMethod: convertSelectedValueListToRequestValue(
-      aiAnalysis.recommendedMethods,
-    ),
   };
 };
 
@@ -108,14 +92,18 @@ export const createMyLearningSteps = async (
   form: FormState,
 ): Promise<CreateMyLearningStepsResponse> => {
   try {
-    return await createApi<
+    const currentUser = await fetchCurrentUser();
+
+    const response = await createApi<
       CreateMyLearningStepsResponse,
       MyLearningStepsRequestBody
     >(
       API_ENDPOINT.myLearning.create,
-      buildMyLearningStepsRequestBody({ form }),
+      buildMyLearningStepsRequestBody({ form, usersId: currentUser.id }),
       createAuthenticatedRequestConfig(),
     );
+
+    return response;
   } catch (error) {
     logApiError(error, "학습 프로필 설정 생성 실패");
 

@@ -14,6 +14,8 @@ import {
 export type UploadedNoteFileRowItem = {
   id: string;
   file?: File;
+  fileUrl?: string;
+  content?: string;
   name: string;
   sizeLabel: string;
 };

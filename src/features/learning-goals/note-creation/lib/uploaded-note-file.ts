@@ -18,17 +18,25 @@ export const convertFileSizeToLabel = (size: number): string => {
   return `${roundedSize} ${BYTE_UNITS[unitIndex]}`;
 };
 
+export const createUploadedNoteFileKey = ({
+  name,
+  size,
+  lastModified,
+}: Pick<UploadedNoteFile, "name" | "size" | "lastModified">): string =>
+  `${name}-${size}-${lastModified}`;
+
 export const convertFilesToUploadedNoteFileList = (
   fileList: FileList | File[],
 ): UploadedNoteFile[] => {
   const uploadIdSeed = Date.now();
 
   return Array.from(fileList).map((file, index) => ({
-    id: `${file.name}-${file.size}-${file.lastModified}-${uploadIdSeed}-${index}`,
-    file,
+    id: `${createUploadedNoteFileKey(file)}-${uploadIdSeed}-${index}`,
+    attachmentId: null,
     name: file.name,
     size: file.size,
     lastModified: file.lastModified,
     sizeLabel: convertFileSizeToLabel(file.size),
+    file,
   }));
 };

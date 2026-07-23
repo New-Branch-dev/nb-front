@@ -25,7 +25,7 @@ const OAuth2RedirectContent = () => {
         nickname: nickname ? decodeURIComponent(nickname) : undefined,
       });
 
-      window.location.href = "/";
+      window.location.href = "/main";
     } else {
       router.replace("/sign-in?error=social_login_failed");
     }
@@ -35,7 +35,7 @@ const OAuth2RedirectContent = () => {
   return <RedirectStatus />;
 };
 
-const RedirectStatus = () => {
+const OAuth2RedirectPage = () => {
   return (
     <Suspense fallback={null}>
       <OAuth2RedirectContent />

@@ -7,7 +7,10 @@ import { Button } from "@shared/ui";
 import { buttonRecipe } from "@shared/ui/button/Button.css";
 
 import type { StepFlowNavigation } from "@widgets/learning-step-layout/lib/stepFlow.types";
-import { actionButton, actionRow } from "@widgets/learning-step-layout/ui/StepFlowActionsRow/StepFlowActionsRow.css";
+import {
+  actionButton,
+  actionRow,
+} from "@widgets/learning-step-layout/ui/StepFlowActionsRow/StepFlowActionsRow.css";
 
 type StepFlowActionsRowProps = {
   navigation: StepFlowNavigation;
@@ -17,6 +20,7 @@ type StepFlowActionsRowProps = {
   finalDisabledLabel?: string;
   activityNamePrefix?: string;
   canProceed?: boolean;
+  onNextAction?: () => Promise<void> | void;
   onFinalAction?: () => Promise<void> | void;
 };
 
@@ -28,6 +32,7 @@ export const StepFlowActionsRow = ({
   finalDisabledLabel = "등록",
   activityNamePrefix = "step-flow",
   canProceed,
+  onNextAction,
   onFinalAction,
 }: StepFlowActionsRowProps) => {
   const {
@@ -41,6 +46,7 @@ export const StepFlowActionsRow = ({
   const isNextEnabled = showNextLink && (canProceed ?? true);
   const isFinalEnabled = isLastStep && canProceed === true;
   const isDisabled = !isNextEnabled && !isFinalEnabled;
+  const hasNextAction = Boolean(onNextAction);
 
   return (
     <div className={actionRow}>
@@ -62,7 +68,7 @@ export const StepFlowActionsRow = ({
       </Activity>
 
       <Activity
-        mode={isNextEnabled ? "visible" : "hidden"}
+        mode={isNextEnabled && !hasNextAction ? "visible" : "hidden"}
         name={`${activityNamePrefix}-action-next-link`}
       >
         <Link
@@ -76,6 +82,21 @@ export const StepFlowActionsRow = ({
         >
           {isLastStep ? finalEnabledLabel : nextLabel}
         </Link>
+      </Activity>
+
+      <Activity
+        mode={isNextEnabled && hasNextAction ? "visible" : "hidden"}
+        name={`${activityNamePrefix}-action-next-button`}
+      >
+        <Button
+          type="button"
+          size="lg"
+          fullWidth={!hasPreviousStep}
+          className={hasPreviousStep ? actionButton : undefined}
+          onClick={onNextAction}
+        >
+          {nextLabel}
+        </Button>
       </Activity>
 
       <Activity

@@ -118,3 +118,13 @@ export const actionRow = style({
   color: colors.white,
   boxShadow: `0 0.5rem 0.875rem ${colors.primary}33`,
 });
+
+export const statusMessage = style({
+  width: "100%",
+  maxWidth: RESULT_MAX_WIDTH,
+  margin: "0 auto",
+  padding: "4rem 1.5rem",
+  color: colors.grayscale.gray600,
+  fontSize: typographyContract.bodyMd,
+  textAlign: "center",
+});
