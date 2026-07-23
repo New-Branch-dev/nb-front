@@ -6,7 +6,6 @@ import axios, {
 } from "axios";
 
 import {
-  clearAuthToken,
   fetchAccessToken,
   fetchRefreshToken,
   saveAuthToken,
@@ -81,11 +80,7 @@ const refreshAccessToken = async () => {
 
         return token.accessToken;
       })
-      .catch(() => {
-        clearAuthToken();
-
-        return null;
-      })
+      .catch(() => null)
       .finally(() => {
         refreshTokenRequest = null;
       });

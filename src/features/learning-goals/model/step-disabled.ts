@@ -8,13 +8,15 @@ const hasPeriod = ({
 }: {
   startDate: string;
   endDate: string;
-}) =>
-  hasText(startDate) && hasText(endDate) && startDate <= endDate;
+}) => hasText(startDate) && hasText(endDate) && startDate <= endDate;
 
 const isNoteCreationComplete = ({ noteCreation }: LearningGoalsFormState) => {
   const hasUploadedFile =
     noteCreation.uploadedFileList.length > 0 &&
-    noteCreation.uploadedFileList.every((file) => Boolean(file.file));
+    noteCreation.uploadedFileList.every(
+      ({ attachmentId, file }) =>
+        Boolean(file) || (attachmentId !== null && attachmentId > 0),
+    );
 
   return hasUploadedFile || hasText(noteCreation.directText);
 };

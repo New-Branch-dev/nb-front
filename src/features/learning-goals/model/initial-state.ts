@@ -4,6 +4,8 @@ export const initialLearningGoalsState: LearningGoalsFormState = {
   noteCreation: {
     uploadedFileList: [],
     directText: "",
+    directTextAttachmentId: null,
+    savedDirectText: "",
   },
   goalSetting: {
     title: "",

@@ -23,9 +23,4 @@ export const initialMyLearningState: FormState = {
     teacherStyles: [],
     teamMemberStyles: [],
   },
-
-  aiAnalysis: {
-    learningStyles: [],
-    recommendedMethods: [],
-  },
 };

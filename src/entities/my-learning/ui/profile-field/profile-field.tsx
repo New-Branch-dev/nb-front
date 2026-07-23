@@ -1,4 +1,9 @@
-import { chip, fieldLabel, fieldRow, fieldStack } from "@entities/my-learning/ui/profile-field/profile-field.css";
+import {
+  chip,
+  fieldLabel,
+  fieldRow,
+  fieldStack,
+} from "@entities/my-learning/ui/profile-field/profile-field.css";
 
 type ProfileFieldProps = {
   label: string;

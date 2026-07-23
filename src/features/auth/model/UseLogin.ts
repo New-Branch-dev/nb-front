@@ -27,7 +27,7 @@ export const useLogin = () => {
         });
 
         window.dispatchEvent(new Event("login-success"));
-        window.location.href = "/";
+        window.location.href = "/main";
       } else {
         if (result.code === "A005") {
           alert("아이디 또는 비밀번호가 일치하지 않습니다.");

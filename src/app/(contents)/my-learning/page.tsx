@@ -1,15 +1,22 @@
-import { redirect } from "next/navigation";
+"use client";
 
-import { fetchMyLearningSetupStatus } from "@entities/my-learning/api/fetch-my-learning-setup-status";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-const MyLearningRoutePage = async () => {
-  const isConfigured = await fetchMyLearningSetupStatus();
+import { fetchMyLearningSetupCompleted } from "@features/my-learning";
 
-  if (isConfigured) {
-    redirect("/my-learning/result");
-  }
+const MyLearningRoutePage = () => {
+  const router = useRouter();
 
-  redirect("/my-learning/profile");
+  useEffect(() => {
+    const nextHref = fetchMyLearningSetupCompleted()
+      ? "/my-learning/result"
+      : "/my-learning/profile";
+
+    router.replace(nextHref);
+  }, [router]);
+
+  return null;
 };
 
 export default MyLearningRoutePage;

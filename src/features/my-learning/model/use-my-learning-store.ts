@@ -17,13 +17,11 @@ const pickMyLearningFormState = ({
   learningPattern,
   learningType,
   preferredPartner,
-  aiAnalysis,
 }: StoreState): FormState => ({
   profile,
   learningPattern,
   learningType,
   preferredPartner,
-  aiAnalysis,
 });
 
 type PersistedPatternState = Partial<Omit<PatternState, "personality">> & {
@@ -84,9 +82,13 @@ const mergePersistedMyLearningState = (
     },
     learningType: {
       ...currentState.learningType,
-      materialFormats: convertStringList(persistedLearningType?.materialFormats),
+      materialFormats: convertStringList(
+        persistedLearningType?.materialFormats,
+      ),
       classStyles: convertStringList(persistedLearningType?.classStyles),
-      learningMethods: convertStringList(persistedLearningType?.learningMethods),
+      learningMethods: convertStringList(
+        persistedLearningType?.learningMethods,
+      ),
     },
     preferredPartner: {
       ...currentState.preferredPartner,
@@ -98,10 +100,6 @@ const mergePersistedMyLearningState = (
         persistedFormState.preferredPartner?.teamMemberStyles ??
           persistedFormState.preferredPartner?.friendTypes,
       ),
-    },
-    aiAnalysis: {
-      ...currentState.aiAnalysis,
-      ...persistedFormState.aiAnalysis,
     },
   };
 };
@@ -143,13 +141,6 @@ export const useMyLearningStore = create<StoreState>()(
           preferredPartner: {
             ...state.preferredPartner,
             ...preferredPartner,
-          },
-        })),
-      setAiAnalysis: (aiAnalysis) =>
-        set((state) => ({
-          aiAnalysis: {
-            ...state.aiAnalysis,
-            ...aiAnalysis,
           },
         })),
       resetMyLearning: () => set(initialMyLearningState),

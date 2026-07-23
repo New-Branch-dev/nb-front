@@ -11,10 +11,11 @@ import {
 } from "@shared/api";
 
 import {
-  clearUploadedFilesFromLearningGoalsSession,
   createLearningGoal,
   isLearningGoalsStepComplete,
   LearningGoalsTabRail,
+  syncLearningGoalDirectTextAttachment,
+  syncLearningGoalFileAttachmentList,
   useLearningGoalsStore,
 } from "@features/learning-goals";
 
@@ -30,18 +31,28 @@ type LearningGoalsPageProps = {
   children: ReactNode;
 };
 
-export const LearningGoalsPage = ({
-  children,
-}: LearningGoalsPageProps) => {
+export const LearningGoalsPage = ({ children }: LearningGoalsPageProps) => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { currentHref, currentStep, navigation, progressItems } =
     useLearningGoalsStepFlow();
-  const { goalSetting, noteCreation, resetLearningGoals } = useLearningGoalsStore(
+  const {
+    goalSetting,
+    noteCreation,
+    isUploadingAttachments,
+    resetLearningGoals,
+    setDirectTextAttachment,
+    setIsUploadingAttachments,
+    setUploadedFileList,
+  } = useLearningGoalsStore(
     useShallow((state) => ({
       noteCreation: state.noteCreation,
       goalSetting: state.goalSetting,
+      isUploadingAttachments: state.isUploadingAttachments,
       resetLearningGoals: state.resetLearningGoals,
+      setDirectTextAttachment: state.setDirectTextAttachment,
+      setIsUploadingAttachments: state.setIsUploadingAttachments,
+      setUploadedFileList: state.setUploadedFileList,
     })),
   );
   const form = useMemo(
@@ -51,7 +62,47 @@ export const LearningGoalsPage = ({
     }),
     [goalSetting, noteCreation],
   );
-  const canProceed = isLearningGoalsStepComplete(form, currentStep) && !isSubmitting;
+  const canProceed =
+    isLearningGoalsStepComplete(form, currentStep) &&
+    !isSubmitting &&
+    !isUploadingAttachments;
+
+  const syncNoteCreationAttachments = async () => {
+    setIsUploadingAttachments(true);
+
+    const uploadedFileList = await syncLearningGoalFileAttachmentList(
+      noteCreation.uploadedFileList,
+    );
+    setUploadedFileList(uploadedFileList);
+
+    const syncedAttachment =
+      await syncLearningGoalDirectTextAttachment(noteCreation);
+
+    setDirectTextAttachment(
+      syncedAttachment.attachmentId,
+      syncedAttachment.savedDirectText,
+    );
+
+    return {
+      ...noteCreation,
+      uploadedFileList,
+      directTextAttachmentId: syncedAttachment.attachmentId,
+      savedDirectText: syncedAttachment.savedDirectText,
+    };
+  };
+
+  const handleNoteCreationNext = async () => {
+    try {
+      setIsSubmitting(true);
+      await syncNoteCreationAttachments();
+      router.push(navigation.nextHref);
+    } catch (error) {
+      alert(getApiErrorMessage(error, "직접 입력 자료 저장에 실패했습니다."));
+    } finally {
+      setIsUploadingAttachments(false);
+      setIsSubmitting(false);
+    }
+  };
 
   const handleCreateLearningGoal = async () => {
     if (!fetchAccessToken() && !fetchRefreshToken()) {
@@ -62,12 +113,18 @@ export const LearningGoalsPage = ({
 
     try {
       setIsSubmitting(true);
-      await createLearningGoal(form);
+      const syncedNoteCreation = await syncNoteCreationAttachments();
+
+      await createLearningGoal({
+        ...form,
+        noteCreation: syncedNoteCreation,
+      });
       resetLearningGoals();
       router.push("/learning-goals/list");
     } catch (error) {
       alert(getApiErrorMessage(error, "학습 목표 생성에 실패했습니다."));
     } finally {
+      setIsUploadingAttachments(false);
       setIsSubmitting(false);
     }
   };
@@ -75,18 +132,6 @@ export const LearningGoalsPage = ({
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [currentHref]);
-
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      clearUploadedFilesFromLearningGoalsSession();
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
 
   return (
     <LearningStepLayout
@@ -99,6 +144,7 @@ export const LearningGoalsPage = ({
       finalEnabledLabel="목표 생성"
       finalDisabledLabel="목표 생성"
       canProceed={canProceed}
+      onNextAction={currentStep === 1 ? handleNoteCreationNext : undefined}
       onFinalAction={handleCreateLearningGoal}
       belowHeader={
         <LearningGoalsTabRail

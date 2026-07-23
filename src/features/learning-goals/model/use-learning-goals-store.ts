@@ -7,29 +7,28 @@ import { initialLearningGoalsState } from "@features/learning-goals/model/initia
 import type {
   LearningGoalsFormState,
   LearningGoalsStoreState,
-  UploadedNoteFile,
 } from "@features/learning-goals/model/store.types";
 
 export const LEARNING_GOALS_STORAGE_KEY = "learning-goals-store";
 
-const createUploadedFileKey = ({
-  name,
-  size,
-  lastModified,
-}: UploadedNoteFile): string => `${name}-${size}-${lastModified}`;
-
 const convertUploadedFileForStorage = ({
   id,
+  attachmentId,
   name,
   size,
   lastModified,
   sizeLabel,
-}: UploadedNoteFile): UploadedNoteFile => ({
+  fileUrl,
+  content,
+}: LearningGoalsFormState["noteCreation"]["uploadedFileList"][number]) => ({
   id,
+  attachmentId,
   name,
   size,
   lastModified,
   sizeLabel,
+  fileUrl,
+  content,
 });
 
 const pickLearningGoalsFormState = ({
@@ -37,7 +36,7 @@ const pickLearningGoalsFormState = ({
   goalSetting,
 }: LearningGoalsStoreState): LearningGoalsFormState => ({
   noteCreation: {
-    directText: noteCreation.directText,
+    ...noteCreation,
     uploadedFileList: noteCreation.uploadedFileList.map(
       convertUploadedFileForStorage,
     ),
@@ -52,15 +51,17 @@ const mergePersistedLearningGoalsState = (
   const persistedFormState = persistedState as Partial<LearningGoalsFormState>;
   const persistedUploadedFileList =
     persistedFormState.noteCreation?.uploadedFileList ?? [];
+  const validUploadedFileList = persistedUploadedFileList.filter(
+    (file) =>
+      Number.isInteger(file.attachmentId) && Number(file.attachmentId) > 0,
+  );
 
   return {
     ...currentState,
     noteCreation: {
       ...currentState.noteCreation,
       ...persistedFormState.noteCreation,
-      uploadedFileList: persistedUploadedFileList.map(
-        convertUploadedFileForStorage,
-      ),
+      uploadedFileList: validUploadedFileList,
     },
     goalSetting: {
       ...currentState.goalSetting,
@@ -73,75 +74,37 @@ const mergePersistedLearningGoalsState = (
   };
 };
 
-export const clearUploadedFilesFromLearningGoalsSession = () => {
-  const storageValue = sessionStorage.getItem(LEARNING_GOALS_STORAGE_KEY);
-
-  if (!storageValue) {
-    return;
-  }
-
-  try {
-    const parsedStorage = JSON.parse(storageValue) as {
-      state?: Partial<LearningGoalsFormState>;
-    };
-
-    if (!parsedStorage.state?.noteCreation) {
-      return;
-    }
-
-    parsedStorage.state.noteCreation.uploadedFileList = [];
-    sessionStorage.setItem(
-      LEARNING_GOALS_STORAGE_KEY,
-      JSON.stringify(parsedStorage),
-    );
-  } catch {
-    sessionStorage.removeItem(LEARNING_GOALS_STORAGE_KEY);
-  }
-};
-
 export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
   persist(
     (set) => ({
       ...initialLearningGoalsState,
+      isUploadingAttachments: false,
       appendUploadedFiles: (uploadedFileList) =>
         set((state) => {
-          const uploadedFileMap = new Map(
-            state.noteCreation.uploadedFileList.map((file) => [
-              createUploadedFileKey(file),
-              file,
-            ]),
+          const uploadedFileIdSet = new Set(
+            state.noteCreation.uploadedFileList.map(({ id }) => id),
           );
-          const nextUploadedFileList = [...state.noteCreation.uploadedFileList];
-
-          uploadedFileList.forEach((file) => {
-            const fileKey = createUploadedFileKey(file);
-            const existingFile = uploadedFileMap.get(fileKey);
-
-            if (!existingFile) {
-              uploadedFileMap.set(fileKey, file);
-              nextUploadedFileList.push(file);
-              return;
-            }
-
-            if (!existingFile.file) {
-              const existingFileIndex = nextUploadedFileList.findIndex(
-                (uploadedFile) => createUploadedFileKey(uploadedFile) === fileKey,
-              );
-
-              nextUploadedFileList[existingFileIndex] = {
-                ...existingFile,
-                file: file.file,
-              };
-            }
-          });
+          const nextUploadedFileList = uploadedFileList.filter(
+            ({ id }) => !uploadedFileIdSet.has(id),
+          );
 
           return {
             noteCreation: {
               ...state.noteCreation,
-              uploadedFileList: nextUploadedFileList,
+              uploadedFileList: [
+                ...state.noteCreation.uploadedFileList,
+                ...nextUploadedFileList,
+              ],
             },
           };
         }),
+      setUploadedFileList: (uploadedFileList) =>
+        set((state) => ({
+          noteCreation: {
+            ...state.noteCreation,
+            uploadedFileList,
+          },
+        })),
       deleteUploadedFile: (fileId) =>
         set((state) => ({
           noteCreation: {
@@ -151,13 +114,19 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
             ),
           },
         })),
-      deleteAllUploadedFiles: () =>
-        set((state) => ({
-          noteCreation: {
-            ...state.noteCreation,
-            uploadedFileList: [],
-          },
-        })),
+      deleteUploadedFileList: (fileIdList) =>
+        set((state) => {
+          const fileIdSet = new Set(fileIdList);
+
+          return {
+            noteCreation: {
+              ...state.noteCreation,
+              uploadedFileList: state.noteCreation.uploadedFileList.filter(
+                (file) => !fileIdSet.has(file.id),
+              ),
+            },
+          };
+        }),
       setNoteDirectText: (directText) =>
         set((state) => ({
           noteCreation: {
@@ -165,6 +134,16 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
             directText,
           },
         })),
+      setDirectTextAttachment: (attachmentId, savedDirectText) =>
+        set((state) => ({
+          noteCreation: {
+            ...state.noteCreation,
+            directTextAttachmentId: attachmentId,
+            savedDirectText,
+          },
+        })),
+      setIsUploadingAttachments: (isUploadingAttachments) =>
+        set({ isUploadingAttachments }),
       setGoalSetting: (goalSetting) =>
         set((state) => ({
           goalSetting: {
@@ -182,7 +161,11 @@ export const useLearningGoalsStore = create<LearningGoalsStoreState>()(
             },
           },
         })),
-      resetLearningGoals: () => set(initialLearningGoalsState),
+      resetLearningGoals: () =>
+        set({
+          ...initialLearningGoalsState,
+          isUploadingAttachments: false,
+        }),
     }),
     {
       name: LEARNING_GOALS_STORAGE_KEY,
