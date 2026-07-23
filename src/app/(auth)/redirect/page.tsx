@@ -3,6 +3,8 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
 
+import { saveAuthToken } from "@shared/api";
+
 const RedirectStatus = () => {
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
@@ -21,11 +23,11 @@ const OAuth2RedirectContent = () => {
     const nickname = searchParams.get("nickname");
 
     if (accessToken && refreshToken) {
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      if (nickname) {
-        localStorage.setItem("nickname", decodeURIComponent(nickname));
-      }
+      saveAuthToken({
+        accessToken,
+        refreshToken,
+        nickname: nickname ? decodeURIComponent(nickname) : undefined,
+      });
 
       window.location.href = "/";
     } else {
