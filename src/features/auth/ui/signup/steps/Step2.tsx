@@ -103,8 +103,6 @@ const Step2 = ({ onNext, onPrev, formData, setFormData }: StepProps) => {
       if (success) {
         setFormData((prev) => ({ ...prev, isEmailVerified: true }));
         alert("이메일 인증이 성공적으로 완료되었습니다!");
-      } else {
-        alert("인증번호가 일치하지 않거나 만료되었습니다.");
       }
     } catch (err) {
       if (axios.isAxiosError(err)) {

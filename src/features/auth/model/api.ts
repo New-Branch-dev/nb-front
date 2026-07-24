@@ -82,15 +82,17 @@ export const checkIdDuplication = async (id: string): Promise<boolean> => {
       params: { loginId: id },
     });
     return response.data?.data ?? false;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const serverMessage = error.response?.data?.message || "";
+  } catch (error: unknown) {
+    console.error("아이디 중복 확인 API 에러:", error);
 
-      if (serverMessage.includes("exists") || serverMessage.includes("already") || error.response?.status === 500) {
+    if (axios.isAxiosError(error) && error.response) {
+      const serverMessage = error.response.data?.message || "";
+
+      if (serverMessage.includes("exists") || serverMessage.includes("already")) {
         return true;
       }
     }
 
-    return true;
+    return false;
   }
 };

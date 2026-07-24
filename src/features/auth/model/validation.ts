@@ -17,7 +17,7 @@ export const signupSchema = z.object({
     .string()
     .min(4, "아이디는 최소 4자 이상이어야 합니다.")
     .max(20, "아이디는 20자 이내여야 합니다.")
-    .regex(/^[a-zA-Z{} [\]/?.,;:|)*~`!^\-_+<>@###$%&\\\=\(\'\"]+$/, "아이디는 영문 및 특수문자만 입력 가능합니다.")
+    .regex(/^[a-zA-Z0-9{} [\]/?.,;:|)*~`!^\-_+<>@###$%&\\\=\(\'\"]+$/, "아이디는 영문, 숫자 및 특수문자만 입력 가능합니다.")
     .regex(/[a-zA-Z]/, "아이디에 영문이 최소 1개 이상 포함되어야 합니다."),
 
   password: z
@@ -43,5 +43,5 @@ export const formatNameInput = (value: string): string => {
 };
 
 export const formatUseridInput = (value: string): string => {
-  return value.replace(/[^a-zA-Z{} [\]/?.,;:|)*~`!^\-_+<>@###$%&\\\=\(\'\"]/g, "").slice(0, 20);
+  return value.replace(/[^a-zA-Z0-9{} [\]/?.,;:|)*~`!^\-_+<>@###$%&\\\=\(\'\"]/g, "").slice(0, 20);
 };
